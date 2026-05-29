@@ -92,7 +92,7 @@ function vitePluginManusDebugCollector(): Plugin {
 
 export default defineConfig({
   // 🔥 IMPORTANT for GitHub Pages
-  base: "/Dao-Yu-101-V3/",
+  base: "/Insel1o1/",
 
   plugins: [
     react(),

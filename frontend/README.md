@@ -1,6 +1,6 @@
-# Dao-Yu Frontend Application
+# Insel 1o1 - Frontend Application
 
-This is the frontend application for the Dao-Yu EdTech Platform, built with React, TypeScript, TailwindCSS, and Vite.
+This is the frontend application for the Insel 1o1 EdTech Platform, built with React, TypeScript, TailwindCSS, and Vite.
 
 ## Project Structure
 

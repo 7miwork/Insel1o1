@@ -1,7 +1,7 @@
 {
-  "name": "dao-yu-frontend",
+  "name": "insel1o1-frontend",
   "version": "1.0.0",
-  "description": "Dao-Yu EdTech Platform - Frontend Application",
+  "description": "Insel 1o1 - Frontend Application",
   "type": "module",
   "scripts": {
     "dev": "vite --host",

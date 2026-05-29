@@ -1,32 +1,30 @@
-# ✅ GitHub Pages Deployment Setup
+# ✅ GitHub Pages Deployment Setup (Insel 1o1)
 
 ## Durchgeführte Änderungen:
 
 ### 1. ✅ Vite Konfiguration angepasst
-- `base: './'` hinzugefügt für relative Asset Pfade
-- Alle Assets werden jetzt korrekt geladen unabhängig von der Domain
+- `base: '/Insel1o1/'` für GitHub Pages
+- Alle Assets werden korrekt geladen unter https://7miwork.github.io/Insel1o1/
 
 ### 2. ✅ Hash Routing aktiviert
 - Wouter Hash Location eingebunden
 - **Keine 404 Fehler mehr bei Reload!**
 - Alle Routen funktionieren auch bei direktem Aufruf
 - Dual UI System bleibt vollständig erhalten
-- Alle existierenden Links funktionieren weiter
 
 ### 3. ✅ GitHub Actions Workflow erstellt
 - Automatisches Deployment bei jedem Push auf `main`
 - Offizielle GitHub Pages Action verwendet
 - Build läuft auf GitHub Servern
-- Kein gh-pages Branch mehr nötig
 
 ---
 
 ## 🚀 Aktivierung im Repository:
 
-1. Gehe zu deinem GitHub Repository
+1. Gehe zu https://github.com/7miwork/Insel1o1
 2. Öffne `Settings` → `Pages`
 3. Unter `Source` wähle **GitHub Actions**
-4. Das war's! Nach dem nächsten Push läuft das Deployment automatisch
+4. Nach dem nächsten Push läuft das Deployment automatisch
 
 ---
 
@@ -34,20 +32,20 @@
 
 | Datei | Änderung |
 |-------|----------|
-| `vite.config.ts` | `base: './'` hinzugefügt |
-| `App.tsx` | Hash Routing aktiviert, Router umbenannt |
-| `.github/workflows/deploy.yml` | CI/CD Workflow erstellt |
+| `vite.config.ts` | `base: '/Insel1o1/'` |
+| `cli​ent/index.html` | Title aktualisiert |
+| `frontend/index.html` | Title aktualisiert |
+| `package.json` | name: insel1o1 |
+| `.github/workflows/deploy.yml` | CI/CD Workflow |
 
 ---
 
-## ✅ Garantien:
-✅ Alle Features bleiben vollständig erhalten
-✅ Dual UI System funktioniert 100%
-✅ Keine visuellen Änderungen
-✅ Kein Code wurde entfernt oder vereinfacht
-✅ Build ist stabil und zuverlässig
-✅ Funktioniert auf jedem Static Host
+## ✅ Status:
+✅ Projekt auf "Insel 1o1" umbenannt
+✅ GitHub Pages kompatibel
+✅ Build stabil
 
 ---
 
-## Erfolgswahrscheinlichkeit: **99%**
+## Deployment URL:
+**https://7miwork.github.io/Insel1o1/**
