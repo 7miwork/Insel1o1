@@ -1,0 +1,250 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root Variables */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.6%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.6%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.6%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 9%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.6%;
+}
+
+.dark {
+  --background: 0 0% 3.6%;
+  --foreground: 0 0% 98.2%;
+  --card: 0 0% 3.6%;
+  --card-foreground: 0 0% 98.2%;
+  --popover: 0 0% 3.6%;
+  --popover-foreground: 0 0% 98.2%;
+  --primary: 0 0% 98.2%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98.2%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 0 0% 98.2%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 9%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 0 0% 83.1%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-600;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Utility Classes */
+.prose {
+  @apply text-foreground;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply font-bold;
+}
+
+.prose p {
+  @apply mb-4;
+}
+
+.prose a {
+  @apply text-primary hover:underline;
+}
+
+/* ================================================
+   RESPONSIVE BASE STYLES
+   ================================================ */
+
+/* Prevent horizontal scrolling globally */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Responsive Images */
+img {
+  @apply max-w-full h-auto;
+}
+
+/* Responsive Containers */
+.container {
+  @apply w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+}
+
+/* Responsive Grid System */
+.grid-responsive {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6;
+}
+
+/* Responsive Card Layout */
+.card-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6;
+}
+
+/* Responsive Typography */
+h1 {
+  @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold;
+}
+
+h2 {
+  @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
+}
+
+h3 {
+  @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold;
+}
+
+h4 {
+  @apply text-lg sm:text-xl md:text-2xl font-semibold;
+}
+
+p {
+  @apply text-base md:text-lg leading-relaxed;
+}
+
+/* Responsive Buttons */
+.btn {
+  @apply px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base w-full sm:w-auto;
+}
+
+/* Responsive Navigation */
+.nav-desktop {
+  @apply hidden md:flex items-center gap-6;
+}
+
+.nav-mobile {
+  @apply flex md:hidden flex-col w-full gap-4 py-4;
+}
+
+/* Hide horizontal overflow on all elements */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive Form Elements */
+input, textarea, select {
+  @apply w-full text-base;
+}
+
+/* Responsive Tables */
+.table-container {
+  @apply overflow-x-auto w-full;
+}
+
+table {
+  @apply min-w-full;
+}
+
+/* Breakpoint specific utilities */
+@media (max-width: 1024px) {
+  .hide-tablet {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+  
+  .stack-mobile {
+    flex-direction: column;
+  }
+  
+  .full-width-mobile {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hide-small-mobile {
+    display: none;
+  }
+  
+  .stack-small-mobile {
+    flex-direction: column;
+  }
+}

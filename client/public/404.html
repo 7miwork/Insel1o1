@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dao Yu 101</title>
+    <script type="module">
+        // GitHub Pages SPA Routing Fallback
+        // Redirect 404 requests to index.html with hash routing
+        const path = window.location.pathname;
+        const search = window.location.search;
+        const target = path.replace('/Dao-Yu-101-V3', '') + search;
+        
+        // Redirect to hash router
+        window.location.replace(window.location.origin + '/Dao-Yu-101-V3/#' + target);
+    </script>
+</head>
+<body>
+</body>
+</html>
