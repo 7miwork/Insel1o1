@@ -4,6 +4,7 @@ import { BookOpen, Mail, Lock, User, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { authService } from "@/lib/auth-service";
+import { useI18n } from "@/contexts/I18nContext";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ export default function Register() {
   });
   const [, setLocation] = useLocation();
   const [loading, setLoading] = useState(false);
+  const { t } = useI18n();
   const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -29,17 +31,17 @@ export default function Register() {
 
     // Validation
     if (!formData.firstName || !formData.lastName) {
-      setError("First and last name are required");
+      setError(t("register.errorFirstLast"));
       return;
     }
 
     if (formData.password.length < 8) {
-      setError("Password must be at least 8 characters");
+      setError(t("register.errorPasswordLength"));
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+      setError(t("register.errorPasswordMismatch"));
       return;
     }
 
@@ -56,7 +58,7 @@ export default function Register() {
     if (response.success) {
       setLocation("/dashboard");
     } else {
-      setError(response.error || "Registration failed");
+      setError(response.error || t("register.errorRegistrationFailed"));
       setLoading(false);
     }
   };
@@ -69,13 +71,13 @@ export default function Register() {
           <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-600 rounded-lg flex items-center justify-center">
             <BookOpen className="w-7 h-7 text-white" />
           </div>
-          <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Insel 1o1</span>
+          <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{t("common.appName")}</span>
         </div>
 
         {/* Card */}
         <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-purple-500/20 rounded-2xl p-8 backdrop-blur-xl">
-          <h1 className="text-2xl font-bold text-white mb-2">Create Account</h1>
-          <p className="text-purple-300 mb-8">Join Insel 1o1 and start your learning journey</p>
+            <h1 className="text-2xl font-bold text-white mb-2">{t("register.createAccount")}</h1>
+            <p className="text-purple-300 mb-8">{t("register.joinOurCommunity")}</p>
 
           {error && (
             <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-lg flex items-start gap-3">
@@ -88,13 +90,13 @@ export default function Register() {
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-purple-200 mb-2">First Name</label>
+                  <label className="block text-sm font-medium text-purple-200 mb-2">{t("register.firstName")}</label>
                 <div className="relative">
                   <User className="absolute left-3 top-3 w-5 h-5 text-purple-400" />
                   <Input
                     type="text"
                     name="firstName"
-                    placeholder="John"
+                    placeholder={t("register.firstNamePlaceholder")}
                     value={formData.firstName}
                     onChange={handleChange}
                     className="pl-10 bg-slate-700/50 border-purple-500/30 text-white placeholder-purple-400/50 focus:border-purple-500 focus:ring-purple-500"
@@ -103,13 +105,13 @@ export default function Register() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-purple-200 mb-2">Last Name</label>
+                  <label className="block text-sm font-medium text-purple-200 mb-2">{t("register.lastName")}</label>
                 <div className="relative">
                   <User className="absolute left-3 top-3 w-5 h-5 text-purple-400" />
                   <Input
                     type="text"
                     name="lastName"
-                    placeholder="Doe"
+                    placeholder={t("register.lastNamePlaceholder")}
                     value={formData.lastName}
                     onChange={handleChange}
                     className="pl-10 bg-slate-700/50 border-purple-500/30 text-white placeholder-purple-400/50 focus:border-purple-500 focus:ring-purple-500"
@@ -121,13 +123,13 @@ export default function Register() {
 
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-purple-200 mb-2">Email Address</label>
+                  <label className="block text-sm font-medium text-purple-200 mb-2">{t("register.email")}</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 w-5 h-5 text-purple-400" />
                 <Input
                   type="email"
                   name="email"
-                  placeholder="you@example.com"
+                    placeholder={t("register.emailPlaceholder")}
                   value={formData.email}
                   onChange={handleChange}
                   className="pl-10 bg-slate-700/50 border-purple-500/30 text-white placeholder-purple-400/50 focus:border-purple-500 focus:ring-purple-500"
@@ -138,46 +140,46 @@ export default function Register() {
 
             {/* Role Selection */}
             <div>
-              <label className="block text-sm font-medium text-purple-200 mb-2">I am a</label>
+              <label className="block text-sm font-medium text-purple-200 mb-2">{t("register.selectRole")}</label>
               <select
                 name="role"
                 value={formData.role}
                 onChange={handleChange}
                 className="w-full px-4 py-2 bg-slate-700/50 border border-purple-500/30 text-white rounded-lg focus:outline-none focus:border-purple-500"
               >
-                <option value="student">Student</option>
-                <option value="teacher">Teacher</option>
-                <option value="parent">Parent</option>
+                <option value="student">{t("login.student")}</option>
+                <option value="teacher">{t("login.teacher")}</option>
+                <option value="parent">{t("login.parent")}</option>
               </select>
             </div>
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-purple-200 mb-2">Password</label>
+                  <label className="block text-sm font-medium text-purple-200 mb-2">{t("register.password")}</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 w-5 h-5 text-purple-400" />
                 <Input
                   type="password"
                   name="password"
-                  placeholder="••••••••"
+                    placeholder={t("register.passwordPlaceholder")}
                   value={formData.password}
                   onChange={handleChange}
                   className="pl-10 bg-slate-700/50 border-purple-500/30 text-white placeholder-purple-400/50 focus:border-purple-500 focus:ring-purple-500"
                   required
                 />
               </div>
-              <p className="text-xs text-purple-400 mt-1">At least 8 characters</p>
+                <p className="text-xs text-purple-400 mt-1">{t("register.passwordHint")}</p>
             </div>
 
             {/* Confirm Password */}
             <div>
-              <label className="block text-sm font-medium text-purple-200 mb-2">Confirm Password</label>
+              <label className="block text-sm font-medium text-purple-200 mb-2">{t("register.confirmPassword")}</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 w-5 h-5 text-purple-400" />
                 <Input
                   type="password"
                   name="confirmPassword"
-                  placeholder="••••••••"
+                placeholder={t("register.passwordPlaceholder")}
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   className="pl-10 bg-slate-700/50 border-purple-500/30 text-white placeholder-purple-400/50 focus:border-purple-500 focus:ring-purple-500"
@@ -189,7 +191,7 @@ export default function Register() {
             {/* Terms */}
             <label className="flex items-start gap-2 cursor-pointer">
               <input type="checkbox" className="w-4 h-4 rounded border-purple-500/30 bg-slate-700/50 mt-1" required />
-              <span className="text-xs text-purple-300">I agree to the Terms of Service and Privacy Policy</span>
+                <span className="text-xs text-purple-300">{t("register.termsAgreement")}</span>
             </label>
 
             {/* Submit Button */}
@@ -198,14 +200,14 @@ export default function Register() {
               disabled={loading}
               className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 py-6 text-lg font-semibold mt-6"
             >
-              {loading ? "Creating account..." : "Create Account"}
+              {loading ? t("register.creatingAccount") : t("register.createAccountButton")}
             </Button>
           </form>
 
           {/* Sign In Link */}
-          <p className="text-center text-purple-300 mt-8">
-            Already have an account? <a href="/login" className="text-blue-400 hover:text-blue-300 font-semibold transition">Sign in</a>
-          </p>
+            <p className="text-center text-purple-300 mt-8">
+            {t("register.alreadyHaveAccount")} <a href="/login" className="text-blue-400 hover:text-blue-300 font-semibold transition">{t("login.signInButton")}</a>
+            </p>
         </div>
       </div>
     </div>

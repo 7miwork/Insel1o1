@@ -71,7 +71,17 @@
     "roleDescription": "Choose your role to get started",
     "createAccountButton": "Create Account",
     "alreadyHaveAccount": "Already have an account?",
-    "signInLink": "Sign in"
+    "signInLink": "Sign in",
+    "firstNamePlaceholder": "John",
+    "lastNamePlaceholder": "Doe",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "••••••••",
+    "passwordHint": "At least 8 characters",
+    "creatingAccount": "Creating account...",
+    "errorFirstLast": "First and last name are required",
+    "errorPasswordLength": "Password must be at least 8 characters",
+    "errorPasswordMismatch": "Passwords do not match",
+    "errorRegistrationFailed": "Registration failed"
   },
   "dashboard": {
     "welcomeMessage": "Welcome back, {name}!",

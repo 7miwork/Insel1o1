@@ -71,7 +71,18 @@
     "roleDescription": "選擇您的角色以開始",
     "createAccountButton": "建立帳戶",
     "alreadyHaveAccount": "已經有帳戶了？",
-    "signInLink": "登入"
+    "signInLink": "登入",
+    "firstNamePlaceholder": "John",
+    "lastNamePlaceholder": "Doe",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "••••••••",
+    "passwordHint": "至少 8 個字元",
+    "creatingAccount": "建立帳戶中...",
+    "errorFirstLast": "名字和姓氏是必填的",
+    "errorPasswordLength": "密碼必須至少 8 個字元",
+    "errorPasswordMismatch": "密碼不相符",
+    "errorRegistrationFailed": "註冊失敗",
+    "termsAgreement": "我同意服務條款與隱私政策"
   },
   "dashboard": {
     "welcomeMessage": "歡迎回來，{name}！",
