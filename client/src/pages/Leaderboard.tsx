@@ -144,18 +144,18 @@ const classLeaderboardData = [
 ];
 
 const achievementBadges = [
-  { id: 1, name: "First Steps", icon: "🎯", description: "Complete first lesson" },
-  { id: 2, name: "Quiz Master", icon: "🧠", description: "Score 100% on 5 quizzes" },
-  { id: 3, name: "Streak Warrior", icon: "🔥", description: "Maintain 7-day streak" },
-  { id: 4, name: "Math Wizard", icon: "🧮", description: "Complete all Math courses" },
-  { id: 5, name: "Science Explorer", icon: "🔬", description: "Complete all Science courses" },
-  { id: 6, name: "Word Master", icon: "📚", description: "Complete all English courses" },
-  { id: 7, name: "Code Ninja", icon: "💻", description: "Complete Programming Realm" },
-  { id: 8, name: "Time Keeper", icon: "⏰", description: "Complete 50 lessons" },
-  { id: 9, name: "Legend", icon: "👑", description: "Reach level 30" },
-  { id: 10, name: "Speed Runner", icon: "⚡", description: "Complete lesson in under 5 min" },
-  { id: 11, name: "Perfectionist", icon: "✨", description: "Score 100% on 10 quizzes" },
-  { id: 12, name: "Marathon Runner", icon: "🏃", description: "Complete 100 lessons" },
+  { id: 1, icon: "🎯", nameKey: "leaderboard.badgesList.firstSteps", descKey: "leaderboard.badgesList.firstStepsDesc" },
+  { id: 2, icon: "🧠", nameKey: "leaderboard.badgesList.quizMaster", descKey: "leaderboard.badgesList.quizMasterDesc" },
+  { id: 3, icon: "🔥", nameKey: "leaderboard.badgesList.streakWarrior", descKey: "leaderboard.badgesList.streakWarriorDesc" },
+  { id: 4, icon: "🧮", nameKey: "leaderboard.badgesList.mathWizard", descKey: "leaderboard.badgesList.mathWizardDesc" },
+  { id: 5, icon: "🔬", nameKey: "leaderboard.badgesList.scienceExplorer", descKey: "leaderboard.badgesList.scienceExplorerDesc" },
+  { id: 6, icon: "📚", nameKey: "leaderboard.badgesList.wordMaster", descKey: "leaderboard.badgesList.wordMasterDesc" },
+  { id: 7, icon: "💻", nameKey: "leaderboard.badgesList.codeNinja", descKey: "leaderboard.badgesList.codeNinjaDesc" },
+  { id: 8, icon: "⏰", nameKey: "leaderboard.badgesList.timeKeeper", descKey: "leaderboard.badgesList.timeKeeperDesc" },
+  { id: 9, icon: "👑", nameKey: "leaderboard.badgesList.legend", descKey: "leaderboard.badgesList.legendDesc" },
+  { id: 10, icon: "⚡", nameKey: "leaderboard.badgesList.speedRunner", descKey: "leaderboard.badgesList.speedRunnerDesc" },
+  { id: 11, icon: "✨", nameKey: "leaderboard.badgesList.perfectionist", descKey: "leaderboard.badgesList.perfectionistDesc" },
+  { id: 12, icon: "🏃", nameKey: "leaderboard.badgesList.marathonRunner", descKey: "leaderboard.badgesList.marathonRunnerDesc" },
 ];
 
 export default function Leaderboard() {
@@ -201,21 +201,21 @@ export default function Leaderboard() {
               <div className="text-3xl font-bold text-indigo-600 mb-1">
                 {player.xp.toLocaleString()}
               </div>
-              <p className="text-xs text-gray-600">{t("total_xp", "Total XP")}</p>
+              <p className="text-xs text-gray-600">{t("leaderboard.totalXp")}</p>
             </div>
 
             <div className="grid grid-cols-3 gap-2 text-center">
               <div>
                 <p className="text-lg font-bold text-gray-900">{player.level}</p>
-                <p className="text-xs text-gray-600">{t("level", "Level")}</p>
+                <p className="text-xs text-gray-600">{t("leaderboard.level")}</p>
               </div>
               <div>
                 <p className="text-lg font-bold text-red-500">{player.streak}</p>
-                <p className="text-xs text-gray-600">{t("streak", "Streak")}</p>
+                <p className="text-xs text-gray-600">{t("leaderboard.streak")}</p>
               </div>
               <div>
                 <p className="text-lg font-bold text-purple-600">{player.badges}</p>
-                <p className="text-xs text-gray-600">{t("badges", "Badges")}</p>
+                <p className="text-xs text-gray-600">{t("leaderboard.badgesLabel")}</p>
               </div>
             </div>
           </div>
@@ -226,7 +226,7 @@ export default function Leaderboard() {
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="p-6 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900">
-            {t("global_rankings", "Global Rankings")}
+            {t("leaderboard.globalRankings")}
           </h3>
         </div>
         <div className="overflow-x-auto">
@@ -234,25 +234,25 @@ export default function Leaderboard() {
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                  {t("rank", "Rank")}
+                  {t("leaderboard.rank")}
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                  {t("student", "Student")}
+                  {t("leaderboard.student")}
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                  {t("school", "School")}
+                  {t("leaderboard.school")}
                 </th>
                 <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
-                  {t("xp", "XP")}
+                  {t("leaderboard.xp")}
                 </th>
                 <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
-                  {t("level", "Level")}
+                  {t("leaderboard.level")}
                 </th>
                 <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
-                  {t("streak", "Streak")}
+                  {t("leaderboard.streak")}
                 </th>
                 <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
-                  {t("change", "Change")}
+                  {t("leaderboard.change")}
                 </th>
               </tr>
             </thead>
@@ -323,7 +323,7 @@ export default function Leaderboard() {
       {/* Class Selector */}
       <div className="bg-white rounded-lg border border-gray-200 p-4">
         <label className="block text-sm font-medium text-gray-900 mb-2">
-          {t("select_class", "Select Class")}
+          {t("leaderboard.selectClass")}
         </label>
         <select
           value={selectedClass}
@@ -332,7 +332,7 @@ export default function Leaderboard() {
         >
           {["9A", "9B", "10A", "10B", "11A"].map((cls) => (
             <option key={cls} value={cls}>
-              {t("class", "Class")} {cls}
+              {t("leaderboard.class")} {cls}
             </option>
           ))}
         </select>
@@ -342,7 +342,7 @@ export default function Leaderboard() {
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="p-6 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900">
-            {t("class", "Class")} {selectedClass} {t("rankings", "Rankings")}
+            {t("leaderboard.class")} {selectedClass} {t("leaderboard.rankings")}
           </h3>
         </div>
         <div className="overflow-x-auto">
@@ -350,19 +350,19 @@ export default function Leaderboard() {
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                  {t("rank", "Rank")}
+                  {t("leaderboard.rank")}
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
-                  {t("student", "Student")}
+                  {t("leaderboard.student")}
                 </th>
                 <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
-                  {t("xp", "XP")}
+                  {t("leaderboard.xp")}
                 </th>
                 <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
-                  {t("level", "Level")}
+                  {t("leaderboard.level")}
                 </th>
                 <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
-                  {t("streak", "Streak")}
+                  {t("leaderboard.streak")}
                 </th>
               </tr>
             </thead>
@@ -416,7 +416,7 @@ export default function Leaderboard() {
     <div className="space-y-6">
       <div className="bg-white rounded-lg border border-gray-200 p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-6">
-          {t("available_achievements", "Available Achievements")}
+          {t("leaderboard.availableAchievements")}
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {achievementBadges.map((badge) => (
@@ -425,8 +425,8 @@ export default function Leaderboard() {
               className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200 p-4 hover:shadow-lg transition-shadow text-center"
             >
               <div className="text-5xl mb-3">{badge.icon}</div>
-              <h4 className="font-semibold text-gray-900 mb-1">{badge.name}</h4>
-              <p className="text-sm text-gray-600">{badge.description}</p>
+              <h4 className="font-semibold text-gray-900 mb-1">{t(badge.nameKey)}</h4>
+              <p className="text-sm text-gray-600">{t(badge.descKey)}</p>
             </div>
           ))}
         </div>
@@ -442,7 +442,7 @@ export default function Leaderboard() {
           <div className="flex items-center gap-3">
             <Trophy className="w-8 h-8 text-yellow-500" />
             <h1 className="text-2xl font-bold text-gray-900">
-              {t("leaderboard", "Leaderboard")}
+              {t("leaderboard.leaderboard")}
             </h1>
           </div>
 
@@ -453,7 +453,7 @@ export default function Leaderboard() {
               className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <LogOut className="w-5 h-5" />
-              <span className="hidden sm:inline">{t("logout", "Logout")}</span>
+              <span className="hidden sm:inline">{t("common.logout")}</span>
             </button>
           </div>
         </div>
@@ -471,7 +471,7 @@ export default function Leaderboard() {
             }`}
           >
             <Users className="w-5 h-5" />
-            {t("global", "Global")}
+            {t("leaderboard.global")}
           </button>
 
           <button
@@ -483,7 +483,7 @@ export default function Leaderboard() {
             }`}
           >
             <BookOpen className="w-5 h-5" />
-            {t("class", "Class")}
+            {t("leaderboard.class")}
           </button>
 
           <button
@@ -495,7 +495,7 @@ export default function Leaderboard() {
             }`}
           >
             <Star className="w-5 h-5" />
-            {t("achievements", "Achievements")}
+            {t("leaderboard.achievements")}
           </button>
         </div>
 

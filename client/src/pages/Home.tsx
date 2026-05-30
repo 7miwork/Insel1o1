@@ -72,7 +72,7 @@ export default function Home() {
           <div className="space-y-8 animate-fadeInUp">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-sm font-medium">
               <Sparkles className="w-4 h-4" />
-              <span>Next-Generation EdTech Platform</span>
+              <span>{t("home.tagline")}</span>
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight">
               {t("home.heroTitle")}
@@ -108,20 +108,20 @@ export default function Home() {
                     🏝️
                   </div>
                   <div>
-                    <p className="text-gray-900 dark:text-white font-semibold">Welcome to Archipelago</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Your learning journey starts here</p>
+                    <p className="text-gray-900 dark:text-white font-semibold">{t("home.archipelagoWelcomeTitle")}</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{t("home.archipelagoWelcomeDesc")}</p>
                   </div>
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">Mathematics Kingdom</span>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">{t("home.mathKingdom")}</span>
                     <span className="text-indigo-600 dark:text-indigo-400 font-bold">85%</span>
                   </div>
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div className="bg-gradient-to-r from-indigo-500 to-blue-500 h-2 rounded-full" style={{width: '85%'}}></div>
                   </div>
                   <div className="flex items-center justify-between pt-2">
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">English Literature</span>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">{t("home.englishLiterature")}</span>
                     <span className="text-indigo-600 dark:text-indigo-400 font-bold">60%</span>
                   </div>
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
@@ -130,16 +130,16 @@ export default function Home() {
                 </div>
                 <div className="border-t border-gray-200 dark:border-gray-700 pt-6 grid grid-cols-3 gap-4 text-center">
                   <div>
-                    <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">2,450</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">XP Earned</p>
+                <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">2,450</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">{t("home.xpEarned")}</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">5</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">Level</p>
+                <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">5</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">{t("home.level")}</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">12</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">Streak</p>
+                <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">12</p>
+                <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">{t("home.streak")}</p>
                   </div>
                 </div>
               </div>
@@ -171,21 +171,21 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-3xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">Why Choose Insel 1o1?</h2>
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">{t("home.whyChooseTitle")}</h2>
             <div className="space-y-4">
-              {[
-                "Personalized learning paths for every student",
-                "Real-time progress tracking and analytics",
-                "Engaging gamification system",
-                "Multi-language support",
-                "Teacher and parent dashboards",
-                "Secure and scalable platform"
-              ].map((benefit, idx) => (
-                <div key={idx} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-indigo-600 dark:text-indigo-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 dark:text-gray-300 font-medium">{benefit}</span>
-                </div>
-              ))}
+               {[
+                 t("home.benefits.personalizedLearning"),
+                 t("home.benefits.realTimeTracking"),
+                 t("home.benefits.gamification"),
+                 t("home.benefits.multiLanguageSupport"),
+                 t("home.benefits.teacherParentDashboards"),
+                 t("home.benefits.secureScalable")
+               ].map((benefit, idx) => (
+                 <div key={idx} className="flex items-start gap-3">
+                   <CheckCircle2 className="w-6 h-6 text-indigo-600 dark:text-indigo-400 flex-shrink-0 mt-0.5" />
+                   <span className="text-gray-700 dark:text-gray-300 font-medium">{benefit}</span>
+                 </div>
+               ))}
             </div>
           </div>
           <div className="relative">
@@ -193,16 +193,16 @@ export default function Home() {
             <div className="relative bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-2xl border border-gray-200 dark:border-gray-700">
               <div className="text-center">
                 <div className="text-6xl mb-4">📊</div>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">Track your progress with detailed analytics and insights</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">{t("home.trackProgress")}</p>
                 <div className="space-y-3">
                   <div className="text-left">
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Learning Consistency</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{t("home.learningConsistency")}</p>
                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                       <div className="bg-indigo-600 h-2 rounded-full" style={{width: '92%'}}></div>
                     </div>
                   </div>
                   <div className="text-left">
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Course Completion</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{t("home.courseCompletion")}</p>
                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                       <div className="bg-blue-600 h-2 rounded-full" style={{width: '78%'}}></div>
                     </div>
