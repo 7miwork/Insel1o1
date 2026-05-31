@@ -627,7 +627,7 @@ function LessonsMapView({
                 <circle
                   cx={lesson.x}
                   cy={lesson.y}
-                  r={isHovered ? 6.5 : 5.5}
+                  r={lesson.isMainIsland ? (isHovered ? 11 : 9) : (isHovered ? 6.5 : 5.5)}
                   fill={course.color}
                   opacity={isHovered ? 0.25 : 0.1}
                   className="transition-all duration-500"
@@ -637,9 +637,9 @@ function LessonsMapView({
                 <circle
                   cx={lesson.x}
                   cy={lesson.y}
-                  r={isHovered ? 5 : 4.2}
+                  r={lesson.isMainIsland ? (isHovered ? 9 : 7.5) : (isHovered ? 5 : 4.2)}
                   fill="#FDE68A"
-                  opacity="0.2"
+                  opacity={lesson.isMainIsland ? 0.35 : 0.2}
                   className="transition-all duration-500"
                 />
 
@@ -647,39 +647,67 @@ function LessonsMapView({
                 <circle
                   cx={lesson.x}
                   cy={lesson.y}
-                  r={isHovered ? 4 : 3.5}
-                  fill={course.color}
-                  filter="url(#islandGlow)"
-                  className="transition-all duration-500"
+                  r={lesson.isMainIsland ? (isHovered ? 7.5 : 6.5) : (isHovered ? 4 : 3.5)}
+                  fill={lesson.isMainIsland ? "#7C3AED" : course.color}
+                  filter={lesson.isMainIsland ? "url(#islandGlow)" : "url(#islandGlow)"}
+                  className={`transition-all duration-500 ${lesson.isMainIsland ? "animate-pulse-glow" : ""}`}
                 />
+
+                {/* Golden crown for main island */}
+                {lesson.isMainIsland && (
+                  <text
+                    x={lesson.x}
+                    y={lesson.y - 9}
+                    textAnchor="middle"
+                    fontSize="3.5"
+                    className="pointer-events-none"
+                  >
+                    👑
+                  </text>
+                )}
 
                 {/* Lesson number */}
                 <text
                   x={lesson.x}
-                  y={lesson.y + 1}
+                  y={lesson.y + 1.5}
                   textAnchor="middle"
-                  fontSize={isHovered ? "2.5" : "2"}
-                  fill="white"
+                  fontSize={isHovered ? "3" : "2.5"}
+                  fill={lesson.isMainIsland ? "#FDE68A" : "white"}
                   fontWeight="bold"
                   className="pointer-events-none transition-all duration-500"
                 >
                   {idx + 1}
                 </text>
 
-                {/* Hover label */}
+                {/* Hover label - lesson name */}
                 {isHovered && (
-                  <text
-                    x={lesson.x}
-                    y={lesson.y - 6}
-                    textAnchor="middle"
-                    fontSize="2"
-                    fill="white"
-                    opacity="0.9"
-                    fontWeight="500"
-                    className="pointer-events-none"
-                  >
-                    {t("archipelago.lesson")} {idx + 1}
-                  </text>
+                  <g>
+                    <text
+                      x={lesson.x}
+                      y={lesson.y - 8}
+                      textAnchor="middle"
+                      fontSize="2.2"
+                      fill="white"
+                      opacity="0.95"
+                      fontWeight="bold"
+                      className="pointer-events-none"
+                    >
+                      {t(lesson.titleKey)}
+                    </text>
+                    {lesson.subtitleKey && (
+                      <text
+                        x={lesson.x}
+                        y={lesson.y - 5}
+                        textAnchor="middle"
+                        fontSize="1.6"
+                        fill="#FDE68A"
+                        opacity="0.8"
+                        className="pointer-events-none"
+                      >
+                        {t(lesson.subtitleKey)}
+                      </text>
+                    )}
+                  </g>
                 )}
               </g>
             );
