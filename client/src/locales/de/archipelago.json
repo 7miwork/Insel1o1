@@ -26,24 +26,114 @@
     "startCourse": "Kurs starten",
     "lesson1": "Bedingungen entdecken",
     "lesson1sub": "Wenn etwas passiert, reagiert der Agent",
+    "lesson1desc": "Lerne, wie du den Agenten mit Bedingungsblöcken auf Ereignisse reagieren lässt.",
+    "lesson1objectives": [
+      "Bedingungsblöcke verstehen",
+      "If‑Anweisungen nutzen",
+      "Werte vergleichen",
+      "Aktionen basierend auf Bedingungen auslösen",
+      "Logik testen und debuggen"
+    ],
+    "lesson1preview": "Nach dieser Lektion kann dein Agent einfache Entscheidungen basierend auf seiner Umgebung treffen.",
     "lesson2": "Clevere Entscheidungen",
     "lesson2sub": "If, Else und mehrere Möglichkeiten",
+    "lesson2desc": "Kombiniere mehrere Bedingungen mit else und else‑if, um verzweigte Logik zu erstellen.",
+    "lesson2objectives": [
+      "else‑ und else‑if‑Anweisungen verwenden",
+      "Bedingungen verschachteln",
+      "Logische Operatoren anwenden",
+      "Verzweigte Code‑Pfade erstellen",
+      "Bedingungsabläufe debuggen"
+    ],
+    "lesson2preview": "Dein Agent kann nun je nach Situation zwischen verschiedenen Aktionen wählen.",
     "lesson3": "Punkte & Zähler",
     "lesson3sub": "Variablen als Gedächtnis nutzen",
+    "lesson3desc": "Einführung in Variablen zum Speichern von Zahlen, Inkrementieren und Vergleichen für Punktestände.",
+    "lesson3objectives": [
+      "Numerische Variablen deklarieren",
+      "Arithmetische Operationen durchführen",
+      "Werte inkrementieren und dekrementieren",
+      "Variablen vergleichen",
+      "Variablen in Schleifen und Punktesystemen einsetzen"
+    ],
+    "lesson3preview": "Du kannst nun Punktestände verwalten und Schleifen in deinen Programmen steuern.",
     "lesson4": "Eigene Code-Blöcke",
     "lesson4sub": "Funktionen erstellen und wiederverwenden",
+    "lesson4desc": "Erstelle wiederverwendbare Funktionen, um Blöcke zu gruppieren und deinen Code zu vereinfachen.",
+    "lesson4objectives": [
+      "Funktionen definieren",
+      "Parameter an Funktionen übergeben",
+      "Werte zurückgeben",
+      "Funktionen aus anderen Blöcken aufrufen",
+      "Code für bessere Lesbarkeit organisieren"
+    ],
+    "lesson4preview": "Du kannst dieselben Aktionen mit einem einzigen Block ausführen, wodurch dein Programm sauberer wird.",
     "lesson5": "Schlaue Brücken",
     "lesson5sub": "Bedingungen und Funktionen kombinieren",
+    "lesson5desc": "Integriere Bedingungen und Funktionen, um komplexere Rätsel effizient zu lösen.",
+    "lesson5objectives": [
+      "Funktionen mit Bedingungslogik kombinieren",
+      "Parameter für flexible Funktionen nutzen",
+      "Modulare Lösungen entwerfen",
+      "Interaktionen zwischen Blöcken testen",
+      "Code‑Wiederverwendung optimieren"
+    ],
+    "lesson5preview": "Du erstellst modulare Lösungen, die intelligent auf die Umgebung reagieren.",
     "lesson6": "Muster-Meister",
     "lesson6sub": "Komplexe Muster mit Bedingungen bauen",
+    "lesson6desc": "Verwende Schleifen und Bedingungen, um wiederholende Muster effizient zu erzeugen.",
+    "lesson6objectives": [
+      "Wiederholungsschleifen nutzen",
+      "Verschachtelte Schleifen erstellen",
+      "Bedingte Muster innerhalb von Schleifen anwenden",
+      "Block‑Nutzung optimieren",
+      "Muster visualisieren und debuggen"
+    ],
+    "lesson6preview": "Dein Agent kann mit minimalen Blöcken komplexe Designs bauen.",
     "lesson7": "Umgebungs-Scanner",
     "lesson7sub": "Der Agent erkennt seine Umgebung",
+    "lesson7desc": "Lehre den Agenten, Blöcke, Entitäten und Spielerposition zu erkennen.",
+    "lesson7objectives": [
+      "Bestimmte Blöcke erkennen",
+      "Nahe Entitäten wahrnehmen",
+      "Spielerkoordinaten abrufen",
+      "Bedingte Reaktionen basierend auf Sensoren erstellen",
+      "Erkennung mit Aktionen kombinieren"
+    ],
+    "lesson7preview": "Dein Agent wird sich seiner Umgebung bewusst und kann entsprechend reagieren.",
     "lesson8": "Geheime Maschinen",
     "lesson8sub": "Interaktive Objekte und Redstone",
+    "lesson8desc": "Arbeite mit Redstone‑Komponenten und interaktiven Objekten, um einfache Maschinen zu bauen.",
+    "lesson8objectives": [
+      "Redstone‑Staub platzieren",
+      "Hebel und Knöpfe nutzen",
+      "Einfache Schaltungen erstellen",
+      "Mechanismen programmatisch auslösen",
+      "Maschinen debuggen und verfeinern"
+    ],
+    "lesson8preview": "Du automatisierst Aktionen mithilfe von Redstone‑Logik.",
     "lesson9": "Mein erstes Spiel",
     "lesson9sub": "Punkte, Regeln und Mini-Games",
+    "lesson9desc": "Kombiniere alle bisherigen Konzepte, um ein Mini‑Spiel mit Regeln, Punktestand und Gewinnbedingungen zu erstellen.",
+    "lesson9objectives": [
+      "Einfachen Spiel‑Loop entwerfen",
+      "Punktesystem implementieren",
+      "Gewinn‑ oder Verlustbedingungen erkennen",
+      "Ereignisse zur Steuerung des Gameplays nutzen",
+      "Benutzererlebnis verfeinern"
+    ],
+    "lesson9preview": "Du hast ein spielbares Spiel innerhalb von Minecraft.",
     "lesson10": "Gemeinsame Stadt",
     "lesson10sub": "Das große Abschlussprojekt",
+    "lesson10desc": "Arbeite im Team an einem größeren Projekt, bei dem mehrere Agenten eine gemeinsame Stadt bauen und fortgeschrittene Logik anwenden.",
+    "lesson10objectives": [
+      "Gemeinsame Aufgaben planen",
+      "Mehrere Agenten synchronisieren",
+      "Gemeinsame Ressourcen verwalten",
+      "Stadtfunktionen (Straßen, Gebäude, Versorgungsleitungen) implementieren",
+      "Teamarbeit und Problemlösung reflektieren"
+    ],
+    "lesson10preview": "Du siehst, wie Block‑Coding auf Gruppenprojekte skaliert.",
     "lesson11": "Die Letzte Insel",
     "lesson11sub": "Das Ziel deiner Block-Coding-Reise"
   }

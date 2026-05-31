@@ -26,24 +26,114 @@
     "startCourse": "開始課程",
     "lesson1": "發現條件",
     "lesson1sub": "當事件發生時，Agent 會做出反應",
+    "lesson1desc": "學習如何使用條件方塊讓 Agent 回應事件。",
+    "lesson1objectives": [
+      "了解條件方塊",
+      "使用 if 語句",
+      "比較數值",
+      "根據條件觸發動作",
+      "測試與除錯邏輯"
+    ],
+    "lesson1preview": "完成此課程後，Agent 能根據周圍情況做出簡單決策。",
     "lesson2": "聰明決策",
     "lesson2sub": "If、Else 及多種可能性",
+    "lesson2desc": "結合多個條件與 else、else‑if，建立分支邏輯。",
+    "lesson2objectives": [
+      "使用 else 與 else‑if",
+      "巢狀條件",
+      "運用邏輯運算子",
+      "建立分支程式路徑",
+      "除錯條件流程"
+    ],
+    "lesson2preview": "你的 Agent 能根據情況選擇不同的行動。",
     "lesson3": "分數與計數器",
     "lesson3sub": "使用變數作為記憶",
+    "lesson3desc": "介紹變數用於儲存數字、遞增與比較，以追蹤分數。",
+    "lesson3objectives": [
+      "宣告數值變數",
+      "執行算術運算",
+      "遞增與遞減值",
+      "比較變數",
+      "在迴圈與計分中使用變數"
+    ],
+    "lesson3preview": "你將能管理分數並控制程式中的迴圈。",
     "lesson4": "自訂程式碼區塊",
     "lesson4sub": "建立和重用函數",
+    "lesson4desc": "建立可重用的函式，將方塊分組並簡化程式碼。",
+    "lesson4objectives": [
+      "定義函式",
+      "傳遞參數給函式",
+      "回傳值",
+      "從其他方塊呼叫函式",
+      "組織程式碼以提升可讀性"
+    ],
+    "lesson4preview": "你可以用單一方塊執行相同動作，使程式更整潔。",
     "lesson5": "智慧橋樑",
     "lesson5sub": "結合條件與函數",
+    "lesson5desc": "將條件與函式結合，以更有效解決複雜謎題。",
+    "lesson5objectives": [
+      "將函式與條件邏輯結合",
+      "使用參數提升函式彈性",
+      "設計模組化解決方案",
+      "測試方塊之間的互動",
+      "優化程式碼重用"
+    ],
+    "lesson5preview": "你將建立能智慧回應環境的模組化解決方案。",
     "lesson6": "圖案大師",
     "lesson6sub": "用條件建立複雜圖案",
+    "lesson6desc": "使用迴圈與條件高效產生重複圖案。",
+    "lesson6objectives": [
+      "使用重複迴圈",
+      "建立巢狀迴圈",
+      "在迴圈中套用條件圖案",
+      "優化方塊使用量",
+      "視覺化與除錯圖案"
+    ],
+    "lesson6preview": "你的 Agent 能以最少方塊建造精緻設計。",
     "lesson7": "環境掃描器",
     "lesson7sub": "Agent 偵測周遭環境",
+    "lesson7desc": "教導 Agent 偵測方塊、實體與玩家位置。",
+    "lesson7objectives": [
+      "偵測特定方塊",
+      "感知附近實體",
+      "取得玩家座標",
+      "根據感測器建立條件回應",
+      "將偵測與動作結合"
+    ],
+    "lesson7preview": "Agent 會意識到周圍環境並相應行動。",
     "lesson8": "祕密機器",
     "lesson8sub": "互動物件與紅石",
+    "lesson8desc": "使用 Redstone 元件與互動物件，建造簡易機械。",
+    "lesson8objectives": [
+      "放置 Redstone 粉",
+      "使用拉桿與按鈕",
+      "建立基本電路",
+      "以程式方式觸發機制",
+      "除錯與優化機械"
+    ],
+    "lesson8preview": "你將透過 Redstone 邏輯自動化動作。",
     "lesson9": "我的第一款遊戲",
     "lesson9sub": "分數、規則與小遊戲",
+    "lesson9desc": "結合所有先前概念，打造具規則、計分與勝負條件的迷你遊戲。",
+    "lesson9objectives": [
+      "設計簡易遊戲迴圈",
+      "實作計分機制",
+      "偵測勝負條件",
+      "使用事件驅動遊戲流程",
+      "優化使用者體驗"
+    ],
+    "lesson9preview": "你將在 Minecraft 中擁有可玩的小遊戲。",
     "lesson10": "共享城市",
     "lesson10sub": "大型畢業專案",
+    "lesson10desc": "協作完成大型專案，讓多個 Agent 共同建造城市，運用進階邏輯與團隊合作。",
+    "lesson10objectives": [
+      "規劃協作任務",
+      "同步多個 Agent",
+      "管理共享資源",
+      "實作城市功能（道路、建築、公共設施）",
+      "反思團隊合作與問題解決"
+    ],
+    "lesson10preview": "你將看到方塊程式如何擴展至團隊專案。",
     "lesson11": "最後之島",
     "lesson11sub": "你 Block Coding 旅程的終點"
   }

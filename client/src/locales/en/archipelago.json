@@ -26,24 +26,114 @@
     "startCourse": "Start Course",
     "lesson1": "Discovering Conditions",
     "lesson1sub": "When something happens, the Agent reacts",
+    "lesson1desc": "Learn how to make the Agent respond to events using conditional blocks.",
+    "lesson1objectives": [
+      "Understand condition blocks",
+      "Use if statements",
+      "Compare values",
+      "Trigger actions based on conditions",
+      "Test and debug logic"
+    ],
+    "lesson1preview": "After this lesson, your Agent can make simple decisions based on what happens around it.",
     "lesson2": "Clever Decisions",
-    "lesson2sub": "If, Else, and multiple possibilities",
+    "lesson2sub": "If, Else and multiple possibilities",
+    "lesson2desc": "Combine multiple conditions with else and else‑if to create branching logic.",
+    "lesson2objectives": [
+      "Use else and else‑if statements",
+      "Nest conditions",
+      "Apply logical operators",
+      "Create branching code paths",
+      "Debug conditional flows"
+    ],
+    "lesson2preview": "Your Agent will be able to choose between different actions depending on the situation.",
     "lesson3": "Points & Counters",
     "lesson3sub": "Using variables as memory",
+    "lesson3desc": "Introduce variables to store numbers, increment and compare them to track scores.",
+    "lesson3objectives": [
+      "Declare numeric variables",
+      "Perform arithmetic operations",
+      "Increment and decrement values",
+      "Compare variables",
+      "Apply variables in loops and scoring"
+    ],
+    "lesson3preview": "You’ll be able to keep score and control loops in your programs.",
     "lesson4": "Custom Code Blocks",
     "lesson4sub": "Creating and reusing functions",
+    "lesson4desc": "Build reusable functions to group blocks and simplify your code.",
+    "lesson4objectives": [
+      "Define functions",
+      "Pass parameters to functions",
+      "Return values",
+      "Call functions from other blocks",
+      "Organize code for readability"
+    ],
+    "lesson4preview": "You can call the same set of actions with a single block, making your programs cleaner.",
     "lesson5": "Smart Bridges",
     "lesson5sub": "Combining conditions and functions",
+    "lesson5desc": "Integrate conditions and functions to solve more complex puzzles efficiently.",
+    "lesson5objectives": [
+      "Combine functions with conditional logic",
+      "Use parameters for flexible functions",
+      "Design modular solutions",
+      "Test interactions between blocks",
+      "Optimize code reuse"
+    ],
+    "lesson5preview": "You’ll create modular solutions that react intelligently to the environment.",
     "lesson6": "Pattern Master",
     "lesson6sub": "Building complex patterns with conditions",
+    "lesson6desc": "Use loops and conditions to generate repeating patterns efficiently.",
+    "lesson6objectives": [
+      "Use repeat loops",
+      "Create nested loops",
+      "Apply conditional patterns within loops",
+      "Optimize block usage",
+      "Visualize and debug patterns"
+    ],
+    "lesson6preview": "Your Agent can build intricate designs with minimal blocks.",
     "lesson7": "Environment Scanner",
     "lesson7sub": "The Agent detects its surroundings",
+    "lesson7desc": "Teach the Agent to detect blocks, entities, and player position.",
+    "lesson7objectives": [
+      "Detect specific blocks",
+      "Sense nearby entities",
+      "Retrieve player coordinates",
+      "Create conditional reactions based on sensors",
+      "Combine detection with actions"
+    ],
+    "lesson7preview": "Your Agent becomes aware of its surroundings and can react accordingly.",
     "lesson8": "Secret Machines",
     "lesson8sub": "Interactive objects and Redstone",
+    "lesson8desc": "Work with Redstone components and interactive objects to build simple machines.",
+    "lesson8objectives": [
+      "Place Redstone dust",
+      "Use levers and buttons",
+      "Create basic circuits",
+      "Trigger mechanisms programmatically",
+      "Debug and refine machines"
+    ],
+    "lesson8preview": "You’ll automate actions using Redstone logic.",
     "lesson9": "My First Game",
     "lesson9sub": "Points, rules, and mini-games",
+    "lesson9desc": "Combine all previous concepts to create a mini‑game with rules, scoring, and win conditions.",
+    "lesson9objectives": [
+      "Design a simple game loop",
+      "Implement scoring mechanisms",
+      "Detect win or lose conditions",
+      "Use events to drive gameplay",
+      "Polish the user experience"
+    ],
+    "lesson9preview": "You’ll have a playable game inside Minecraft.",
     "lesson10": "Shared City",
     "lesson10sub": "The big final project",
+    "lesson10desc": "Collaborate on a larger project where multiple agents build a shared city, applying teamwork and advanced logic.",
+    "lesson10objectives": [
+      "Plan collaborative tasks",
+      "Synchronize multiple agents",
+      "Manage shared resources",
+      "Implement city features (roads, buildings, utilities)",
+      "Reflect on teamwork and problem solving"
+    ],
+    "lesson10preview": "You’ll see how block coding scales to group projects.",
     "lesson11": "The Last Island",
     "lesson11sub": "The goal of your block coding journey"
   }

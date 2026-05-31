@@ -32,135 +32,398 @@ export interface QuizQuestion {
 }
 
 // Placeholder lessons for other islands
-export const PLACEHOLDER_LESSONS: Lesson[] = [
   {
-    id: 2,
-    title: 'Python Basics - Coming Soon',
-    description: 'Learn Python programming fundamentals',
-    phase: 'getting-started',
+    id: 16,
+    title: 'Ereignisse – Chat‑Befehle',
+    description: 'Agent reagiert auf Chat‑Befehle (z. B. /bau)',
+    phase: 'conditionals',
     duration: 60,
-    difficulty: 'beginner',
-    objectives: ['Coming soon'],
-    content: 'This course is coming soon! Check back later.',
-    codeBlocks: [],
-    studentActivity: 'Stay tuned for Python lessons!',
-    teacherTip: 'Python course will be available soon.',
-    quiz: [],
-    xpReward: 0,
+    difficulty: 'intermediate',
+    objectives: [
+      'Chat‑Befehle erkennen',
+      'Variablen für Status nutzen',
+      'Einfaches Bau‑Projekt per Befehl umsetzen',
+    ],
+    content: `
+# Ereignisse – Chat‑Befehle
+
+## Theorie (15 Min)** – \`when chat command\` Syntax, Status‑Variablen.
+## Praxis (35 Min)** – Implementiere Befehle \`/bau Wand\`, \`/bau Tür\`, \`/repariere\`.
+## Reflexion (10 Min)** – Welche Befehle wären im echten Leben nützlich?
+`,
+    codeBlocks: [
+      { name: 'when chat command', description: 'Auf Chat‑Befehl reagieren', example: "when chat command \"bau Wand\" received { … }", icon: '💬' },
+    ],
+    studentActivity: `
+1. Definiere drei Chat‑Befehle zum Bauen.
+2. Teste sie im Spiel und beobachte das Ergebnis.
+3. Dokumentiere die genutzten Variablen.
+`,
+    teacherTip: 'Erkläre, dass Chat‑Befehle ein Interface für Nicht‑Programmierer sind.',
+    quiz: [
+      { id: 1, question: 'Welcher Block wird durch den Befehl `/bau Wand` gebaut?', options: ['Wand aus Stein', 'Wand aus Holz', 'Wand aus Glas', 'Keine Wand'], correctAnswer: 0, explanation: 'Im Beispiel wird Stein verwendet.' },
+    ],
+    xpReward: 75,
+    unlocks: [17],
   },
   {
-    id: 3,
-    title: 'Web Development - Coming Soon',
-    description: 'Learn HTML, CSS, and JavaScript',
-    phase: 'getting-started',
+    id: 17,
+    title: 'Ereignisse – Redstone‑Signale',
+    description: 'Agent reagiert auf Knöpfe, Hebel und Redstone‑Signal',
+    phase: 'conditionals',
     duration: 60,
-    difficulty: 'beginner',
-    objectives: ['Coming soon'],
-    content: 'This course is coming soon! Check back later.',
-    codeBlocks: [],
-    studentActivity: 'Stay tuned for Web Development lessons!',
-    teacherTip: 'Web Development course will be available soon.',
-    quiz: [],
-    xpReward: 0,
+    difficulty: 'intermediate',
+    objectives: [
+      'Redstone‑Signal erkennen',
+      'Bedingungen für Signalstärke nutzen',
+      'Tür‑Mechanik mit Code implementieren',
+    ],
+    content: `
+# Ereignisse – Redstone‑Signale
+
+## Theorie (10 Min)** – Redstone als Stromkreis erklären.
+## Praxis (40 Min)** – Tür öffnet sich nur, wenn Knopf gedrückt **und** Spieler Goldblock hält.
+## Herausforderung (10 Min)** – Tür schließt automatisch nach 5 Sekunden.
+`,
+    codeBlocks: [
+      { name: 'when redstone signal', description: 'Auf Redstone‑Signal reagieren', example: "when redstone signal received { … }", icon: '🔌' },
+    ],
+    studentActivity: `
+1. Baue eine Tür, die nur bei Goldblock‑Haltung öffnet.
+2. Implementiere automatisches Schließen.
+`,
+    teacherTip: 'Nutze farbige Redstone‑Leuchten zur Visualisierung.',
+    quiz: [
+      { id: 1, question: 'Wie prüft man, ob ein Redstone‑Signal aktiv ist?', options: ['if (redstone power > 0)', 'if (signal)', 'if (redstone)', 'if (power)'], correctAnswer: 0, explanation: 'Signalstärke > 0 bedeutet aktiv.' },
+    ],
+    xpReward: 75,
+    unlocks: [18],
   },
   {
-    id: 4,
-    title: 'Game Design - Coming Soon',
-    description: 'Learn game design principles',
-    phase: 'getting-started',
+    id: 18,
+    title: 'Agent folgt dem Spieler',
+    description: 'Agent bewegt sich relativ zur Spieler‑Position',
+    phase: 'loops',
     duration: 60,
-    difficulty: 'beginner',
-    objectives: ['Coming soon'],
-    content: 'This course is coming soon! Check back later.',
-    codeBlocks: [],
-    studentActivity: 'Stay tuned for Game Design lessons!',
-    teacherTip: 'Game Design course will be available soon.',
-    quiz: [],
-    xpReward: 0,
+    difficulty: 'intermediate',
+    objectives: [
+      'Relative Position berechnen',
+      'Teleport‑Befehl nutzen',
+      'Automatisches Weg‑Bauen',
+    ],
+    content: `
+# Agent folgt dem Spieler
+
+## Theorie (15 Min)** – \`teleport\` mit Offset, Spieler‑Koordinaten.
+## Praxis (35 Min)** – Agent baut einen Weg aus Steinplatten, 2 Blöcke Abstand.
+## Reflexion (10 Min)** – Grenzen der Teleport‑Methode diskutieren.
+`,
+    codeBlocks: [
+      { name: 'teleport', description: 'Agent zu Koordinate teleportieren', example: "teleport(playerX, playerY, playerZ + 2)", icon: '📍' },
+    ],
+    studentActivity: `
+1. Implementiere ein Skript, das den Agenten 2 Blöcke hinter dem Spieler hält.
+2. Lasse ihn einen Stein‑Pfad legen.
+`,
+    teacherTip: 'Achte auf mögliche Kollisionen beim Teleport.',
+    quiz: [
+      { id: 1, question: 'Welcher Befehl legt den Agenten 2 Blöcke vor dem Spieler?', options: ['teleport(playerX, playerY, playerZ + 2)', 'move(FORWARD, 2)', 'turn(RIGHT)', 'place(STONE)'], correctAnswer: 0, explanation: 'Teleport mit Offset positioniert den Agenten.' },
+    ],
+    xpReward: 75,
+    unlocks: [19],
   },
+  {
+    id: 19,
+    title: 'Mehrstufige Aufgaben',
+    description: 'Agent erledigt komplexe Abläufe (Sammeln → Verarbeiten → Bauen)',
+    phase: 'loops',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'Variablen als Status‑Flags nutzen',
+      'Sequenz von Aktionen planen',
+      'Code effizient strukturieren',
+    ],
+    content: `
+# Mehrstufige Aufgaben
+
+## Theorie (15 Min)** – Flags \`hatHolz\`, \`hatPlanken\` erklären.
+## Praxis (35 Min)** – Holz sammeln → zu Planken verarbeiten → Tisch bauen.
+## Reflexion (10 Min)** – Optimierungsmöglichkeiten besprechen.
+`,
+    codeBlocks: [
+      { name: 'function', description: 'Wiederverwendbare Abläufe', example: "function sammleHolz() { … }", icon: '⚙️' },
+    ],
+    studentActivity: `
+1. Definiere Funktion \`sammleHolz\`.
+2. Nutze Flags, um den Fortschritt zu steuern.
+3. Baue anschließend einen Tisch.
+`,
+    teacherTip: 'Zeige, wie man den Code in einzelne Funktionen aufteilt.',
+    quiz: [
+      { id: 1, question: 'Welches Flag zeigt an, dass Holz gesammelt wurde?', options: ['hatHolz', 'hatPlanken', 'hatStein', 'hatWolle'], correctAnswer: 0, explanation: 'Flag `hatHolz` wird gesetzt, wenn Holz vorhanden ist.' },
+    ],
+    xpReward: 75,
+    unlocks: [20],
+  },
+  {
+    id: 20,
+    title: 'Umgebungs‑Scans',
+    description: 'Agent erkennt Muster (z. B. alle Bäume) und führt Aktionen aus',
+    phase: 'conditionals',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'Verschachtelte Schleifen nutzen',
+      'Block‑Typen prüfen',
+      'Automatisierte Aktionen (Fällen, Sammeln)',
+    ],
+    content: `
+# Umgebungs‑Scans
+
+## Theorie (15 Min)** – \`blockAt\` prüfen, verschachtelte Schleifen.
+## Praxis (35 Min)** – Agent findet alle Bäume in einem 10×10‑Bereich und fällt sie.
+## Reflexion (10 Min)** – Performance‑Überlegungen.
+`,
+    codeBlocks: [
+      { name: 'blockAt', description: 'Block an Position prüfen', example: "if (blockAt(x, y, z) == LOG) { … }", icon: '🔎' },
+    ],
+    studentActivity: `
+1. Schreibe ein Skript, das alle Baumstämme in einem definierten Gebiet fällen kann.
+2. Ergänze eine Zähl‑Variable für gefällte Bäume.
+`,
+    teacherTip: 'Erkläre, warum verschachtelte Schleifen effizient sind.',
+    quiz: [
+      { id: 1, question: 'Welcher Befehl prüft den Blocktyp an einer Position?', options: ['blockAt', 'checkBlock', 'getBlock', 'findBlock'], correctAnswer: 0, explanation: 'blockAt(x,y,z) gibt den Blocktyp zurück.' },
+    ],
+    xpReward: 75,
+    unlocks: [21],
+  },
+  {
+    id: 21,
+    title: 'Dynamische Bauwerke',
+    description: 'Bauwerke passen sich der Umgebung (Höhe, Material) an',
+    phase: 'conditionals',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'Umgebungs‑Checks in Bedingungen nutzen',
+      'Variable Höhe und Material wählen',
+      'Adaptive Strukturen bauen',
+    ],
+    content: `
+# Dynamische Bauwerke
+
+## Theorie (15 Min)** – Bedingungen für Höhe und Material.
+## Praxis (35 Min)** – Mauer, die höher wird, wenn sie auf einem Berg steht.
+## Reflexion (10 Min)** – Vor- und Nachteile statischer vs. dynamischer Bauweise.
+`,
+    codeBlocks: [
+      { name: 'if', description: 'Bedingte Logik', example: "if (blockBelow == STONE) { … }", icon: '🔀' },
+    ],
+    studentActivity: `
+1. Baue eine Mauer, die bei Stein‑Boden 5 Blöcke hoch ist, sonst 3.
+2. Teste in unterschiedlichen Biomen.
+`,
+    teacherTip: 'Zeige Beispiele aus der echten Welt (z. B. Stadtmauern).',
+    quiz: [
+      { id: 1, question: 'Welche Bedingung erzeugt eine höhere Mauer?', options: ['if (blockBelow == STONE)', 'if (blockBelow == DIRT)', 'if (blockBelow == WATER)', 'if (true)'], correctAnswer: 0, explanation: 'Stein‑Boden löst die höhere Mauer aus.' },
+    ],
+    xpReward: 75,
+    unlocks: [22],
+  },
+  {
+    id: 22,
+    title: 'Agent mit „Gedächtnis“',
+    description: 'Agent speichert Positionen oder Objekte in Variablen',
+    phase: 'variables',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'Variablen für Koordinaten nutzen',
+      'Gespeicherte Position später ansteuern',
+      'Schatz‑Suche implementieren',
+    ],
+    content: `
+# Agent mit „Gedächtnis“
+
+## Theorie (15 Min)** – Variablen \`schatzX\`, \`schatzZ\` erklären.
+## Praxis (35 Min)** – Agent merkt sich Schatz‑Koordinaten und teleportiert sich dorthin.
+## Reflexion (10 Min)** – Nutzen von Speicher in größeren Projekten.
+`,
+    codeBlocks: [
+      { name: 'set variable', description: 'Variable setzen', example: "set variable schatzX = 10", icon: '🔧' },
+    ],
+    studentActivity: `
+1. Definiere Variablen für Schatz‑Koordinaten.
+2. Teleportiere den Agenten zum Schatz.
+`,
+    teacherTip: 'Verwende sprechende Namen, nicht `var1`.',
+    quiz: [
+      { id: 1, question: 'Wie speichert man die X‑Koordinate eines Schatzes?', options: ['set variable schatzX = 10', 'set variable X = 10', 'change variable schatzX by 10', 'move X 10'], correctAnswer: 0, explanation: 'set variable schatzX = 10' },
+    ],
+    xpReward: 75,
+    unlocks: [23],
+  },
+  {
+    id: 23,
+    title: 'Interaktive Spiele',
+    description: 'Agent als Spielfigur in Mini‑Spielen (z. B. Fang‑Spiel)',
+    phase: 'creative',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'Zufalls‑Blöcke nutzen',
+      'Punkte‑System implementieren',
+      'Zeit‑Limit einbauen',
+    ],
+    content: `
+# Interaktive Spiele
+
+## Theorie (15 Min)** – Zufalls‑Funktion, Punktestand.
+## Praxis (35 Min)** – „Agenten‑Rennen“: Agent jagt Spieler, Punkte sammeln.
+## Reflexion (10 Min)** – Spielbalance diskutieren.
+`,
+    codeBlocks: [
+      { name: 'random', description: 'Zufallszahl erzeugen', example: "let dir = random([NORTH, SOUTH, EAST, WEST])", icon: '🎲' },
+    ],
+    studentActivity: `
+1. Erstelle ein Fang‑Spiel, bei dem der Agent Punkte bekommt, wenn er den Spieler berührt.
+2. Implementiere ein 2‑Minuten‑Timer.
+`,
+    teacherTip: 'Ermutige kreative Regel‑Varianten.',
+    quiz: [
+      { id: 1, question: 'Welcher Befehl erzeugt eine Zufalls‑Richtung?', options: ['random([NORTH, SOUTH, EAST, WEST])', 'rand()', 'choose()', 'shuffle()'], correctAnswer: 0, explanation: 'random([...]) liefert eine zufällige Richtung.' },
+    ],
+    xpReward: 75,
+    unlocks: [24],
+  },
+  {
+    id: 24,
+    title: 'Fehlerbehandlung',
+    description: 'Agent erkennt und korrigiert Fehler (z. B. feststecken)',
+    phase: 'conditionals',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'Position‑Vergleich für Stuck‑Erkennung',
+      'Wiederherstellungs‑Logik implementieren',
+      'Zeit‑Überwachung nutzen',
+    ],
+    content: `
+# Fehlerbehandlung
+
+## Theorie (15 Min)** – Position speichern, nach kurzer Zeit vergleichen.
+## Praxis (35 Min)** – Agent sagt „Ich stecke fest!“, springt dann.
+## Reflexion (10 Min)** – Wie lässt sich Robustheit erhöhen?
+`,
+    codeBlocks: [
+      { name: 'set variable', description: 'Letzte Position speichern', example: "set variable letztePos = agentPos", icon: '🔧' },
+    ],
+    studentActivity: `
+1. Implementiere Stuck‑Erkennung nach 5 Sekunden.
+2. Lasse den Agenten einen Sprung ausführen, um sich zu befreien.
+`,
+    teacherTip: 'Zeige, wie man Logs für Debugging nutzt.',
+    quiz: [
+      { id: 1, question: 'Wie erkennt man, dass der Agent feststeckt?', options: ['Vergleiche aktuelle und letzte Position', 'Zähle Befehle', 'Prüfe Inventar', 'Messe Zeit'], correctAnswer: 0, explanation: 'Positionsvergleich zeigt Stuck‑Zustand.' },
+    ],
+    xpReward: 75,
+    unlocks: [25],
+  },
+  {
+    id: 25,
+    title: 'Abschlussprojekt – Stadt',
+    description: 'Alle Konzepte kombinieren, modulare Funktionen, automatisierte Stadt',
+    phase: 'final-project',
+    duration: 60,
+    difficulty: 'advanced',
+    objectives: [
+      'Alle gelernten Konzepte in einer Stadt anwenden',
+      'Modulare Funktionen für Gebäude nutzen',
+      'Automatisierte Dienste (z. B. Farm‑Agent) implementieren',
+    ],
+    content: `
+# Abschlussprojekt – Stadt
+
+## Planung (10 Min)** – Stadt‑Layout skizzieren, Rollen verteilen.
+## Umsetzung (40 Min)** – Gebäude, Straßen, automatisierte Agenten (Farm, Sicherheit).
+## Präsentation (10 Min)** – Stadt‑Tour, Reflexion.
+`,
+    codeBlocks: [
+      { name: 'function', description: 'Modulare Gebäude‑Funktion', example: "function baueHaus() { … }", icon: '⚙️' },
+    ],
+    studentActivity: `
+1. Plane das Stadt‑Layout.
+2. Implementiere mindestens drei Gebäude mit eigenen Funktionen.
+3. Ergänze einen automatisierten Farm‑Agenten.
+4. Verbinde alles mit Straßen.
+`,
+    teacherTip: 'Ermutige Teams, ihre Aufgaben zu koordinieren und Code zu teilen.',
+    quiz: [
+      { id: 1, question: 'Welcher Schritt ist zuerst beim Stadt‑Projekt?', options: ['Bauen', 'Planen', 'Präsentieren', 'Testen'], correctAnswer: 1, explanation: 'Planung ist der erste Schritt.' },
+    ],
+    xpReward: 150,
+    unlocks: [],
+  },
+  // End of lessons
 ];
 
 export const MINECRAFT_LESSONS: Lesson[] = [
   {
     id: 1,
-    title: 'Welcome to Minecraft Education – Controls and Codebuilder',
-    description: 'Learn keyboard/mouse controls and your first code block',
+    title: 'Grundlagen der Steuerung',
+    description: 'Sicherer Umgang mit Minecraft-Steuerung ohne CodeBuilder',
     phase: 'getting-started',
     duration: 60,
     difficulty: 'beginner',
     objectives: [
-      'Move and interact in Minecraft Education using keyboard and mouse',
-      'Open Codebuilder for the first time',
-      'Use the say command to print messages in chat',
-      'Understand that Codebuilder controls the Agent, not the player',
+      'Tastatur‑ und Maus‑Funktionen sicher einsetzen',
+      'Bewegungsabläufe (Linie, Quadrat, Kreis) verstehen',
+      'Koordinaten für Schatzsuche nutzen',
+      'Reflexion über Schwierigkeiten und Tipps sammeln',
     ],
     content: `
-# Welcome to Minecraft Education
+# Grundlagen der Steuerung
 
-## Controls
-- **WASD**: Move forward, left, backward, right
-- **Space**: Jump
-- **Shift**: Sneak/Crouch
-- **E**: Open inventory
-- **Right Click**: Place/interact with blocks
-- **Left Click**: Break/destroy blocks
+## Einführung
+In dieser Lektion lernen die Schüler*innen, wie sie sich in Minecraft Education sicher bewegen und die Grundfunktionen der Steuerung (WASD, Springen, Schleichen) anwenden. Das ist die Basis für alle späteren Coding‑Aufgaben, weil der Agent nur dann effektiv eingesetzt werden kann, wenn die Umgebung gut erkundet wird.
 
-## Codebuilder Basics
-Codebuilder is a visual programming tool that lets you write code to control the Agent (a programmable robot). The Agent is separate from your player character.
-
-## Your First Command: Say
-The 'say' command prints a message in the chat for everyone to see.
-
-\`\`\`
-say("Hello, Minecraft World!")
-\`\`\`
-
-## Key Concept
-**Important**: You (the player) are controlled by your keyboard and mouse. The Agent is controlled by your code in Codebuilder. They are separate!
+## Ablauf
+**Theorie (10 Min)** – Erklärung der Tasten und Demonstration von einfachen Bewegungsformen (Linie, Quadrat, Kreis).
+**Praxis (40 Min)** –
+1. Parcours mit Woll‑Pfaden folgen.
+2. Schatzsuche mit Koordinaten (z. B. „5 Blöcke nordöstlich“).
+**Reflexion (10 Min)** – Was war schwer? Tipps für die nächste Stunde.
 `,
-    codeBlocks: [
-      {
-        name: 'say',
-        description: 'Print a message in chat',
-        example: 'say("Hello")',
-        icon: '💬',
-      },
-      {
-        name: 'teleport',
-        description: 'Move the Agent to a location',
-        example: 'teleport(10, 5, 20)',
-        icon: '📍',
-      },
-    ],
+    codeBlocks: [],
     studentActivity: `
-1. Open Codebuilder by pressing 'C'
-2. Write: say("I am learning to code!")
-3. Run the code and see your message in chat
-4. Change the message and run again
-5. Try teleporting the Agent: teleport(0, 5, 0)
+1. Folge dem vorgegebenen Woll‑Pfad und achte auf die Richtung.
+2. Finde das versteckte Item anhand der Koordinaten‑Hinweise.
+3. Diskutiere im Team, welche Tasten dir am meisten geholfen haben.
 `,
-    teacherTip: 'Emphasize the difference between player and Agent. Have students practice moving around and then using Codebuilder separately.',
+    teacherTip: 'Beginne mit einer kurzen Live‑Demo. Nutze farbige Schilder, um die Koordinaten‑Hinweise klar zu markieren.',
     quiz: [
       {
         id: 1,
-        question: 'Which keys move your player character forward and backward?',
-        options: ['W and S', 'A and D', 'Space and Shift', 'E and Q'],
-        correctAnswer: 0,
-        explanation: 'W moves forward and S moves backward in Minecraft.',
+        question: 'Welche Taste lässt deinen Spieler springen?',
+        options: ['W', 'Space', 'Shift', 'E'],
+        correctAnswer: 1,
+        explanation: 'Die Leertaste (Space) bewirkt einen Sprung.',
       },
       {
         id: 2,
-        question: 'What does the say command do?',
-        options: ['Moves the Agent', 'Prints a message in chat', 'Breaks blocks', 'Places blocks'],
-        correctAnswer: 1,
-        explanation: 'The say command prints a message that everyone in the world can see.',
+        question: 'Wie lautet die Tastenkombination, um zu schleichen?',
+        options: ['Shift', 'Ctrl', 'Alt', 'Tab'],
+        correctAnswer: 0,
+        explanation: 'Mit der Shift‑Taste kannst du dich leise bewegen.',
       },
       {
         id: 3,
-        question: 'Who does Codebuilder control?',
-        options: ['Your player character', 'The Agent robot', 'All mobs', 'Nothing'],
+        question: 'Ein Schüler soll ein Item 5 Blöcke nordöstlich finden. Welche Richtung muss er zuerst gehen?',
+        options: ['Nord', 'Ost', 'Süd', 'West'],
         correctAnswer: 1,
-        explanation: 'Codebuilder controls the Agent, not your player character.',
+        explanation: 'Nordöstlich bedeutet zuerst nach Osten, dann nach Norden.',
       },
     ],
     xpReward: 50,
