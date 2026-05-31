@@ -66,7 +66,7 @@ export interface ArchipelagoConfig {
  * The Programmier-Archipel configuration.
  *
  * Currently contains:
- * - Minecraft Education Basic (15 lessons)
+ * - Minecraft Education Basic (11 lessons)
  * - Minecraft Education Advanced (coming soon, 0 lessons)
  *
  * To extend, add new courses to the `courses` array.
@@ -89,28 +89,20 @@ export const programmingArchipelago: ArchipelagoConfig = {
       lessons: [
         // Row 1: Getting Started (left to right)
         { id: 1, titleKey: "archipelago.lesson", emoji: "🏝️", x: 8, y: 15, available: true },
-        { id: 2, titleKey: "archipelago.lesson", emoji: "🏝️", x: 20, y: 12, available: true },
-        { id: 3, titleKey: "archipelago.lesson", emoji: "🏝️", x: 32, y: 15, available: true },
+        { id: 2, titleKey: "archipelago.lesson", emoji: "🏝️", x: 22, y: 12, available: true },
+        { id: 3, titleKey: "archipelago.lesson", emoji: "🏝️", x: 36, y: 15, available: true },
+        { id: 4, titleKey: "archipelago.lesson", emoji: "🏝️", x: 50, y: 12, available: true },
+        { id: 5, titleKey: "archipelago.lesson", emoji: "🏝️", x: 64, y: 15, available: true },
 
-        // Row 2: Loops
-        { id: 4, titleKey: "archipelago.lesson", emoji: "🏝️", x: 44, y: 10, available: true },
-        { id: 5, titleKey: "archipelago.lesson", emoji: "🏝️", x: 56, y: 13, available: true },
-        { id: 6, titleKey: "archipelago.lesson", emoji: "🏝️", x: 68, y: 10, available: true },
+        // Row 2: Winding back (right to left)
+        { id: 6, titleKey: "archipelago.lesson", emoji: "🏝️", x: 78, y: 18, available: true },
+        { id: 7, titleKey: "archipelago.lesson", emoji: "🏝️", x: 85, y: 32, available: true },
+        { id: 8, titleKey: "archipelago.lesson", emoji: "🏝️", x: 78, y: 48, available: true },
+        { id: 9, titleKey: "archipelago.lesson", emoji: "🏝️", x: 64, y: 52, available: true },
 
-        // Row 3: Conditionals
-        { id: 7, titleKey: "archipelago.lesson", emoji: "🏝️", x: 80, y: 15, available: true },
-        { id: 8, titleKey: "archipelago.lesson", emoji: "🏝️", x: 90, y: 20, available: true },
-        { id: 9, titleKey: "archipelago.lesson", emoji: "🏝️", x: 92, y: 35, available: true },
-
-        // Row 4: Creative Projects
-        { id: 10, titleKey: "archipelago.lesson", emoji: "🏝️", x: 85, y: 50, available: true },
-        { id: 11, titleKey: "archipelago.lesson", emoji: "🏝️", x: 75, y: 58, available: true },
-        { id: 12, titleKey: "archipelago.lesson", emoji: "🏝️", x: 62, y: 62, available: true },
-
-        // Row 5: Final Projects
-        { id: 13, titleKey: "archipelago.lesson", emoji: "🏝️", x: 48, y: 65, available: true },
-        { id: 14, titleKey: "archipelago.lesson", emoji: "🏝️", x: 34, y: 68, available: true },
-        { id: 15, titleKey: "archipelago.lesson", emoji: "🏝️", x: 20, y: 72, available: true },
+        // Row 3: Final stretch (left to right, bottom)
+        { id: 10, titleKey: "archipelago.lesson", emoji: "🏝️", x: 48, y: 55, available: true },
+        { id: 11, titleKey: "archipelago.lesson", emoji: "🏝️", x: 32, y: 60, available: true },
       ],
     },
     {
