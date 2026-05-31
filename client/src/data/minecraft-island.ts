@@ -168,94 +168,164 @@ Welche Tasten haben dir am meisten geholfen? Welche Schwierigkeiten gab es?
   },
   {
     id: 2,
-    title: 'Basic Commands for the Agent',
-    description: 'Meet the Agent and learn essential movement and building commands',
+    title: 'Einführung in Block Coding',
+    description: 'In dieser Lektion lernst du die Grundlagen des Block Codings kennen. Du erfährst, wie Programme aus einzelnen Befehlen aufgebaut werden und wie Minecraft auf deine Blöcke reagiert.',
     phase: 'getting-started',
     duration: 60,
     difficulty: 'beginner',
     objectives: [
-      'Understand the Agent as a programmable robot',
-      'Use movement commands: move, turn',
-      'Use building commands: place, destroy',
-      'Understand that the Agent has a facing direction',
+      'Block Coding verstehen',
+      'Codeblöcke verwenden',
+      'Befehle anordnen',
+      'Programme starten',
+      'Ergebnisse beobachten',
+      'Fehler erkennen',
     ],
     content: `
-# Basic Agent Commands
+# Einführung in Block Coding
 
-## Movement Commands
-- **move(direction, distance)**: Move the Agent forward, backward, left, right, up, or down
-- **turn(direction)**: Turn the Agent left or right
+## Was ist Block Coding?
+Beim Block Coding setzt du Programme aus einzelnen Bausteinen zusammen – wie mit LEGO-Steinen. Jeder Block steht für einen Befehl, den dein Agent ausführt. So entsteht Schritt für Schritt ein vollständiges Programm.
 
-## Building Commands
-- **place(blockType)**: Place a block in front of the Agent
-- **destroy()**: Destroy the block in front of the Agent
+## Warum Block Coding?
+Im Vergleich zu geschriebenem Code ist Block Coding einfacher:
+- Du musst keine Syntax lernen (keine Klammern, Semikolons oder Fehlerquellen)
+- Du siehst sofort, welche Befehle zusammengehören
+- Du kannst Blöcke per Drag & Drop anordnen
+- Fehler entstehen eher durch die Logik als durch Tippfehler
 
-## Agent Facing Direction
-The Agent has a facing direction (which way it's looking). When you use 'place', it places a block in front of where it's facing.
+## So ist ein Programm aufgebaut
+Ein Programm besteht aus einer Folge von Blöcken. Minecraft führt die Blöcke von oben nach unten aus – also genau in der Reihenfolge, in der du sie angeordnet hast.
 
-## Example Code
+Beispiel:
 \`\`\`
-move(FORWARD, 5)
-turn(LEFT)
+place(GRASS)
+move(FORWARD, 1)
+place(GRASS)
+move(FORWARD, 1)
 place(GRASS)
 \`\`\`
+
+Dieses Programm legt drei Grasblöcke in einer Reihe.
+
+## Wichtige Befehle
+- **move(Richtung, Anzahl)** – Bewege den Agenten vorwärts, rückwärts, links, rechts, hoch oder runter
+- **turn(Richtung)** – Drehe den Agenten nach links oder rechts
+- **place(Blöcke)** – Lege einen Block vor den Agenten
+- **destroy()** – Zerstöre den Block vor dem Agenten
+
+## Programme starten
+Sobald du alle Blöcke in der richtigen Reihenfolge angeordnet hast, kannst du dein Programm starten. Der Agent führt dann jeden Befehl nacheinander aus. Beobachte genau, was passiert!
+
+## Fehler erkennen und beheben
+Wenn dein Programm nicht das richtige Ergebnis zeigt:
+1. Schau dir die Reihenfolge der Blöcke an
+2. Prüfe, ob alle Blöcke die richtigen Richtungen haben
+3. Überprüfe, ob Blöcke fehlen
+4. Teste das Programm Schritt für Schritt
+
+## Aufgabe 1: Mein erstes Programm
+Erstelle ein einfaches Programm mit 5 Befehlen: Der Agent soll 3 Blöcke nach vorne legen und dabei jeweils einen Schritt weitergehen.
+
+## Aufgabe 2: Muster legen
+Erstelle ein Programm, das ein einfaches Muster erzeugt – zum Beispiel ein Quadrat oder einen Zickzack-Pfad aus verschiedenen Blöcken.
+
+## Aufgabe 3: Fehler finden
+Jemand hat ein Fehlerhaftes Programm erstellt. Finde den Fehler und korrigiere ihn, damit der Agent das richtige Ergebnis erzeugt.
+
+## Reflexion
+Was ist dir leicht gefallen? Wo gab es Schwierigkeiten? Welche Befehle findest du am nützlichsten?
 `,
     codeBlocks: [
       {
         name: 'move',
-        description: 'Move the Agent in a direction',
-        example: 'move(FORWARD, 5)',
+        description: 'Bewege den Agenten in eine Richtung',
+        example: 'move(FORWARD, 3)',
         icon: '🚀',
       },
       {
         name: 'turn',
-        description: 'Turn the Agent left or right',
+        description: 'Drehe den Agenten nach links oder rechts',
         example: 'turn(LEFT)',
         icon: '🔄',
       },
       {
         name: 'place',
-        description: 'Place a block',
+        description: 'Lege einen Block',
         example: 'place(GRASS)',
         icon: '🧱',
       },
       {
         name: 'destroy',
-        description: 'Destroy a block',
+        description: 'Zerstöre einen Block',
         example: 'destroy()',
         icon: '💥',
       },
     ],
     studentActivity: `
-1. Spawn the Agent near you
-2. Write code to move the Agent forward 3 blocks
-3. Turn the Agent left
-4. Place a grass block
-5. Move forward and place another block
-6. Try destroying blocks with destroy()
+**Aufgabe 1: Mein erstes Programm**
+1. Erstelle ein Programm mit 5 Befehlen.
+2. Der Agent soll 3 Blöcke nach vorne legen und dabei jeweils einen Schritt weitergehen.
+3. Starte das Programm und beobachte das Ergebnis.
+
+**Aufgabe 2: Muster legen**
+1. Erstelle ein Programm, das ein einfaches Muster erzeugt.
+2. Probiere ein Quadrat oder einen Zickzack-Pfad aus verschiedenen Blöcken.
+3. Teste dein Programm und passe die Befehle an.
+
+**Aufgabe 3: Fehler finden**
+1. Finde den Fehler in einem vorgegebenen Programm.
+2. Korrigiere den Fehler, damit der Agent das richtige Ergebnis erzeugt.
+
+**Reflexion im Team:**
+Was ist dir leicht gefallen? Wo gab es Schwierigkeiten? Welche Befehle findest du am nützlichsten?
 `,
-    teacherTip: 'Have students visualize the Agent\'s facing direction. Use arrows or markers to show which way the Agent is facing.',
+    teacherTip: 'Beginne damit, Block Coding anhand eines einfachen Beispiels zu demonstrieren. Lasse die Schüler zuerst frei experimentieren, bevor sie die strukturierten Aufgaben bearbeiten. Betone die Bedeutung der Reihenfolge der Blöcke.',
     quiz: [
       {
         id: 1,
-        question: 'What does move(FORWARD, 5) do?',
-        options: ['Moves you forward 5 blocks', 'Moves the Agent forward 5 blocks', 'Turns the Agent', 'Places 5 blocks'],
+        question: 'Was ist ein Block im Block Coding?',
+        options: ['Ein Minecraft-Haus', 'Ein Baustein eines Programms', 'Ein Werkzeug', 'Ein Gegenstand'],
         correctAnswer: 1,
-        explanation: 'move(FORWARD, 5) moves the Agent forward 5 blocks.',
+        explanation: 'Ein Block ist ein Baustein eines Programms. Jede(r) Block steht für einen einzelnen Befehl.',
       },
       {
         id: 2,
-        question: 'Which command destroys a block?',
-        options: ['place()', 'move()', 'destroy()', 'turn()'],
+        question: 'In welcher Reihenfolge führt Minecraft die Blöcke aus?',
+        options: ['Zufällig', 'Von unten nach oben', 'Von oben nach unten', 'Gleichzeitig'],
         correctAnswer: 2,
-        explanation: 'The destroy() command destroys the block in front of the Agent.',
+        explanation: 'Minecraft führt die Blöcke von oben nach unten aus – also in der Reihenfolge, in der du sie angeordnet hast.',
       },
       {
         id: 3,
-        question: 'What is the Agent?',
-        options: ['Your player character', 'A programmable robot', 'A monster', 'A building'],
+        question: 'Was macht der Befehl move(FORWARD, 3)?',
+        options: ['Den Agenten 3 Blöcke nach vorne bewegen', '3 Blöcke nach vorne legen', 'Den Agenten nach links drehen', '3 Schritte zurückgehen'],
+        correctAnswer: 0,
+        explanation: 'move(FORWARD, 3) bewegt den Agenten 3 Blöcke in die angegebene Richtung.',
+      },
+      {
+        id: 4,
+        question: 'Warum ist Block Coding einfacher als geschriebener Code?',
+        options: [
+          'Es ist schneller auszuführen',
+          'Man braucht keine Tastatur',
+          'Man braucht keine Syntax zu lernen',
+          'Es ist nur für Experten',
+        ],
+        correctAnswer: 2,
+        explanation: 'Beim Block Coding musst du keine Syntax lernen – keine Klammern, Semikolons oder Tippfehler.',
+      },
+      {
+        id: 5,
+        question: 'Was solltest du tun, wenn dein Programm nicht das richtige Ergebnis zeigt?',
+        options: [
+          'Das Programm löschen',
+          'Die Reihenfolge der Blöcke prüfen',
+          'Einen anderen Computer verwenden',
+          'Minecraft neu starten',
+        ],
         correctAnswer: 1,
-        explanation: 'The Agent is a programmable robot that you control with code.',
+        explanation: 'Prüfe zuerst die Reihenfolge der Blöcke – oft liegt der Fehler in der falschen Anordnung.',
       },
     ],
     xpReward: 50,

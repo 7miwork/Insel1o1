@@ -49,17 +49,35 @@
     "lesson1reward": "Navigator Badge",
     "lesson1rewardDesc": "For successfully completing the first journey across the island.",
     "lesson1conclusion": "You can now move safely and orient yourself in Minecraft Education. These skills form the foundation for all further coding adventures on the archipelago.",
-    "lesson2": "Clever Decisions",
-    "lesson2sub": "If, Else and multiple possibilities",
-    "lesson2desc": "Combine multiple conditions with else and else‑if to create branching logic.",
+    "lesson2": "Introduction to Block Coding",
+    "lesson2sub": "Building programs from blocks",
+    "lesson2desc": "In this lesson, you'll learn the basics of block coding. Discover how programs are built from individual commands and how Minecraft responds to your blocks.",
     "lesson2objectives": [
-      "Use else and else‑if statements",
-      "Nest conditions",
-      "Apply logical operators",
-      "Create branching code paths",
-      "Debug conditional flows"
+      "Understand block coding",
+      "Use code blocks",
+      "Arrange commands",
+      "Start programs",
+      "Observe results",
+      "Recognize errors"
     ],
-    "lesson2preview": "Your Agent will be able to choose between different actions depending on the situation.",
+    "lesson2preview": "You've taken your first steps in block coding and now know how programs are built from individual commands.",
+    "lesson2tasks": [
+      {
+        "title": "My First Program",
+        "description": "Create a simple program with 5 commands."
+      },
+      {
+        "title": "Lay a Pattern",
+        "description": "Create a simple pattern with different blocks."
+      },
+      {
+        "title": "Find the Bug",
+        "description": "Find and fix the error in a given program."
+      }
+    ],
+    "lesson2reward": "Code Explorer",
+    "lesson2rewardDesc": "For the first successful steps in block coding.",
+    "lesson2conclusion": "You've taken your first steps in block coding and now know how programs are built from individual commands.",
     "lesson3": "Points & Counters",
     "lesson3sub": "Using variables as memory",
     "lesson3desc": "Introduce variables to store numbers, increment and compare them to track scores.",

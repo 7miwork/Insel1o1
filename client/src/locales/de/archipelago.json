@@ -49,17 +49,35 @@
     "lesson1reward": "Navigator-Abzeichen",
     "lesson1rewardDesc": "Für das erfolgreiche Abschließen der ersten Reise über die Insel.",
     "lesson1conclusion": "Du kannst dich nun sicher in Minecraft Education bewegen und orientieren. Diese Fähigkeiten bilden die Grundlage für alle weiteren Coding-Abenteuer auf dem Archipel.",
-    "lesson2": "Clevere Entscheidungen",
-    "lesson2sub": "If, Else und mehrere Möglichkeiten",
-    "lesson2desc": "Kombiniere mehrere Bedingungen mit else und else‑if, um verzweigte Logik zu erstellen.",
+    "lesson2": "Einführung in Block Coding",
+    "lesson2sub": "Programme aus Bausteinen zusammenbauen",
+    "lesson2desc": "In dieser Lektion lernst du die Grundlagen des Block Codings kennen. Du erfährst, wie Programme aus einzelnen Befehlen aufgebaut werden und wie Minecraft auf deine Blöcke reagiert.",
     "lesson2objectives": [
-      "else‑ und else‑if‑Anweisungen verwenden",
-      "Bedingungen verschachteln",
-      "Logische Operatoren anwenden",
-      "Verzweigte Code‑Pfade erstellen",
-      "Bedingungsabläufe debuggen"
+      "Block Coding verstehen",
+      "Codeblöcke verwenden",
+      "Befehle anordnen",
+      "Programme starten",
+      "Ergebnisse beobachten",
+      "Fehler erkennen"
     ],
-    "lesson2preview": "Dein Agent kann nun je nach Situation zwischen verschiedenen Aktionen wählen.",
+    "lesson2preview": "Du hast die ersten Schritte im Block Coding gemacht und weißt nun, wie Programme aus einzelnen Befehlen aufgebaut werden.",
+    "lesson2tasks": [
+      {
+        "title": "Mein erstes Programm",
+        "description": "Erstelle ein einfaches Programm mit 5 Befehlen."
+      },
+      {
+        "title": "Muster legen",
+        "description": "Erzeuge ein einfaches Muster mit verschiedenen Blöcken."
+      },
+      {
+        "title": "Fehler finden",
+        "description": "Finde und korrigiere den Fehler in einem vorgegebenen Programm."
+      }
+    ],
+    "lesson2reward": "Code-Entdecker",
+    "lesson2rewardDesc": "Für die ersten erfolgreichen Schritte im Block Coding.",
+    "lesson2conclusion": "Du hast die ersten Schritte im Block Coding gemacht und weißt nun, wie Programme aus einzelnen Befehlen aufgebaut werden.",
     "lesson3": "Punkte & Zähler",
     "lesson3sub": "Variablen als Gedächtnis nutzen",
     "lesson3desc": "Einführung in Variablen zum Speichern von Zahlen, Inkrementieren und Vergleichen für Punktestände.",
