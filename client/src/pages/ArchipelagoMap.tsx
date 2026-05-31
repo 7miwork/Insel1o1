@@ -627,7 +627,7 @@ function LessonsMapView({
                 <circle
                   cx={lesson.x}
                   cy={lesson.y}
-                  r={lesson.isMainIsland ? (isHovered ? 11 : 9) : (isHovered ? 6.5 : 5.5)}
+                  r={lesson.isMainIsland || lesson.isFinalIsland ? (isHovered ? 11 : 9) : (isHovered ? 6.5 : 5.5)}
                   fill={course.color}
                   opacity={isHovered ? 0.25 : 0.1}
                   className="transition-all duration-500"
@@ -637,7 +637,7 @@ function LessonsMapView({
                 <circle
                   cx={lesson.x}
                   cy={lesson.y}
-                  r={lesson.isMainIsland ? (isHovered ? 9 : 7.5) : (isHovered ? 5 : 4.2)}
+                  r={lesson.isMainIsland || lesson.isFinalIsland ? (isHovered ? 9 : 7.5) : (isHovered ? 5 : 4.2)}
                   fill="#FDE68A"
                   opacity={lesson.isMainIsland ? 0.35 : 0.2}
                   className="transition-all duration-500"
@@ -647,14 +647,14 @@ function LessonsMapView({
                 <circle
                   cx={lesson.x}
                   cy={lesson.y}
-                  r={lesson.isMainIsland ? (isHovered ? 7.5 : 6.5) : (isHovered ? 4 : 3.5)}
-                  fill={lesson.isMainIsland ? "#7C3AED" : course.color}
+                  r={lesson.isMainIsland || lesson.isFinalIsland ? (isHovered ? 7.5 : 6.5) : (isHovered ? 4 : 3.5)}
+                  fill={lesson.isFinalIsland ? "#7C3AED" : (lesson.isMainIsland ? "#7C3AED" : course.color)}
                   filter={lesson.isMainIsland ? "url(#islandGlow)" : "url(#islandGlow)"}
                   className={`transition-all duration-500 ${lesson.isMainIsland ? "animate-pulse-glow" : ""}`}
                 />
 
                 {/* Golden crown for main island */}
-                {lesson.isMainIsland && (
+                  {(lesson.isMainIsland || lesson.isFinalIsland) && (
                   <text
                     x={lesson.x}
                     y={lesson.y - 9}

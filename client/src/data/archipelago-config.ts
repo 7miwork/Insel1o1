@@ -30,6 +30,8 @@ export interface ArchipelagoLesson {
   available: boolean;
   /** Whether this island is a special main island (larger, different styling) */
   isMainIsland?: boolean;
+  /** Whether this island is the final destination of the learning path */
+  isFinalIsland?: boolean;
 }
 
 export interface ArchipelagoCourse {
@@ -109,7 +111,8 @@ export const programmingArchipelago: ArchipelagoConfig = {
         { id: 10, titleKey: "archipelago.lesson10", subtitleKey: "archipelago.lesson10sub", emoji: "🏙️", x: 48, y: 55, available: true },
 
         // Row 4: Mysterious Main Island (larger, central, special)
-        { id: 11, titleKey: "archipelago.lesson11", subtitleKey: "archipelago.lesson11sub", emoji: "🏰", x: 32, y: 65, available: true, isMainIsland: true },
+        // Final island – the last destination of the learning path
+        { id: 11, titleKey: "archipelago.lesson11", subtitleKey: "archipelago.lesson11sub", emoji: "🏰", x: 32, y: 65, available: true, isFinalIsland: true },
       ],
     },
     {
