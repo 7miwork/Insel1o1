@@ -1,0 +1,14 @@
+{
+  "navigation": {
+    "features": "Funktionen",
+    "pricing": "Preise",
+    "about": "Über uns",
+    "signIn": "Anmelden",
+    "exploreCourses": "Kurse erkunden",
+    "dashboard": "Dashboard",
+    "leaderboard": "Rangliste",
+    "courses": "Kurse",
+    "home": "Startseite",
+    "profile": "Profil"
+  }
+}

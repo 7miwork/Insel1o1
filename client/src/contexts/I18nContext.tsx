@@ -1,7 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import enCommon from "@/locales/en/common.json";
+import enArchipelago from "@/locales/en/archipelago.json";
 import deCommon from "@/locales/de/common.json";
+import deArchipelago from "@/locales/de/archipelago.json";
 import zhTwCommon from "@/locales/zh-TW/common.json";
+import zhTwArchipelago from "@/locales/zh-TW/archipelago.json";
 
 type Language = "en" | "de" | "zh-TW";
 
@@ -15,9 +18,9 @@ interface I18nContextType {
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
 const translations: Record<Language, any> = {
-  en: enCommon,
-  de: deCommon,
-  "zh-TW": zhTwCommon,
+  en: { ...enCommon, ...enArchipelago },
+  de: { ...deCommon, ...deArchipelago },
+  "zh-TW": { ...zhTwCommon, ...zhTwArchipelago },
 };
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {

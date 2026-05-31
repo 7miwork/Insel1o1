@@ -1,0 +1,21 @@
+{
+  "courses": {
+    "allCourses": "所有課程",
+    "discoverCourses": "發現並註冊令人驚嘆的課程",
+    "filterByCategory": "按類別篩選",
+    "sortBy": "排序方式",
+    "newest": "最新",
+    "popular": "熱門",
+    "rating": "評分",
+    "students": "學生",
+    "instructor": "講師",
+    "duration": "持續時間",
+    "level": "等級",
+    "beginner": "初級",
+    "intermediate": "中級",
+    "advanced": "進階",
+    "enroll": "註冊",
+    "enrolled": "已註冊",
+    "lessons": "課程"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "archipelago": {
+    "title": "Programmier-Archipel",
+    "subtitle": "Discover the world of programming",
+    "backToWorld": "Back to World Map",
+    "backToCourses": "Back to Courses",
+    "course_one": "Course",
+    "course_other": "Courses",
+    "lesson_one": "Lesson",
+    "lesson_other": "Lessons",
+    "startLesson": "Start Lesson",
+    "exploreCourse": "Explore Course",
+    "inDevelopment": "In Development",
+    "comingSoon": "Coming Soon",
+    "minecraftEducation": "Minecraft Education",
+    "blockCodingBasic": "Block Coding Basic",
+    "island_one": "Island",
+    "island_other": "Islands",
+    "startExploring": "Start Exploring",
+    "waterLabel": "Ocean",
+    "dragHint": "Drag to explore the map"
+}
+}

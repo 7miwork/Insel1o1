@@ -1,0 +1,13 @@
+{
+  "notifications": {
+    "lessonCompleted": "Lesson Completed!",
+    "quizPassed": "Quiz Passed!",
+    "achievementUnlocked": "Achievement Unlocked!",
+    "xpEarned": "XP Earned",
+    "newBadge": "New Badge Earned",
+    "streakMaintained": "Streak Maintained!",
+    "levelUp": "Level Up!",
+    "courseCompleted": "Course Completed!",
+    "congratulations": "Congratulations!"
+  }
+}

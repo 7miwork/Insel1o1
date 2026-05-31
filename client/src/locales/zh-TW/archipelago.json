@@ -1,0 +1,23 @@
+{
+  "archipelago": {
+    "title": "Programmier-Archipel",
+    "subtitle": "探索程式設計的世界",
+    "backToWorld": "返回世界地圖",
+    "backToCourses": "返回課程列表",
+    "course_one": "課程",
+    "course_other": "課程",
+    "lesson_one": "單元",
+    "lesson_other": "單元",
+    "startLesson": "開始學習",
+    "exploreCourse": "探索課程",
+    "inDevelopment": "開發中",
+    "comingSoon": "即將推出",
+    "minecraftEducation": "Minecraft Education",
+    "blockCodingBasic": "Block Coding Basic",
+    "island_one": "島嶼",
+    "island_other": "島嶼",
+    "startExploring": "開始探索",
+    "waterLabel": "海洋",
+    "dragHint": "拖曳以探索地圖"
+  }
+}

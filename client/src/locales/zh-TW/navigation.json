@@ -1,0 +1,14 @@
+{
+  "navigation": {
+    "features": "功能",
+    "pricing": "定價",
+    "about": "關於",
+    "signIn": "登入",
+    "exploreCourses": "探索課程",
+    "dashboard": "儀表板",
+    "leaderboard": "排行榜",
+    "courses": "課程",
+    "home": "首頁",
+    "profile": "個人資料"
+  }
+}

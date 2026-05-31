@@ -1,0 +1,21 @@
+{
+  "courses": {
+    "allCourses": "All Courses",
+    "discoverCourses": "Discover and enroll in amazing courses",
+    "filterByCategory": "Filter by Category",
+    "sortBy": "Sort By",
+    "newest": "Newest",
+    "popular": "Popular",
+    "rating": "Rating",
+    "students": "Students",
+    "instructor": "Instructor",
+    "duration": "Duration",
+    "level": "Level",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "enroll": "Enroll",
+    "enrolled": "Enrolled",
+    "lessons": "Lessons"
+  }
+}

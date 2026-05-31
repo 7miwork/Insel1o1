@@ -1,0 +1,14 @@
+{
+  "navigation": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "signIn": "Sign In",
+    "exploreCourses": "Explore Courses",
+    "dashboard": "Dashboard",
+    "leaderboard": "Leaderboard",
+    "courses": "Courses",
+    "home": "Home",
+    "profile": "Profile"
+  }
+}

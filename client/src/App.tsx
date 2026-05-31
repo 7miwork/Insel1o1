@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import DashboardRouter from "./components/DashboardRouter";
 import Courses from "./pages/Courses";
 import ArchipelagoMap from "./pages/ArchipelagoMap";
+import ProgrammingArchipelago from "./pages/ProgrammingArchipelago";
 import LessonPage from "./pages/LessonPage";
 import MinecraftLessonPage from "./pages/MinecraftLessonPage";
 import SchoolDashboard from "./pages/SchoolDashboard";
@@ -28,6 +29,7 @@ function AppRouter() {
       <Route path={"/dashboard"} component={DashboardRouter} />
       <Route path={"/courses"} component={Courses} />
       <Route path={"/archipelago"} component={ArchipelagoMap} />
+      <Route path={"/programming-archipelago"} component={ProgrammingArchipelago} />
       <Route path={"/lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/minecraft-lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/school-dashboard"} component={SchoolDashboard} />

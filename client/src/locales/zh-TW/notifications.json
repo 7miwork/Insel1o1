@@ -1,0 +1,13 @@
+{
+  "notifications": {
+    "lessonCompleted": "課程已完成！",
+    "quizPassed": "測驗通過！",
+    "achievementUnlocked": "成就已解鎖！",
+    "xpEarned": "獲得XP",
+    "newBadge": "獲得新徽章",
+    "streakMaintained": "連勝已保持！",
+    "levelUp": "等級提升！",
+    "courseCompleted": "課程已完成！",
+    "congratulations": "恭喜！"
+  }
+}
