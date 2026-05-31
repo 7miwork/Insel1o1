@@ -12,12 +12,18 @@
     "exploreCourse": "Kurs erkunden",
     "inDevelopment": "In Entwicklung",
     "comingSoon": "Demnächst",
-    "minecraftEducation": "Minecraft Education",
+    "minecraftBasic": "Minecraft Education Basic",
+    "minecraftAdvanced": "Minecraft Education Advanced",
+    "minecraftBasicDesc": "Lerne die Grundlagen der Block-Programmierung mit Minecraft Education",
+    "minecraftAdvancedDesc": "Fortgeschrittene Programmierkonzepte in Minecraft Education",
     "blockCodingBasic": "Block Coding Basic",
     "island_one": "Insel",
     "island_other": "Inseln",
     "startExploring": "Erkundung starten",
     "waterLabel": "Ozean",
-    "dragHint": "Ziehen, um die Karte zu erkunden"
+    "dragHint": "Ziehen, um die Karte zu erkunden",
+    "lessonPath": "Lernpfad",
+    "lesson": "Lektion",
+    "startCourse": "Kurs starten"
 }
 }

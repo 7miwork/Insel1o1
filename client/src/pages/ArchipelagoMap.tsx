@@ -1,515 +1,722 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useLocation } from "wouter";
-import { ChevronLeft, Sparkles } from "lucide-react";
+import { ChevronLeft, Compass, Ship, Map as MapIcon } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
+import {
+  programmingArchipelago,
+  type ArchipelagoCourse,
+} from "@/data/archipelago-config";
 
-interface Island {
-  id: number;
-  name: string;
-  emoji: string;
-  progress: number;
-  completed: boolean;
-  x: number;
-  y: number;
-}
+type ViewLevel = "world" | "course" | "lessons";
 
-interface Archipelago {
-  id: number;
-  name: string;
-  emoji: string;
-  color: string;
-  lightColor: string;
-  islands: Island[];
-  x: number;
-  y: number;
-}
-
-const archipelagos: Archipelago[] = [
-  {
-    id: 1,
-    name: "Mathematics Kingdom",
-    emoji: "🏝️",
-    color: "#f59e0b",
-    lightColor: "#fef3c7",
-    x: 20,
-    y: 30,
-    islands: [
-      { id: 101, name: "Algebra Basics", emoji: "📐", progress: 100, completed: true, x: 15, y: 25 },
-      { id: 102, name: "Geometry", emoji: "🔺", progress: 85, completed: false, x: 25, y: 30 },
-      { id: 103, name: "Calculus", emoji: "📊", progress: 60, completed: false, x: 20, y: 40 },
-      { id: 104, name: "Statistics", emoji: "📈", progress: 0, completed: false, x: 30, y: 35 },
-    ],
-  },
-  {
-    id: 2,
-    name: "English Literature",
-    emoji: "📚",
-    color: "#3b82f6",
-    lightColor: "#dbeafe",
-    x: 60,
-    y: 25,
-    islands: [
-      { id: 201, name: "Shakespeare", emoji: "🎭", progress: 75, completed: false, x: 55, y: 20 },
-      { id: 202, name: "Poetry", emoji: "✍️", progress: 60, completed: false, x: 65, y: 25 },
-      { id: 203, name: "Modern Novels", emoji: "📖", progress: 40, completed: false, x: 60, y: 35 },
-      { id: 204, name: "Grammar", emoji: "🔤", progress: 90, completed: true, x: 70, y: 30 },
-    ],
-  },
-  {
-    id: 3,
-    name: "Science Lab",
-    emoji: "🔬",
-    color: "#10b981",
-    lightColor: "#d1fae5",
-    x: 40,
-    y: 70,
-    islands: [
-      { id: 301, name: "Physics", emoji: "⚛️", progress: 50, completed: false, x: 35, y: 65 },
-      { id: 302, name: "Chemistry", emoji: "🧪", progress: 40, completed: false, x: 45, y: 70 },
-      { id: 303, name: "Biology", emoji: "🧬", progress: 30, completed: false, x: 40, y: 80 },
-      { id: 304, name: "Ecology", emoji: "🌿", progress: 20, completed: false, x: 50, y: 75 },
-    ],
-  },
-  {
-    id: 4,
-    name: "History Voyage",
-    emoji: "⚓",
-    color: "#a855f7",
-    lightColor: "#f3e8ff",
-    x: 75,
-    y: 60,
-    islands: [
-      { id: 401, name: "Ancient Rome", emoji: "🏛️", progress: 70, completed: false, x: 70, y: 55 },
-      { id: 402, name: "Medieval Times", emoji: "🏰", progress: 55, completed: false, x: 80, y: 60 },
-      { id: 403, name: "Renaissance", emoji: "🎨", progress: 45, completed: false, x: 75, y: 70 },
-      { id: 404, name: "Modern Era", emoji: "🌍", progress: 25, completed: false, x: 85, y: 65 },
-    ],
-  },
-  {
-    id: 5,
-    name: "Art Studio",
-    emoji: "🎨",
-    color: "#ef4444",
-    lightColor: "#fee2e2",
-    x: 85,
-    y: 35,
-    islands: [
-      { id: 501, name: "Drawing", emoji: "✏️", progress: 0, completed: false, x: 80, y: 30 },
-      { id: 502, name: "Painting", emoji: "🖌️", progress: 0, completed: false, x: 90, y: 35 },
-      { id: 503, name: "Sculpture", emoji: "🗿", progress: 0, completed: false, x: 85, y: 45 },
-      { id: 504, name: "Digital Art", emoji: "💻", progress: 0, completed: false, x: 95, y: 40 },
-    ],
-  },
-  {
-    id: 6,
-    name: "Programming Realm",
-    emoji: "⚙️",
-    color: "#ec4899",
-    lightColor: "#fce7f3",
-    x: 50,
-    y: 15,
-    islands: [
-      { id: 1, name: "Minecraft Coding", emoji: "⛏️", progress: 0, completed: false, x: 45, y: 10 },
-      { id: 2, name: "Python Basics", emoji: "🐍", progress: 0, completed: false, x: 55, y: 12 },
-      { id: 3, name: "Web Development", emoji: "🌐", progress: 0, completed: false, x: 50, y: 20 },
-      { id: 4, name: "Game Design", emoji: "🎮", progress: 0, completed: false, x: 60, y: 18 },
-    ],
-  },
-];
-
+/**
+ * ArchipelagoMap – The gamified learning map for the Programmier-Archipel.
+ *
+ * Three zoom levels:
+ *   world   → Shows the archipelago with large course islands
+ *   course  → Shows a specific course (e.g., Minecraft Education Basic)
+ *   lessons → Shows the lesson islands inside a course (a learning path)
+ *
+ * Design: Tropical archipelago, calm colors, glassmorphism, gentle animations.
+ */
 export default function ArchipelagoMap() {
   const [, setLocation] = useLocation();
-  const [selectedArchipelago, setSelectedArchipelago] = useState<Archipelago | null>(null);
-  const [hoveredArchipelago, setHoveredArchipelago] = useState<number | null>(null);
-  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; opacity: number }>>([]);
   const { t } = useI18n();
+  const config = programmingArchipelago;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const newParticle = {
-        id: Math.random(),
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        opacity: 0.5,
-      };
-      setParticles((prev) => [...prev.slice(-20), newParticle]);
-    }, 2000);
-    return () => clearInterval(interval);
+  const [viewLevel, setViewLevel] = useState<ViewLevel>("world");
+  const [selectedCourse, setSelectedCourse] = useState<ArchipelagoCourse | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  const goToCourse = useCallback((course: ArchipelagoCourse) => {
+    setSelectedCourse(course);
+    if (course.lessons.length > 0) {
+      setViewLevel("course");
+    }
   }, []);
 
-  const handleArchipelagoClick = (archipelago: Archipelago) => {
-    setSelectedArchipelago(archipelago);
-  };
+  const goToLessons = useCallback(() => {
+    setViewLevel("lessons");
+  }, []);
 
-  const handleIslandClick = (island: Island) => {
-    setLocation(`/lesson/${island.id}`);
-  };
+  const goToLesson = useCallback(
+    (lessonId: number) => {
+      setLocation(`/lesson/${lessonId}`);
+    },
+    [setLocation]
+  );
 
-  const handleBack = () => {
-    setSelectedArchipelago(null);
-  };
+  const handleBack = useCallback(() => {
+    if (viewLevel === "lessons") {
+      setViewLevel("course");
+    } else if (viewLevel === "course") {
+      setSelectedCourse(null);
+      setViewLevel("world");
+    }
+  }, [viewLevel]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950 overflow-hidden relative">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse animation-delay-2000"></div>
-      </div>
-
-      {/* Floating particles */}
+    <div className="min-h-screen bg-gradient-to-b from-cyan-900 via-teal-800 to-emerald-900 overflow-hidden relative">
+      {/* Ocean background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {particles.map((particle) => (
-          <div
-            key={particle.id}
-            className="absolute w-1 h-1 bg-white rounded-full animate-float"
-            style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              opacity: particle.opacity,
-              animation: `float ${3 + Math.random() * 2}s ease-in-out infinite`,
-            }}
-          ></div>
-        ))}
+        <div className="absolute inset-0 bg-gradient-to-b from-cyan-800/60 via-teal-700/40 to-emerald-800/60" />
+        <svg
+          className="absolute bottom-0 w-full h-48 opacity-30"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#0D9488" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#14B8A6" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#0D9488" stopOpacity="0.4" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#waveGrad)"
+            d="M0,32 C360,64 720,0 1080,32 L1440,64 L1440,120 L0,120 Z"
+            className="animate-wave-slow"
+          />
+          <path
+            fill="url(#waveGrad)"
+            d="M0,48 C360,80 720,16 1080,48 L1440,80 L1440,120 L0,120 Z"
+            className="animate-wave-slower"
+            opacity="0.6"
+          />
+        </svg>
+        {/* Floating particles */}
+        <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-cyan-300/30 rounded-full animate-float-slow" />
+        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-teal-300/20 rounded-full animate-float-slower" />
+        <div className="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-emerald-300/25 rounded-full animate-float-slow" />
+        <div className="absolute top-2/3 right-1/3 w-2 h-2 bg-cyan-200/20 rounded-full animate-float-slower" />
       </div>
 
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-gradient-to-b from-slate-900/95 to-slate-900/50 backdrop-blur-xl border-b border-purple-500/20">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          {selectedArchipelago ? (
-            <>
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={handleBack}
-                  className="p-2 hover:bg-purple-500/20 rounded-lg transition duration-300"
-                >
-                  <ChevronLeft className="w-6 h-6 text-white" />
-                </button>
-                <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                    {selectedArchipelago.emoji} {selectedArchipelago.name}
-                  </h1>
-                  <p className="text-sm text-purple-300">
-                    {selectedArchipelago.islands.length} Topics
-                  </p>
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-8 h-8 text-purple-400" />
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                🗺️ Your Learning World
+      <header className="relative z-20 bg-white/10 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            {viewLevel !== "world" ? (
+              <button
+                onClick={handleBack}
+                className="p-2 hover:bg-white/10 rounded-xl transition-all duration-200"
+              >
+                <ChevronLeft className="w-5 h-5 text-white" />
+              </button>
+            ) : null}
+            <div className="flex items-center gap-2">
+              <MapIcon className="w-5 h-5 text-cyan-300" />
+              <h1 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                {t(config.titleKey)}
               </h1>
             </div>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-cyan-200/80">
+            {viewLevel === "world" && (
+              <span className="flex items-center gap-1">
+                <Compass className="w-3.5 h-3.5" />
+                {t("archipelago.startExploring")}
+              </span>
+            )}
+            {viewLevel === "course" && selectedCourse && (
+              <span className="flex items-center gap-1">
+                <Ship className="w-3.5 h-3.5" />
+                {t(selectedCourse.titleKey)}
+              </span>
+            )}
+            {viewLevel === "lessons" && selectedCourse && (
+              <span className="flex items-center gap-1">
+                <Ship className="w-3.5 h-3.5" />
+                {t(selectedCourse.titleKey)} → {t("archipelago.lessonPath")}
+              </span>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        {viewLevel === "world" && (
+          <WorldMapView
+            config={config}
+            t={t}
+            onCourseClick={goToCourse}
+            hoveredId={hoveredId}
+            setHoveredId={setHoveredId}
+          />
+        )}
+
+        {viewLevel === "course" && selectedCourse && (
+          <CourseView
+            course={selectedCourse}
+            t={t}
+            onExploreLessons={goToLessons}
+            hoveredId={hoveredId}
+            setHoveredId={setHoveredId}
+          />
+        )}
+
+        {viewLevel === "lessons" && selectedCourse && (
+          <LessonsMapView
+            course={selectedCourse}
+            t={t}
+            onLessonClick={goToLesson}
+            hoveredId={hoveredId}
+            setHoveredId={setHoveredId}
+          />
+        )}
+      </main>
+
+      <footer className="relative z-20 text-center py-4 text-xs text-white/30">
+        {t("archipelago.dragHint")}
+      </footer>
+
+      <style>{`
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+          25% { transform: translateY(-15px) translateX(5px); opacity: 0.5; }
+          50% { transform: translateY(-8px) translateX(-5px); opacity: 0.4; }
+          75% { transform: translateY(-20px) translateX(3px); opacity: 0.5; }
+        }
+        @keyframes float-slower {
+          0%, 100% { transform: translateY(0px); opacity: 0.2; }
+          50% { transform: translateY(-25px); opacity: 0.4; }
+        }
+        @keyframes wave-slow {
+          0% { transform: translateX(0); }
+          50% { transform: translateX(-10%); }
+          100% { transform: translateX(0); }
+        }
+        @keyframes wave-slower {
+          0% { transform: translateX(0); }
+          50% { transform: translateX(10%); }
+          100% { transform: translateX(0); }
+        }
+        .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+        .animate-float-slower { animation: float-slower 8s ease-in-out infinite; }
+        .animate-wave-slow { animation: wave-slow 8s ease-in-out infinite; }
+        .animate-wave-slower { animation: wave-slower 12s ease-in-out infinite; }
+      `}</style>
+    </div>
+  );
+}
+
+// ─── World Map View ────────────────────────────────────────────────────────────
+function WorldMapView({
+  config,
+  t,
+  onCourseClick,
+  hoveredId,
+  setHoveredId,
+}: {
+  config: { titleKey: string; subtitleKey: string; courses: ArchipelagoCourse[] };
+  t: (key: string, fallback?: string) => string;
+  onCourseClick: (course: ArchipelagoCourse) => void;
+  hoveredId: string | null;
+  setHoveredId: (id: string | null) => void;
+}) {
+  return (
+    <div className="space-y-8">
+      {/* Subtitle */}
+      <div className="text-center">
+        <p className="text-cyan-200/70 text-sm sm:text-base italic">
+          {t(config.subtitleKey)}
+        </p>
+      </div>
+
+      {/* SVG World Map with large course islands */}
+      <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-4 sm:p-8 border border-white/10 shadow-xl">
+        <svg
+          className="w-full h-64 sm:h-80 md:h-96 rounded-2xl"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <defs>
+            <radialGradient id="oceanGrad" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stopColor="#0D9488" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#115E59" stopOpacity="0.05" />
+            </radialGradient>
+            <filter id="softGlow">
+              <feGaussianBlur stdDeviation="2" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <pattern id="wavePattern" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse">
+              <path
+                d="M0,7.5 Q3.75,3.75 7.5,7.5 T15,7.5"
+                stroke="rgba(13,148,136,0.12)"
+                fill="none"
+                strokeWidth="0.4"
+              />
+            </pattern>
+          </defs>
+
+          <rect width="100" height="100" fill="url(#oceanGrad)" />
+          <rect width="100" height="100" fill="url(#wavePattern)" />
+
+          {/* Connection path between course islands */}
+          {config.courses.filter(c => c.available).length > 1 && (
+            <path
+              d={config.courses
+                .filter((c) => c.available)
+                .map((c, i) => (i === 0 ? `M${c.x},${c.y}` : `L${c.x},${c.y}`))
+                .join(" ")}
+              stroke="rgba(253, 230, 138, 0.15)"
+              strokeWidth="1"
+              fill="none"
+              strokeDasharray="3,3"
+            />
           )}
+
+          {/* Course islands – significantly larger than lesson islands */}
+          {config.courses.map((course) => {
+            const isHovered = hoveredId === course.id;
+            const lessonCount = course.lessons.length;
+
+            return (
+              <g
+                key={course.id}
+                onClick={() => course.available && onCourseClick(course)}
+                onMouseEnter={() => setHoveredId(course.id)}
+                onMouseLeave={() => setHoveredId(null)}
+                className={course.available ? "cursor-pointer" : "cursor-not-allowed"}
+                style={{
+                  transformOrigin: `${course.x}% ${course.y}%`,
+                  opacity: course.available ? 1 : 0.4,
+                }}
+              >
+                {/* Outer glow ring */}
+                <circle
+                  cx={course.x}
+                  cy={course.y}
+                  r={isHovered ? 20 : 17}
+                  fill={course.color}
+                  opacity={isHovered ? 0.2 : 0.08}
+                  className="transition-all duration-500"
+                />
+
+                {/* Sandy beach ring */}
+                <circle
+                  cx={course.x}
+                  cy={course.y}
+                  r={isHovered ? 16 : 14}
+                  fill="#FDE68A"
+                  opacity="0.25"
+                  className="transition-all duration-500"
+                />
+
+                {/* Main island */}
+                <circle
+                  cx={course.x}
+                  cy={course.y}
+                  r={isHovered ? 13 : 11}
+                  fill={course.color}
+                  filter="url(#softGlow)"
+                  className="transition-all duration-500"
+                />
+
+                {/* Inner highlight */}
+                <circle
+                  cx={course.x - 3}
+                  cy={course.y - 3}
+                  r={isHovered ? 6 : 5}
+                  fill="rgba(255,255,255,0.1)"
+                  className="transition-all duration-500"
+                />
+
+                {/* Emoji icon – larger for course islands */}
+                <text
+                  x={course.x}
+                  y={course.y + 3}
+                  textAnchor="middle"
+                  fontSize={isHovered ? "7" : "6"}
+                  className="pointer-events-none transition-all duration-500"
+                >
+                  {course.emoji}
+                </text>
+
+                {/* Course label */}
+                <text
+                  x={course.x}
+                  y={course.y + 22}
+                  textAnchor="middle"
+                  fontSize="2.5"
+                  fill="white"
+                  fontWeight="bold"
+                  opacity={isHovered ? 1 : 0.8}
+                  className="pointer-events-none transition-all duration-500"
+                >
+                  {t(course.titleKey).split(" Education")[0]}
+                </text>
+
+                {/* Lesson count badge */}
+                {lessonCount > 0 && (
+                  <g>
+                    <circle
+                      cx={course.x + 12}
+                      cy={course.y - 10}
+                      r="4"
+                      fill="#FDE68A"
+                      opacity="0.9"
+                    />
+                    <text
+                      x={course.x + 12}
+                      y={course.y - 8.5}
+                      textAnchor="middle"
+                      fontSize="2.5"
+                      fill="#0D9488"
+                      fontWeight="bold"
+                      className="pointer-events-none"
+                    >
+                      {lessonCount}
+                    </text>
+                  </g>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      {/* Course Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        {config.courses.map((course) => {
+          const lessonCount = course.lessons.length;
+          return (
+            <div
+              key={course.id}
+              onClick={() => course.available && onCourseClick(course)}
+              className={`relative group bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 transition-all duration-300 overflow-hidden ${
+                course.available
+                  ? "hover:bg-white/15 hover:border-white/20 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                  : "opacity-50 cursor-not-allowed"
+              }`}
+            >
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl"
+                style={{ backgroundColor: course.color }}
+              />
+
+              <div className="relative z-10 space-y-3">
+                <div className="flex items-start justify-between">
+                  <span className="text-5xl drop-shadow-lg">{course.emoji}</span>
+                  <span className="text-xs font-semibold text-white bg-white/10 px-3 py-1.5 rounded-full">
+                    {lessonCount > 0
+                      ? `${lessonCount} ${t("archipelago.lesson_other")}`
+                      : t("archipelago.comingSoon")}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-white">{t(course.titleKey)}</h3>
+                <p className="text-sm text-cyan-200/70 line-clamp-2">
+                  {t(course.descriptionKey)}
+                </p>
+                {course.available && lessonCount > 0 && (
+                  <div className="pt-2">
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-300 group-hover:text-white transition-colors">
+                      {t("archipelago.exploreCourse")}
+                      <ChevronLeft className="w-3.5 h-3.5 rotate-180" />
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Color accent bar */}
+              <div
+                className="absolute bottom-0 left-6 right-6 h-1 rounded-full opacity-40"
+                style={{ backgroundColor: course.color }}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─── Course View ────────────────────────────────────────────────────────────────
+function CourseView({
+  course,
+  t,
+  onExploreLessons,
+}: {
+  course: ArchipelagoCourse;
+  t: (key: string, fallback?: string) => string;
+  onExploreLessons: () => void;
+  hoveredId: string | null;
+  setHoveredId: (id: string | null) => void;
+}) {
+  const lessonCount = course.lessons.length;
+
+  return (
+    <div className="space-y-8">
+      {/* Course Hero */}
+      <div
+        className="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-white/10"
+        style={{
+          background: `linear-gradient(135deg, ${course.color}22, ${course.color}44)`,
+        }}
+      >
+        <div
+          className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-10"
+          style={{ backgroundColor: course.color }}
+        />
+        <div
+          className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full opacity-10"
+          style={{ backgroundColor: course.color }}
+        />
+
+        <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <span className="text-6xl sm:text-7xl drop-shadow-xl">{course.emoji}</span>
+          <div className="flex-1">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+              {t(course.titleKey)}
+            </h2>
+            <p className="text-cyan-200/70 text-sm sm:text-base max-w-xl">
+              {t(course.descriptionKey)}
+            </p>
+            <div className="flex items-center gap-4 mt-4">
+              <span className="text-xs text-white/50 flex items-center gap-1">
+                <Ship className="w-3.5 h-3.5" />
+                {lessonCount > 0
+                  ? `${lessonCount} ${t("archipelago.lesson_other")}`
+                  : t("archipelago.comingSoon")}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8 relative z-10">
-        {!selectedArchipelago ? (
-          // World Map View
-          <div className="space-y-8">
-            {/* Interactive SVG Map */}
-            <div className="bg-gradient-to-b from-slate-800/50 to-slate-900/50 rounded-3xl p-8 border border-purple-500/30 shadow-2xl backdrop-blur-sm">
-              <svg
-                className="w-full h-96 bg-gradient-to-b from-cyan-900/20 to-purple-900/20 rounded-2xl"
-                viewBox="0 0 100 100"
-                preserveAspectRatio="xMidYMid meet"
-              >
-                <defs>
-                  <radialGradient id="waterGradient" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0.1" />
-                  </radialGradient>
-
-                  <filter id="glow">
-                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-                    <feMerge>
-                      <feMergeNode in="coloredBlur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-
-                  <pattern id="waves" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <path
-                      d="M0,10 Q5,5 10,10 T20,10"
-                      stroke="rgba(59,130,246,0.2)"
-                      fill="none"
-                      strokeWidth="0.5"
-                    />
-                  </pattern>
-                </defs>
-
-                <rect width="100" height="100" fill="url(#waterGradient)" />
-                <rect width="100" height="100" fill="url(#waves)" />
-
-                {archipelagos.map((arch) => (
-                  <g
-                    key={arch.id}
-                    onClick={() => handleArchipelagoClick(arch)}
-                    onMouseEnter={() => setHoveredArchipelago(arch.id)}
-                    onMouseLeave={() => setHoveredArchipelago(null)}
-                    className="cursor-pointer transition-transform duration-300"
-                    style={{
-                      transform:
-                        hoveredArchipelago === arch.id ? "scale(1.15)" : "scale(1)",
-                      transformOrigin: `${arch.x}% ${arch.y}%`,
-                    }}
-                  >
-                    <circle
-                      cx={arch.x}
-                      cy={arch.y}
-                      r={hoveredArchipelago === arch.id ? 9 : 7}
-                      fill={arch.color}
-                      opacity={hoveredArchipelago === arch.id ? 0.4 : 0.2}
-                      className="transition-all duration-300"
-                    />
-
-                    <circle
-                      cx={arch.x}
-                      cy={arch.y}
-                      r={hoveredArchipelago === arch.id ? 6.5 : 5.5}
-                      fill="none"
-                      stroke={arch.color}
-                      strokeWidth="0.5"
-                      opacity={hoveredArchipelago === arch.id ? 1 : 0.6}
-                      className="transition-all duration-300"
-                    />
-
-                    <circle
-                      cx={arch.x}
-                      cy={arch.y}
-                      r={hoveredArchipelago === arch.id ? 5 : 4}
-                      fill={arch.color}
-                      filter="url(#glow)"
-                      className="transition-all duration-300"
-                    />
-
-                    <text
-                      x={arch.x}
-                      y={arch.y + 1}
-                      textAnchor="middle"
-                      fontSize={hoveredArchipelago === arch.id ? "4.5" : "4"}
-                      fill="white"
-                      fontWeight="bold"
-                      className="pointer-events-none transition-all duration-300"
-                    >
-                      {arch.emoji}
-                    </text>
-
-                    <text
-                      x={arch.x}
-                      y={arch.y + 13}
-                      textAnchor="middle"
-                      fontSize="2"
-                      fill="white"
-                      fontWeight="600"
-                      className="pointer-events-none"
-                      opacity={hoveredArchipelago === arch.id ? 1 : 0.8}
-                    >
-                      {arch.name.split(" ")[0]}
-                    </text>
-                  </g>
-                ))}
-              </svg>
-            </div>
-
-            {/* Archipelago Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {archipelagos.map((arch) => {
-                const completedIslands = arch.islands.filter((i) => i.completed).length;
-                const avgProgress = Math.round(
-                  arch.islands.reduce((sum, i) => sum + i.progress, 0) / arch.islands.length
-                );
-
-                return (
-                  <div
-                    key={arch.id}
-                    onClick={() => handleArchipelagoClick(arch)}
-                    className="group relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm p-6 rounded-2xl border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 hover:scale-105 overflow-hidden cursor-pointer"
-                  >
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                      style={{ backgroundColor: arch.color }}
-                    ></div>
-
-                    <div className="relative z-10 space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div className="text-5xl drop-shadow-lg">{arch.emoji}</div>
-                        <span className="text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-blue-600 px-3 py-1 rounded-full shadow-lg">
-                          {completedIslands}/{arch.islands.length}
-                        </span>
-                      </div>
-
-                      <div>
-                        <h3 className="text-lg font-bold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
-                          {arch.name}
-                        </h3>
-                        <p className="text-xs text-purple-200 mt-1">{arch.islands.length} Topics</p>
-                      </div>
-
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-center">
-                          <span className="text-xs text-purple-300 font-medium">Progress</span>
-                          <span className="text-sm font-bold text-cyan-400">{avgProgress}%</span>
-                        </div>
-                        <div className="w-full bg-slate-700/50 rounded-full h-2.5 overflow-hidden border border-purple-500/20">
-                          <div
-                            className="h-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 rounded-full transition-all duration-500 shadow-lg shadow-purple-500/50"
-                            style={{ width: `${avgProgress}%` }}
-                          ></div>
-                        </div>
-                      </div>
-
-                      <div className="w-full mt-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-lg hover:shadow-purple-500/50 transition-all duration-300 group-hover:shadow-xl px-4 py-2 rounded-lg text-center">
-                        Explore
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+      {lessonCount > 0 && (
+        <>
+          {/* Start Course Button */}
+          <div className="text-center">
+            <button
+              onClick={onExploreLessons}
+              className="inline-flex items-center gap-2 px-10 py-4 rounded-xl text-white font-semibold text-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+              style={{
+                background: `linear-gradient(135deg, ${course.color}, ${course.color}dd)`,
+              }}
+            >
+              {t("archipelago.startCourse")}
+              <ChevronLeft className="w-5 h-5 rotate-180" />
+            </button>
           </div>
-        ) : (
-          // Archipelago Detail View
-          <div className="space-y-8">
-            {/* Archipelago Map */}
-            <div className="bg-gradient-to-b from-slate-800/50 to-slate-900/50 rounded-3xl p-8 border border-purple-500/30 shadow-2xl backdrop-blur-sm">
-              <svg
-                className="w-full h-96 bg-gradient-to-b from-cyan-900/20 to-purple-900/20 rounded-2xl"
-                viewBox="0 0 100 100"
-                preserveAspectRatio="xMidYMid meet"
+
+          {/* Lesson preview cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {course.lessons.map((lesson, idx) => (
+              <div
+                key={lesson.id}
+                className="bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5 flex items-center gap-3"
               >
-                <defs>
-                  <filter id="islandGlow">
-                    <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
-                    <feMerge>
-                      <feMergeNode in="coloredBlur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                  <pattern id="waves2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <path
-                      d="M0,10 Q5,5 10,10 T20,10"
-                      stroke="rgba(59,130,246,0.2)"
-                      fill="none"
-                      strokeWidth="0.5"
-                    />
-                  </pattern>
-                </defs>
-                <rect width="100" height="100" fill="url(#waterGradient)" />
-                <rect width="100" height="100" fill="url(#waves2)" />
-
-                {selectedArchipelago.islands.map((island) => (
-                  <g
-                    key={island.id}
-                    onClick={() => handleIslandClick(island)}
-                    className="cursor-pointer transition-transform duration-300 hover:scale-125"
-                    style={{ transformOrigin: `${island.x}% ${island.y}%` }}
-                  >
-                    <circle
-                      cx={island.x}
-                      cy={island.y}
-                      r="5"
-                      fill={island.completed ? "#10b981" : "#f59e0b"}
-                      opacity="0.3"
-                    />
-
-                    <circle
-                      cx={island.x}
-                      cy={island.y}
-                      r="3.5"
-                      fill={island.completed ? "#10b981" : "#f59e0b"}
-                      filter="url(#islandGlow)"
-                    />
-
-                    <text
-                      x={island.x}
-                      y={island.y + 0.5}
-                      textAnchor="middle"
-                      fontSize="2"
-                      fill="white"
-                      fontWeight="bold"
-                      className="pointer-events-none"
-                    >
-                      {island.emoji}
-                    </text>
-
-                    {island.completed && (
-                      <circle
-                        cx={island.x + 3}
-                        cy={island.y - 3}
-                        r="1.2"
-                        fill="#10b981"
-                        stroke="white"
-                        strokeWidth="0.3"
-                      />
-                    )}
-                  </g>
-                ))}
-              </svg>
-            </div>
-
-            {/* Island Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {selectedArchipelago.islands.map((island) => (
                 <div
-                  key={island.id}
-                  onClick={() => handleIslandClick(island)}
-                  className="group relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm p-6 rounded-2xl border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 hover:scale-105 overflow-hidden cursor-pointer"
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shrink-0"
+                  style={{ backgroundColor: course.color }}
                 >
-                  <div className="relative z-10 space-y-4">
-                    <div className="flex items-start justify-between">
-                      <div className="text-5xl drop-shadow-lg">{island.emoji}</div>
-                      {island.completed && (
-                        <span className="text-xs font-bold text-white bg-gradient-to-r from-green-600 to-emerald-600 px-3 py-1 rounded-full shadow-lg">
-                          ✓ Completed
-                        </span>
-                      )}
-                    </div>
-
-                    <div>
-                      <h3 className="text-lg font-bold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
-                        {island.name}
-                      </h3>
-                      <p className="text-xs text-purple-200 mt-1">Progress: {island.progress}%</p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="w-full bg-slate-700/50 rounded-full h-2.5 overflow-hidden border border-purple-500/20">
-                        <div
-                          className="h-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 rounded-full transition-all duration-500 shadow-lg shadow-purple-500/50"
-                          style={{ width: `${island.progress}%` }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    <div className="w-full mt-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-lg hover:shadow-purple-500/50 transition-all duration-300 group-hover:shadow-xl px-4 py-2 rounded-lg text-center">
-                      Start Lesson
-                    </div>
-                  </div>
+                  {idx + 1}
                 </div>
-              ))}
-            </div>
+                <span className="text-xs text-cyan-200/70">
+                  {t("archipelago.lesson")} {idx + 1}
+                </span>
+              </div>
+            ))}
           </div>
-        )}
+        </>
+      )}
+    </div>
+  );
+}
+
+// ─── Lessons Map View ───────────────────────────────────────────────────────────
+function LessonsMapView({
+  course,
+  t,
+  onLessonClick,
+  hoveredId,
+  setHoveredId,
+}: {
+  course: ArchipelagoCourse;
+  t: (key: string, fallback?: string) => string;
+  onLessonClick: (lessonId: number) => void;
+  hoveredId: string | null;
+  setHoveredId: (id: string | null) => void;
+}) {
+  return (
+    <div className="space-y-8">
+      {/* Section Title */}
+      <div className="text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-1">
+          {t("archipelago.lessonPath")}
+        </h2>
+        <p className="text-cyan-200/60 text-sm">
+          {course.lessons.length} {t("archipelago.island_other")}
+        </p>
       </div>
 
-      <style>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
+      {/* SVG Island Map with learning path */}
+      <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-4 sm:p-8 border border-white/10 shadow-xl">
+        <svg
+          className="w-full h-64 sm:h-80 md:h-96 rounded-2xl"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <defs>
+            <radialGradient id="islandOcean" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stopColor="#0D9488" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#115E59" stopOpacity="0.05" />
+            </radialGradient>
+            <filter id="islandGlow">
+              <feGaussianBlur stdDeviation="1" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <pattern id="wavePattern2" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
+              <path
+                d="M0,6 Q3,3 6,6 T12,6"
+                stroke="rgba(13,148,136,0.1)"
+                fill="none"
+                strokeWidth="0.3"
+              />
+            </pattern>
+          </defs>
+
+          <rect width="100" height="100" fill="url(#islandOcean)" />
+          <rect width="100" height="100" fill="url(#wavePattern2)" />
+
+          {/* Learning path connection lines */}
+          <path
+            d={course.lessons
+              .filter((l) => l.available)
+              .map((l, i) => {
+                if (i === 0) return `M${l.x},${l.y}`;
+                return `L${l.x},${l.y}`;
+              })
+              .join(" ")}
+            stroke={course.color}
+            strokeWidth="0.5"
+            fill="none"
+            strokeDasharray="1.5,2"
+            opacity="0.4"
+          />
+
+          {/* Start marker */}
+          <text x={course.lessons[0]?.x ?? 10} y={(course.lessons[0]?.y ?? 10) - 8} textAnchor="middle" fontSize="2" fill="#FDE68A" opacity="0.6" fontWeight="bold">
+            START
+          </text>
+
+          {/* Lesson Islands */}
+          {course.lessons.map((lesson, idx) => {
+            const isHovered = hoveredId === `lesson-${lesson.id}`;
+
+            return (
+              <g
+                key={lesson.id}
+                onClick={() => lesson.available && onLessonClick(lesson.id)}
+                onMouseEnter={() => setHoveredId(`lesson-${lesson.id}`)}
+                onMouseLeave={() => setHoveredId(null)}
+                className={lesson.available ? "cursor-pointer" : "cursor-not-allowed"}
+                style={{
+                  transformOrigin: `${lesson.x}% ${lesson.y}%`,
+                  opacity: lesson.available ? 1 : 0.35,
+                }}
+              >
+                {/* Water ring */}
+                <circle
+                  cx={lesson.x}
+                  cy={lesson.y}
+                  r={isHovered ? 6.5 : 5.5}
+                  fill={course.color}
+                  opacity={isHovered ? 0.25 : 0.1}
+                  className="transition-all duration-500"
+                />
+
+                {/* Sandy beach */}
+                <circle
+                  cx={lesson.x}
+                  cy={lesson.y}
+                  r={isHovered ? 5 : 4.2}
+                  fill="#FDE68A"
+                  opacity="0.2"
+                  className="transition-all duration-500"
+                />
+
+                {/* Island */}
+                <circle
+                  cx={lesson.x}
+                  cy={lesson.y}
+                  r={isHovered ? 4 : 3.5}
+                  fill={course.color}
+                  filter="url(#islandGlow)"
+                  className="transition-all duration-500"
+                />
+
+                {/* Lesson number */}
+                <text
+                  x={lesson.x}
+                  y={lesson.y + 1}
+                  textAnchor="middle"
+                  fontSize={isHovered ? "2.5" : "2"}
+                  fill="white"
+                  fontWeight="bold"
+                  className="pointer-events-none transition-all duration-500"
+                >
+                  {idx + 1}
+                </text>
+
+                {/* Hover label */}
+                {isHovered && (
+                  <text
+                    x={lesson.x}
+                    y={lesson.y - 6}
+                    textAnchor="middle"
+                    fontSize="2"
+                    fill="white"
+                    opacity="0.9"
+                    fontWeight="500"
+                    className="pointer-events-none"
+                  >
+                    {t("archipelago.lesson")} {idx + 1}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      {/* Lesson Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+        {course.lessons.map((lesson, idx) => (
+          <div
+            key={lesson.id}
+            onClick={() => lesson.available && onLessonClick(lesson.id)}
+            className={`relative bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 transition-all duration-300 ${
+              lesson.available
+                ? "hover:bg-white/15 hover:border-white/20 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+                : "opacity-40 cursor-not-allowed"
+            }`}
+          >
+            <div className="flex flex-col items-center text-center gap-2">
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
+                style={{ backgroundColor: course.color }}
+              >
+                {idx + 1}
+              </div>
+              <span className="text-xs text-cyan-200/70">
+                {t("archipelago.lesson")} {idx + 1}
+              </span>
+            </div>
+            <div
+              className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full opacity-30"
+              style={{ backgroundColor: course.color }}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
