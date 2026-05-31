@@ -95,7 +95,7 @@ export const programmingArchipelago: ArchipelagoConfig = {
       available: true,
       lessons: [
         // Row 1: Top row (left to right)
-        { id: 1, titleKey: "archipelago.lesson1", subtitleKey: "archipelago.lesson1sub", emoji: "🌿", x: 8, y: 15, available: true },
+        { id: 1, titleKey: "archipelago.lesson1", subtitleKey: "archipelago.lesson1sub", emoji: "🧭", x: 8, y: 15, available: true },
         { id: 2, titleKey: "archipelago.lesson2", subtitleKey: "archipelago.lesson2sub", emoji: "🧠", x: 22, y: 12, available: true },
         { id: 3, titleKey: "archipelago.lesson3", subtitleKey: "archipelago.lesson3sub", emoji: "🔢", x: 36, y: 15, available: true },
         { id: 4, titleKey: "archipelago.lesson4", subtitleKey: "archipelago.lesson4sub", emoji: "🧩", x: 50, y: 12, available: true },

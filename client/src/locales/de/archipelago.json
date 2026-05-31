@@ -24,17 +24,31 @@
     "lessonPath": "Lernpfad",
     "lesson": "Lektion",
     "startCourse": "Kurs starten",
-    "lesson1": "Bedingungen entdecken",
-    "lesson1sub": "Wenn etwas passiert, reagiert der Agent",
-    "lesson1desc": "Lerne, wie du den Agenten mit Bedingungsblöcken auf Ereignisse reagieren lässt.",
+    "lesson1": "Grundlagen der Steuerung",
+    "lesson1sub": "Bewegung, Orientierung und Koordinaten in Minecraft Education",
+    "lesson1desc": "Bevor wir mit Block Coding und Agenten arbeiten, lernst du die wichtigsten Steuerungen in Minecraft Education kennen. Bewege dich sicher durch die Welt, überwinde Hindernisse und orientiere dich mit Koordinaten und Wegmarkierungen.",
     "lesson1objectives": [
-      "Bedingungsblöcke verstehen",
-      "If‑Anweisungen nutzen",
-      "Werte vergleichen",
-      "Aktionen basierend auf Bedingungen auslösen",
-      "Logik testen und debuggen"
+      "Sicher bewegen",
+      "Kamera kontrollieren",
+      "Hindernisse überwinden",
+      "Richtungen verstehen",
+      "Koordinaten nutzen",
+      "Hinweise in der Welt lesen"
     ],
-    "lesson1preview": "Nach dieser Lektion kann dein Agent einfache Entscheidungen basierend auf seiner Umgebung treffen.",
+    "lesson1preview": "Nach dieser Lektion kannst du dich sicher in Minecraft Education bewegen und orientieren. Diese Fähigkeiten bilden die Grundlage für alle weiteren Coding-Abenteuer auf dem Archipel.",
+    "lesson1tasks": [
+      {
+        "title": "Parcours der Farben",
+        "description": "Farbigen Wollpfaden folgen und Hindernisse überwinden."
+      },
+      {
+        "title": "Schatzsuche",
+        "description": "Versteckte Gegenstände mithilfe von Richtungen und Koordinaten finden."
+      }
+    ],
+    "lesson1reward": "Navigator-Abzeichen",
+    "lesson1rewardDesc": "Für das erfolgreiche Abschließen der ersten Reise über die Insel.",
+    "lesson1conclusion": "Du kannst dich nun sicher in Minecraft Education bewegen und orientieren. Diese Fähigkeiten bilden die Grundlage für alle weiteren Coding-Abenteuer auf dem Archipel.",
     "lesson2": "Clevere Entscheidungen",
     "lesson2sub": "If, Else und mehrere Möglichkeiten",
     "lesson2desc": "Kombiniere mehrere Bedingungen mit else und else‑if, um verzweigte Logik zu erstellen.",

@@ -24,17 +24,31 @@
     "lessonPath": "Learning Path",
     "lesson": "Lesson",
     "startCourse": "Start Course",
-    "lesson1": "Discovering Conditions",
-    "lesson1sub": "When something happens, the Agent reacts",
-    "lesson1desc": "Learn how to make the Agent respond to events using conditional blocks.",
+    "lesson1": "Basics of Controls",
+    "lesson1sub": "Movement, orientation and coordinates in Minecraft Education",
+    "lesson1desc": "Before we start with block coding and Agents, you'll learn the essential controls in Minecraft Education. Move safely through the world, overcome obstacles, and navigate using coordinates and landmarks.",
     "lesson1objectives": [
-      "Understand condition blocks",
-      "Use if statements",
-      "Compare values",
-      "Trigger actions based on conditions",
-      "Test and debug logic"
+      "Move safely",
+      "Control the camera",
+      "Overcome obstacles",
+      "Understand directions",
+      "Use coordinates",
+      "Read hints in the world"
     ],
-    "lesson1preview": "After this lesson, your Agent can make simple decisions based on what happens around it.",
+    "lesson1preview": "After this lesson, you can move safely and orient yourself in Minecraft Education. These skills form the foundation for all further coding adventures on the archipelago.",
+    "lesson1tasks": [
+      {
+        "title": "Color Course",
+        "description": "Follow colored wool paths and overcome obstacles."
+      },
+      {
+        "title": "Treasure Hunt",
+        "description": "Find hidden items using directions and coordinates."
+      }
+    ],
+    "lesson1reward": "Navigator Badge",
+    "lesson1rewardDesc": "For successfully completing the first journey across the island.",
+    "lesson1conclusion": "You can now move safely and orient yourself in Minecraft Education. These skills form the foundation for all further coding adventures on the archipelago.",
     "lesson2": "Clever Decisions",
     "lesson2sub": "If, Else and multiple possibilities",
     "lesson2desc": "Combine multiple conditions with else and else‑if to create branching logic.",

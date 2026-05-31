@@ -36,57 +36,131 @@ export const MINECRAFT_LESSONS: Lesson[] = [
   {
     id: 1,
     title: 'Grundlagen der Steuerung',
-    description: 'Sicherer Umgang mit Minecraft-Steuerung ohne CodeBuilder',
+    description: 'Bevor wir mit Block Coding und Agenten arbeiten, lernst du die wichtigsten Steuerungen in Minecraft Education kennen. Bewege dich sicher durch die Welt, überwinde Hindernisse und orientiere dich mit Koordinaten und Wegmarkierungen.',
     phase: 'getting-started',
     duration: 60,
     difficulty: 'beginner',
     objectives: [
-      'Tastatur‑ und Maus‑Funktionen sicher einsetzen',
-      'Bewegungsabläufe (Linie, Quadrat, Kreis) verstehen',
-      'Koordinaten für Schatzsuche nutzen',
-      'Reflexion über Schwierigkeiten und Tipps sammeln',
+      'Sicher bewegen',
+      'Kamera kontrollieren',
+      'Hindernisse überwinden',
+      'Richtungen verstehen',
+      'Koordinaten nutzen',
+      'Hinweise in der Welt lesen',
     ],
     content: `
 # Grundlagen der Steuerung
 
 ## Einführung
-In dieser Lektion lernen die Schüler*innen, wie sie sich in Minecraft Education sicher bewegen und die Grundfunktionen der Steuerung (WASD, Springen, Schleichen) anwenden. Das ist die Basis für alle späteren Coding‑Aufgaben, weil der Agent nur dann effektiv eingesetzt werden kann, wenn die Umgebung gut erkundet wird.
+Bevor wir mit Block Coding und Agenten arbeiten, lernst du die wichtigsten Steuerungen in Minecraft Education kennen. Bewege dich sicher durch die Welt, überwinde Hindernisse und orientiere dich mit Koordinaten und Wegmarkierungen.
 
-## Ablauf
-**Theorie (10 Min)** – Erklärung der Tasten und Demonstration von einfachen Bewegungsformen (Linie, Quadrat, Kreis).
-**Praxis (40 Min)** –
-1. Parcours mit Woll‑Pfaden folgen.
-2. Schatzsuche mit Koordinaten (z. B. „5 Blöcke nordöstlich“).
-**Reflexion (10 Min)** – Was war schwer? Tipps für die nächste Stunde.
+## WASD-Steuerung
+Mit den Tasten **W**, **A**, **S** und **D** bewegst du dich in der Minecraft-Welt:
+- **W** – Vorwärts (nach vorn)
+- **A** – Links (nach links)
+- **S** – Rückwärts (nach hinten)
+- **D** – Rechts (nach rechts)
+
+Kombiniere die Tasten, um diagonal zu laufen (z. B. W + D für schräg nach rechts vorwärts).
+
+## Springen
+Drücke die **Leertaste (Space)**, um zu springen. Springen ist nötig, um über Hindernisse wie Blöcke, Zäune oder Wasser zu gelangen.
+
+## Schleichen
+Halte die **Shift-Taste** gedrückt, um zu schleichen. Beim Schleichen:
+- Bewegst du dich langsamer
+- Fällst du nicht von hohen Kanten
+- Kannst du vorsichtig an Rändern gehen
+
+## Bewegung im Raum
+Minecraft ist eine 3D-Welt. Du kannst dich in alle Richtungen bewegen:
+- **Vorwärts / Rückwärts** auf dem gleichen Niveau
+- **Links / Rechts** seitlich
+- **Aufwärts** durch Springen oder Treppen
+- **Abwärts** durch Abstiege oder Fallgruben
+
+## Kamera kontrollieren
+Bewege die **Maus**, um deine Sicht zu drehen. Das ist wichtig, um:
+- Deine Umgebung zu erkunden
+- Hindernisse rechtzeitig zu sehen
+- Wegmarkierungen und Schilder zu finden
+
+## Richtungen und Orientierung
+In Minecraft gibt es vier Himmelsrichtungen: **Nord**, **Süd**, **Ost** und **West**. Du kannst deine Richtung anhand der Sonne oder des Kompasses bestimmen. Farbige Wollblöcke und Schilder helfen dir als Wegmarkierungen.
+
+## Koordinaten nutzen
+Koordinaten geben die Position in der Welt an. Sie bestehen aus drei Werten:
+- **X** – Ost (positive) / West (negativ)
+- **Y** – Höhe (wie hoch du bist)
+- **Z** – Süd (positive) / Nord (negativ)
+
+Drücke **F3** (Java Edition) oder schaue in den Einstellungen, um die Koordinaten anzuzeigen. Koordinaten helfen dir, Orte wiederzufinden und präzise zu navigieren.
+
+## Aufgabe 1: Parcours der Farben
+Folge dem farbigen Wollpfad durch den Parcours. Überwinde alle Hindernisse – Springe über Lücken, klettere über Blöcke und nutze Schleichen, um sicher an engen Stellen vorbeizukommen.
+
+## Aufgabe 2: Schatzsuche
+Finde die versteckten Gegenstände mithilfe von Richtungsangaben und Koordinaten. Lese die Hinweise auf den Schildern in der Welt und navigiere präzise zum Ziel.
+
+## Reflexion
+Was war schwer? Welche Tasten haben dir am meisten geholfen? Welche Tipps kannst du für die nächste Stunde mitgeben?
 `,
     codeBlocks: [],
     studentActivity: `
-1. Folge dem vorgegebenen Woll‑Pfad und achte auf die Richtung.
-2. Finde das versteckte Item anhand der Koordinaten‑Hinweise.
-3. Diskutiere im Team, welche Tasten dir am meisten geholfen haben.
+**Aufgabe 1: Parcours der Farben**
+1. Folge dem farbigen Wollpfad durch den Parcours.
+2. Überwinde alle Hindernisse – Springe über Lücken, klettere über Blöcke.
+3. Nutze Schleichen, um sicher an engen Stellen vorbeizukommen.
+
+**Aufgabe 2: Schatzsuche**
+1. Lies die Hinweise auf den Schildern in der Welt.
+2. Nutze die angegebenen Richtungen und Koordinaten, um zum versteckten Gegenstand zu navigieren.
+3. Finde alle versteckten Items.
+
+**Reflexion im Team:**
+Welche Tasten haben dir am meisten geholfen? Welche Schwierigkeiten gab es?
 `,
-    teacherTip: 'Beginne mit einer kurzen Live‑Demo. Nutze farbige Schilder, um die Koordinaten‑Hinweise klar zu markieren.',
+    teacherTip: 'Beginne mit einer kurzen Live-Demo der WASD-Steuerung. Nutze farbige Schilder, um die Koordinaten-Hinweise klar zu markieren. Lasse die Schüler zunächst frei die Steuerung ausprobieren, bevor sie den Parcours starten.',
     quiz: [
       {
         id: 1,
-        question: 'Welche Taste lässt deinen Spieler springen?',
-        options: ['W', 'Space', 'Shift', 'E'],
-        correctAnswer: 1,
-        explanation: 'Die Leertaste (Space) bewirkt einen Sprung.',
+        question: 'Welche Taste wird normalerweise verwendet, um vorwärts zu laufen?',
+        options: ['A', 'B', 'W', 'S'],
+        correctAnswer: 2,
+        explanation: 'Die W-Taste wird für das Vorwärtslaufen verwendet (W = Walk Forward).',
       },
       {
         id: 2,
-        question: 'Wie lautet die Tastenkombination, um zu schleichen?',
-        options: ['Shift', 'Ctrl', 'Alt', 'Tab'],
-        correctAnswer: 0,
-        explanation: 'Mit der Shift‑Taste kannst du dich leise bewegen.',
+        question: 'Warum sind Koordinaten hilfreich?',
+        options: ['Zum Bauen von Häusern', 'Zum Finden von Orten', 'Zum Ändern von Blöcken', 'Zum Öffnen von Truhen'],
+        correctAnswer: 1,
+        explanation: 'Koordinaten helfen dir, Orte in der Minecraft-Welt wiederzufinden und präzise zu navigieren.',
       },
       {
         id: 3,
-        question: 'Ein Schüler soll ein Item 5 Blöcke nordöstlich finden. Welche Richtung muss er zuerst gehen?',
-        options: ['Nord', 'Ost', 'Süd', 'West'],
+        question: 'Welche Taste wird zum Schleichen verwendet?',
+        options: ['Ctrl', 'Alt', 'Shift', 'Tab'],
+        correctAnswer: 2,
+        explanation: 'Mit der Shift-Taste kannst du dich leise und langsam bewegen (Schleichen).',
+      },
+      {
+        id: 4,
+        question: 'Was passiert, wenn du die Leertaste drückst?',
+        options: ['Du läufst schneller', 'Du springst', 'Du öffnest dein Inventar', 'Du schleichst'],
         correctAnswer: 1,
-        explanation: 'Nordöstlich bedeutet zuerst nach Osten, dann nach Norden.',
+        explanation: 'Die Leertaste (Space) wird zum Springen verwendet.',
+      },
+      {
+        id: 5,
+        question: 'Was bedeuten die drei Koordinatenwerte X, Y und Z in Minecraft?',
+        options: [
+          'Breite, Höhe, Tiefe',
+          'Ost/West, Höhe, Süd/Nord',
+          'Nord, Süd, Ost',
+          'Himmelsrichtung, Zeit, Temperatur',
+        ],
+        correctAnswer: 1,
+        explanation: 'X steht für Ost/West, Y für die Höhe und Z für Süd/Nord.',
       },
     ],
     xpReward: 50,

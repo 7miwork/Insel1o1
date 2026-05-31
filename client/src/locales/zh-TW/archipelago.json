@@ -24,17 +24,31 @@
     "lessonPath": "學習路徑",
     "lesson": "單元",
     "startCourse": "開始課程",
-    "lesson1": "發現條件",
-    "lesson1sub": "當事件發生時，Agent 會做出反應",
-    "lesson1desc": "學習如何使用條件方塊讓 Agent 回應事件。",
+    "lesson1": "操控基礎",
+    "lesson1sub": "Minecraft Education 中的移動、方向與座標",
+    "lesson1desc": "在開始方塊程式設計與 Agent 之前，先學習 Minecraft Education 的基本操控。安全地在世界中移動、克服障礙，並利用座標和路標進行導航。",
     "lesson1objectives": [
-      "了解條件方塊",
-      "使用 if 語句",
-      "比較數值",
-      "根據條件觸發動作",
-      "測試與除錯邏輯"
+      "安全移動",
+      "控制視角",
+      "克服障礙",
+      "理解方向",
+      "使用座標",
+      "讀取世界中的提示"
     ],
-    "lesson1preview": "完成此課程後，Agent 能根據周圍情況做出簡單決策。",
+    "lesson1preview": "完成此課程後，你將能在 Minecraft Education 中安全移動並辨識方向。這些技能是後續所有程式設計冒險的基礎。",
+    "lesson1tasks": [
+      {
+        "title": "色彩闖關",
+        "description": "沿著彩色羊毛路徑前進並克服障礙。"
+      },
+      {
+        "title": "尋寶任務",
+        "description": "利用方向與座標尋找隱藏物品。"
+      }
+    ],
+    "lesson1reward": "導航員徽章",
+    "lesson1rewardDesc": "成功完成第一趟島嶼之旅。",
+    "lesson1conclusion": "你現在已能在 Minecraft Education 中安全移動並辨識方向。這些技能是後續所有程式設計冒險的基礎。",
     "lesson2": "聰明決策",
     "lesson2sub": "If、Else 及多種可能性",
     "lesson2desc": "結合多個條件與 else、else‑if，建立分支邏輯。",
