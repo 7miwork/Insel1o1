@@ -90,17 +90,18 @@
       "Recognize errors"
     ],
     "lesson3preview": "You've met your first programmable helper and can now give it your own commands.",
-    "lesson4": "Custom Code Blocks",
-    "lesson4sub": "Creating and reusing functions",
-    "lesson4desc": "Build reusable functions to group blocks and simplify your code.",
+    "lesson4": "Agent Movement and Navigation",
+    "lesson4sub": "Steering the Agent with purpose",
+    "lesson4desc": "Learn to move the Agent through the Minecraft world with purpose. Understand directions, combine commands, and plan simple routes.",
     "lesson4objectives": [
-      "Define functions",
-      "Pass parameters to functions",
-      "Return values",
-      "Call functions from other blocks",
-      "Organize code for readability"
+      "Understand movement commands",
+      "Use directions correctly",
+      "Steer the Agent",
+      "Combine commands",
+      "Plan routes",
+      "Fix errors"
     ],
-    "lesson4preview": "You can call the same set of actions with a single block, making your programs cleaner.",
+    "lesson4preview": "You can now steer the Agent through the world and solve simple navigation tasks.",
     "lesson5": "Smart Bridges",
     "lesson5sub": "Combining conditions and functions",
     "lesson5desc": "Integrate conditions and functions to solve more complex puzzles efficiently.",
@@ -191,6 +192,30 @@
     ],
     "lesson3reward": "Agent Assistant",
     "lesson3rewardDesc": "You've successfully controlled your first Agent.",
-    "lesson3conclusion": "You've met your first programmable helper and can now give it your own commands."
+    "lesson3conclusion": "You've met your first programmable helper and can now give it your own commands.",
+    "lesson4tasks": [
+      {
+        "title": "Straight Path",
+        "description": "Make the Agent walk 6 steps forward."
+      },
+      {
+        "title": "Walk a Rectangle",
+        "description": "Make the Agent walk a rectangle path."
+      },
+      {
+        "title": "Go Around Obstacle",
+        "description": "Navigate the Agent around a wall."
+      }
+    ],
+    "lesson4knowledge": [
+      "Direction - The compass direction the Agent faces",
+      "Forward - The Agent moves in the direction it is facing",
+      "Backward - The Agent moves opposite to its facing direction",
+      "Turning - Rotating the Agent left or right without moving",
+      "Navigation - Planning and executing movement sequences"
+    ],
+    "lesson4reward": "Pathfinder Badge",
+    "lesson4rewardDesc": "For successfully navigating the Agent through its first challenges.",
+    "lesson4conclusion": "You can now steer the Agent through the world and solve simple navigation tasks."
   }
 }

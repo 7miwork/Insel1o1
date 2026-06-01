@@ -90,17 +90,18 @@
       "辨識錯誤"
     ],
     "lesson3preview": "你已認識第一個程式化助手，現在可以給它自己的指令。",
-    "lesson4": "自訂程式碼區塊",
-    "lesson4sub": "建立和重用函數",
-    "lesson4desc": "建立可重用的函式，將方塊分組並簡化程式碼。",
+    "lesson4": "Agent 的移動與導航",
+    "lesson4sub": "精準控制 Agent",
+    "lesson4desc": "學習在 Minecraft 世界中精準地移動 Agent。理解方向、組合指令並規劃簡單路線。",
     "lesson4objectives": [
-      "定義函式",
-      "傳遞參數給函式",
-      "回傳值",
-      "從其他方塊呼叫函式",
-      "組織程式碼以提升可讀性"
+      "理解移動指令",
+      "正確使用方向",
+      "操控 Agent",
+      "組合指令",
+      "規劃路線",
+      "修正錯誤"
     ],
-    "lesson4preview": "你可以用單一方塊執行相同動作，使程式更整潔。",
+    "lesson4preview": "你現在能操控 Agent 在世界中移動並完成簡單的導航任務。",
     "lesson5": "智慧橋樑",
     "lesson5sub": "結合條件與函數",
     "lesson5desc": "將條件與函式結合，以更有效解決複雜謎題。",
@@ -191,6 +192,30 @@
     ],
     "lesson3reward": "Agent 助手",
     "lesson3rewardDesc": "你已成功操控第一個 Agent。",
-    "lesson3conclusion": "你已認識第一個程式化助手，現在可以給它自己的指令。"
+    "lesson3conclusion": "你已認識第一個程式化助手，現在可以給它自己的指令。",
+    "lesson4tasks": [
+      {
+        "title": "直線行走",
+        "description": "讓 Agent 向前走 6 步。"
+      },
+      {
+        "title": "走長方形",
+        "description": "讓 Agent 走一個長方形路徑。"
+      },
+      {
+        "title": "繞過障礙物",
+        "description": "讓 Agent 繞過牆壁導航。"
+      }
+    ],
+    "lesson4knowledge": [
+      "方向 - Agent 面對的方位",
+      "前進 - Agent 朝著它面對的方向移動",
+      "後退 - Agent 朝著相反方向移動",
+      "轉向 - 讓 Agent 向左或向右旋轉",
+      "導航 - 規劃並執行移動序列"
+    ],
+    "lesson4reward": "探路者徽章",
+    "lesson4rewardDesc": "成功操控 Agent 完成首次導航挑戰。",
+    "lesson4conclusion": "你現在能操控 Agent 在世界中移動並完成簡單的導航任務。"
   }
 }

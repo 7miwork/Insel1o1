@@ -113,17 +113,18 @@
     "lesson3reward": "Agenten-Assistent",
     "lesson3rewardDesc": "Du hast deinen ersten Agenten erfolgreich gesteuert.",
     "lesson3conclusion": "Du hast deinen ersten programmierbaren Helfer kennengelernt und kannst ihm nun eigene Befehle geben.",
-    "lesson4": "Eigene Code-Blöcke",
-    "lesson4sub": "Funktionen erstellen und wiederverwenden",
-    "lesson4desc": "Erstelle wiederverwendbare Funktionen, um Blöcke zu gruppieren und deinen Code zu vereinfachen.",
+    "lesson4": "Bewegung und Navigation des Agenten",
+    "lesson4sub": "Den Agenten gezielt steuern",
+    "lesson4desc": "Lerne, den Agenten gezielt durch die Minecraft-Welt zu bewegen. Verstehe Richtungen, kombiniere Befehle und plane einfache Wege.",
     "lesson4objectives": [
-      "Funktionen definieren",
-      "Parameter an Funktionen übergeben",
-      "Werte zurückgeben",
-      "Funktionen aus anderen Blöcken aufrufen",
-      "Code für bessere Lesbarkeit organisieren"
+      "Bewegungsbefehle verstehen",
+      "Richtungen korrekt nutzen",
+      "Den Agenten steuern",
+      "Befehle kombinieren",
+      "Wege planen",
+      "Fehler korrigieren"
     ],
-    "lesson4preview": "Du kannst dieselben Aktionen mit einem einzigen Block ausführen, wodurch dein Programm sauberer wird.",
+    "lesson4preview": "Du kannst den Agenten nun gezielt durch die Welt bewegen und einfache Navigationsaufgaben lösen.",
     "lesson5": "Schlaue Brücken",
     "lesson5sub": "Bedingungen und Funktionen kombinieren",
     "lesson5desc": "Integriere Bedingungen und Funktionen, um komplexere Rätsel effizient zu lösen.",
@@ -191,6 +192,30 @@
     ],
     "lesson10preview": "Du siehst, wie Block‑Coding auf Gruppenprojekte skaliert.",
     "lesson11": "Die Letzte Insel",
-    "lesson11sub": "Das Ziel deiner Block-Coding-Reise"
+    "lesson11sub": "Das Ziel deiner Block-Coding-Reise",
+    "lesson4tasks": [
+      {
+        "title": "Gerader Weg",
+        "description": "Lass den Agenten 6 Schritte nach vorne gehen."
+      },
+      {
+        "title": "Rechteck laufen",
+        "description": "Lass den Agenten ein Rechteck ablaufen."
+      },
+      {
+        "title": "Hindernis umgehen",
+        "description": "Lass den Agenten um eine Wand herum navigieren."
+      }
+    ],
+    "lesson4knowledge": [
+      "Richtung - Die Himmelsrichtung, in die der Agent zeigt",
+      "Vorwärts - Der Agent bewegt sich in seine Blickrichtung",
+      "Rückwärts - Der Agent bewegt sich entgegen seiner Blickrichtung",
+      "Drehen - Den Agenten nach links oder rechts drehen",
+      "Navigation - Das gezielte Planen von Bewegungsabläufen"
+    ],
+    "lesson4reward": "Pfadfinder-Abzeichen",
+    "lesson4rewardDesc": "Für die erfolgreiche Navigation des Agenten durch seine ersten Herausforderungen.",
+    "lesson4conclusion": "Du kannst den Agenten nun gezielt durch die Welt bewegen und einfache Navigationsaufgaben lösen."
   }
 }

@@ -480,81 +480,141 @@ Wie unterscheidet sich der Agent von deinem Spieler? Welche Befehle findest du a
   },
   {
     id: 4,
-    title: 'Repeat Loops – Making the Agent Build a Wall',
-    description: 'Learn loops to reduce repetitive code',
+    title: 'Bewegung und Navigation des Agenten',
+    description: 'Lerne, den Agenten gezielt durch die Minecraft-Welt zu bewegen. Verstehe Richtungen, kombiniere Befehle und plane einfache Wege.',
     phase: 'loops',
     duration: 60,
     difficulty: 'intermediate',
     objectives: [
-      'Understand the concept of loops',
-      'Use repeat loops to reduce code repetition',
-      'Build a wall structure using loops',
-      'Modify loop parameters',
+      'Bewegungsbefehle verstehen',
+      'Richtungen korrekt nutzen',
+      'Den Agenten steuern',
+      'Befehle kombinieren',
+      'Wege planen',
+      'Fehler korrigieren',
     ],
     content: `
-# Repeat Loops
+# Bewegung und Navigation des Agenten
 
-## What is a Loop?
-A loop repeats a block of code multiple times. Instead of writing the same command 10 times, you can write it once in a loop.
+## Wie bewegt sich der Agent?
+Der Agent kann sich in verschiedene Richtungen bewegen. Die Grundbefehle dafür sind:
+- **move(FORWARD, Anzahl)** – Der Agent geht nach vorne
+- **move(BACKWARD, Anzahl)** – Der Agent geht nach hinten
+- **turn(LEFT)** – Der Agent dreht sich nach links
+- **turn(RIGHT)** – Der Agent dreht sich nach rechts
 
-## Syntax
-\`\`\`
-repeat(5) {
-  place(STONE)
-  move(FORWARD, 1)
-}
-\`\`\`
+Jeder Bewegungsbefehl wird nacheinander ausgeführt. Die Reihenfolge ist entscheidend!
 
-This places a stone block and moves forward 5 times.
+## Warum ist die Reihenfolge wichtig?
+Minecraft führt deine Befehle der Reihe nach aus – von oben nach unten. Wenn du zuerst drehst und dann gehst, bewegt sich der Agent in die neue Richtung. Wenn du zuerst gehst und dann drehst, hat sich der Agent schon in die falsche Richtung bewegt.
 
-## Building a Wall
-To build a wall, you need to:
-1. Place a block
-2. Move to the next position
-3. Repeat
+## Befehle zu Bewegungsabläufen kombiniere
+Um den Agenten zum Beispiel in einem Quadrat zu bewegen, brauchst du:
+1. move(FORWARD, 4) – 4 Schritte geradeaus
+2. turn(RIGHT) – Nach rechts drehen
+3. move(FORWARD, 4) – Nochmal 4 Schritte
+4. turn(RIGHT) – Wieder drehen
+5. ... und so weiter
 
-## Benefits of Loops
-- Less code to write
-- Easier to modify (change one number instead of many commands)
-- Easier to understand
+## Fehler bei Bewegungen
+Häufige Fehler:
+- Der Agent bewegt sich in die falsche Richtung → Prüfe die Drehung
+- Der Agent geht zu weit oder zu kurz → Passe die Anzahl an
+- Der Agent dreht sich zu oft oder zu wenig → Reihenfolge prüfen
+
+## Das solltest du wissen
+- **Richtung** – Die Himmelsrichtung, in die der Agent zeigt (Nord, Süd, Ost, West)
+- **Vorwärts** – Der Agent bewegt sich in die Richtung, in die er gerade schaut
+- **Rückwärts** – Der Agent bewegt sich entgegen seiner Blickrichtung
+- **Drehen** – Den Agenten nach links oder rechts drehen, ohne ihn zu bewegen
+- **Navigation** – Das gezielte Planen und Ausführen von Bewegungsabläufen
+
+## Aufgabe 1: Gerader Weg
+Lass den Agenten 6 Schritte nach vorne gehen. Beobachte, was passiert. Ändere dann die Anzahl auf 3 und auf 10.
+
+## Aufgabe 2: Rechteck laufen
+Lass den Agenten ein Rechteck ablaufen: 4 Schritte vorwärts, rechts drehen, 6 Schritte vorwärts, rechts drehen, 4 Schritte vorwärts, rechts drehen, 6 Schritte vorwärts.
+
+## Aufgabe 3: Hindernis umgehen
+Der Agent steht vor einer Wand. Lass ihn nach links drehen, 2 Schritte gehen, nach rechts drehen und dann weiter vorwärts gehen.
+
+## Reflexion
+Was ist dir aufgefallen, als du den Agenten gelenkt hast? Was passiert, wenn die Reihenfolge der Befehle nicht stimmt?
 `,
     codeBlocks: [
       {
-        name: 'repeat',
-        description: 'Repeat code N times',
-        example: 'repeat(10) { ... }',
-        icon: '🔁',
+        name: 'move',
+        description: 'Bewege den Agenten in eine Richtung',
+        example: 'move(FORWARD, 4)',
+        icon: '🚀',
+      },
+      {
+        name: 'turn',
+        description: 'Drehe den Agenten nach links oder rechts',
+        example: 'turn(RIGHT)',
+        icon: '🔄',
       },
     ],
     studentActivity: `
-1. Build a 10-block wall using a repeat loop
-2. Build a 20-block wall
-3. Build a wall and then move up and build another wall (2 levels)
-4. Create a wall with different block types (alternate)
-5. Build a wall in a circle (use turns)
+**Aufgabe 1: Gerader Weg**
+1. Lass den Agenten 6 Schritte nach vorne gehen.
+2. Beobachte, was passiert.
+3. Ändere dann die Anzahl auf 3 und auf 10.
+
+**Aufgabe 2: Rechteck laufen**
+1. move(FORWARD, 4)
+2. turn(RIGHT)
+3. move(FORWARD, 6)
+4. turn(RIGHT)
+5. move(FORWARD, 4)
+6. turn(RIGHT)
+7. move(FORWARD, 6)
+
+**Aufgabe 3: Hindernis umgehen**
+1. turn(LEFT)
+2. move(FORWARD, 2)
+3. turn(RIGHT)
+4. move(FORWARD, 3)
+
+**Reflexion im Team:**
+Was passiert, wenn die Reihenfolge der Befehle nicht stimmt? Wie planst du einen Weg?
 `,
-    teacherTip: 'Show the difference between writing 10 separate commands vs. 1 repeat loop. Emphasize code efficiency.',
+    teacherTip: 'Lasse die Schüler zuerst mit Papierskizzen planen, welche Befehle der Agent braucht. Dann das Programm testen. Betone, dass der Agent immer in die Richtung schaut, in die er zuletzt gedreht hat.',
     quiz: [
       {
         id: 1,
-        question: 'What does a loop do?',
-        options: ['Turns the Agent', 'Repeats code multiple times', 'Places blocks', 'Destroys blocks'],
+        question: 'Warum ist die Reihenfolge von Befehlen wichtig?',
+        options: ['Weil Minecraft sonst abstürzt', 'Weil der Agent die Befehle nacheinander ausführt', 'Weil Blöcke verschwinden', 'Weil die Welt gespeichert wird'],
         correctAnswer: 1,
-        explanation: 'A loop repeats a block of code multiple times.',
+        explanation: 'Der Agent führt die Befehle nacheinander aus – die Reihenfolge bestimmt das Ergebnis.',
       },
       {
         id: 2,
-        question: 'How many times will this code repeat? repeat(7) { place(GRASS) }',
-        options: ['5 times', '7 times', '10 times', '1 time'],
+        question: 'Was macht turn(RIGHT)?',
+        options: ['Bewegt den Agenten nach rechts', 'Dreht den Agenten nach rechts', 'Legt einen Block rechts', 'Zerstört einen Block rechts'],
         correctAnswer: 1,
-        explanation: 'repeat(7) means the code inside runs 7 times.',
+        explanation: 'turn(RIGHT) dreht den Agenten um 90 Grad nach rechts, ohne ihn zu bewegen.',
       },
       {
         id: 3,
-        question: 'Why use loops instead of repeating commands?',
-        options: ['Loops are faster', 'Loops use less code', 'Loops are more fun', 'Loops are required'],
+        question: 'Wie läuft der Agent ein Quadrat ab?',
+        options: ['4× move(FORWARD, 4)', '4× (move(FORWARD, 4) + turn(RIGHT))', '4× turn(RIGHT)', 'move(CIRCLE)'],
         correctAnswer: 1,
-        explanation: 'Loops reduce code repetition and make code easier to modify.',
+        explanation: 'Für ein Quadrat brauchst du 4× die Kombination: geradeaus gehen und dann drehen.',
+      },
+      {
+        id: 4,
+        question: 'Der Agent schaut nach Norden. Was passiert bei move(FORWARD, 3)?',
+        options: ['Er geht 3 Blöcke nach Süden', 'Er geht 3 Blöcke nach Norden', 'Er dreht sich nach Norden', 'Nichts'],
+        correctAnswer: 1,
+        explanation: 'Der Agent bewegt sich in die Richtung, in die er gerade schaut – hier nach Norden.',
+      },
+      {
+        id: 5,
+        question: 'Was solltest du tun, bevor du Befehle ausführst?',
+        options: ['Minecraft beenden', 'Einen Plan erstellen', 'Die Welt löschen', 'Den Server neustarten'],
+        correctAnswer: 1,
+        explanation: 'Plane zuerst den Weg – zum Beispiel auf Papier – bevor du die Befehle programmierst.',
       },
     ],
     xpReward: 75,
