@@ -333,90 +333,146 @@ Was ist dir leicht gefallen? Wo gab es Schwierigkeiten? Welche Befehle findest d
   },
   {
     id: 3,
-    title: 'Build a Simple Path or Road with the Agent',
-    description: 'Combine movement and building commands to create structures',
+    title: 'Der Agent und seine ersten Befehle',
+    description: 'Lerne deinen ersten programmierbaren Helfer kennen – den Agenten. Entdecke, wie du ihm Befehle gibst und wie er Blöcke in der Welt platziert und bewegt.',
     phase: 'getting-started',
     duration: 60,
     difficulty: 'beginner',
     objectives: [
-      'Combine multiple commands in sequence',
-      'Build a path using repeated commands',
-      'Identify and fix sequencing bugs',
-      'Understand block types and materials',
+      'Den Agenten kennenlernen',
+      'Agentenbefehle verstehen',
+      'Erste Befehle ausführen',
+      'Bewegungen steuern',
+      'Ergebnisse beobachten',
+      'Fehler erkennen',
     ],
     content: `
-# Building a Path
+# Der Agent und seine ersten Befehle
 
-## Sequencing
-Sequencing means putting commands in the right order. The Agent executes commands from top to bottom.
+## Wer ist der Agent?
+Der Agent ist ein kleiner, programmierbarer Roboter in Minecraft Education. Er steht neben dir in der Welt und kann Befehle ausführen, die du ihm gibst. Wie ein treuer Helfer baut, bewegt und zerstört er Blöcke genau nach deinen Anweisungen.
 
-## Block Types
-- GRASS: Green grass block
-- STONE: Gray stone block
-- DIRT: Brown dirt block
-- WOOD: Brown wood block
-- SAND: Yellow sand block
+## Warum ist der Agent wichtig?
+Im weiteren Verlauf des Kurses wirst du dem Agenten komplexere Aufgaben übertragen – wie das automatische Bauen von Straßen, das Sammeln von Ressourcen oder das Erkunden der Umgebung. In dieser Lektion lernst du die Grundbefehle, die dafür die Basis bilden.
 
-## Example: Simple Path
-\`\`\`
-place(GRASS)
-move(FORWARD, 1)
-place(GRASS)
-move(FORWARD, 1)
-place(GRASS)
-\`\`\`
+## So arbeitest du mit dem Agenten
+1. **Agenten spawnen** – Rufe den Agenten in die Nähe deines Spielers
+2. **Befehle programmieren** – Setze Befehlsblöcke zusammen
+3. **Programm ausführen** – Der Agent führt deine Befehle der Reihe nach aus
+4. **Ergebnis beobachten** – Schau dir an, was der Agent gebaut oder verändert hat
 
-This creates a path of 3 grass blocks.
+## Die wichtigsten Befehle
 
-## Debugging
-If your path doesn't look right, check:
-1. Are the commands in the right order?
-2. Did you use the right block type?
-3. Is the Agent facing the right direction?
+### Bewegung
+- **move(FORWARD, Anzahl)** – Der Agent bewegt sich vorwärts
+- **move(BACKWARD, Anzahl)** – Der Agent bewegt sich rückwärts
+- **turn(LEFT)** – Der Agent dreht sich nach links
+- **turn(RIGHT)** – Der Agent dreht sich nach rechts
+
+### Bauen und Zerstören
+- **place(Blöcke)** – Der Agent legt einen Block vor sich ab
+- **destroy()** – Der Agent zerstört den Block vor sich
+
+## Das solltest du wissen
+- **Agent** – Ein programmierbarer Roboter, der Befehle in der Minecraft-Welt ausführt
+- **Befehl** – Eine einzelne Anweisung, die der Agent ausführt (z. B. move, place, turn)
+- **Ausführung** – Der Vorgang, bei dem der Agent deine Befehle der Reihe nach abarbeitet
+- **Bewegung** – Das Fortbewegen des Agenten in eine bestimmte Richtung
+
+## Aufgabe 1: Agent starten
+Spawne den Agenten in deiner Nähe. Schreibe ein Programm mit drei Befehlen: Der Agent soll zwei Schritte nach vorne gehen und dann einen Block legen.
+
+## Aufgabe 2: Pfad bauen
+Erstelle einen einfachen Pfad aus 5 Blöcken. Der Agent soll jeweils einen Block legen und dann einen Schritt nach vorne gehen.
+
+## Aufgabe 3: Richtung wechseln
+Lass den Agenten nach drei Schritten nach vorne nach rechts drehen und weitere zwei Blöcke legen. Beobachte, wie sich die Richtung verändert.
+
+## Reflexion
+Was ist dir aufgefallen? Wie unterscheidet sich der Agent von deinem Spieler? Welche Befehle findest du am nützlichsten?
 `,
     codeBlocks: [
       {
+        name: 'move',
+        description: 'Bewege den Agenten in eine Richtung',
+        example: 'move(FORWARD, 2)',
+        icon: '🚀',
+      },
+      {
+        name: 'turn',
+        description: 'Drehe den Agenten nach links oder rechts',
+        example: 'turn(RIGHT)',
+        icon: '🔄',
+      },
+      {
         name: 'place',
-        description: 'Place different block types',
+        description: 'Lege einen Block vor den Agenten',
         example: 'place(STONE)',
         icon: '🧱',
       },
       {
-        name: 'move',
-        description: 'Move and build',
-        example: 'move(FORWARD, 1)',
-        icon: '🚀',
+        name: 'destroy',
+        description: 'Zerstöre den Block vor dem Agenten',
+        example: 'destroy()',
+        icon: '💥',
       },
     ],
     studentActivity: `
-1. Create a 5-block path using GRASS blocks
-2. Create a 5-block path using STONE blocks
-3. Create a path that changes direction (use turn commands)
-4. Intentionally make a mistake and fix it
-5. Create a 10-block road with alternating block types
+**Aufgabe 1: Agent starten**
+1. Spawne den Agenten in deiner Nähe.
+2. Schreibe ein Programm mit drei Befehlen: 2× move(FORWARD) und 1× place(STONE).
+3. Starte das Programm und beobachte das Ergebnis.
+
+**Aufgabe 2: Pfad bauen**
+1. Erstelle einen Pfad aus 5 Blöcken.
+2. Der Agent soll jeweils einen Block legen und dann einen Schritt nach vorne gehen.
+3. Teste dein Programm und passe es bei Bedarf an.
+
+**Aufgabe 3: Richtung wechseln**
+1. Lass den Agenten 3 Schritte nach vorne gehen.
+2. Dann soll er nach rechts drehen.
+3. Anschließend 2 weitere Blöcke legen.
+4. Beobachte, wie sich die Richtung verändert.
+
+**Reflexion im Team:**
+Wie unterscheidet sich der Agent von deinem Spieler? Welche Befehle findest du am nützlichsten?
 `,
-    teacherTip: 'Have students plan their path on paper before coding. This helps them understand sequencing.',
+    teacherTip: 'Zeige zuerst, wie man den Agenten spawnt. Lass die Schüler dann frei experimentieren, bevor sie die strukturierten Aufgaben bearbeiten. Betone, dass der Agent immer in die Richtung schaut, in die er zuletzt gedreht hat.',
     quiz: [
       {
         id: 1,
-        question: 'What is sequencing?',
-        options: ['Putting commands in the right order', 'Repeating commands', 'Turning the Agent', 'Placing blocks'],
-        correctAnswer: 0,
-        explanation: 'Sequencing means executing commands in the correct order.',
+        question: 'Wozu dient der Agent?',
+        options: ['Zum Dekorieren', 'Zum Ausführen von Befehlen', 'Zum Speichern der Welt', 'Zum Ändern der Sprache'],
+        correctAnswer: 1,
+        explanation: 'Der Agent ist ein programmierbarer Roboter, der Befehle in der Minecraft-Welt ausführt.',
       },
       {
         id: 2,
-        question: 'If your path looks wrong, what should you check first?',
-        options: ['The block type', 'The command order', 'Your player position', 'The time of day'],
+        question: 'Was macht der Befehl move(FORWARD, 3)?',
+        options: ['Bewegt den Spieler 3 Blöcke', 'Bewegt den Agenten 3 Schritte nach vorne', 'Legt 3 Blöcke ab', 'Dreht den Agenten 3 Mal'],
         correctAnswer: 1,
-        explanation: 'Always check if your commands are in the right order.',
+        explanation: 'move(FORWARD, 3) bewegt den Agenten 3 Schritte in die angegebene Richtung.',
       },
       {
         id: 3,
-        question: 'Which block type is STONE?',
-        options: ['Green', 'Gray', 'Brown', 'Yellow'],
+        question: 'Was passiert, wenn der Agent turn(RIGHT) ausführt?',
+        options: ['Er bewegt sich nach rechts', 'Er dreht sich nach rechts', 'Er legt einen Block', 'Er zerstört einen Block'],
         correctAnswer: 1,
-        explanation: 'STONE blocks are gray.',
+        explanation: 'turn(RIGHT) dreht den Agenten um 90 Grad nach rechts.',
+      },
+      {
+        id: 4,
+        question: 'Welcher Befehl legt einen Block vor den Agenten?',
+        options: ['move()', 'turn()', 'place()', 'destroy()'],
+        correctAnswer: 2,
+        explanation: 'Der Befehl place() legt einen Block vor den Agenten ab.',
+      },
+      {
+        id: 5,
+        question: 'Was sollte man tun, bevor man dem Agenten Befehle gibt?',
+        options: ['Minecraft beenden', 'Den Agenten spawnen', 'Die Welt löschen', 'Einen neuen Server erstellen'],
+        correctAnswer: 1,
+        explanation: 'Bevor der Agent Befehle ausführen kann, muss er zuerst in die Nähe des Spielers gespawnt werden.',
       },
     ],
     xpReward: 50,

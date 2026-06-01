@@ -78,17 +78,41 @@
     "lesson2reward": "Code-Entdecker",
     "lesson2rewardDesc": "Für die ersten erfolgreichen Schritte im Block Coding.",
     "lesson2conclusion": "Du hast die ersten Schritte im Block Coding gemacht und weißt nun, wie Programme aus einzelnen Befehlen aufgebaut werden.",
-    "lesson3": "Punkte & Zähler",
-    "lesson3sub": "Variablen als Gedächtnis nutzen",
-    "lesson3desc": "Einführung in Variablen zum Speichern von Zahlen, Inkrementieren und Vergleichen für Punktestände.",
+    "lesson3": "Der Agent und seine ersten Befehle",
+    "lesson3sub": "Den programmierbaren Helfer kennenlernen",
+    "lesson3desc": "Lerne deinen ersten programmierbaren Helfer kennen – den Agenten. Entdecke, wie du ihm Befehle gibst und wie er Blöcke in der Welt platziert und bewegt.",
     "lesson3objectives": [
-      "Numerische Variablen deklarieren",
-      "Arithmetische Operationen durchführen",
-      "Werte inkrementieren und dekrementieren",
-      "Variablen vergleichen",
-      "Variablen in Schleifen und Punktesystemen einsetzen"
+      "Den Agenten kennenlernen",
+      "Agentenbefehle verstehen",
+      "Erste Befehle ausführen",
+      "Bewegungen steuern",
+      "Ergebnisse beobachten",
+      "Fehler erkennen"
     ],
-    "lesson3preview": "Du kannst nun Punktestände verwalten und Schleifen in deinen Programmen steuern.",
+    "lesson3preview": "Du hast deinen ersten programmierbaren Helfer kennengelernt und kannst ihm nun eigene Befehle geben.",
+    "lesson3tasks": [
+      {
+        "title": "Agent starten",
+        "description": "Spawne den Agenten und gib ihm drei einfache Befehle."
+      },
+      {
+        "title": "Pfad bauen",
+        "description": "Erstelle einen Pfad aus 5 Blöcken mit dem Agenten."
+      },
+      {
+        "title": "Richtung wechseln",
+        "description": "Lass den Agenten die Richtung wechseln und weiter bauen."
+      }
+    ],
+    "lesson3knowledge": [
+      "Agent – Ein programmierbarer Roboter in Minecraft",
+      "Befehl – Eine einzelne Anweisung für den Agenten",
+      "Ausführung – Die Reihenfolge der Befehle",
+      "Bewegung – Das Fortbewegen des Agenten"
+    ],
+    "lesson3reward": "Agenten-Assistent",
+    "lesson3rewardDesc": "Du hast deinen ersten Agenten erfolgreich gesteuert.",
+    "lesson3conclusion": "Du hast deinen ersten programmierbaren Helfer kennengelernt und kannst ihm nun eigene Befehle geben.",
     "lesson4": "Eigene Code-Blöcke",
     "lesson4sub": "Funktionen erstellen und wiederverwenden",
     "lesson4desc": "Erstelle wiederverwendbare Funktionen, um Blöcke zu gruppieren und deinen Code zu vereinfachen.",

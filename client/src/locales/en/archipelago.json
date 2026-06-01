@@ -78,17 +78,18 @@
     "lesson2reward": "Code Explorer",
     "lesson2rewardDesc": "For the first successful steps in block coding.",
     "lesson2conclusion": "You've taken your first steps in block coding and now know how programs are built from individual commands.",
-    "lesson3": "Points & Counters",
-    "lesson3sub": "Using variables as memory",
-    "lesson3desc": "Introduce variables to store numbers, increment and compare them to track scores.",
+    "lesson3": "The Agent and Its First Commands",
+    "lesson3sub": "Meet your programmable helper",
+    "lesson3desc": "Meet your first programmable helper - the Agent. Discover how to give it commands and how it places and moves blocks in the world.",
     "lesson3objectives": [
-      "Declare numeric variables",
-      "Perform arithmetic operations",
-      "Increment and decrement values",
-      "Compare variables",
-      "Apply variables in loops and scoring"
+      "Meet the Agent",
+      "Understand Agent commands",
+      "Execute first commands",
+      "Control movements",
+      "Observe results",
+      "Recognize errors"
     ],
-    "lesson3preview": "You’ll be able to keep score and control loops in your programs.",
+    "lesson3preview": "You've met your first programmable helper and can now give it your own commands.",
     "lesson4": "Custom Code Blocks",
     "lesson4sub": "Creating and reusing functions",
     "lesson4desc": "Build reusable functions to group blocks and simplify your code.",
@@ -167,6 +168,29 @@
     ],
     "lesson10preview": "You’ll see how block coding scales to group projects.",
     "lesson11": "The Last Island",
-    "lesson11sub": "The goal of your block coding journey"
+    "lesson11sub": "The goal of your block coding journey",
+    "lesson3tasks": [
+      {
+        "title": "Start the Agent",
+        "description": "Spawn the Agent and give it three simple commands."
+      },
+      {
+        "title": "Build a Path",
+        "description": "Create a path of 5 blocks with the Agent."
+      },
+      {
+        "title": "Change Direction",
+        "description": "Make the Agent change direction and continue building."
+      }
+    ],
+    "lesson3knowledge": [
+      "Agent - A programmable robot in Minecraft",
+      "Command - A single instruction for the Agent",
+      "Execution - The order in which commands are carried out",
+      "Movement - Moving the Agent in a direction"
+    ],
+    "lesson3reward": "Agent Assistant",
+    "lesson3rewardDesc": "You've successfully controlled your first Agent.",
+    "lesson3conclusion": "You've met your first programmable helper and can now give it your own commands."
   }
 }

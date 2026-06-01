@@ -78,17 +78,18 @@
     "lesson2reward": "程式探險家",
     "lesson2rewardDesc": "成功完成方塊程式設計的初次嘗試。",
     "lesson2conclusion": "你已完成方塊程式設計的第一步，了解如何將單一指令組合成完整程式。",
-    "lesson3": "分數與計數器",
-    "lesson3sub": "使用變數作為記憶",
-    "lesson3desc": "介紹變數用於儲存數字、遞增與比較，以追蹤分數。",
+    "lesson3": "Agent 與第一個指令",
+    "lesson3sub": "認識你的程式化助手",
+    "lesson3desc": "認識你的第一個程式化助手 - Agent。了解如何下達指令，以及 Agent 如何在世界中放置和移動方塊。",
     "lesson3objectives": [
-      "宣告數值變數",
-      "執行算術運算",
-      "遞增與遞減值",
-      "比較變數",
-      "在迴圈與計分中使用變數"
+      "認識 Agent",
+      "理解 Agent 指令",
+      "執行第一個指令",
+      "控制移動",
+      "觀察結果",
+      "辨識錯誤"
     ],
-    "lesson3preview": "你將能管理分數並控制程式中的迴圈。",
+    "lesson3preview": "你已認識第一個程式化助手，現在可以給它自己的指令。",
     "lesson4": "自訂程式碼區塊",
     "lesson4sub": "建立和重用函數",
     "lesson4desc": "建立可重用的函式，將方塊分組並簡化程式碼。",
@@ -167,6 +168,29 @@
     ],
     "lesson10preview": "你將看到方塊程式如何擴展至團隊專案。",
     "lesson11": "最後之島",
-    "lesson11sub": "你 Block Coding 旅程的終點"
+    "lesson11sub": "你 Block Coding 旅程的終點",
+    "lesson3tasks": [
+      {
+        "title": "啟動 Agent",
+        "description": "召喚 Agent 並給它三個簡單指令。"
+      },
+      {
+        "title": "建造路徑",
+        "description": "用 Agent 建造一條由 5 個方塊組成的路徑。"
+      },
+      {
+        "title": "改變方向",
+        "description": "讓 Agent 改變方向並繼續建造。"
+      }
+    ],
+    "lesson3knowledge": [
+      "Agent - Minecraft 中的程式化機器人",
+      "指令 - 給 Agent 的單一動作",
+      "執行 - 指令的執行順序",
+      "移動 - 讓 Agent 在特定方向前進"
+    ],
+    "lesson3reward": "Agent 助手",
+    "lesson3rewardDesc": "你已成功操控第一個 Agent。",
+    "lesson3conclusion": "你已認識第一個程式化助手，現在可以給它自己的指令。"
   }
 }
