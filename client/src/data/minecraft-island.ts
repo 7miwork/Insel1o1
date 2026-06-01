@@ -622,87 +622,147 @@ Was passiert, wenn die Reihenfolge der Befehle nicht stimmt? Wie planst du einen
   },
   {
     id: 5,
-    title: 'Nested Loops – Build a Floor or Grid Pattern',
-    description: 'Use loops inside loops to create 2D patterns',
+    title: 'Bauen mit dem Agenten',
+    description: 'Der Agent wird zum Baumeister. Mit den ersten Baubefehlen lernst du, wie der Agent automatisch Blöcke platzieren und einfache Bauwerke erstellen kann.',
     phase: 'loops',
     duration: 60,
     difficulty: 'intermediate',
     objectives: [
-      'Understand nested loops',
-      'Build 2D grid patterns',
-      'Combine horizontal and vertical loops',
-      'Create complex structures efficiently',
+      'Baubefehle verstehen',
+      'Blöcke platzieren',
+      'Den Agenten als Baumeister nutzen',
+      'Bauaufgaben planen',
+      'Fehler erkennen und korrigieren',
+      'Einfache Bauwerke automatisieren',
     ],
     content: `
-# Nested Loops
+# Bauen mit dem Agenten
 
-## What are Nested Loops?
-Nested loops are loops inside loops. They let you create 2D patterns.
+## Wie platziert der Agent Blöcke?
+Der Agent kann mit dem Befehl **place(Blöcke)** Blöcke in der Welt ablegen. Er legt den Block immer vor sich ab – also in die Richtung, in die er gerade schaut. Das ist wichtig, denn wenn du willst, dass der Agent einen Block an einer bestimmten Stelle platziert, musst du ihn zuerst in die richtige Richtung drehen.
 
-## Example: 3x3 Grid
-\`\`\`
-repeat(3) {
-  repeat(3) {
-    place(GRASS)
-    move(FORWARD, 1)
-  }
-  turn(LEFT)
-  move(FORWARD, 1)
-  turn(RIGHT)
-}
-\`\`\`
+## Warum automatisiertes Bauen wichtig ist
+Stell dir vor, du möchtest eine Mauer aus 20 Blöcken bauen. Statt 20 Mal manuell zu klicken, kannst du den Agenten programmed der das für dich tut. Er macht es schneller, exakter und macht keine Fehler – solange dein Programm stimmt.
 
-This creates a 3x3 grid of grass blocks.
+## Aus einzelnen Befehlen entstehen Bauwerke
+Einzelne place-Befehle werden zu ganzen Strukturen, wenn du sie in der richtigen Reihenfolge anordnest:
+1. Block platzieren
+2. Bewegen
+3. Nächsten Block platzieren
+4. Wiederholen
 
-## How It Works
-1. Outer loop: Repeat 3 times (for each row)
-2. Inner loop: Repeat 3 times (for each block in the row)
-3. After each row, move to the next row
+So entstehen Wände, Wege, Treppen und vieles mehr.
 
-## Grid Patterns
-You can create:
-- Squares
-- Rectangles
-- Checkerboards (alternating blocks)
-- Floors for buildings
+## Wichtige Baubefehle
+- **place(STONE)** – Einen Steinblock vor den Agenten legen
+- **place(WOOD)** – Einen Holzblock legen
+- **place(GRASS)** – Einen Grasblock legen
+- **destroy()** – Einen Block vor dem Agenten zerstören
+
+## Fehler beim Bauen
+- **Block liegt falsch** → Der Agent schaut in die falsche Richtung → turn()-Befehl hinzufügen
+- **Zu wenig Blöcke** → Die Anzahl der place-Befehle erhöhen
+- **Agent bewegt sich nicht** → move()-Befehl zwischen die place-Befehle einfügen
+
+## Das solltest du wissen
+- **Platzieren** – Der Agent legt einen Block in die Welt ab
+- **Block** – Ein Baustein in Minecraft (z. B. Stein, Holz, Gras)
+- **Bauen** – Das Erstellen von Strukturen durch das Platzieren von Blöcken
+- **Agent** – Der programmierbare Roboter, der die Baubefehle ausführt
+- **Bauauftrag** – Eine Aufgabe, bei der der Agent eine Struktur erstellen soll
+
+## Aufgabe 1: Erste Mauer
+Lass den Agenten eine einfache Mauer aus 5 Steinblöcken bauen. Der Agent soll: place(STONE), move(FORWARD, 1), place(STONE), move(FORWARD, 1), ... fortsetzen, bis 5 Blöcke liegen.
+
+## Aufgabe 2: Farbiger Pfad
+Erstelle einen Pfad aus 4 verschiedenen Blöcken: place(WOOD), move(FORWARD, 1), place(STONE), move(FORWARD, 1), place(GRASS), move(FORWARD, 1), place(SAND).
+
+## Aufgabe 3: Treppe bauen
+Bau eine einfache Treppe mit 3 Stufen. Jede Stufe ist einen Block höher als die vorherige. Verwende place() und move() in Kombination.
+
+## Reflexion
+Was ist dir beim Bauen aufgefallen? Warum ist die Richtung des Agenten so wichtig? Wie würdest du eine komplexere Struktur planen?
 `,
     codeBlocks: [
       {
-        name: 'nested repeat',
-        description: 'Loops inside loops',
-        example: 'repeat(3) { repeat(3) { ... } }',
-        icon: '📦',
+        name: 'place',
+        description: 'Einen Block vor den Agenten legen',
+        example: 'place(STONE)',
+        icon: '🧱',
+      },
+      {
+        name: 'destroy',
+        description: 'Einen Block vor dem Agenten zerstören',
+        example: 'destroy()',
+        icon: '💥',
+      },
+      {
+        name: 'move',
+        description: 'Bewege den Agenten zur nächsten Position',
+        example: 'move(FORWARD, 1)',
+        icon: '🚀',
       },
     ],
     studentActivity: `
-1. Build a 5x5 floor using nested loops
-2. Build a 10x10 floor
-3. Build a checkerboard pattern (alternate block types)
-4. Build a 3x3x3 cube using 3 nested loops
-5. Create a pattern of your choice
+**Aufgabe 1: Erste Mauer**
+1. Lass den Agenten 5× place(STONE) und move(FORWARD, 1) ausführen.
+2. Beobachte, wie eine gerade Mauer entsteht.
+3. Teste mit verschiedenen Blöcken.
+
+**Aufgabe 2: Farbiger Pfad**
+1. place(WOOD), move(FORWARD, 1)
+2. place(STONE), move(FORWARD, 1)
+3. place(GRASS), move(FORWARD, 1)
+4. place(SAND)
+5. Beobachte den bunten Pfad.
+
+**Aufgabe 3: Treppe bauen**
+1. Place und move kombinieren, um 3 Stufen zu bauen.
+2. Jede Stufe einen Block höher.
+3. Teste und korrigiere Fehler.
+
+**Baumeister-Challenge:**
+Erstelle ein kleines Bauprojekt mit dem Agenten – zum Beispiel ein einfaches Haus aus 4 Wänden oder einen geraden Weg aus 10 Blöcken. Plane zuerst, welche Befehle du brauchst.
+
+**Reflexion im Team:**
+Warum ist die Richtung des Agenten beim Bauen so wichtig? Wie planst du ein Bauprojekt?
 `,
-    teacherTip: 'Use visual aids to show how nested loops work. Have students trace through the code step by step.',
+    teacherTip: 'Zeige zuerst, wie place() funktioniert – der Agent legt den Block immer VOR sich ab. Lasse die Schüler dann mit Papierskizzen planen, welche Befehle sie brauchen. Betone die Bedeutung der richtigen Richtung.',
     quiz: [
       {
         id: 1,
-        question: 'What are nested loops?',
-        options: ['Loops that turn', 'Loops inside loops', 'Loops that place blocks', 'Loops that move'],
+        question: 'Was passiert, wenn der Agent einen Block platziert?',
+        options: ['Der Block verschwindet', 'Ein neuer Block wird an der angegebenen Position gesetzt', 'Der Agent teleportiert sich', 'Das Inventar wird gelöscht'],
         correctAnswer: 1,
-        explanation: 'Nested loops are loops placed inside other loops.',
+        explanation: 'Der Agent legt einen neuen Block vor sich in die Welt ab.',
       },
       {
         id: 2,
-        question: 'How many blocks will this create? repeat(4) { repeat(4) { place(GRASS) } }',
-        options: ['4 blocks', '8 blocks', '16 blocks', '32 blocks'],
-        correctAnswer: 2,
-        explanation: '4 x 4 = 16 blocks total.',
+        question: 'Wohin platziert der Agent einen Block?',
+        options: ['Hinter sich', 'Vor sich', 'Über sich', 'Zufällig'],
+        correctAnswer: 1,
+        explanation: 'Der Agent platziert den Block immer vor sich – in die Richtung, in die er schaut.',
       },
       {
         id: 3,
-        question: 'What can you build with nested loops?',
-        options: ['Only walls', '2D patterns and grids', 'Only circles', 'Nothing special'],
+        question: 'Wie baust du eine Mauer aus 5 Blöcken?',
+        options: ['5× place(STONE)', '5× (place(STONE) + move(FORWARD, 1))', '5× turn(RIGHT)', '1× place(STONE, 5)'],
         correctAnswer: 1,
-        explanation: 'Nested loops are perfect for creating 2D patterns and grids.',
+        explanation: 'Für eine Mauer brauchst du: Block legen, weitergehen, Block legen – 5 Mal.',
+      },
+      {
+        id: 4,
+        question: 'Was solltest du tun, bevor du mit dem Bauen beginnst?',
+        options: ['Minecraft beenden', 'Einen Plan erstellen', 'Die Welt löschen', 'Den Server neustarten'],
+        correctAnswer: 1,
+        explanation: 'Plane zuerst, welche Blöcke du wo platzieren möchtest – zum Beispiel auf Papier.',
+      },
+      {
+        id: 5,
+        question: 'Warum ist die Richtung des Agenten beim Bauen wichtig?',
+        options: ['Weil der Agent sonst nicht baut', 'Weil er den Block immer vor sich platziert', 'Weil Blöcke nur in eine Richtung funktionieren', 'Weil die Welt sonst abstürzt'],
+        correctAnswer: 1,
+        explanation: 'Der Agent platziert den Block immer in Blickrichtung – falsche Richtung = falsche Position.',
       },
     ],
     xpReward: 75,

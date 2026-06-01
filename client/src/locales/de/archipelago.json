@@ -125,17 +125,18 @@
       "Fehler korrigieren"
     ],
     "lesson4preview": "Du kannst den Agenten nun gezielt durch die Welt bewegen und einfache Navigationsaufgaben lösen.",
-    "lesson5": "Schlaue Brücken",
-    "lesson5sub": "Bedingungen und Funktionen kombinieren",
-    "lesson5desc": "Integriere Bedingungen und Funktionen, um komplexere Rätsel effizient zu lösen.",
+    "lesson5": "Bauen mit dem Agenten",
+    "lesson5sub": "Der Agent wird zum Baumeister",
+    "lesson5desc": "Der Agent wird zum Baumeister. Mit den ersten Baubefehlen lernst du, wie der Agent automatisch Blöcke platzieren und einfache Bauwerke erstellen kann.",
     "lesson5objectives": [
-      "Funktionen mit Bedingungslogik kombinieren",
-      "Parameter für flexible Funktionen nutzen",
-      "Modulare Lösungen entwerfen",
-      "Interaktionen zwischen Blöcken testen",
-      "Code‑Wiederverwendung optimieren"
+      "Baubefehle verstehen",
+      "Blöcke platzieren",
+      "Den Agenten als Baumeister nutzen",
+      "Bauaufgaben planen",
+      "Fehler erkennen und korrigieren",
+      "Einfache Bauwerke automatisieren"
     ],
-    "lesson5preview": "Du erstellst modulare Lösungen, die intelligent auf die Umgebung reagieren.",
+    "lesson5preview": "Du hast gelernt, wie der Agent Blöcke platzieren und erste Bauaufgaben übernehmen kann. Damit beginnt der Weg zum automatisierten Bauen.",
     "lesson6": "Muster-Meister",
     "lesson6sub": "Komplexe Muster mit Bedingungen bauen",
     "lesson6desc": "Verwende Schleifen und Bedingungen, um wiederholende Muster effizient zu erzeugen.",
@@ -216,6 +217,34 @@
     ],
     "lesson4reward": "Pfadfinder-Abzeichen",
     "lesson4rewardDesc": "Für die erfolgreiche Navigation des Agenten durch seine ersten Herausforderungen.",
-    "lesson4conclusion": "Du kannst den Agenten nun gezielt durch die Welt bewegen und einfache Navigationsaufgaben lösen."
+    "lesson4conclusion": "Du kannst den Agenten nun gezielt durch die Welt bewegen und einfache Navigationsaufgaben lösen.",
+    "lesson5tasks": [
+      {
+        "title": "Erste Mauer",
+        "description": "Baue eine Mauer aus 5 Steinblöcken mit dem Agenten."
+      },
+      {
+        "title": "Farbiger Pfad",
+        "description": "Erstelle einen Pfad aus 4 verschiedenen Blöcken."
+      },
+      {
+        "title": "Treppe bauen",
+        "description": "Bau eine einfache Treppe mit 3 Stufen."
+      }
+    ],
+    "lesson5knowledge": [
+      "Platzieren - Der Agent legt einen Block in die Welt ab",
+      "Block - Ein Baustein in Minecraft",
+      "Bauen - Das Erstellen von Strukturen durch Blöcke",
+      "Agent - Der programmierbare Roboter",
+      "Bauauftrag - Eine Aufgabe für den Agenten"
+    ],
+    "lesson5challenge": {
+      "title": "Baumeister-Challenge",
+      "description": "Erstelle ein kleines Bauprojekt mit dem Agenten – zum Beispiel ein einfaches Haus oder einen geraden Weg."
+    },
+    "lesson5reward": "Baumeister-Abzeichen",
+    "lesson5rewardDesc": "Für den erfolgreichen Einsatz der ersten Baubefehle.",
+    "lesson5conclusion": "Du hast gelernt, wie der Agent Blöcke platzieren und erste Bauaufgaben übernehmen kann. Damit beginnt der Weg zum automatisierten Bauen."
   }
 }

@@ -102,17 +102,18 @@
       "Fix errors"
     ],
     "lesson4preview": "You can now steer the Agent through the world and solve simple navigation tasks.",
-    "lesson5": "Smart Bridges",
-    "lesson5sub": "Combining conditions and functions",
-    "lesson5desc": "Integrate conditions and functions to solve more complex puzzles efficiently.",
+    "lesson5": "Building with the Agent",
+    "lesson5sub": "The Agent becomes a builder",
+    "lesson5desc": "The Agent becomes a builder. Learn the first building commands to place blocks automatically and create simple structures.",
     "lesson5objectives": [
-      "Combine functions with conditional logic",
-      "Use parameters for flexible functions",
-      "Design modular solutions",
-      "Test interactions between blocks",
-      "Optimize code reuse"
+      "Understand building commands",
+      "Place blocks",
+      "Use the Agent as a builder",
+      "Plan building tasks",
+      "Recognize and fix errors",
+      "Automate simple structures"
     ],
-    "lesson5preview": "You’ll create modular solutions that react intelligently to the environment.",
+    "lesson5preview": "You've learned how the Agent can place blocks and take on building tasks. This is the beginning of automated building.",
     "lesson6": "Pattern Master",
     "lesson6sub": "Building complex patterns with conditions",
     "lesson6desc": "Use loops and conditions to generate repeating patterns efficiently.",
@@ -216,6 +217,34 @@
     ],
     "lesson4reward": "Pathfinder Badge",
     "lesson4rewardDesc": "For successfully navigating the Agent through its first challenges.",
-    "lesson4conclusion": "You can now steer the Agent through the world and solve simple navigation tasks."
+    "lesson4conclusion": "You can now steer the Agent through the world and solve simple navigation tasks.",
+    "lesson5tasks": [
+      {
+        "title": "First Wall",
+        "description": "Build a wall of 5 stone blocks with the Agent."
+      },
+      {
+        "title": "Colorful Path",
+        "description": "Create a path from 4 different blocks."
+      },
+      {
+        "title": "Build Stairs",
+        "description": "Build a simple staircase with 3 steps."
+      }
+    ],
+    "lesson5knowledge": [
+      "Placing - The Agent puts a block into the world",
+      "Block - A building block in Minecraft",
+      "Building - Creating structures by placing blocks",
+      "Agent - The programmable robot",
+      "Building task - An assignment for the Agent"
+    ],
+    "lesson5challenge": {
+      "title": "Builder Challenge",
+      "description": "Create a small building project with the Agent – for example a simple house or a straight path."
+    },
+    "lesson5reward": "Builder Badge",
+    "lesson5rewardDesc": "For successfully using the first building commands.",
+    "lesson5conclusion": "You've learned how the Agent can place blocks and take on building tasks. This is the beginning of automated building."
   }
 }

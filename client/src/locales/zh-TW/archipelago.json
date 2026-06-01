@@ -102,17 +102,18 @@
       "修正錯誤"
     ],
     "lesson4preview": "你現在能操控 Agent 在世界中移動並完成簡單的導航任務。",
-    "lesson5": "智慧橋樑",
-    "lesson5sub": "結合條件與函數",
-    "lesson5desc": "將條件與函式結合，以更有效解決複雜謎題。",
+    "lesson5": "用 Agent 建造",
+    "lesson5sub": "Agent 變成建築師",
+    "lesson5desc": "Agent 變成建築師。學習第一個建造指令，了解 Agent 如何自動放置方塊並建造簡單結構。",
     "lesson5objectives": [
-      "將函式與條件邏輯結合",
-      "使用參數提升函式彈性",
-      "設計模組化解決方案",
-      "測試方塊之間的互動",
-      "優化程式碼重用"
+      "理解建造指令",
+      "放置方塊",
+      "將 Agent 作為建築師使用",
+      "規劃建造任務",
+      "辨識並修正錯誤",
+      "自動化簡單結構"
     ],
-    "lesson5preview": "你將建立能智慧回應環境的模組化解決方案。",
+    "lesson5preview": "你已學會 Agent 如何放置方塊並執行建造任務。這是自動化建造的開始。",
     "lesson6": "圖案大師",
     "lesson6sub": "用條件建立複雜圖案",
     "lesson6desc": "使用迴圈與條件高效產生重複圖案。",
@@ -216,6 +217,34 @@
     ],
     "lesson4reward": "探路者徽章",
     "lesson4rewardDesc": "成功操控 Agent 完成首次導航挑戰。",
-    "lesson4conclusion": "你現在能操控 Agent 在世界中移動並完成簡單的導航任務。"
+    "lesson4conclusion": "你現在能操控 Agent 在世界中移動並完成簡單的導航任務。",
+    "lesson5tasks": [
+      {
+        "title": "第一面牆",
+        "description": "用 Agent 建造一面由 5 個石頭方塊組成的牆。"
+      },
+      {
+        "title": "彩色路徑",
+        "description": "用 4 種不同方塊創造一條路徑。"
+      },
+      {
+        "title": "建造階梯",
+        "description": "建造一個有 3 個階梯的簡單樓梯。"
+      }
+    ],
+    "lesson5knowledge": [
+      "放置 - Agent 將方塊放入世界中",
+      "方塊 - Minecraft 中的建築材料",
+      "建造 - 透過放置方塊創建結構",
+      "Agent - 可程式化的機器人",
+      "建造任務 - 指派給 Agent 的任務"
+    ],
+    "lesson5challenge": {
+      "title": "建築師挑戰",
+      "description": "用 Agent 完成一個小型建造計畫，例如一座簡單的房子或一條筆直的道路。"
+    },
+    "lesson5reward": "建築師徽章",
+    "lesson5rewardDesc": "成功使用第一個建造指令。",
+    "lesson5conclusion": "你已學會 Agent 如何放置方塊並執行建造任務。這是自動化建造的開始。"
   }
 }
