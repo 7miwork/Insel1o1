@@ -910,38 +910,29 @@ Warum sparen Schleifen Zeit? Was passiert, wenn du die Anzahl vergisst?
   },
   {
     id: 7,
-    title: 'If/Else – The Agent Reacts to the World',
-    description: 'Learn conditional logic to make decisions in code',
+    title: 'Bedingungen und Entscheidungen',
+    description: 'Programme treffen Entscheidungen. Der Agent lernt, unterschiedlich zu reagieren, abhängig von einer Situation oder Bedingung.',
     phase: 'conditionals',
     duration: 60,
     difficulty: 'intermediate',
     objectives: [
-      'Understand conditional logic (if/else)',
-      'Use conditions to make decisions',
-      'Check block types and positions',
-      'Create responsive code',
+      'Bedingungen verstehen',
+      'Entscheidungen programmieren',
+      'Wenn-Dann-Logik anwenden',
+      'Situationen erkennen',
+      'Reaktionen steuern',
+      'Programme intelligenter machen',
     ],
     content: `
-# Conditionals: If/Else
+# Bedingungen und Entscheidungen
 
-## What is a Conditional?
-A conditional lets your code make decisions. It runs different code based on whether a condition is true or false.
+## Was sind Bedingungen?
+Eine Bedingung ist eine Frage, die dein Programm beantwortet – zum Beispiel: "Ist vor mir ein Block?" oder "Kann ich nach vorne gehen?". Je nach Antwort führt das Programm unterschiedliche Befehle aus.
 
-## Syntax
-\`\`\`
-if (condition) {
-  // Do this if true
-} else {
-  // Do this if false
-}
-\`\`\`
+## Warum müssen Programme Entscheidungen treffen?
+Ohne Bedingungen führt dein Programm immer die gleichen Befehle aus – egal was passiert. Mit Bedingungen wird dein Agent intelligent: Er kann auf seine Umgebung reagieren und unterschiedlich handeln.
 
-## Common Conditions
-- blockAt(x, y, z) == GRASS: Is there grass at this position?
-- canMove(FORWARD): Can the Agent move forward?
-- agentX == 5: Is the Agent at position 5?
-
-## Example
+## Wenn-Dann-Logik
 \`\`\`
 if (canMove(FORWARD)) {
   move(FORWARD, 1)
@@ -950,45 +941,124 @@ if (canMove(FORWARD)) {
 }
 \`\`\`
 
-This moves forward if possible, otherwise turns left.
+- **Wenn** die Bedingung wahr ist (der Agent kann nach vorne) → dann geht er vorwärts.
+- **Wenn nicht** (die Bedingung ist falsch) → dann dreht er sich.
+
+## Was passiert bei einer Bedingung?
+1. Das Programm stellt die Frage (die Bedingung)
+2. **Ja (wahr)** → Der Code im "Dann"-Block wird ausgeführt
+3. **Nein (falsch)** → Der Code im "Sonst"-Block wird ausgeführt (falls vorhanden)
+
+## Entscheidungsbaum
+\`\`\`
+Kann ich nach vorne?
+├─ Ja → Gehe vorwärts
+└─ Nein → Drehe dich
+\`\`\`
+
+## Wichtige Bedingungen
+- **canMove(FORWARD)** – Kann der Agent nach vorne gehen?
+- **blockAt(x, y, z) == GRASS** – Ist an dieser Stelle ein Grasblock?
+- **agentX == 5** – Steht der Agent an Position 5?
+
+## Wenn-Dann-Logik im Alltag
+- "Wenn es regnet, nehme ich einen Regenschirm. Sonst nicht."
+- "Wenn ich hungrig bin, esse ich. Sonst gehe ich spielen."
+- "Wenn die Tür offen ist, gehe ich rein. Sonst klopfe ich."
+
+## Das solltest du wissen
+- **Bedingung** – Eine Frage, die mit Ja oder Nein beantwortet wird
+- **Entscheidung** – Das Programm wählt verschiedene Aktionen
+- **Wenn (if)** – Führt Code nur aus, wenn die Bedingung wahr ist
+- **Dann** – Der Code, der bei "wahr" ausgeführt wird
+- **Wahr / Falsch** – Die zwei möglichen Antworten einer Bedingung
+
+## Aufgabe 1: Hindernis erkennen
+Lass den Agenten prüfen, ob er nach vorne gehen kann. Wenn ja: move(FORWARD, 1). Wenn nein: turn(LEFT).
+
+## Aufgabe 2: Block prüfen
+Prüfe, ob an einer bestimmten Stelle ein Grasblock liegt. Wenn ja: place(STONE). Wenn nein: move(FORWARD, 1).
+
+## Aufgabe 3: Entscheidungsbaum
+Erstelle einen Ablauf mit 2 aufeinanderfolgenden Bedingungen: Zuerst prüfen, ob man gehen kann. Dann prüfen, ob rechts frei ist.
+
+## Reflexion
+Was ist dir aufgefallen? Wie macht eine Bedingung dein Programm intelligenter? Was passiert, wenn du die Bedingung vergisst?
 `,
     codeBlocks: [
       {
-        name: 'if/else',
-        description: 'Make decisions in code',
-        example: 'if (condition) { ... } else { ... }',
+        name: 'if',
+        description: 'Führe Code nur aus, wenn eine Bedingung wahr ist',
+        example: 'if (canMove(FORWARD)) { move(FORWARD, 1) }',
         icon: '🔀',
+      },
+      {
+        name: 'else',
+        description: 'Führe Code aus, wenn die Bedingung falsch ist',
+        example: 'if (bedingung) { ... } else { turn(LEFT) }',
+        icon: '🔄',
       },
     ],
     studentActivity: `
-1. Make the Agent check if it can move forward
-2. If yes, move forward; if no, turn left
-3. Create code that places different blocks based on position
-4. Make the Agent react to different block types
-5. Create a decision tree with multiple conditions
+**Aufgabe 1: Hindernis erkennen**
+1. Prüfe mit if (canMove(FORWARD)).
+2. Wenn ja: move(FORWARD, 1).
+3. Wenn nein: turn(LEFT).
+
+**Aufgabe 2: Block prüfen**
+1. Prüfe, ob an einer Stelle Gras liegt.
+2. Wenn ja: place(STONE).
+3. Wenn nein: move(FORWARD, 1).
+
+**Aufgabe 3: Entscheidungsbaum**
+1. Prüfe, ob vorne frei ist.
+2. Wenn ja: Gehe vorwärts.
+3. Wenn nein: Prüfe, ob rechts frei ist.
+4. Wenn ja: Drehe rechts und gehe.
+5. Wenn nein: Drehe links.
+
+**Mission: Der schlaue Agent**
+Setze Bedingungen ein und erlebe, wie der Agent abhängig von Situationen unterschiedliche Aktionen ausführt.
+
+**Reflexion im Team:**
+Wie macht eine Bedingung dein Programm intelligenter? Was passiert, wenn du die Bedingung vergisst?
 `,
-    teacherTip: 'Use real-world examples: "If it\'s raining, take an umbrella. Else, don\'t."',
+    teacherTip: 'Beginne mit Alltagsbeispielen: "Wenn es regnet, Regenschirm. Sonst nicht." Zeige dann, wie der Agent mit if/else reagieren kann. Betone, dass else optional ist.',
     quiz: [
       {
         id: 1,
-        question: 'What does an if/else statement do?',
-        options: ['Repeats code', 'Makes decisions', 'Moves the Agent', 'Places blocks'],
+        question: 'Wann wird ein Wenn-Block ausgeführt?',
+        options: ['Immer', 'Nur wenn die Bedingung erfüllt ist', 'Nur nachts', 'Nur beim Bauen'],
         correctAnswer: 1,
-        explanation: 'If/else statements let code make decisions based on conditions.',
+        explanation: 'Ein Wenn-Block wird nur ausgeführt, wenn die Bedingung wahr (erfüllt) ist.',
       },
       {
         id: 2,
-        question: 'What happens if the condition is false?',
-        options: ['Code stops', 'The else block runs', 'Nothing happens', 'Error occurs'],
+        question: 'Was passiert, wenn eine Bedingung falsch ist und ein Else-Block vorhanden ist?',
+        options: ['Nichts passiert', 'Der Else-Block wird ausgeführt', 'Ein Fehler entsteht', 'Das Programm stoppt'],
         correctAnswer: 1,
-        explanation: 'If the condition is false, the else block runs.',
+        explanation: 'Wenn die Bedingung falsch ist, wird der Else-Block ausgeführt.',
       },
       {
         id: 3,
-        question: 'Can you have if without else?',
-        options: ['No', 'Yes', 'Only sometimes', 'Never'],
+        question: 'Was macht canMove(FORWARD)?',
+        options: ['Bewegt den Agenten nach vorne', 'Prüft, ob der Agent nach vorne gehen kann', 'Dreht den Agenten', 'Legt einen Block'],
         correctAnswer: 1,
-        explanation: 'Yes, you can have if without else. The else is optional.',
+        explanation: 'canMove(FORWARD) prüft, ob Bewegung nach vorne möglich ist.',
+      },
+      {
+        id: 4,
+        question: 'Kann man if ohne else verwenden?',
+        options: ['Nein, immer beide brauchen', 'Ja, else ist optional', 'Nur bei Schleifen', 'Nur bei Bedingungen mit Zahl'],
+        correctAnswer: 1,
+        explanation: 'Else ist optional. Man kann nur if verwenden, ohne else.',
+      },
+      {
+        id: 5,
+        question: 'Wie wird dein Programm durch Bedingungen besser?',
+        options: ['Es wird kürzer', 'Es kann auf verschiedene Situationen reagieren', 'Es startet schneller', 'Es braucht weniger Blöcke'],
+        correctAnswer: 1,
+        explanation: 'Bedingungen machen dein Programm intelligenter, weil es auf verschiedene Situationen reagieren kann.',
       },
     ],
     xpReward: 75,

@@ -126,17 +126,18 @@
       "規劃重複序列"
     ],
     "lesson6preview": "你已學會程式如何自動重複任務。這能節省時間，讓大型專案更容易實現。",
-    "lesson7": "環境掃描器",
-    "lesson7sub": "Agent 偵測周遭環境",
-    "lesson7desc": "教導 Agent 偵測方塊、實體與玩家位置。",
+    "lesson7": "條件與決策",
+    "lesson7sub": "Agent 的如果-那麼邏輯",
+    "lesson7desc": "程式會做決策。Agent 學會根據不同情況或條件做出不同反應。",
     "lesson7objectives": [
-      "偵測特定方塊",
-      "感知附近實體",
-      "取得玩家座標",
-      "根據感測器建立條件回應",
-      "將偵測與動作結合"
+      "理解條件",
+      "編寫決策",
+      "應用如果-那麼邏輯",
+      "辨識情況",
+      "控制反應",
+      "讓程式更智慧"
     ],
-    "lesson7preview": "Agent 會意識到周圍環境並相應行動。",
+    "lesson7preview": "你已學會程式如何做決策。這讓你的 Agent 變得更加智慧，能對環境做出反應。",
     "lesson8": "祕密機器",
     "lesson8sub": "互動物件與紅石",
     "lesson8desc": "使用 Redstone 元件與互動物件，建造簡易機械。",
@@ -274,6 +275,34 @@
     },
     "lesson6reward": "迴圈大師",
     "lesson6rewardDesc": "你已成功掌握重複的力量。",
-    "lesson6conclusion": "你已學會程式如何自動重複任務。這能節省時間，讓大型專案更容易實現。"
+    "lesson6conclusion": "你已學會程式如何自動重複任務。這能節省時間，讓大型專案更容易實現。",
+    "lesson7tasks": [
+      {
+        "title": "偵測障礙物",
+        "description": "檢查 Agent 是否能向前移動。"
+      },
+      {
+        "title": "檢查方塊",
+        "description": "檢查某個位置是否有草地方塊。"
+      },
+      {
+        "title": "決策樹",
+        "description": "建立一個有 2 個連續條件的流程。"
+      }
+    ],
+    "lesson7knowledge": [
+      "條件 - 用是/否回答的問題",
+      "決策 - 程式選擇不同的動作",
+      "如果 (if) - 只在為真時執行",
+      "那麼 - 為真時執行的程式碼",
+      "真 / 假 - 條件的兩種答案"
+    ],
+    "lesson7mission": {
+      "title": "聰明的 Agent",
+      "description": "使用條件，體驗 Agent 如何根據情況執行不同動作。"
+    },
+    "lesson7reward": "邏輯探險家",
+    "lesson7rewardDesc": "你已成功編寫第一個決策。",
+    "lesson7conclusion": "你已學會程式如何做決策。這讓你的 Agent 變得更加智慧，能對環境做出反應。"
   }
 }

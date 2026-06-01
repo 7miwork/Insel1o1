@@ -126,17 +126,18 @@
       "Plan recurring sequences"
     ],
     "lesson6preview": "You've learned how programs can automatically repeat tasks. This saves time and makes larger projects easier.",
-    "lesson7": "Environment Scanner",
-    "lesson7sub": "The Agent detects its surroundings",
-    "lesson7desc": "Teach the Agent to detect blocks, entities, and player position.",
+    "lesson7": "Conditions and Decisions",
+    "lesson7sub": "If-Then logic for the Agent",
+    "lesson7desc": "Programs make decisions. The Agent learns to react differently depending on a situation or condition.",
     "lesson7objectives": [
-      "Detect specific blocks",
-      "Sense nearby entities",
-      "Retrieve player coordinates",
-      "Create conditional reactions based on sensors",
-      "Combine detection with actions"
+      "Understand conditions",
+      "Program decisions",
+      "Apply if-then logic",
+      "Recognize situations",
+      "Control reactions",
+      "Make programs smarter"
     ],
-    "lesson7preview": "Your Agent becomes aware of its surroundings and can react accordingly.",
+    "lesson7preview": "You've learned how programs make decisions. This makes your Agent much smarter and able to react to its environment.",
     "lesson8": "Secret Machines",
     "lesson8sub": "Interactive objects and Redstone",
     "lesson8desc": "Work with Redstone components and interactive objects to build simple machines.",
@@ -274,6 +275,34 @@
     },
     "lesson6reward": "Loop Master",
     "lesson6rewardDesc": "You've successfully harnessed the power of repetition.",
-    "lesson6conclusion": "You've learned how programs can automatically repeat tasks. This saves time and makes larger projects easier."
+    "lesson6conclusion": "You've learned how programs can automatically repeat tasks. This saves time and makes larger projects easier.",
+    "lesson7tasks": [
+      {
+        "title": "Detect Obstacle",
+        "description": "Check if the Agent can move forward."
+      },
+      {
+        "title": "Check Block",
+        "description": "Check if there is a grass block at a position."
+      },
+      {
+        "title": "Decision Tree",
+        "description": "Create a flow with 2 consecutive conditions."
+      }
+    ],
+    "lesson7knowledge": [
+      "Condition - A question with yes/no answer",
+      "Decision - The program chooses different actions",
+      "If - Only runs code when true",
+      "Then - The code that runs when true",
+      "True / False - The two answers of a condition"
+    ],
+    "lesson7mission": {
+      "title": "The Clever Agent",
+      "description": "Use conditions and experience how the Agent performs different actions depending on the situation."
+    },
+    "lesson7reward": "Logic Explorer",
+    "lesson7rewardDesc": "You've successfully programmed your first decisions.",
+    "lesson7conclusion": "You've learned how programs make decisions. This makes your Agent much smarter and able to react to its environment."
   }
 }

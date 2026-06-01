@@ -149,17 +149,18 @@
       "Wiederkehrende Abläufe planen"
     ],
     "lesson6preview": "Du hast gelernt, wie Programme Aufgaben automatisch wiederholen können. Damit sparst du Zeit und kannst größere Projekte einfacher umsetzen.",
-    "lesson7": "Umgebungs-Scanner",
-    "lesson7sub": "Der Agent erkennt seine Umgebung",
-    "lesson7desc": "Lehre den Agenten, Blöcke, Entitäten und Spielerposition zu erkennen.",
+    "lesson7": "Bedingungen und Entscheidungen",
+    "lesson7sub": "Wenn-Dann-Logik für den Agenten",
+    "lesson7desc": "Programme treffen Entscheidungen. Der Agent lernt, unterschiedlich zu reagieren, abhängig von einer Situation oder Bedingung.",
     "lesson7objectives": [
-      "Bestimmte Blöcke erkennen",
-      "Nahe Entitäten wahrnehmen",
-      "Spielerkoordinaten abrufen",
-      "Bedingte Reaktionen basierend auf Sensoren erstellen",
-      "Erkennung mit Aktionen kombinieren"
+      "Bedingungen verstehen",
+      "Entscheidungen programmieren",
+      "Wenn-Dann-Logik anwenden",
+      "Situationen erkennen",
+      "Reaktionen steuern",
+      "Programme intelligenter machen"
     ],
-    "lesson7preview": "Dein Agent wird sich seiner Umgebung bewusst und kann entsprechend reagieren.",
+    "lesson7preview": "Du hast gelernt, wie Programme Entscheidungen treffen. Damit wird dein Agent deutlich intelligenter und kann auf seine Umgebung reagieren.",
     "lesson8": "Geheime Maschinen",
     "lesson8sub": "Interaktive Objekte und Redstone",
     "lesson8desc": "Arbeite mit Redstone‑Komponenten und interaktiven Objekten, um einfache Maschinen zu bauen.",
@@ -274,6 +275,34 @@
     },
     "lesson6reward": "Schleifen-Meister",
     "lesson6rewardDesc": "Du hast die Kraft der Wiederholung erfolgreich eingesetzt.",
-    "lesson6conclusion": "Du hast gelernt, wie Programme Aufgaben automatisch wiederholen können. Damit sparst du Zeit und kannst größere Projekte einfacher umsetzen."
+    "lesson6conclusion": "Du hast gelernt, wie Programme Aufgaben automatisch wiederholen können. Damit sparst du Zeit und kannst größere Projekte einfacher umsetzen.",
+    "lesson7tasks": [
+      {
+        "title": "Hindernis erkennen",
+        "description": "Prüfe, ob der Agent nach vorne gehen kann."
+      },
+      {
+        "title": "Block prüfen",
+        "description": "Prüfe, ob an einer Stelle ein Grasblock liegt."
+      },
+      {
+        "title": "Entscheidungsbaum",
+        "description": "Erstelle einen Ablauf mit 2 aufeinanderfolgenden Bedingungen."
+      }
+    ],
+    "lesson7knowledge": [
+      "Bedingung - Eine Frage mit Ja/Nein-Antwort",
+      "Entscheidung - Das Programm waehlt verschiedene Aktionen",
+      "Wenn (if) - Fuehrt Code nur bei wahr aus",
+      "Dann - Der Code bei wahr",
+      "Wahr / Falsch - Die zwei Antworten einer Bedingung"
+    ],
+    "lesson7mission": {
+      "title": "Der schlaue Agent",
+      "description": "Setze Bedingungen ein und erlebe, wie der Agent abhaengig von Situationen unterschiedliche Aktionen ausfuehrt."
+    },
+    "lesson7reward": "Logik-Entdecker",
+    "lesson7rewardDesc": "Du hast die ersten Entscheidungen erfolgreich programmiert.",
+    "lesson7conclusion": "Du hast gelernt, wie Programme Entscheidungen treffen. Damit wird dein Agent deutlich intelligenter und kann auf seine Umgebung reagieren."
   }
 }
