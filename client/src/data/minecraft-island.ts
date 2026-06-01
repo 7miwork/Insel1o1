@@ -770,86 +770,139 @@ Warum ist die Richtung des Agenten beim Bauen so wichtig? Wie planst du ein Baup
   },
   {
     id: 6,
-    title: 'Loop Challenge – Build a Pyramid with the Agent',
-    description: 'Challenge: Use loops to build a pyramid structure',
+    title: 'Schleifen – Aufgaben automatisch wiederholen',
+    description: 'Lerne, wie du mit Schleifen Befehle automatisch wiederholen kannst. Der Agent führt Aufgaben mehrfach aus, ohne dass du den Code immer wieder schreiben musst.',
     phase: 'loops',
     duration: 60,
     difficulty: 'intermediate',
     objectives: [
-      'Apply loop knowledge to a complex structure',
-      'Use nested loops for 3D building',
-      'Problem-solve and debug code',
-      'Optimize code for efficiency',
+      'Schleifen verstehen',
+      'Wiederholungen erkennen',
+      'Wiederholungsblöcke einsetzen',
+      'Bewegungen automatisieren',
+      'Aufgaben effizient lösen',
+      'Wiederkehrende Abläufe planen',
     ],
     content: `
-# Pyramid Challenge
+# Schleifen – Aufgaben automatisch wiederholen
 
-## The Challenge
-Build a pyramid that looks like this (side view):
-\`\`\`
-    X
-   XXX
-  XXXXX
- XXXXXXX
-XXXXXXXXX
-\`\`\`
+## Was sind Schleifen?
+Eine Schleife ist ein Baustein im Programm, der Befehle automatisch wiederholt. Statt denselben Code 10 Mal zu schreiben, schreibst du ihn einmal und sagst der Schleife, wie oft sie ihn wiederholen soll.
 
-## Hints
-1. Each row has a different number of blocks
-2. You need to position the Agent correctly for each row
-3. Use nested loops for each row
+## Warum sind Schleifen wichtig?
+Stell dir vor, du möchtest eine Mauer aus 10 Blöcken bauen. Ohne Schleife müsstest du 10 Mal den gleichen Befehl schreiben. Mit einer Schleife reicht eine einzige Anweisung!
 
-## Solution Strategy
-- Row 1: 1 block
-- Row 2: 3 blocks
-- Row 3: 5 blocks
-- Pattern: Each row has 2 more blocks than the previous
-
-## Code Pattern
+## So funktioniert eine Schleife
 \`\`\`
 repeat(5) {
-  // Place blocks for this row
-  // Move to next row position
+  place(STONE)
+  move(FORWARD, 1)
 }
 \`\`\`
+
+Diese Schleife wiederholt den place- und move-Befehl 5 Mal. Das Ergebnis: Eine Mauer aus 5 Steinblöcken.
+
+## Ablauf einer Schleife
+1. **Start** – Die Schleife beginnt
+2. **Befehl ausführen** – Die Befehle innerhalb der Schleife werden ausgeführt
+3. **Wiederholen** – Die Schleife zählt: Noch nicht geschafft? Nochmal!
+4. **Ergebnis** – Wenn die Anzahl erreicht ist, geht es weiter
+
+## Schleifen sparen Zeit
+- Ohne Schleife: 10× place(STONE), 10× move(FORWARD, 1) = 20 Befehle
+- Mit Schleife: repeat(10) { place(STONE); move(FORWARD, 1) } = 2 Befehle
+
+## Endlosschleifen vermeiden
+Vorsicht: Wenn du die Anzahl vergisst oder zu hoch setzt, läuft die Schleife sehr lange. Starte immer mit kleinen Zahlen und teste dein Programm.
+
+## Das solltest du wissen
+- **Schleife** – Ein Baustein, der Befehle automatisch wiederholt
+- **Wiederholung** – Der Vorgang, einen Befehl mehrfach auszuführen
+- **Anzahl** – Die Zahl, die angibt, wie oft wiederholt wird
+- **Ablauf** – Die Reihenfolge, in der die Befehle ausgeführt werden
+- **Automatisierung** – Aufgaben werden vom Computer wiederholt, ohne dass man sie manuell eingibt
+
+## Aufgabe 1: Erste Schleife
+Baue eine Mauer aus 8 Steinblöcken mit einer Schleife. Verwende repeat(8) { place(STONE); move(FORWARD, 1) }.
+
+## Aufgabe 2: Bunter Pfad
+Erstelle einen Pfad aus 6 Grasblöcken mit einer Schleife. Verwende repeat(6) { place(GRASS); move(FORWARD, 1) }.
+
+## Aufgabe 3: Rechteck mit Schleifen
+Baue ein Rechteck: Verwende 4 Schleifen für die 4 Seiten. Jede Seite ist 5 Blöcke lang.
+
+## Codefluss
+Start → Befehl ausführen → Nochmal wiederholen? → Ja: Befehl ausführen → Nein: Fertig
+
+## Reflexion
+Was ist dir aufgefallen? Warum sparen Schleifen Zeit? Was passiert, wenn du die Anzahl vergisst?
 `,
     codeBlocks: [
       {
-        name: 'nested loops',
-        description: 'For building pyramids',
-        example: 'repeat(n) { repeat(n) { ... } }',
-        icon: '🔺',
+        name: 'repeat',
+        description: 'Befehle automatisch wiederholen',
+        example: 'repeat(5) { place(STONE); move(FORWARD, 1) }',
+        icon: '🔁',
       },
     ],
     studentActivity: `
-1. Build a 5-level pyramid
-2. Build a 10-level pyramid
-3. Build a pyramid with different block types per level
-4. Build an upside-down pyramid
-5. Build two pyramids facing each other
+**Aufgabe 1: Erste Schleife**
+1. Baue eine Mauer aus 8 Steinblöcken mit repeat(8).
+2. Beobachte, wie die Schleife die Befehle wiederholt.
+3. Ändere die Anzahl auf 5 und auf 12.
+
+**Aufgabe 2: Bunter Pfad**
+1. Erstelle einen Pfad aus 6 Grasblöcken mit repeat(6).
+2. Teste das Programm.
+3. Ändere den Blocktyp zu STONE.
+
+**Aufgabe 3: Rechteck mit Schleifen**
+1. Verwende 4 Schleifen für die 4 Seiten eines Rechtecks.
+2. Jede Seite: repeat(5) { place(STONE); move(FORWARD, 1) }
+3. Nach jeder Seite: turn(RIGHT)
+
+**Endlosschleifen-Mission:**
+Vermeide Endlosschleifen! Starte mit kleinen Zahlen und teste schrittweise. Was passiert bei repeat(100)?
+
+**Reflexion im Team:**
+Warum sparen Schleifen Zeit? Was passiert, wenn du die Anzahl vergisst?
 `,
-    teacherTip: 'This is a challenging problem. Encourage students to draw the pyramid first and plan their code.',
+    teacherTip: 'Beginne mit einer Demonstration: Schreibe 5 Mal place+move, dann zeige die Schleife. Lasse die Schüler die Anzahl variieren und die Ergebnisse vergleichen. Betone, dass Schleifen bei sich wiederholenden Aufgaben helfen.',
     quiz: [
       {
         id: 1,
-        question: 'How many blocks are in a 5-level pyramid?',
-        options: ['15 blocks', '25 blocks', '35 blocks', '45 blocks'],
-        correctAnswer: 2,
-        explanation: '1+3+5+7+9 = 25 blocks (wait, let me recalculate: 1+3+5+7+9 = 25). Actually 1+3+5+7+9 = 25.',
+        question: 'Warum verwendet man Schleifen?',
+        options: ['Damit Programme länger werden', 'Damit man Befehle nicht ständig wiederholen muss', 'Damit Minecraft schneller startet', 'Damit Blöcke verschwinden'],
+        correctAnswer: 1,
+        explanation: 'Schleifen sparen Zeit, indem sie Befehle automatisch wiederholen.',
       },
       {
         id: 2,
-        question: 'What is the pattern for pyramid blocks per row?',
-        options: ['Same number each row', 'Each row has 1 more block', 'Each row has 2 more blocks', 'Random'],
-        correctAnswer: 2,
-        explanation: 'In a pyramid, each row typically has 2 more blocks than the previous row.',
+        question: 'Wie oft führt repeat(6) { place(GRASS) } den place-Befehl aus?',
+        options: ['1 Mal', '6 Mal', '10 Mal', 'Unendlich'],
+        correctAnswer: 1,
+        explanation: 'repeat(6) wiederholt den Befehl 6 Mal.',
       },
       {
         id: 3,
-        question: 'Which is easier: writing 25 place commands or using loops?',
-        options: ['Writing 25 commands', 'Using loops', 'They\'re the same', 'Neither works'],
+        question: 'Was passiert, wenn du die Anzahl in einer Schleife vergisst?',
+        options: ['Die Schleife läuft gar nicht', 'Die Schleife wird 1 Mal ausgeführt', 'Ein Fehler tritt auf', 'Die Schleife läuft endlos'],
+        correctAnswer: 2,
+        explanation: 'Ohne Anzahl oder bei ungültiger Angabe gibt es einen Fehler.',
+      },
+      {
+        id: 4,
+        question: 'Was ist der Vorteil von repeat(10) gegenüber 10 Mal den gleichen Befehl zu schreiben?',
+        options: ['Es ist sicherer', 'Es spart Zeit und Code', 'Es ist schwieriger', 'Es macht mehr Spaß'],
         correctAnswer: 1,
-        explanation: 'Loops are much easier and more efficient than writing 25 separate commands.',
+        explanation: 'Schleifen sparen Zeit und machen den Code kürzer und übersichtlicher.',
+      },
+      {
+        id: 5,
+        question: 'Wie baust du eine Mauer aus 5 Blöcken mit einer Schleife?',
+        options: ['5× place(STONE)', 'repeat(5) { place(STONE); move(FORWARD, 1) }', 'repeat(STONE) { place(5) }', 'place(5, STONE)'],
+        correctAnswer: 1,
+        explanation: 'repeat(5) wiederholt Block legen und weitergehen 5 Mal.',
       },
     ],
     xpReward: 100,

@@ -137,17 +137,18 @@
       "Einfache Bauwerke automatisieren"
     ],
     "lesson5preview": "Du hast gelernt, wie der Agent Blöcke platzieren und erste Bauaufgaben übernehmen kann. Damit beginnt der Weg zum automatisierten Bauen.",
-    "lesson6": "Muster-Meister",
-    "lesson6sub": "Komplexe Muster mit Bedingungen bauen",
-    "lesson6desc": "Verwende Schleifen und Bedingungen, um wiederholende Muster effizient zu erzeugen.",
+    "lesson6": "Schleifen - Aufgaben automatisch wiederholen",
+    "lesson6sub": "Wiederholungen automatisieren",
+    "lesson6desc": "Lerne, wie du mit Schleifen Befehle automatisch wiederholen kannst. Der Agent fuehrt Aufgaben mehrfach aus, ohne dass du den Code immer wieder schreiben musst.",
     "lesson6objectives": [
-      "Wiederholungsschleifen nutzen",
-      "Verschachtelte Schleifen erstellen",
-      "Bedingte Muster innerhalb von Schleifen anwenden",
-      "Block‑Nutzung optimieren",
-      "Muster visualisieren und debuggen"
+      "Schleifen verstehen",
+      "Wiederholungen erkennen",
+      "Wiederholungsblöcke einsetzen",
+      "Bewegungen automatisieren",
+      "Aufgaben effizient lösen",
+      "Wiederkehrende Abläufe planen"
     ],
-    "lesson6preview": "Dein Agent kann mit minimalen Blöcken komplexe Designs bauen.",
+    "lesson6preview": "Du hast gelernt, wie Programme Aufgaben automatisch wiederholen können. Damit sparst du Zeit und kannst größere Projekte einfacher umsetzen.",
     "lesson7": "Umgebungs-Scanner",
     "lesson7sub": "Der Agent erkennt seine Umgebung",
     "lesson7desc": "Lehre den Agenten, Blöcke, Entitäten und Spielerposition zu erkennen.",
@@ -245,6 +246,34 @@
     },
     "lesson5reward": "Baumeister-Abzeichen",
     "lesson5rewardDesc": "Für den erfolgreichen Einsatz der ersten Baubefehle.",
-    "lesson5conclusion": "Du hast gelernt, wie der Agent Blöcke platzieren und erste Bauaufgaben übernehmen kann. Damit beginnt der Weg zum automatisierten Bauen."
+    "lesson5conclusion": "Du hast gelernt, wie der Agent Blöcke platzieren und erste Bauaufgaben übernehmen kann. Damit beginnt der Weg zum automatisierten Bauen.",
+    "lesson6tasks": [
+      {
+        "title": "Erste Schleife",
+        "description": "Baue eine Mauer aus 8 Steinblöcken mit einer Schleife."
+      },
+      {
+        "title": "Bunter Pfad",
+        "description": "Erstelle einen Pfad aus 6 Grasblöcken mit einer Schleife."
+      },
+      {
+        "title": "Rechteck mit Schleifen",
+        "description": "Baue ein Rechteck mit 4 Schleifen für die 4 Seiten."
+      }
+    ],
+    "lesson6knowledge": [
+      "Schleife - Ein Baustein der Befehle wiederholt",
+      "Wiederholung - Mehrfaches Ausführen eines Befehls",
+      "Anzahl - Wie oft wiederholt wird",
+      "Ablauf - Die Reihenfolge der Befehle",
+      "Automatisierung - Aufgaben vom Computer wiederholt"
+    ],
+    "lesson6mission": {
+      "title": "Endlosschleifen vermeiden",
+      "description": "Vermeide Endlosschleifen! Starte mit kleinen Zahlen und teste schrittweise."
+    },
+    "lesson6reward": "Schleifen-Meister",
+    "lesson6rewardDesc": "Du hast die Kraft der Wiederholung erfolgreich eingesetzt.",
+    "lesson6conclusion": "Du hast gelernt, wie Programme Aufgaben automatisch wiederholen können. Damit sparst du Zeit und kannst größere Projekte einfacher umsetzen."
   }
 }

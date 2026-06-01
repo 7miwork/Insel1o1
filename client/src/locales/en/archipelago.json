@@ -114,17 +114,18 @@
       "Automate simple structures"
     ],
     "lesson5preview": "You've learned how the Agent can place blocks and take on building tasks. This is the beginning of automated building.",
-    "lesson6": "Pattern Master",
-    "lesson6sub": "Building complex patterns with conditions",
-    "lesson6desc": "Use loops and conditions to generate repeating patterns efficiently.",
+    "lesson6": "Loops - Automate Repetitive Tasks",
+    "lesson6sub": "Automate repetitions",
+    "lesson6desc": "Learn how to use loops to automatically repeat commands. The Agent performs tasks multiple times without you having to write the code over and over.",
     "lesson6objectives": [
-      "Use repeat loops",
-      "Create nested loops",
-      "Apply conditional patterns within loops",
-      "Optimize block usage",
-      "Visualize and debug patterns"
+      "Understand loops",
+      "Recognize repetitions",
+      "Use repeat blocks",
+      "Automate movements",
+      "Solve tasks efficiently",
+      "Plan recurring sequences"
     ],
-    "lesson6preview": "Your Agent can build intricate designs with minimal blocks.",
+    "lesson6preview": "You've learned how programs can automatically repeat tasks. This saves time and makes larger projects easier.",
     "lesson7": "Environment Scanner",
     "lesson7sub": "The Agent detects its surroundings",
     "lesson7desc": "Teach the Agent to detect blocks, entities, and player position.",
@@ -245,6 +246,34 @@
     },
     "lesson5reward": "Builder Badge",
     "lesson5rewardDesc": "For successfully using the first building commands.",
-    "lesson5conclusion": "You've learned how the Agent can place blocks and take on building tasks. This is the beginning of automated building."
+    "lesson5conclusion": "You've learned how the Agent can place blocks and take on building tasks. This is the beginning of automated building.",
+    "lesson6tasks": [
+      {
+        "title": "First Loop",
+        "description": "Build a wall of 8 stone blocks using a loop."
+      },
+      {
+        "title": "Colorful Path",
+        "description": "Create a path of 6 grass blocks using a loop."
+      },
+      {
+        "title": "Rectangle with Loops",
+        "description": "Build a rectangle using 4 loops for the 4 sides."
+      }
+    ],
+    "lesson6knowledge": [
+      "Loop - A block that repeats commands",
+      "Repetition - Executing a command multiple times",
+      "Count - How often to repeat",
+      "Flow - The order of command execution",
+      "Automation - Tasks repeated by the computer"
+    ],
+    "lesson6mission": {
+      "title": "Avoid Infinite Loops",
+      "description": "Avoid infinite loops! Start with small numbers and test step by step."
+    },
+    "lesson6reward": "Loop Master",
+    "lesson6rewardDesc": "You've successfully harnessed the power of repetition.",
+    "lesson6conclusion": "You've learned how programs can automatically repeat tasks. This saves time and makes larger projects easier."
   }
 }
