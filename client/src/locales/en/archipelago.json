@@ -138,17 +138,18 @@
       "Make programs smarter"
     ],
     "lesson7preview": "You've learned how programs make decisions. This makes your Agent much smarter and able to react to its environment.",
-    "lesson8": "Secret Machines",
-    "lesson8sub": "Interactive objects and Redstone",
-    "lesson8desc": "Work with Redstone components and interactive objects to build simple machines.",
+    "lesson8": "Events and Chat Commands",
+    "lesson8sub": "Programs respond to input",
+    "lesson8desc": "Programs can react to events. The Agent and Minecraft should perform actions when a specific trigger occurs or a chat command is used.",
     "lesson8objectives": [
-      "Place Redstone dust",
-      "Use levers and buttons",
-      "Create basic circuits",
-      "Trigger mechanisms programmatically",
-      "Debug and refine machines"
+      "Understand events",
+      "Use chat commands",
+      "Recognize triggers",
+      "Start actions",
+      "Make programs interactive",
+      "Connect events with commands"
     ],
-    "lesson8preview": "You’ll automate actions using Redstone logic.",
+    "lesson8preview": "You've learned how programs react to events. This makes your projects interactive and able to respond to player input.",
     "lesson9": "My First Game",
     "lesson9sub": "Points, rules, and mini-games",
     "lesson9desc": "Combine all previous concepts to create a mini‑game with rules, scoring, and win conditions.",
@@ -303,6 +304,35 @@
     },
     "lesson7reward": "Logic Explorer",
     "lesson7rewardDesc": "You've successfully programmed your first decisions.",
-    "lesson7conclusion": "You've learned how programs make decisions. This makes your Agent much smarter and able to react to its environment."
+    "lesson7conclusion": "You've learned how programs make decisions. This makes your Agent much smarter and able to react to its environment.",
+    "lesson8tasks": [
+      {
+        "title": "First Chat Command",
+        "description": "Create a program that reacts to /start."
+      },
+      {
+        "title": "Build with Command",
+        "description": "Create the chat command /bridge for the Agent."
+      },
+      {
+        "title": "Two Commands",
+        "description": "Create /wall and /path with different actions."
+      }
+    ],
+    "lesson8knowledge": [
+      "Event - Something that happens",
+      "Trigger - What starts the event",
+      "Chat Command - A command in chat (often with /)",
+      "Action - The program's reaction",
+      "Input - What the player does",
+      "Reaction - What the Agent does in response"
+    ],
+    "lesson8mission": {
+      "title": "The Magic Voice Command",
+      "description": "Experience how a chat command automatically triggers actions."
+    },
+    "lesson8reward": "Event Master",
+    "lesson8rewardDesc": "You've successfully controlled programs with events and chat commands.",
+    "lesson8conclusion": "You've learned how programs react to events. This makes your projects interactive and able to respond to player input."
   }
 }

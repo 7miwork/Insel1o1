@@ -138,17 +138,18 @@
       "讓程式更智慧"
     ],
     "lesson7preview": "你已學會程式如何做決策。這讓你的 Agent 變得更加智慧，能對環境做出反應。",
-    "lesson8": "祕密機器",
-    "lesson8sub": "互動物件與紅石",
-    "lesson8desc": "使用 Redstone 元件與互動物件，建造簡易機械。",
+    "lesson8": "事件與聊天指令",
+    "lesson8sub": "程式對輸入做出反應",
+    "lesson8desc": "程式可以對事件做出反應。當特定觸發發生或使用聊天指令時，Agent 和 Minecraft 應執行相應動作。",
     "lesson8objectives": [
-      "放置 Redstone 粉",
-      "使用拉桿與按鈕",
-      "建立基本電路",
-      "以程式方式觸發機制",
-      "除錯與優化機械"
+      "理解事件",
+      "使用聊天指令",
+      "辨識觸發器",
+      "啟動動作",
+      "讓程式互動化",
+      "連接事件與指令"
     ],
-    "lesson8preview": "你將透過 Redstone 邏輯自動化動作。",
+    "lesson8preview": "你已學會程式如何對事件做出反應。這讓你的專案更具互動性，能回應玩家的輸入。",
     "lesson9": "我的第一款遊戲",
     "lesson9sub": "分數、規則與小遊戲",
     "lesson9desc": "結合所有先前概念，打造具規則、計分與勝負條件的迷你遊戲。",
@@ -303,6 +304,35 @@
     },
     "lesson7reward": "邏輯探險家",
     "lesson7rewardDesc": "你已成功編寫第一個決策。",
-    "lesson7conclusion": "你已學會程式如何做決策。這讓你的 Agent 變得更加智慧，能對環境做出反應。"
+    "lesson7conclusion": "你已學會程式如何做決策。這讓你的 Agent 變得更加智慧，能對環境做出反應。",
+    "lesson8tasks": [
+      {
+        "title": "第一個聊天指令",
+        "description": "建立一個對 /start 反應的程式。"
+      },
+      {
+        "title": "用指令建造",
+        "description": "為 Agent 建立聊天指令 /bridge。"
+      },
+      {
+        "title": "兩個指令",
+        "description": "建立 /wall 和 /path，執行不同動作。"
+      }
+    ],
+    "lesson8knowledge": [
+      "事件 - 發生的事情",
+      "觸發器 - 啟動事件的條件",
+      "聊天指令 - 聊天中的指令（常以 / 開頭）",
+      "動作 - 程式的反應",
+      "輸入 - 玩家的操作",
+      "反應 - Agent 的回應動作"
+    ],
+    "lesson8mission": {
+      "title": "魔法語音指令",
+      "description": "體驗聊天指令如何自動觸發動作。"
+    },
+    "lesson8reward": "事件大師",
+    "lesson8rewardDesc": "你已成功使用事件和聊天指令控制程式。",
+    "lesson8conclusion": "你已學會程式如何對事件做出反應。這讓你的專案更具互動性，能回應玩家的輸入。"
   }
 }

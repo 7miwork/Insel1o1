@@ -1066,86 +1066,135 @@ Wie macht eine Bedingung dein Programm intelligenter? Was passiert, wenn du die 
   },
   {
     id: 8,
-    title: 'Conditionals + Movement – Agent Avoids Obstacles',
-    description: 'Use conditionals to navigate around obstacles',
+    title: 'Ereignisse und Chat-Befehle',
+    description: 'Programme können auf Ereignisse reagieren. Der Agent und Minecraft sollen Aktionen ausführen, wenn ein bestimmter Auslöser eintritt oder ein Chat-Befehl verwendet wird.',
     phase: 'conditionals',
     duration: 60,
     difficulty: 'intermediate',
     objectives: [
-      'Combine conditionals with movement',
-      'Detect and avoid obstacles',
-      'Create pathfinding logic',
-      'Handle multiple conditions',
+      'Ereignisse verstehen',
+      'Chat-Befehle verwenden',
+      'Auslöser erkennen',
+      'Aktionen starten',
+      'Programme interaktiv machen',
+      'Ereignisse mit Befehlen verbinden',
     ],
     content: `
-# Obstacle Avoidance
+# Ereignisse und Chat-Befehle
 
-## The Problem
-The Agent needs to move forward but there might be obstacles in the way.
+## Was ist ein Ereignis?
+Ein Ereignis ist etwas, das passiert – zum Beispiel ein Spieler drückt eine Taste, der Agent trifft auf einen Block oder jemand gibt einen Chat-Befehl ein. Programme können auf solche Ereignisse reagieren.
 
-## The Solution
-Check if the Agent can move forward. If yes, move. If no, try turning and moving.
+## Was ist ein Auslöser (Trigger)?
+Ein Auslöser ist das, was das Ereignis startet. Zum Beispiel: "Spieler gibt /bauen im Chat ein" ist der Auslöser. "Der Agent legt einen Steinblock" ist die Aktion.
 
-## Code Pattern
-\`\`\`
-if (canMove(FORWARD)) {
-  move(FORWARD, 1)
-} else if (canMove(LEFT)) {
-  turn(LEFT)
-  move(FORWARD, 1)
-} else if (canMove(RIGHT)) {
-  turn(RIGHT)
-  move(FORWARD, 1)
-} else {
-  turn(LEFT)
-  turn(LEFT)
-}
-\`\`\`
+## Wie funktionieren Chat-Befehle?
+Chat-Befehle sind Wörter, die du in den Chat von Minecraft eingibst. Sie beginnen oft mit einem Schrägstrich (/). Wenn du zum Beispiel /start eingibst, beginnt der Agent mit dem Bauen. Minecraft erkennt den Befehl und führt die dazugehörige Aktion aus.
 
-## Conditions to Check
-- canMove(FORWARD)
-- canMove(LEFT)
-- canMove(RIGHT)
-- canMove(UP)
-- canMove(DOWN)
+## Vom Auslöser zur Aktion:
+Chat-Befehl → Ereignis → Programm startet → Aktion wird ausgeführt
+
+Beispiel: Der Spieler gibt /bridge ein
+1. **Chat-Befehl** – /bridge
+2. **Ereignis** – Minecraft bemerkt den Befehl
+3. **Programm startet** – Das zugehörige Programm läuft
+4. **Aktion** – Der Agent baut eine Brücke
+
+## Warum sind Ereignisse wichtig?
+Ohne Ereignisse läuft dein Programm immer gleich ab. Mit Ereignissen wird dein Programm interaktiv: Es wartet auf Eingaben und reagiert erst dann.
+
+## Das solltest du wissen
+- **Ereignis** – Etwas, das passiert (Taste, Chat-Befehl, Blockberührung)
+- **Trigger/Auslöser** – Das, was das Ereignis startet
+- **Chat-Befehl** – Ein Befehl, den du im Chat eingibst (oft mit /)
+- **Aktion** – Die Reaktion des Programms auf das Ereignis
+- **Eingabe** – Das, was der Spieler macht oder sagt
+- **Reaktion** – Das, was der Agent als Antwort tut
+
+## Aufgabe 1: Erster Chat-Befehl
+Erstelle ein Programm, das auf den Chat-Befehl /start reagiert. Wenn der Spieler /start eingibt, soll der Agent "Hallo!" sagen.
+
+## Aufgabe 2: Bauen mit Befehl
+Erstelle ein Programm mit dem Chat-Befehl /bridge. Wenn der Spieler /bridge eingibt, baut der Agent eine Brücke aus 5 Steinblöcken.
+
+## Aufgabe 3: Zwei Befehle
+Erstelle zwei Chat-Befehle: /wall baut eine Mauer, /path baut einen Pfad. Je nach Befehl führt der Agent eine andere Aktion aus.
+
+## Reflexion
+Wie verändert sich ein Programm, wenn es auf Ereignisse reagiert? Warum sind Chat-Befehle nützlich?
 `,
     codeBlocks: [
       {
-        name: 'canMove',
-        description: 'Check if Agent can move in direction',
-        example: 'canMove(FORWARD)',
-        icon: '🚧',
+        name: 'on chat command',
+        description: 'Starte ein Programm, wenn ein Chat-Befehl eingegeben wird',
+        example: 'on chat "/start" { ... }',
+        icon: '💬',
+      },
+      {
+        name: 'say',
+        description: 'Der Agent sagt einen Text',
+        example: 'say("Hallo!")',
+        icon: '🗣️',
       },
     ],
     studentActivity: `
-1. Create an obstacle course and have the Agent navigate it
-2. Make the Agent avoid water blocks
-3. Make the Agent find a path around a wall
-4. Create complex obstacle patterns
-5. Time how fast the Agent can navigate
+**Aufgabe 1: Erster Chat-Befehl**
+1. Erstelle ein Programm mit on chat "/start".
+2. Wenn der Befehl eingegeben wird, sagt der Agent "Hallo!".
+3. Teste das Programm im Chat.
+
+**Aufgabe 2: Bauen mit Befehl**
+1. Erstelle den Chat-Befehl /bridge.
+2. Der Agent baut eine Brücke aus 5 Steinblöcken.
+3. Teste: Gib /bridge im Chat ein.
+
+**Aufgabe 3: Zwei Befehle**
+1. /wall → Agent baut eine Mauer aus 8 Steinen.
+2. /path → Agent baut einen Pfad aus 6 Grasblöcken.
+3. Teste beide Befehle im Chat.
+
+**Mission: Der magische Sprachbefehl**
+Erlebe, wie durch einen Chat-Befehl automatisch Aktionen ausgelöst werden. Erstelle einen eigenen Befehl, der den Agenten etwas bauen oder sagen lässt.
+
+**Reflexion im Team:**
+Wie verändert sich ein Programm, wenn es auf Ereignisse reagiert? Wann sind Chat-Befehle nützlich?
 `,
-    teacherTip: 'Create a simple maze first, then gradually increase complexity.',
+    teacherTip: 'Zeige zuerst, wie Chat-Befehle in Minecraft funktionieren. Demonstriere den on chat-Block und erkläre, dass das Programm auf den Befehl wartet. Lasse die Schüler eigene Befehle erfinden.',
     quiz: [
       {
         id: 1,
-        question: 'How do you check if the Agent can move forward?',
-        options: ['move(FORWARD)', 'canMove(FORWARD)', 'checkMove(FORWARD)', 'testMove(FORWARD)'],
+        question: 'Was passiert bei einem Ereignis?',
+        options: ['Minecraft wird beendet', 'Eine Aktion wird durch einen Auslöser gestartet', 'Alle Blöcke verschwinden', 'Der Agent wird gelöscht'],
         correctAnswer: 1,
-        explanation: 'Use canMove(FORWARD) to check if movement is possible.',
+        explanation: 'Ein Ereignis ist ein Auslöser, der eine bestimmte Aktion startet.',
       },
       {
         id: 2,
-        question: 'What should the Agent do if it can\'t move forward?',
-        options: ['Stop', 'Try turning and moving', 'Jump', 'Teleport'],
+        question: 'Wofür steht der Schrägstrich (/) bei einem Chat-Befehl?',
+        options: ['Er ist nur Dekoration', 'Er zeigt an, dass es ein Befehl ist', 'Er löscht den Chat', 'Er startet Minecraft neu'],
         correctAnswer: 1,
-        explanation: 'The Agent should try alternative directions like left or right.',
+        explanation: 'Der Schrägstrich zeigt an, dass es sich um einen Befehl und nicht um normalen Chat-Text handelt.',
       },
       {
         id: 3,
-        question: 'Can the Agent move in multiple directions?',
-        options: ['No, only forward', 'Yes, forward/back/left/right/up/down', 'Only diagonally', 'Only up'],
+        question: 'Was macht der Befehl say("Hallo")?',
+        options: ['Der Spieler sagt Hallo', 'Der Agent sagt Hallo', 'Ein Block sagt Hallo', 'Nichts'],
         correctAnswer: 1,
-        explanation: 'The Agent can move in all 6 directions.',
+        explanation: 'Der Befehl say() lässt den Agenten einen Text im Chat ausgeben.',
+      },
+      {
+        id: 4,
+        question: 'Was ist der Unterschied zwischen einem normalen Programm und einem ereignisgesteuerten Programm?',
+        options: ['Es gibt keinen Unterschied', 'Ereignisgesteuerte Programme warten auf Eingaben', 'Normale Programme sind besser', 'Ereignisse gibt es nicht in Minecraft'],
+        correctAnswer: 1,
+        explanation: 'Ereignisgesteuerte Programme warten auf einen Auslöser und reagieren erst dann.',
+      },
+      {
+        id: 5,
+        question: 'Wie kannst du den Agenten dazu bringen, erst auf Befehl zu handeln?',
+        options: ['Gar nicht', 'Durch einen Chat-Befehl wie /start', 'Durch Neustarten', 'Durch Bauen'],
+        correctAnswer: 1,
+        explanation: 'Mit einem Chat-Befehl wie /start kannst du steuern, wann der Agent handelt.',
       },
     ],
     xpReward: 75,

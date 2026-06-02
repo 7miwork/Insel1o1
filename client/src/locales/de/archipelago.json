@@ -161,17 +161,18 @@
       "Programme intelligenter machen"
     ],
     "lesson7preview": "Du hast gelernt, wie Programme Entscheidungen treffen. Damit wird dein Agent deutlich intelligenter und kann auf seine Umgebung reagieren.",
-    "lesson8": "Geheime Maschinen",
-    "lesson8sub": "Interaktive Objekte und Redstone",
-    "lesson8desc": "Arbeite mit Redstone‑Komponenten und interaktiven Objekten, um einfache Maschinen zu bauen.",
+    "lesson8": "Ereignisse und Chat-Befehle",
+    "lesson8sub": "Programme reagieren auf Eingaben",
+    "lesson8desc": "Programme können auf Ereignisse reagieren. Der Agent und Minecraft sollen Aktionen ausführen, wenn ein bestimmter Auslöser eintritt oder ein Chat-Befehl verwendet wird.",
     "lesson8objectives": [
-      "Redstone‑Staub platzieren",
-      "Hebel und Knöpfe nutzen",
-      "Einfache Schaltungen erstellen",
-      "Mechanismen programmatisch auslösen",
-      "Maschinen debuggen und verfeinern"
+      "Ereignisse verstehen",
+      "Chat-Befehle verwenden",
+      "Auslöser erkennen",
+      "Aktionen starten",
+      "Programme interaktiv machen",
+      "Ereignisse mit Befehlen verbinden"
     ],
-    "lesson8preview": "Du automatisierst Aktionen mithilfe von Redstone‑Logik.",
+    "lesson8preview": "Du hast gelernt, wie Programme auf Ereignisse reagieren. Dadurch werden deine Projekte interaktiv und können auf Eingaben der Spieler antworten.",
     "lesson9": "Mein erstes Spiel",
     "lesson9sub": "Punkte, Regeln und Mini-Games",
     "lesson9desc": "Kombiniere alle bisherigen Konzepte, um ein Mini‑Spiel mit Regeln, Punktestand und Gewinnbedingungen zu erstellen.",
@@ -303,6 +304,35 @@
     },
     "lesson7reward": "Logik-Entdecker",
     "lesson7rewardDesc": "Du hast die ersten Entscheidungen erfolgreich programmiert.",
-    "lesson7conclusion": "Du hast gelernt, wie Programme Entscheidungen treffen. Damit wird dein Agent deutlich intelligenter und kann auf seine Umgebung reagieren."
+    "lesson7conclusion": "Du hast gelernt, wie Programme Entscheidungen treffen. Damit wird dein Agent deutlich intelligenter und kann auf seine Umgebung reagieren.",
+    "lesson8tasks": [
+      {
+        "title": "Erster Chat-Befehl",
+        "description": "Erstelle ein Programm, das auf /start reagiert."
+      },
+      {
+        "title": "Bauen mit Befehl",
+        "description": "Erstelle den Chat-Befehl /bridge für den Agenten."
+      },
+      {
+        "title": "Zwei Befehle",
+        "description": "Erstelle /wall und /path mit verschiedenen Aktionen."
+      }
+    ],
+    "lesson8knowledge": [
+      "Ereignis - Etwas, das passiert",
+      "Trigger - Das, was das Ereignis startet",
+      "Chat-Befehl - Ein Befehl im Chat (oft mit /)",
+      "Aktion - Die Reaktion des Programms",
+      "Eingabe - Was der Spieler macht oder sagt",
+      "Reaktion - Was der Agent als Antwort tut"
+    ],
+    "lesson8mission": {
+      "title": "Der magische Sprachbefehl",
+      "description": "Erlebe, wie durch einen Chat-Befehl automatisch Aktionen ausgelöst werden."
+    },
+    "lesson8reward": "Ereignis-Meister",
+    "lesson8rewardDesc": "Du hast erfolgreich Programme mit Ereignissen und Chat-Befehlen gesteuert.",
+    "lesson8conclusion": "Du hast gelernt, wie Programme auf Ereignisse reagieren. Dadurch werden deine Projekte interaktiv und können auf Eingaben der Spieler antworten."
   }
 }
