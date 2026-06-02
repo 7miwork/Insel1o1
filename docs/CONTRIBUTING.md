@@ -1,163 +1,61 @@
-* Branch-Strategie
-* Commit-Namensschema
-* Pull Requests
-* Coding Standards
-* Übersetzungsregeln
-* Kurs-Erstellungsrichtlinien
+# Contributing to Insel 1o1
 
-⸻
+Thank you for your interest in contributing to Insel 1o1.
 
-ARCHITECTURE.md
+## Project Vision
 
-docs/
-└── ARCHITECTURE.md
+Insel 1o1 is a multilingual educational platform that combines modern learning with gamification and exploration.
 
-Beschreibt:
+## Areas for Contribution
 
-* Frontend
-* Backend
-* Datenmodell
-* i18n-System
-* Theme-System
-* Archipel-System
-* Deployment
+- New lessons
+- New archipelagos
+- UI/UX improvements
+- Translations
+- Documentation
+- Gamification systems
+- Accessibility improvements
+- Educational content
 
-⸻
+## Branch Naming
 
-I18N.md
+Examples:
 
-docs/
-└── I18N.md
+feature/new-archipelago
+feature/python-course
+fix/login-bug
+docs/readme-update
 
-Beschreibt:
+## Commit Format
 
-* Sprachdateien
-* JSON-Struktur
-* Fallback-Sprachen
-* Neue Sprache hinzufügen
+Examples:
 
-⸻
+feat: add minecraft lesson 3
+fix: resolve translation bug
+docs: update roadmap
+refactor: improve island navigation
 
-COURSE-STANDARDS.md
+## Pull Requests
 
-Sehr wichtig für Insel 1o1.
+Please include:
 
-Definiert:
+- Description of changes
+- Screenshots if UI changes
+- Translation updates if needed
+- Build verification
 
-Jede Lektion muss besitzen:
-✓ Einführung
-✓ Lernziele
-✓ Lerninhalt
-✓ Video
-✓ Aufgabe
-✓ Quiz
-✓ Belohnung
-✓ XP
-✓ Übersetzungen
+## Code Quality
 
-Damit spätere Archipele konsistent bleiben.
+Before submitting:
 
-⸻
+pnpm run build
 
-⚖️ Rechtliches
+Ensure:
 
-LICENSE
+- No TypeScript errors
+- No build errors
+- No broken translations
 
-Momentan fehlt noch.
+## Educational Standards
 
-Wenn Open Source:
-
-* MIT
-* Apache 2.0
-* GPLv3
-
-Am häufigsten:
-
-MIT License
-
-⸻
-
-CODE_OF_CONDUCT.md
-
-GitHub Standard.
-
-Zeigt Professionalität.
-
-⸻
-
-🎨 Projektplanung
-
-ARCHIPELAGOS.md
-
-Übersicht aller geplanten Archipele:
-
-Programming
-Creative
-Languages
-STEM
-Business
-AI
-
-Mit Status:
-
-Planned
-In Development
-Released
-
-⸻
-
-GAMIFICATION.md
-
-Beschreibt:
-
-* XP
-* Level
-* Badges
-* Achievements
-* Final Islands
-* Rewards
-
-⸻
-
-🛠️ GitHub
-
-ISSUE_TEMPLATES
-
-.github/
-└── ISSUE_TEMPLATE/
-
-* Bug Report
-* Feature Request
-* Translation Request
-
-⸻
-
-PULL_REQUEST_TEMPLATE.md
-
-Standardisierte Pull Requests.
-
-⸻
-
-SECURITY.md
-
-Später hilfreich.
-
-Beschreibt:
-
-* Meldung von Sicherheitsproblemen
-* Kontaktweg
-
-⸻
-
-🎓 Für den Bildungsbereich
-
-EDUCATIONAL-VISION.md
-
-Hier kannst du die Philosophie von Insel 1o1 festhalten:
-
-* Warum Inseln?
-* Warum Gamification?
-* Warum Dual UI?
-* Warum mehrsprachig?
-
-Das ist oft interessanter als technische Dokumentation.
+All lessons should follow the course standards defined in COURSE-STANDARDS.md.
