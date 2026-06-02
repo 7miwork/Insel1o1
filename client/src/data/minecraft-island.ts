@@ -1523,38 +1523,92 @@ Was war deine größte Herausforderung? Welches Konzept hat dir am besten gefall
   },
   {
     id: 11,
-    title: '🔒 Die letzte Insel',
-    description: 'Diese Insel ist noch verschlossen. Sammle alle Fähigkeiten der vorherigen Inseln, um sie zu betreten.',
+    title: '🏝️ Die letzte Insel',
+    description: 'Du hast alle Inseln des Minecraft Education Block Coding Archipels abgeschlossen. Vor dir liegt die letzte Insel – mit Belohnung, Abenteuer und dem Abschluss deiner Reise.',
     phase: 'final-project',
-    duration: 60,
+    duration: 90,
     difficulty: 'advanced',
     objectives: [
-      '🔒 Gesperrt',
-      '🔒 Gesperrt',
-      '🔒 Gesperrt',
-      '🔒 Gesperrt',
+      'Die letzte Herausforderung meistern',
+      'Das Jump-and-Run absolvieren',
+      'Die Schatzkiste öffnen',
+      'Das Meisterzertifikat erhalten',
+      'Den Archipel-Meister-Titel tragen',
+      'Die Reise abschließen',
     ],
     content: `
-# 🔒 Die letzte Insel
+# 🏝️ Die letzte Insel
 
-## Diese Insel ist noch nicht betretbar.
+## Willkommen auf der letzten Insel!
+Du hast alle 10 Inseln des Archipels erfolgreich abgeschlossen. Diese Insel ist deine Belohnung. Hier erwartet dich ein kleines Abenteuer, dein Zertifikat und der offizielle Abschluss deiner Reise.
 
-Du hast alle 10 Inseln des Archipels abgeschlossen. Die letzte Insel ist noch versiegelt.
+## Inselbereiche
+Die letzte Insel besteht aus mehreren Bereichen:
 
-**Was du weißt:**
-- Sie erwartet dich am Ende des Archipels
-- Sie wird die größte Herausforderung sein
-- Du wirst alle gelernten Konzepte brauchen
-- Sie ist der krönende Abschluss deiner Reise
+### 1. Empfangsbereich (introArea)
+Hier beginnt deine Ankunft. Ein Willkommensschild begrüßt dich. Der Archipel-Meister spricht dich an und überreicht dir den ersten Hinweis.
 
-**Bereite dich vor!**
-Bis es so weit ist, wiederhole die wichtigsten Konzepte und übe weiter.
+### 2. Jump-and-Run (parkourArea)
+Ein kleiner Parkour durch die Insel. Springe über Blöcke, klettere über Mauern und finde den Weg zur Schatzkammer. Keine Angst – es ist nicht schwer, nur ein symbolischer Abschlussparcours.
+
+### 3. Schatzkiste (treasureArea)
+Am Ende des Parkours wartet eine große Schatzkiste. Öffne sie und erhalte deine Belohnung:
+- ⭐ **500 XP Bonus**
+- 🏆 **Archipel-Meister-Pokal**
+- 🎖️ **Meisterabzeichen**
+- 📜 **Dein persönliches Zertifikat**
+
+### 4. Zertifikatsbereich (certificateArea)
+Hier wird dein Zertifikat ausgestellt. Es bestätigt, dass du alle 10 Lektionen des Minecraft Education Block Coding Archipels erfolgreich abgeschlossen hast.
+
+### 5. Abschlussbereich (rewardArea)
+Der krönende Abschluss. Hier kannst du:
+- Deinen Archipel-Meister-Titel aktivieren
+- Eine spezielle Profilmarkierung freischalten
+- Den nächsten Archipel erkunden (in Vorbereitung)
+
+## Die Reise ist abgeschlossen
+| Etappe | Status |
+|--------|--------|
+| Insel 1–10: Ausbildung | ✅ Abgeschlossen |
+| Insel 11: Letzte Insel | ★ Aktiv |
+| Nächstes Archipel | 🔄 In Vorbereitung |
+
+## Reflexion
+Du hast die gesamte Reise durch das Minecraft Education Block Coding Archipel gemeistert. Von den ersten Schritten mit WASD bis zu Variablen und Ereignissen – du hast alle Konzepte gelernt, die du brauchst, um eigene Projekte zu programmieren.
+
+**Was kommt als Nächstes?**
+- Python-Archipel (in Vorbereitung)
+- JavaScript-Archipel (in Vorbereitung)
+- Webdesign-Archipel (in Vorbereitung)
 `,
     codeBlocks: [],
-    studentActivity: '',
-    teacherTip: '',
+    studentActivity: `
+**Bereich 1: Empfang**
+Betrete die Insel und lies das Willkommensschild.
+
+**Bereich 2: Jump-and-Run**
+1. Folge dem Pfad aus bunten Blöcken.
+2. Springe über Lücken (Leertaste).
+3. Klettere über Mauern (Shift + Springen).
+4. Erreiche die Schatzkammer.
+
+**Bereich 3: Schatzkiste**
+Öffne die Schatzkiste und sammle deine Belohnungen ein:
+- ⭐ 500 XP Bonus
+- 🏆 Archipel-Meister-Pokal
+- 🎖️ Meisterabzeichen
+- 📜 Zertifikat
+
+**Bereich 4: Zertifikat**
+Dein Name wird auf dem Zertifikat eingetragen. Herzlichen Glückwunsch!
+
+**Bereich 5: Abschluss**
+Aktiviere deinen Archipel-Meister-Titel und schalte die Profilmarkierung frei.
+`,
+    teacherTip: 'Diese Insel ist die Belohnung für den gesamten Kurs. Lasse den Schülern Zeit, alle Bereiche zu erkunden. Der Parkour ist symbolisch – es geht um den Abschluss, nicht um die Herausforderung.',
     quiz: [],
-    xpReward: 0,
+    xpReward: 500,
     unlocks: [],
   },
 ];

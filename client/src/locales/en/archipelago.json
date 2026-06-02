@@ -174,8 +174,8 @@
       "Solve complex tasks"
     ],
     "lesson10preview": "You've almost completed the Minecraft Education Block Coding archipelago. Only the mysterious final island lies ahead.",
-    "lesson11": "🔒 The Last Island",
-    "lesson11sub": "Locked - Coming soon",
+    "lesson11": "🏝️ The Last Island",
+    "lesson11sub": "Reward, adventure and completion",
     "lesson3tasks": [
       {
         "title": "Start the Agent",
@@ -394,6 +394,6 @@
     "lesson10reward": "Archipelago Master",
     "lesson10rewardDesc": "You've completed all training islands successfully and are ready for the final journey.",
     "lesson10conclusion": "You've almost completed the Minecraft Education Block Coding archipelago. Only the mysterious final island lies ahead.",
-    "lesson11desc": "This island is still locked. Collect all skills from the previous islands to enter it."
+    "lesson11desc": "You have completed all islands of the Minecraft Education Block Coding archipelago. Before you lies the last island – with rewards, adventure and the completion of your journey."
   }
 }

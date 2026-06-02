@@ -174,8 +174,8 @@
       "解決複雜任務"
     ],
     "lesson10preview": "你幾乎完成了 Minecraft Education Block Coding 群島的訓練。前方只剩下神秘的最後之島。",
-    "lesson11": "🔒 最後之島",
-    "lesson11sub": "已鎖定 - 即將開放",
+    "lesson11": "🏝️ 最後之島",
+    "lesson11sub": "獎勵、冒險與完成",
     "lesson3tasks": [
       {
         "title": "啟動 Agent",
@@ -394,6 +394,6 @@
     "lesson10reward": "群島大師",
     "lesson10rewardDesc": "你已成功完成所有訓練島嶼，準備好迎接最後的旅程。",
     "lesson10conclusion": "你幾乎完成了 Minecraft Education Block Coding 群島的訓練。前方只剩下神秘的最後之島。",
-    "lesson11desc": "這座島嶼仍被封鎖。收集所有先前島嶼的技能才能進入。"
+    "lesson11desc": "你已完成 Minecraft Education Block Coding 群島的所有島嶼。前方是最後之島 – 包含獎勵、冒險與旅程的完成。"
   }
 }
