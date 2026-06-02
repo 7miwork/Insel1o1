@@ -162,19 +162,20 @@
       "讓程式更智慧"
     ],
     "lesson9preview": "你已學會程式如何儲存並重複使用資訊。這讓你的專案變得更加強大。",
-    "lesson10": "共享城市",
-    "lesson10sub": "大型畢業專案",
-    "lesson10desc": "協作完成大型專案，讓多個 Agent 共同建造城市，運用進階邏輯與團隊合作。",
+    "lesson10": "最終專案與冒險",
+    "lesson10sub": "結合所有技能",
+    "lesson10desc": "運用你所學的一切。規劃自己的專案，結合先前課程的各種技能。",
     "lesson10objectives": [
-      "規劃協作任務",
-      "同步多個 Agent",
-      "管理共享資源",
-      "實作城市功能（道路、建築、公共設施）",
-      "反思團隊合作與問題解決"
+      "應用先備知識",
+      "發展自己的解決方案",
+      "結合多個程式設計概念",
+      "規劃專案",
+      "獨立修正錯誤",
+      "解決複雜任務"
     ],
-    "lesson10preview": "你將看到方塊程式如何擴展至團隊專案。",
-    "lesson11": "最後之島",
-    "lesson11sub": "你 Block Coding 旅程的終點",
+    "lesson10preview": "你幾乎完成了 Minecraft Education Block Coding 群島的訓練。前方只剩下神秘的最後之島。",
+    "lesson11": "🔒 最後之島",
+    "lesson11sub": "已鎖定 - 即將開放",
     "lesson3tasks": [
       {
         "title": "啟動 Agent",
@@ -363,6 +364,36 @@
     },
     "lesson9reward": "資料守護者",
     "lesson9rewardDesc": "你已成功學會用變數儲存和管理資訊。",
-    "lesson9conclusion": "你已學會程式如何儲存並重複使用資訊。這讓你的專案變得更加強大。"
+    "lesson9conclusion": "你已學會程式如何儲存並重複使用資訊。這讓你的專案變得更加強大。",
+    "lesson10tasks": [
+      {
+        "title": "專案階段 1：規劃",
+        "description": "規劃一個結合 3 個概念的專案。"
+      },
+      {
+        "title": "專案階段 2：執行",
+        "description": "逐步建構你的專案。"
+      },
+      {
+        "title": "專案階段 3：發表",
+        "description": "向全班展示你的專案。"
+      }
+    ],
+    "lesson10knowledge": [
+      "Agent - 執行指令的機器人",
+      "迴圈 - 自動化重複任務",
+      "條件 - 做決策",
+      "變數 - 記住數值",
+      "事件 - 對聊天指令做出反應",
+      "建造 - 放置方塊"
+    ],
+    "lesson10mission": {
+      "title": "通往最後之島的道路",
+      "description": "運用所有島嶼的技能完成最終挑戰。"
+    },
+    "lesson10reward": "群島大師",
+    "lesson10rewardDesc": "你已成功完成所有訓練島嶼，準備好迎接最後的旅程。",
+    "lesson10conclusion": "你幾乎完成了 Minecraft Education Block Coding 群島的訓練。前方只剩下神秘的最後之島。",
+    "lesson11desc": "這座島嶼仍被封鎖。收集所有先前島嶼的技能才能進入。"
   }
 }

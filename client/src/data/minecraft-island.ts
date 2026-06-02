@@ -1344,510 +1344,218 @@ Warum sind Variablen nützlich? Was passiert, wenn du den Wert vergisst?
   },
   {
     id: 10,
-    title: 'Design a Farm with the Agent Using Loops',
-    description: 'Create a realistic farm structure using loops',
-    phase: 'creative',
+    title: 'Eigenes Projekt und Abschlussabenteuer',
+    description: 'Nutze alles, was du bisher gelernt hast. Plane dein eigenes Projekt und kombiniere die Fähigkeiten aus den vorherigen Lektionen.',
+    phase: 'final-project',
     duration: 60,
-    difficulty: 'intermediate',
+    difficulty: 'advanced',
     objectives: [
-      'Design functional structures',
-      'Use loops for efficient building',
-      'Plan multi-component projects',
-      'Combine different building techniques',
+      'Vorwissen anwenden',
+      'Eigene Lösungen entwickeln',
+      'Mehrere Coding-Konzepte kombinieren',
+      'Projekte planen',
+      'Fehler selbstständig beheben',
+      'Komplexere Aufgaben lösen',
     ],
     content: `
-# Building a Farm
+# Eigenes Projekt und Abschlussabenteuer
 
-## Farm Components
-- **Crop Rows**: Parallel lines of farmland
-- **Fences**: Boundaries for the farm
-- **Paths**: Walking paths between rows
-- **Water Channels**: For irrigation
+## Herzlichen Glückwunsch!
+Du hast dich durch neun Inseln gearbeitet und dabei viele wichtige Fähigkeiten gelernt. Jetzt ist es an der Zeit, alles zu kombinieren und dein eigenes Projekt zu planen.
 
-## Farm Layout
-\`\`\`
-Fence
-Crop Row 1
-Path
-Crop Row 2
-Path
-Crop Row 3
-Fence
-\`\`\`
+## Warum Projekte wichtig sind
+In der echten Programmierung arbeitest du nie mit nur einem Konzept. Du musst Agenten steuern, Schleifen verwenden, Bedingungen prüfen, Variablen einsetzen und auf Ereignisse reagieren – oft alles im selben Programm.
 
-## Building Technique
-1. Use loops to create rows
-2. Use nested loops for multiple rows
-3. Use conditionals to place different materials
+## Programmierer kombinieren Konzepte
+Ein gutes Programm vereint mehrere Fähigkeiten:
+- **Agent** – Der Agent führt deine Befehle aus
+- **Schleifen** – Wiederhole Aufgaben automatisch
+- **Bedingungen** – Triff Entscheidungen
+- **Variablen** – Merke dir Werte
+- **Ereignisse** – Reagiere auf Chat-Befehle
+- **Bauen** – Platziere Blöcke
 
-## Block Types for Farm
-- FARMLAND: Tilled soil for crops
-- WATER: Water channels
-- FENCE: Fence blocks
-- DIRT: Paths
+## Dein Werkzeugkasten
+| Fähigkeit | Gelernt in Lektion | Kurzfassung |
+|-----------|-------------------|-------------|
+| Steuerung | 1 | WASD, Springen, Schleichen |
+| Block Coding | 2 | Programme aus Blöcken |
+| Agent | 3 | Befehle an den Agenten |
+| Navigation | 4 | move, turn, Richtungen |
+| Bauen | 5 | place, destroy |
+| Schleifen | 6 | repeat, Wiederholungen |
+| Bedingungen | 7 | if, else, canMove |
+| Ereignisse | 8 | Chat-Befehle, say |
+| Variablen | 9 | Werte speichern, ändern |
+
+## Projektphase 1: Planung
+Überlege dir ein Projekt, das mindestens 3 verschiedene Konzepte kombiniert. Zeichne eine Skizze und schreibe auf, welche Befehle du brauchst.
+
+## Projektphase 2: Umsetzung
+Setze dein Projekt Schritt für Schritt um. Arbeite mit deinem Team zusammen. Teste jede Funktion einzeln, bevor du alles kombinierst.
+
+## Projektphase 3: Präsentation
+Zeige dein Projekt der Klasse. Erkläre, welche Konzepte du verwendet hast und wie du Probleme gelöst hast.
+
+## Deine Reise durch das Archipel
+| Nr | Insel | Status |
+|----|-------|--------|
+| 1 | Grundlagen der Steuerung | ✓ |
+| 2 | Einführung in Block Coding | ✓ |
+| 3 | Der Agent und seine ersten Befehle | ✓ |
+| 4 | Bewegung und Navigation des Agenten | ✓ |
+| 5 | Bauen mit dem Agenten | ✓ |
+| 6 | Schleifen – Aufgaben automatisch wiederholen | ✓ |
+| 7 | Bedingungen und Entscheidungen | ✓ |
+| 8 | Ereignisse und Chat-Befehle | ✓ |
+| 9 | Variablen und Daten speichern | ✓ |
+| 10 | Eigenes Projekt und Abschlussabenteuer | ★ |
+| 11 | 🔒 Die letzte Insel | 🔒 |
+
+## Reflexion
+Was war deine größte Herausforderung? Welches Konzept hat dir am besten gefallen? Worauf freust du dich bei der letzten Insel?
 `,
     codeBlocks: [
       {
-        name: 'farm building',
-        description: 'Create crop rows and paths',
-        example: 'Nested loops for rows',
-        icon: '🌾',
+        name: 'project planning',
+        description: 'Plane dein Projekt mit mindestens 3 Konzepten',
+        example: 'Skizze + Befehlsliste',
+        icon: '📋',
       },
     ],
     studentActivity: `
-1. Build a 5-row farm
-2. Add fences around the farm
-3. Add water channels
-4. Add walking paths
-5. Create a decorative farm entrance
+**Projektphase 1: Planung**
+1. Überlege ein Projekt, das Agent, Schleifen und Bedingungen kombiniert.
+2. Zeichne eine Skizze.
+3. Schreibe eine Liste mit allen benötigten Befehlen.
+
+**Projektphase 2: Umsetzung**
+1. Setze dein Projekt Schritt für Schritt um.
+2. Teste jede Funktion einzeln.
+3. Arbeite mit deinem Team zusammen.
+
+**Projektphase 3: Präsentation**
+1. Zeige dein Projekt der Klasse.
+2. Erkläre, welche Konzepte du verwendet hast.
+3. Beschreibe, wie du Probleme gelöst hast.
+
+**Mission: Der Weg zur letzten Insel**
+Nutze die Fähigkeiten aller bisherigen Inseln, um die Abschlussaufgabe erfolgreich zu lösen.
+
+**Reflexion im Team:**
+Was war deine größte Herausforderung? Welches Konzept hat dir am besten gefallen?
 `,
-    teacherTip: 'Show pictures of real farms to inspire designs.',
+    teacherTip: 'Gib den Schülern Zeit für die Planung. Ermutige sie, verschiedene Konzepte zu kombinieren. Die Präsentation ist genauso wichtig wie das Programm selbst.',
     quiz: [
       {
         id: 1,
-        question: 'What is farmland used for?',
-        options: ['Growing crops', 'Walking', 'Decoration', 'Storage'],
+        question: 'Welche Fähigkeit hast du in Lektion 6 gelernt?',
+        options: ['Agenten bewegen', 'Schleifen verwenden', 'Blöcke bauen', 'Chat-Befehle'],
+        correctAnswer: 1,
+        explanation: 'In Lektion 6 hast du gelernt, wie Schleifen Aufgaben automatisch wiederholen.',
+      },
+      {
+        id: 2,
+        question: 'Wofür wird der Befehl place() verwendet?',
+        options: ['Den Agenten bewegen', 'Einen Block platzieren', 'Einen Chat-Befehl senden', 'Eine Variable erstellen'],
+        correctAnswer: 1,
+        explanation: 'place() platziert einen Block vor dem Agenten.',
+      },
+      {
+        id: 3,
+        question: 'Was prüft canMove(FORWARD)?',
+        options: ['Ob der Agent sich nach vorne bewegen kann', 'Ob der Agent einen Block platziert hat', 'Ob der Chat aktiv ist', 'Ob der Agent existiert'],
         correctAnswer: 0,
-        explanation: 'Farmland is where crops grow.',
+        explanation: 'canMove(FORWARD) prüft, ob der Agent nach vorne gehen kann.',
       },
       {
-        id: 2,
-        question: 'How would you create multiple crop rows efficiently?',
-        options: ['Place each manually', 'Use nested loops', 'Use conditionals', 'Use teleport'],
+        id: 4,
+        question: 'Wie erstellt man eine Variable "zaehler" mit Wert 0?',
+        options: ['new zaehler = 0', 'set variable zaehler = 0', 'create zaehler = 0', 'var zaehler 0'],
         correctAnswer: 1,
-        explanation: 'Nested loops are perfect for creating multiple rows.',
+        explanation: 'Mit "set variable zaehler = 0" erstellst du eine Variable.',
       },
       {
-        id: 3,
-        question: 'What is a water channel used for?',
-        options: ['Decoration', 'Irrigation', 'Swimming', 'Storage'],
+        id: 5,
+        question: 'Was bewirkt turn(RIGHT)?',
+        options: ['Der Agent geht nach rechts', 'Der Agent dreht sich nach rechts', 'Ein Block wird nach rechts gelegt', 'Nichts'],
         correctAnswer: 1,
-        explanation: 'Water channels irrigate the farmland.',
+        explanation: 'turn(RIGHT) dreht den Agenten um 90 Grad nach rechts.',
       },
-    ],
-    xpReward: 100,
-    unlocks: [11],
-  },
-  {
-    id: 11,
-    title: 'Build a Village House Using Loops and Functions',
-    description: 'Design and build a house structure',
-    phase: 'creative',
-    duration: 60,
-    difficulty: 'intermediate',
-    objectives: [
-      'Design 3D structures',
-      'Use functions for reusable code',
-      'Build walls, roof, and interior',
-      'Plan complex multi-part projects',
-    ],
-    content: `
-# Building a House
-
-## House Components
-- **Walls**: 4 walls forming a rectangle
-- **Roof**: Sloped or flat roof
-- **Door**: Entrance
-- **Windows**: Light and aesthetics
-- **Interior**: Rooms and furniture
-
-## House Dimensions
-- Width: 10 blocks
-- Depth: 10 blocks
-- Height: 5 blocks
-
-## Building Sequence
-1. Build walls (nested loops)
-2. Build roof (pyramid or flat)
-3. Add door and windows
-4. Add interior details
-
-## Materials
-- WOOD: Walls and roof
-- STONE: Foundation
-- GLASS: Windows
-- OAK_DOOR: Door
-`,
-    codeBlocks: [
       {
-        name: 'house building',
-        description: 'Create walls and roof',
-        example: 'Nested loops for walls',
-        icon: '🏠',
-      },
-    ],
-    studentActivity: `
-1. Build a simple 10x10 house
-2. Add a roof
-3. Add windows and a door
-4. Add interior walls and rooms
-5. Decorate the interior
-`,
-    teacherTip: 'Have students sketch their house design before coding.',
-    quiz: [
-      {
-        id: 1,
-        question: 'What material is good for house walls?',
-        options: ['WATER', 'WOOD', 'SAND', 'GLASS'],
+        id: 6,
+        question: 'Wozu dienen Chat-Befehle wie /start?',
+        options: ['Minecraft neustarten', 'Ein Programm durch Eingabe starten', 'Den Chat löschen', 'Den Agenten löschen'],
         correctAnswer: 1,
-        explanation: 'WOOD is a good material for house walls.',
+        explanation: 'Chat-Befehle starten ein Programm, wenn der Spieler sie eingibt.',
       },
       {
-        id: 2,
-        question: 'How would you build 4 walls efficiently?',
-        options: ['Build each manually', 'Use loops', 'Use conditionals', 'Use teleport'],
+        id: 7,
+        question: 'Wie oft führt repeat(5) den Code darin aus?',
+        options: ['1 Mal', '5 Mal', '10 Mal', 'Unendlich'],
         correctAnswer: 1,
-        explanation: 'Loops make building walls much more efficient.',
+        explanation: 'repeat(5) wiederholt den Code 5 Mal.',
       },
       {
-        id: 3,
-        question: 'What is the purpose of windows?',
-        options: ['Strength', 'Light and aesthetics', 'Storage', 'Cooking'],
+        id: 8,
+        question: 'Was passiert bei "change variable anzahl by 1"?',
+        options: ['Die Variable wird gelöscht', 'Der Wert erhöht sich um 1', 'Ein Block wird gesetzt', 'Der Agent sagt die Zahl'],
         correctAnswer: 1,
-        explanation: 'Windows let light in and make the house look nice.',
-      },
-    ],
-    xpReward: 100,
-    unlocks: [12],
-  },
-  {
-    id: 12,
-    title: 'Creative Build – Code a Bridge Over Water',
-    description: 'Design and build a bridge structure',
-    phase: 'creative',
-    duration: 60,
-    difficulty: 'advanced',
-    objectives: [
-      'Plan structures over obstacles',
-      'Use advanced building techniques',
-      'Combine multiple building concepts',
-      'Create aesthetically pleasing structures',
-    ],
-    content: `
-# Building a Bridge
-
-## Bridge Types
-- **Beam Bridge**: Simple horizontal beams
-- **Arch Bridge**: Curved arch structure
-- **Suspension Bridge**: Cables and towers
-- **Drawbridge**: Movable bridge
-
-## Bridge Components
-- **Supports**: Pillars holding the bridge
-- **Deck**: The walkable surface
-- **Rails**: Safety railings
-- **Decorations**: Lanterns, banners, etc.
-
-## Building Technique
-1. Build support pillars
-2. Build the deck connecting pillars
-3. Add railings
-4. Add decorative elements
-
-## Materials
-- STONE: Pillars and supports
-- WOOD: Deck
-- FENCE: Railings
-- LANTERN: Decorations
-`,
-    codeBlocks: [
-      {
-        name: 'bridge building',
-        description: 'Create spans and supports',
-        example: 'Loops for pillars and deck',
-        icon: '🌉',
-      },
-    ],
-    studentActivity: `
-1. Build a simple beam bridge
-2. Build a bridge with decorative railings
-3. Build a bridge with multiple spans
-4. Build an arch bridge
-5. Create a themed bridge (castle, modern, etc.)
-`,
-    teacherTip: 'Show pictures of real bridges for inspiration.',
-    quiz: [
-      {
-        id: 1,
-        question: 'What is the main purpose of bridge supports?',
-        options: ['Decoration', 'Hold the bridge up', 'Store items', 'Look cool'],
-        correctAnswer: 1,
-        explanation: 'Supports hold the bridge up and distribute weight.',
+        explanation: '"change variable anzahl by 1" erhöht den Wert um 1.',
       },
       {
-        id: 2,
-        question: 'What are railings used for on a bridge?',
-        options: ['Decoration', 'Storage', 'Safety', 'Cooking'],
+        id: 9,
+        question: 'Welcher Befehl lässt den Agenten etwas sagen?',
+        options: ['say("Text")', 'talk("Text")', 'speak("Text")', 'write("Text")'],
+        correctAnswer: 0,
+        explanation: 'say("Text") lässt den Agenten einen Text im Chat ausgeben.',
+      },
+      {
+        id: 10,
+        question: 'Wie viele Inseln hast du auf deiner Reise besucht?',
+        options: ['5', '9', '10', '11'],
         correctAnswer: 2,
-        explanation: 'Railings provide safety by preventing falls.',
-      },
-      {
-        id: 3,
-        question: 'What is a good material for bridge supports?',
-        options: ['WOOD', 'STONE', 'GLASS', 'SAND'],
-        correctAnswer: 1,
-        explanation: 'STONE is strong and good for supports.',
-      },
-    ],
-    xpReward: 100,
-    unlocks: [13],
-  },
-  {
-    id: 13,
-    title: 'Final Project – Village Planning: Design 3 Buildings',
-    description: 'Plan a village with 3 different buildings',
-    phase: 'final-project',
-    duration: 60,
-    difficulty: 'advanced',
-    objectives: [
-      'Plan a complete village layout',
-      'Design 3 unique buildings',
-      'Coordinate multiple structures',
-      'Present your design',
-    ],
-    content: `
-# Village Planning
-
-## Village Components
-1. **House**: Residential building
-2. **Farm**: Food production
-3. **Market**: Trading center
-
-## Planning Steps
-1. Sketch the village layout on paper
-2. Decide building positions
-3. Plan paths between buildings
-4. List materials needed
-5. Write code to build each building
-
-## Village Layout
-\`\`\`
-    Market
-    
-House    Farm
-
-    Path
-\`\`\`
-
-## Design Considerations
-- Space between buildings
-- Accessible paths
-- Logical arrangement
-- Aesthetic appeal
-`,
-    codeBlocks: [
-      {
-        name: 'village planning',
-        description: 'Design multiple buildings',
-        example: 'Coordinate 3 structures',
-        icon: '🏘️',
-      },
-    ],
-    studentActivity: `
-1. Sketch your village layout
-2. Plan the 3 buildings
-3. List all materials needed
-4. Write code for each building
-5. Present your design to the class
-`,
-    teacherTip: 'Have students present their designs before coding.',
-    quiz: [
-      {
-        id: 1,
-        question: 'What is the first step in village planning?',
-        options: ['Start coding', 'Sketch the layout', 'Gather materials', 'Build immediately'],
-        correctAnswer: 1,
-        explanation: 'Always plan and sketch before coding.',
-      },
-      {
-        id: 2,
-        question: 'How many buildings should a village have?',
-        options: ['1', '2', '3 or more', 'Unlimited'],
-        correctAnswer: 2,
-        explanation: 'A village should have at least 3 buildings for this project.',
-      },
-      {
-        id: 3,
-        question: 'Why are paths important in a village?',
-        options: ['Decoration', 'Connect buildings', 'Store items', 'Nothing'],
-        correctAnswer: 1,
-        explanation: 'Paths connect buildings and make the village functional.',
-      },
-    ],
-    xpReward: 150,
-    unlocks: [14],
-  },
-  {
-    id: 14,
-    title: 'Final Project – Village Build: Code the 3 Buildings',
-    description: 'Build the 3 planned buildings using code',
-    phase: 'final-project',
-    duration: 60,
-    difficulty: 'advanced',
-    objectives: [
-      'Implement building designs with code',
-      'Use all learned concepts',
-      'Debug complex multi-building code',
-      'Optimize code efficiency',
-    ],
-    content: `
-# Building the Village
-
-## Code Organization
-Organize your code into sections:
-1. Build House
-2. Build Farm
-3. Build Market
-4. Build Paths
-5. Add Decorations
-
-## Code Pattern
-\`\`\`
-// Build House
-teleport(0, 0, 0)
-// ... house building code ...
-
-// Build Farm
-teleport(20, 0, 0)
-// ... farm building code ...
-
-// Build Market
-teleport(40, 0, 0)
-// ... market building code ...
-\`\`\`
-
-## Testing
-- Build each building separately
-- Test the entire village
-- Fix any issues
-- Optimize code
-`,
-    codeBlocks: [
-      {
-        name: 'village building',
-        description: 'Build all 3 buildings',
-        example: 'Complete village code',
-        icon: '🏗️',
-      },
-    ],
-    studentActivity: `
-1. Code the house building
-2. Code the farm
-3. Code the market
-4. Connect with paths
-5. Add decorative details
-`,
-    teacherTip: 'Have students test each building before combining them.',
-    quiz: [
-      {
-        id: 1,
-        question: 'How should you organize village code?',
-        options: ['All mixed together', 'In sections by building', 'Randomly', 'Backwards'],
-        correctAnswer: 1,
-        explanation: 'Organize code into sections for each building.',
-      },
-      {
-        id: 2,
-        question: 'What should you do before building everything?',
-        options: ['Nothing', 'Test each building separately', 'Pray', 'Give up'],
-        correctAnswer: 1,
-        explanation: 'Test each building separately to find bugs early.',
-      },
-      {
-        id: 3,
-        question: 'How do you move the Agent to different building locations?',
-        options: ['Walk there', 'Use teleport', 'Use move', 'Magic'],
-        correctAnswer: 1,
-        explanation: 'Use teleport to move the Agent to different building locations.',
-      },
-    ],
-    xpReward: 150,
-    unlocks: [15],
-  },
-  {
-    id: 15,
-    title: 'Final Project – Connect the Village: Roads and Village Square',
-    description: 'Complete the village with roads and a central square',
-    phase: 'final-project',
-    duration: 60,
-    difficulty: 'advanced',
-    objectives: [
-      'Connect all buildings with roads',
-      'Create a central village square',
-      'Add final decorative touches',
-      'Complete and present the village',
-    ],
-    content: `
-# Connecting the Village
-
-## Village Square
-A central gathering place:
-- Open area for events
-- Decorative elements (fountain, statue)
-- Benches or seating
-- Lanterns for lighting
-
-## Roads
-Connect all buildings:
-- Main road through center
-- Side roads to each building
-- Consistent material (stone, dirt)
-- Decorative elements (lanterns, signs)
-
-## Final Decorations
-- Lanterns along roads
-- Trees and plants
-- Banners and signs
-- Fences and gates
-
-## Completion Checklist
-- [ ] All 3 buildings built
-- [ ] Roads connect all buildings
-- [ ] Village square created
-- [ ] Decorations added
-- [ ] Code is organized
-- [ ] Village tested and working
-`,
-    codeBlocks: [
-      {
-        name: 'village completion',
-        description: 'Roads and square',
-        example: 'Final village code',
-        icon: '✨',
-      },
-    ],
-    studentActivity: `
-1. Build roads connecting all buildings
-2. Create a central village square
-3. Add decorative elements
-4. Add lighting with lanterns
-5. Present your completed village
-`,
-    teacherTip: 'Celebrate student achievements! Have them present their villages to the class.',
-    quiz: [
-      {
-        id: 1,
-        question: 'What is a village square used for?',
-        options: ['Storage', 'Gathering place', 'Farming', 'Nothing'],
-        correctAnswer: 1,
-        explanation: 'A village square is a central gathering place.',
-      },
-      {
-        id: 2,
-        question: 'What should roads be made of?',
-        options: ['Anything', 'Consistent material', 'Random blocks', 'Nothing'],
-        correctAnswer: 1,
-        explanation: 'Use consistent materials for roads to look professional.',
-      },
-      {
-        id: 3,
-        question: 'What have you learned in this course?',
-        options: ['Nothing', 'Basic coding concepts', 'How to play Minecraft', 'How to build houses'],
-        correctAnswer: 1,
-        explanation: 'You\'ve learned sequencing, loops, conditionals, and problem-solving!',
+        explanation: 'Du hast 10 Inseln besucht. Die 11. Insel wartet noch auf dich!',
       },
     ],
     xpReward: 200,
     unlocks: [],
   },
+  {
+    id: 11,
+    title: '🔒 Die letzte Insel',
+    description: 'Diese Insel ist noch verschlossen. Sammle alle Fähigkeiten der vorherigen Inseln, um sie zu betreten.',
+    phase: 'final-project',
+    duration: 60,
+    difficulty: 'advanced',
+    objectives: [
+      '🔒 Gesperrt',
+      '🔒 Gesperrt',
+      '🔒 Gesperrt',
+      '🔒 Gesperrt',
+    ],
+    content: `
+# 🔒 Die letzte Insel
+
+## Diese Insel ist noch nicht betretbar.
+
+Du hast alle 10 Inseln des Archipels abgeschlossen. Die letzte Insel ist noch versiegelt.
+
+**Was du weißt:**
+- Sie erwartet dich am Ende des Archipels
+- Sie wird die größte Herausforderung sein
+- Du wirst alle gelernten Konzepte brauchen
+- Sie ist der krönende Abschluss deiner Reise
+
+**Bereite dich vor!**
+Bis es so weit ist, wiederhole die wichtigsten Konzepte und übe weiter.
+`,
+    codeBlocks: [],
+    studentActivity: '',
+    teacherTip: '',
+    quiz: [],
+    xpReward: 0,
+    unlocks: [],
+  },
 ];
+

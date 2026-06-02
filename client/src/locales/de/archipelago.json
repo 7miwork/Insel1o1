@@ -185,19 +185,20 @@
       "Programme intelligenter machen"
     ],
     "lesson9preview": "Du hast gelernt, wie Programme Informationen speichern und wiederverwenden können. Damit werden deine Projekte deutlich leistungsfähiger.",
-    "lesson10": "Gemeinsame Stadt",
-    "lesson10sub": "Das große Abschlussprojekt",
-    "lesson10desc": "Arbeite im Team an einem größeren Projekt, bei dem mehrere Agenten eine gemeinsame Stadt bauen und fortgeschrittene Logik anwenden.",
+    "lesson10": "Eigenes Projekt und Abschlussabenteuer",
+    "lesson10sub": "Alles kombinieren",
+    "lesson10desc": "Nutze alles, was du bisher gelernt hast. Plane dein eigenes Projekt und kombiniere die Faehigkeiten aus den vorherigen Lektionen.",
     "lesson10objectives": [
-      "Gemeinsame Aufgaben planen",
-      "Mehrere Agenten synchronisieren",
-      "Gemeinsame Ressourcen verwalten",
-      "Stadtfunktionen (Straßen, Gebäude, Versorgungsleitungen) implementieren",
-      "Teamarbeit und Problemlösung reflektieren"
+      "Vorwissen anwenden",
+      "Eigene Loesungen entwickeln",
+      "Mehrere Coding-Konzepte kombinieren",
+      "Projekte planen",
+      "Fehler selbststaendig beheben",
+      "Komplexere Aufgaben loesen"
     ],
-    "lesson10preview": "Du siehst, wie Block‑Coding auf Gruppenprojekte skaliert.",
-    "lesson11": "Die Letzte Insel",
-    "lesson11sub": "Das Ziel deiner Block-Coding-Reise",
+    "lesson10preview": "Du hast die Ausbildung des Minecraft Education Block Coding Archipels fast abgeschlossen. Vor dir liegt nur noch die geheimnisvolle letzte Insel.",
+    "lesson11": "🔒 Die letzte Insel",
+    "lesson11sub": "Gesperrt - Bald verfuegbar",
     "lesson4tasks": [
       {
         "title": "Gerader Weg",
@@ -363,6 +364,36 @@
     },
     "lesson9reward": "Daten-Hüter",
     "lesson9rewardDesc": "Du hast erfolgreich gelernt, Informationen mit Variablen zu speichern und zu verwalten.",
-    "lesson9conclusion": "Du hast gelernt, wie Programme Informationen speichern und wiederverwenden können. Damit werden deine Projekte deutlich leistungsfähiger."
+    "lesson9conclusion": "Du hast gelernt, wie Programme Informationen speichern und wiederverwenden können. Damit werden deine Projekte deutlich leistungsfähiger.",
+    "lesson10tasks": [
+      {
+        "title": "Projektphase 1: Planung",
+        "description": "Ueberlege ein Projekt mit 3 Konzepten."
+      },
+      {
+        "title": "Projektphase 2: Umsetzung",
+        "description": "Setze dein Projekt Schritt fuer Schritt um."
+      },
+      {
+        "title": "Projektphase 3: Praesentation",
+        "description": "Zeige dein Projekt der Klasse."
+      }
+    ],
+    "lesson10knowledge": [
+      "Agent - Der Agent fuehrt Befehle aus",
+      "Schleifen - Aufgaben automatisch wiederholen",
+      "Bedingungen - Entscheidungen treffen",
+      "Variablen - Werte merken",
+      "Ereignisse - Auf Chat-Befehle reagieren",
+      "Bauen - Bloeke platzieren"
+    ],
+    "lesson10mission": {
+      "title": "Der Weg zur letzten Insel",
+      "description": "Nutze die Faehigkeiten aller bisherigen Inseln fuer die Abschlussaufgabe."
+    },
+    "lesson10reward": "Archipel-Meister",
+    "lesson10rewardDesc": "Du hast alle Ausbildungsinseln erfolgreich abgeschlossen und bist bereit fuer die letzte Reise.",
+    "lesson10conclusion": "Du hast die Ausbildung des Minecraft Education Block Coding Archipels fast abgeschlossen. Vor dir liegt nur noch die geheimnisvolle letzte Insel.",
+    "lesson11desc": "Diese Insel ist noch verschlossen. Sammle alle Faehigkeiten der vorherigen Inseln, um sie zu betreten."
   }
 }

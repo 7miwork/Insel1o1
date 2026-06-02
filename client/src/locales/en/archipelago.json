@@ -162,19 +162,20 @@
       "Make programs smarter"
     ],
     "lesson9preview": "You've learned how programs can store and reuse information. This makes your projects much more powerful.",
-    "lesson10": "Shared City",
-    "lesson10sub": "The big final project",
-    "lesson10desc": "Collaborate on a larger project where multiple agents build a shared city, applying teamwork and advanced logic.",
+    "lesson10": "Final Project and Adventure",
+    "lesson10sub": "Combine everything",
+    "lesson10desc": "Use everything you've learned so far. Plan your own project and combine skills from previous lessons.",
     "lesson10objectives": [
-      "Plan collaborative tasks",
-      "Synchronize multiple agents",
-      "Manage shared resources",
-      "Implement city features (roads, buildings, utilities)",
-      "Reflect on teamwork and problem solving"
+      "Apply prior knowledge",
+      "Develop own solutions",
+      "Combine multiple coding concepts",
+      "Plan projects",
+      "Fix errors independently",
+      "Solve complex tasks"
     ],
-    "lesson10preview": "You’ll see how block coding scales to group projects.",
-    "lesson11": "The Last Island",
-    "lesson11sub": "The goal of your block coding journey",
+    "lesson10preview": "You've almost completed the Minecraft Education Block Coding archipelago. Only the mysterious final island lies ahead.",
+    "lesson11": "🔒 The Last Island",
+    "lesson11sub": "Locked - Coming soon",
     "lesson3tasks": [
       {
         "title": "Start the Agent",
@@ -363,6 +364,36 @@
     },
     "lesson9reward": "Data Keeper",
     "lesson9rewardDesc": "You've successfully learned to store and manage information with variables.",
-    "lesson9conclusion": "You've learned how programs can store and reuse information. This makes your projects much more powerful."
+    "lesson9conclusion": "You've learned how programs can store and reuse information. This makes your projects much more powerful.",
+    "lesson10tasks": [
+      {
+        "title": "Project Phase 1: Planning",
+        "description": "Plan a project with 3 concepts."
+      },
+      {
+        "title": "Project Phase 2: Implementation",
+        "description": "Build your project step by step."
+      },
+      {
+        "title": "Project Phase 3: Presentation",
+        "description": "Present your project to the class."
+      }
+    ],
+    "lesson10knowledge": [
+      "Agent - The Agent executes commands",
+      "Loops - Automate repetitive tasks",
+      "Conditions - Make decisions",
+      "Variables - Remember values",
+      "Events - React to chat commands",
+      "Building - Place blocks"
+    ],
+    "lesson10mission": {
+      "title": "The Road to the Last Island",
+      "description": "Use all skills from previous islands for the final challenge."
+    },
+    "lesson10reward": "Archipelago Master",
+    "lesson10rewardDesc": "You've completed all training islands successfully and are ready for the final journey.",
+    "lesson10conclusion": "You've almost completed the Minecraft Education Block Coding archipelago. Only the mysterious final island lies ahead.",
+    "lesson11desc": "This island is still locked. Collect all skills from the previous islands to enter it."
   }
 }
