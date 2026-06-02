@@ -173,17 +173,18 @@
       "Ereignisse mit Befehlen verbinden"
     ],
     "lesson8preview": "Du hast gelernt, wie Programme auf Ereignisse reagieren. Dadurch werden deine Projekte interaktiv und können auf Eingaben der Spieler antworten.",
-    "lesson9": "Mein erstes Spiel",
-    "lesson9sub": "Punkte, Regeln und Mini-Games",
-    "lesson9desc": "Kombiniere alle bisherigen Konzepte, um ein Mini‑Spiel mit Regeln, Punktestand und Gewinnbedingungen zu erstellen.",
+    "lesson9": "Variablen und Daten speichern",
+    "lesson9sub": "Informationen mit Variablen merken",
+    "lesson9desc": "Programme können sich Informationen merken. Mit Variablen lassen sich Werte speichern, verändern und später wiederverwenden.",
     "lesson9objectives": [
-      "Einfachen Spiel‑Loop entwerfen",
-      "Punktesystem implementieren",
-      "Gewinn‑ oder Verlustbedingungen erkennen",
-      "Ereignisse zur Steuerung des Gameplays nutzen",
-      "Benutzererlebnis verfeinern"
+      "Variablen verstehen",
+      "Werte speichern",
+      "Werte verändern",
+      "Informationen wiederverwenden",
+      "Daten verwalten",
+      "Programme intelligenter machen"
     ],
-    "lesson9preview": "Du hast ein spielbares Spiel innerhalb von Minecraft.",
+    "lesson9preview": "Du hast gelernt, wie Programme Informationen speichern und wiederverwenden können. Damit werden deine Projekte deutlich leistungsfähiger.",
     "lesson10": "Gemeinsame Stadt",
     "lesson10sub": "Das große Abschlussprojekt",
     "lesson10desc": "Arbeite im Team an einem größeren Projekt, bei dem mehrere Agenten eine gemeinsame Stadt bauen und fortgeschrittene Logik anwenden.",
@@ -333,6 +334,35 @@
     },
     "lesson8reward": "Ereignis-Meister",
     "lesson8rewardDesc": "Du hast erfolgreich Programme mit Ereignissen und Chat-Befehlen gesteuert.",
-    "lesson8conclusion": "Du hast gelernt, wie Programme auf Ereignisse reagieren. Dadurch werden deine Projekte interaktiv und können auf Eingaben der Spieler antworten."
+    "lesson8conclusion": "Du hast gelernt, wie Programme auf Ereignisse reagieren. Dadurch werden deine Projekte interaktiv und können auf Eingaben der Spieler antworten.",
+    "lesson9tasks": [
+      {
+        "title": "Erste Variable",
+        "description": "Erstelle eine Variable mit dem Wert 0."
+      },
+      {
+        "title": "Schritte zählen",
+        "description": "Zähle die Schritte des Agenten."
+      },
+      {
+        "title": "Variable in Bedingungen",
+        "description": "Nutze Variablen in Bedingungen."
+      }
+    ],
+    "lesson9knowledge": [
+      "Variable - Eine Schachtel mit Namen für Werte",
+      "Wert - Was in der Variable gespeichert ist",
+      "Speichern - Einen Wert ablegen",
+      "Ändern - Den Wert verändern",
+      "Daten - Informationen für das Programm",
+      "Information - Alles, was das Programm sich merkt"
+    ],
+    "lesson9mission": {
+      "title": "Der Gedächtnis-Agent",
+      "description": "Programmiere den Agenten so, dass er sich eine Zahl merkt, diese bei jedem Schritt erhöht und sie am Ende ausgibt."
+    },
+    "lesson9reward": "Daten-Hüter",
+    "lesson9rewardDesc": "Du hast erfolgreich gelernt, Informationen mit Variablen zu speichern und zu verwalten.",
+    "lesson9conclusion": "Du hast gelernt, wie Programme Informationen speichern und wiederverwenden können. Damit werden deine Projekte deutlich leistungsfähiger."
   }
 }

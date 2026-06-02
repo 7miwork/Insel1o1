@@ -150,17 +150,18 @@
       "Connect events with commands"
     ],
     "lesson8preview": "You've learned how programs react to events. This makes your projects interactive and able to respond to player input.",
-    "lesson9": "My First Game",
-    "lesson9sub": "Points, rules, and mini-games",
-    "lesson9desc": "Combine all previous concepts to create a mini‑game with rules, scoring, and win conditions.",
+    "lesson9": "Variables and Storing Data",
+    "lesson9sub": "Remembering information with variables",
+    "lesson9desc": "Programs can remember information. With variables, you can store, change, and reuse values later.",
     "lesson9objectives": [
-      "Design a simple game loop",
-      "Implement scoring mechanisms",
-      "Detect win or lose conditions",
-      "Use events to drive gameplay",
-      "Polish the user experience"
+      "Understand variables",
+      "Store values",
+      "Change values",
+      "Reuse information",
+      "Manage data",
+      "Make programs smarter"
     ],
-    "lesson9preview": "You’ll have a playable game inside Minecraft.",
+    "lesson9preview": "You've learned how programs can store and reuse information. This makes your projects much more powerful.",
     "lesson10": "Shared City",
     "lesson10sub": "The big final project",
     "lesson10desc": "Collaborate on a larger project where multiple agents build a shared city, applying teamwork and advanced logic.",
@@ -333,6 +334,35 @@
     },
     "lesson8reward": "Event Master",
     "lesson8rewardDesc": "You've successfully controlled programs with events and chat commands.",
-    "lesson8conclusion": "You've learned how programs react to events. This makes your projects interactive and able to respond to player input."
+    "lesson8conclusion": "You've learned how programs react to events. This makes your projects interactive and able to respond to player input.",
+    "lesson9tasks": [
+      {
+        "title": "First Variable",
+        "description": "Create a variable with value 0."
+      },
+      {
+        "title": "Count Steps",
+        "description": "Count the Agent's steps."
+      },
+      {
+        "title": "Variable in Conditions",
+        "description": "Use variables in conditions."
+      }
+    ],
+    "lesson9knowledge": [
+      "Variable - A named box for storing values",
+      "Value - What is stored in the variable",
+      "Store - Putting a value in a variable",
+      "Change - Modifying the value",
+      "Data - Information used by a program",
+      "Information - Everything the program needs to remember"
+    ],
+    "lesson9mission": {
+      "title": "The Memory Agent",
+      "description": "Program the Agent to remember a number, increase it with each step, and output it at the end."
+    },
+    "lesson9reward": "Data Keeper",
+    "lesson9rewardDesc": "You've successfully learned to store and manage information with variables.",
+    "lesson9conclusion": "You've learned how programs can store and reuse information. This makes your projects much more powerful."
   }
 }

@@ -1202,84 +1202,141 @@ Wie verändert sich ein Programm, wenn es auf Ereignisse reagiert? Wann sind Cha
   },
   {
     id: 9,
-    title: 'Combined Challenge – Agent Navigates a Simple Maze',
-    description: 'Challenge: Use loops and conditionals to navigate a maze',
-    phase: 'conditionals',
+    title: 'Variablen und Daten speichern',
+    description: 'Programme können sich Informationen merken. Mit Variablen lassen sich Werte speichern, verändern und später wiederverwenden.',
+    phase: 'creative',
     duration: 60,
-    difficulty: 'advanced',
+    difficulty: 'intermediate',
     objectives: [
-      'Combine loops and conditionals',
-      'Solve complex navigation problems',
-      'Debug multi-step logic',
-      'Optimize maze-solving algorithms',
+      'Variablen verstehen',
+      'Werte speichern',
+      'Werte verändern',
+      'Informationen wiederverwenden',
+      'Daten verwalten',
+      'Programme intelligenter machen',
     ],
     content: `
-# Maze Navigation Challenge
+# Variablen und Daten speichern
 
-## The Challenge
-Navigate the Agent through a maze from start to finish.
+## Was ist eine Variable?
+Eine Variable ist wie eine kleine Schachtel mit einem Namen. Du kannst etwas hineinlegen – zum Beispiel eine Zahl oder einen Text – und später wieder herausnehmen. Der Name der Schachtel hilft dir, sie wiederzufinden.
 
-## Strategy
-1. Use loops to repeat navigation attempts
-2. Use conditionals to check for obstacles
-3. Try different directions until finding a path
-4. Repeat until reaching the goal
+## Warum müssen Programme Informationen speichern?
+Stell dir vor, der Agent soll sich merken, wie viele Blöcke er schon gelegt hat. Oder er soll den Namen eines Spielers speichern. Ohne Variablen müsste er immer von vorne anfangen. Mit Variablen kann er sich Werte merken und später verwenden.
 
-## Maze-Solving Algorithms
-- **Wall Follower**: Keep one hand on the wall and follow it
-- **Right-Hand Rule**: Always try to turn right first
-- **Breadth-First Search**: Try all directions systematically
+## Wie eine Variable arbeitet
+1. **Variable erstellen** – Gib der Variable einen Namen (z. B. "anzahl")
+2. **Wert speichern** – Lege einen Wert hinein (z. B. anzahl = 0)
+3. **Wert ändern** – Verändere den Wert (z. B. anzahl + 1)
+4. **Wert verwenden** – Hole den Wert heraus und nutze ihn
 
-## Code Pattern
+## Beispiel: Zählen mit Variablen
 \`\`\`
-repeat(100) {
-  if (canMove(FORWARD)) {
-    move(FORWARD, 1)
-  } else if (canMove(RIGHT)) {
-    turn(RIGHT)
-  } else {
-    turn(LEFT)
-  }
-}
+set variable schritte = 0
+schritte = schritte + 1
+say(schritte)
 \`\`\`
+
+Dieses Programm zählt die Schritte des Agenten und gibt sie im Chat aus.
+
+## Variablen in Minecraft Education
+- **set variable name = wert** – Erstellt eine Variable mit einem Wert
+- **change variable name by zahl** – Verändert den Wert (z. B. +1 oder -1)
+- **Variable im say** – Zeige den Wert einer Variable im Chat an
+- **Variable in Bedingungen** – Vergleiche Werte (z. B. if (schritte == 5))
+
+## Das solltest du wissen
+- **Variable** – Eine Schachtel mit Namen, die einen Wert speichert
+- **Wert** – Das, was in der Variable gespeichert ist (Zahl oder Text)
+- **Speichern** – Einen Wert in die Variable legen
+- **Ändern** – Den Wert der Variable verändern
+- **Daten** – Informationen, die ein Programm verwendet
+- **Information** – Alles, was das Programm sich merken muss
+
+## Aufgabe 1: Erste Variable
+Erstelle eine Variable namens "anzahl" mit dem Wert 0. Lasse den Agenten "anzahl" im Chat ausgeben. Ändere den Wert auf 10.
+
+## Aufgabe 2: Schritte zählen
+Erstelle eine Variable "schritte". Jedes Mal, wenn der Agent einen Schritt geht, erhöhe den Wert um 1. Gib am Ende die Gesamtzahl aus.
+
+## Aufgabe 3: Variable in Bedingungen
+Setze eine Variable "bloecke" auf 0. Jedes Mal, wenn der Agent einen Block platziert, erhöhe bloecke um 1. Wenn bloecke == 5, dann sagt der Agent: "Fertig!".
+
+## Reflexion
+Was ist dir an Variablen aufgefallen? Warum sind sie nützlich? Was passiert, wenn du den Wert vergisst?
 `,
     codeBlocks: [
       {
-        name: 'maze solving',
-        description: 'Navigate complex paths',
-        example: 'Combine loops + conditionals',
-        icon: '🗺️',
+        name: 'set variable',
+        description: 'Erstelle eine Variable und speichere einen Wert',
+        example: 'set variable anzahl = 0',
+        icon: '📦',
+      },
+      {
+        name: 'change variable',
+        description: 'Verändere den Wert einer Variable',
+        example: 'change variable anzahl by 1',
+        icon: '✏️',
       },
     ],
     studentActivity: `
-1. Navigate a simple 10x10 maze
-2. Navigate a complex maze with multiple paths
-3. Implement the wall-follower algorithm
-4. Implement the right-hand rule
-5. Create your own maze and solve it
+**Aufgabe 1: Erste Variable**
+1. Erstelle eine Variable "anzahl" mit Wert 0.
+2. Lasse den Agenten "anzahl" sagen.
+3. Ändere den Wert auf 10 und lasse ihn erneut sagen.
+
+**Aufgabe 2: Schritte zählen**
+1. Erstelle eine Variable "schritte" mit Wert 0.
+2. Nach jedem move(FORWARD, 1): schritte + 1.
+3. Am Ende: say(schritte).
+
+**Aufgabe 3: Variable in Bedingungen**
+1. Variable "bloecke" mit Wert 0.
+2. Nach jedem place: bloecke + 1.
+3. Wenn bloecke == 5: say("Fertig!").
+
+**Mission: Der Gedächtnis-Agent**
+Programmiere den Agenten so, dass er sich eine Zahl merkt, diese bei jedem Schritt erhöht und sie am Ende ausgibt.
+
+**Reflexion im Team:**
+Warum sind Variablen nützlich? Was passiert, wenn du den Wert vergisst?
 `,
-    teacherTip: 'Start with a simple maze and gradually increase difficulty.',
+    teacherTip: 'Beginne mit einem Alltagsbeispiel: "Wenn ich Zähle, wie viele Äpfel ich habe, merke ich mir die Zahl." Zeige dann, wie man in Minecraft eine Variable erstellt und verwendet. Betone den Unterschied zwischen set (festlegen) und change (verändern).',
     quiz: [
       {
         id: 1,
-        question: 'What is the wall-follower algorithm?',
-        options: ['Follow walls with one hand', 'Destroy all walls', 'Build walls', 'Avoid walls'],
-        correctAnswer: 0,
-        explanation: 'The wall-follower algorithm keeps one hand on a wall and follows it through the maze.',
+        question: 'Wozu dient eine Variable?',
+        options: ['Um Blöcke zu zerstören', 'Um Informationen zu speichern', 'Um Minecraft zu schließen', 'Um die Welt zu löschen'],
+        correctAnswer: 1,
+        explanation: 'Eine Variable ist wie eine Schachtel, die Informationen für das Programm speichert.',
       },
       {
         id: 2,
-        question: 'How many times should you repeat the navigation loop?',
-        options: ['10 times', '50 times', '100+ times', 'Infinite'],
-        correctAnswer: 2,
-        explanation: 'Use a large repeat number to ensure the Agent has enough attempts to solve the maze.',
+        question: 'Was passiert bei "change variable anzahl by 1"?',
+        options: ['Die Variable wird gelöscht', 'Der Wert der Variable wird um 1 erhöht', 'Ein Block wird platziert', 'Der Agent wird bewegt'],
+        correctAnswer: 1,
+        explanation: '"change variable anzahl by 1" erhöht den Wert der Variable um 1.',
       },
       {
         id: 3,
-        question: 'What combination of concepts is needed for maze solving?',
-        options: ['Only loops', 'Only conditionals', 'Loops AND conditionals', 'Neither'],
-        correctAnswer: 2,
-        explanation: 'Maze solving requires both loops (to keep trying) and conditionals (to make decisions).',
+        question: 'Wie erstellt man eine Variable "schritte" mit dem Wert 0?',
+        options: ['set variable schritte = 0', 'create schritte = 0', 'new schritte is 0', 'var schritte ist 0'],
+        correctAnswer: 0,
+        explanation: 'Mit "set variable schritte = 0" erstellst du eine Variable und legst den Startwert fest.',
+      },
+      {
+        id: 4,
+        question: 'Warum sind Variablen in Programmen wichtig?',
+        options: ['Sie machen Programme kürzer', 'Damit Programme sich Werte merken können', 'Sie sind nicht wichtig', 'Sie ersetzen den Agenten'],
+        correctAnswer: 1,
+        explanation: 'Variablen sind wichtig, weil Programme sich Werte wie Zahlen oder Texte merken müssen.',
+      },
+      {
+        id: 5,
+        question: 'Was gibt der Agent aus, wenn schritte = 5 und er say(schritte) ausführt?',
+        options: ['"schritte"', '5', 'nichts', 'einen Fehler'],
+        correctAnswer: 1,
+        explanation: 'say(schritte) gibt den aktuellen Wert der Variable aus – hier 5.',
       },
     ],
     xpReward: 100,
