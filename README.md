@@ -1,202 +1,220 @@
 # 🏝️ Insel 1o1
 
-Eine gamifizierte Lernplattform für Schülerinnen und Schüler mit einer modernen Inselwelt als Lernumgebung.
+A gamified learning platform that transforms education into an adventure through islands, archipelagos, quests, achievements, and interactive learning experiences.
 
 ## 🌍 Live Demo
 
 🌐 https://7miwork.github.io/Insel1o1/
 
-## 📖 Projektvision
+---
 
-Insel 1o1 ist eine digitale Lernwelt, die klassische Bildung mit Gamification verbindet.
+# 📖 Project Vision
 
-Während Schüler in einer spielerischen Inselwelt lernen und Fortschritte sammeln, erhalten Eltern, Lehrkräfte und Schulen eine professionelle Verwaltungs- und Analyseoberfläche.
+Insel 1o1 aims to combine modern education with engaging game mechanics.
 
-Das Projekt verfolgt einen Dual-UI-Ansatz:
+Students learn through a world of islands and adventures, while parents, teachers, and educational institutions receive a professional dashboard for monitoring progress and managing courses.
 
-### 🎮 Schüleransicht
+The platform is built around a **Dual UI Concept**:
 
-- Gamifizierte Lernwelt
-- Insel- und Archipel-System
-- Quests und Missionen
-- Erfahrungspunkte (XP)
-- Abzeichen und Belohnungen
-- Fortschrittsanzeigen
-- Freischaltbare Inhalte
-- Lernvideos
-- Quizsystem
-- Interaktive Lernpfade
+## 🎮 Student Interface
 
-### 🏢 Eltern-, Lehrer- und Schulansicht
+A highly gamified environment designed to motivate learning through exploration and progression.
 
-- Modernes professionelles Dashboard
-- Lernfortschrittsübersicht
-- Kursverwaltung
-- Schülerverwaltung
-- Analysen und Berichte
-- Zertifikate
-- Lizenzverwaltung
-- Shop- und Kursverwaltung
+Features include:
+
+- Interactive island world
+- Learning archipelagos
+- Quests and missions
+- Experience points (XP)
+- Achievements and badges
+- Unlockable content
+- Progress tracking
+- Learning videos
+- Interactive quizzes
+- Rewards and collectibles
+- Adventure-based course progression
+
+## 🏢 Professional Interface
+
+A modern dashboard designed for:
+
+- Parents
+- Teachers
+- Schools
+- Educational organizations
+
+Features include:
+
+- Student management
+- Learning analytics
+- Progress reports
+- Course administration
+- Certificate management
+- License management
+- Course marketplace
+- Performance monitoring
 
 ---
 
-# 🗺️ Aktueller Archipel
+# 🗺️ Current Learning Archipelagos
 
-## 💻 Programmier-Archipel
+## 💻 Programming Archipelago
 
-Der erste verfügbare Lernbereich.
+The first learning region available within Insel 1o1.
 
 ### Minecraft Education Block Coding
 
-Der Einstieg in die Welt des Programmierens mit Minecraft Education.
+A beginner-friendly coding journey using Minecraft Education Edition.
 
-Aktuell geplant:
+Current island structure:
 
-| Insel | Inhalt |
-|---------|---------|
-| Insel 1 | Einführung |
-| Insel 2 | Grundlagen |
-| Insel 3 | Agenten |
-| Insel 4 | Bewegungen |
-| Insel 5 | Bauen |
-| Insel 6 | Schleifen |
-| Insel 7 | Bedingungen |
-| Insel 8 | Ereignisse |
-| Insel 9 | Variablen |
-| Insel 10 | Abschlussprojekt |
-| Insel 11 | Die letzte Insel |
+| Island | Topic |
+|----------|----------|
+| Island 1 | Introduction |
+| Island 2 | Coding Basics |
+| Island 3 | Working with the Agent |
+| Island 4 | Agent Movement |
+| Island 5 | Building Structures |
+| Island 6 | Loops |
+| Island 7 | Conditions |
+| Island 8 | Events & Chat Commands |
+| Island 9 | Variables |
+| Island 10 | Final Project |
+| Island 11 | The Final Island |
 
 ---
 
-# 🏆 Die letzte Insel
+# 🏆 The Final Island
 
-Die legendäre Abschlussinsel des Minecraft Education Block Coding Archipels.
+The legendary destination at the end of the Minecraft Education Block Coding journey.
 
-Inspiration:
+Inspired by:
 
 - One Piece – Laugh Tale
-- Endgame-Insel
-- Meisterinsel
+- Endgame content
+- Master-level achievements
 
-Nach erfolgreichem Abschluss aller Lektionen erhalten Schüler Zugang zu:
+After completing all lessons, students will unlock:
 
-- Abschlussabzeichen
-- Zertifikat
-- Spezielle Belohnungen
-- Kleinem Jump-and-Run
-- Schatzkiste
-- Freischaltung weiterer Archipele
+- Final rewards
+- Special achievements
+- Completion certificate
+- Hidden treasure
+- Mini parkour challenge
+- Exclusive profile rewards
+- Access to future archipelagos
 
 ---
 
-# 🎯 Geplante Archipele
+# 🚀 Planned Future Archipelagos
 
-## 💻 Programmierung
+## 💻 Programming
 
 - Minecraft Education
 - Scratch
 - Python
 - JavaScript
-- Webentwicklung
-- KI-Grundlagen
+- Web Development
+- Artificial Intelligence
 
-## 🎨 Kreativität
+## 🎨 Creative Skills
 
 - Pixel Art
-- Grafikdesign
+- Graphic Design
 - Video Editing
 - Animation
 
-## 🌏 Sprachen
+## 🌏 Languages
 
-- Deutsch
-- Englisch
-- Chinesisch
-- Japanisch
+- German
+- English
+- Traditional Chinese
+- Simplified Chinese
+- Japanese
 
-## 🔬 MINT
+## 🔬 STEM
 
-- Mathematik
-- Physik
-- Chemie
-- Robotik
+- Mathematics
+- Physics
+- Chemistry
+- Robotics
 
 ---
 
-# 🌐 Mehrsprachigkeit (i18n)
+# 🌐 Internationalization (i18n)
 
-Das gesamte Projekt wird vollständig internationalisiert.
+The platform is designed from the ground up to support multiple languages.
 
-Geplante Sprachen:
+Planned languages include:
 
-- 🇩🇪 Deutsch
+- 🇩🇪 German
 - 🇬🇧 English
-- 🇹🇼 繁體中文
-- 🇨🇳 简体中文
-- 🇯🇵 日本語
+- 🇹🇼 Traditional Chinese
+- 🇨🇳 Simplified Chinese
+- 🇯🇵 Japanese
 
-Alle Inhalte werden über zentrale Übersetzungsdateien verwaltet.
+All content is managed through centralized translation files.
 
 ---
 
-# 🎥 Lernvideos
+# 🎥 Learning Video System
 
-Jede Lektion unterstützt künftig:
+Each lesson supports future integration with:
 
 - YouTube
 - PeerTube
 - Vimeo
-- MP4-Dateien
-- Selbst gehostete Videos
+- MP4 files
+- Self-hosted videos
 
-Aktuell sind Video-Platzhalter vorbereitet.
-
----
-
-# 🏅 Gamification-System
-
-Geplante Funktionen:
-
-- XP-System
-- Levelsystem
-- Erfolge
-- Abzeichen
-- Questsystem
-- Lernserien
-- Tagesaufgaben
-- Wochenziele
-- Ranglisten
-- Insel-Freischaltungen
+A reusable video placeholder system is already prepared throughout the platform.
 
 ---
 
-# 🏪 Shop-System
+# 🏅 Gamification Features
 
-Geplant:
+Planned systems include:
 
-- Einzelne Lektionen
-- Kurspakete
-- Archipel-Pakete
-- Zertifikate
-- Premium-Inhalte
+- XP progression
+- Levels
+- Achievements
+- Badges
+- Quests
+- Daily challenges
+- Weekly objectives
+- Learning streaks
+- Unlockable islands
+- Special rewards
 
 ---
 
-# 🛠️ Technologie
+# 🏪 Marketplace
 
-Aktueller Stack:
+Planned features:
+
+- Individual lessons
+- Course bundles
+- Archipelago bundles
+- Certificates
+- Premium content
+
+---
+
+# 🛠️ Technology Stack
+
+Current technologies:
 
 - React
 - TypeScript
 - Vite
 - Tailwind CSS
 - Express
-- i18n-System
+- Internationalization (i18n)
 - GitHub Pages Deployment
 
 ---
 
-# 📂 Projektstruktur
+# 📂 Project Structure
 
 ```text
 client/
@@ -215,58 +233,77 @@ shared/
 .github/
 ```
 
-# 🚀 Lokale Entwicklung
+---
 
-Installation:
+# 🚀 Local Development
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/7miwork/Insel1o1.git
-
 cd Insel1o1
+```
 
+## Install Dependencies
+
+```bash
 pnpm install
 ```
 
-Entwicklungsserver starten:
+## Start Development Server
 
 ```bash
 pnpm run dev
 ```
 
-Build erstellen:
+## Build Production Version
 
 ```bash
 pnpm run build
 ```
 
-Typprüfung:
+## Run Type Checks
 
 ```bash
 pnpm run check
 ```
 
-# 🤝 Mitwirken
+---
 
-Beiträge sind willkommen.
+# 🤝 Contributing
 
-Mögliche Bereiche:
+Contributions are welcome.
 
-- Übersetzungen
-- Neue Archipele
-- Quiz-Inhalte
-- Minecraft Education Kurse
-- UI/UX Verbesserungen
-- Gamification
-- Dokumentation
+Areas where help is especially appreciated:
 
-# 📜 Lizenz
-
-Derzeit in Vorbereitung.
-
-# 🌟 Langfristiges Ziel
-
-Eine vollständig mehrsprachige Bildungsplattform zu schaffen, die Lernen so motivierend macht wie ein gutes Spiel und gleichzeitig Lehrkräften, Schulen und Eltern professionelle Werkzeuge bietet.
+- Translation improvements
+- New archipelagos
+- Educational content
+- Minecraft Education lessons
+- Quizzes and assessments
+- UI/UX improvements
+- Accessibility improvements
+- Documentation
+- Gamification systems
 
 ---
 
-**Insel 1o1 – Lernen als Abenteuer.**
+# 🎯 Long-Term Goal
+
+To create a multilingual educational platform that makes learning feel like an adventure while providing professional tools for teachers, parents, and educational institutions.
+
+Students should feel like explorers on a journey, unlocking new islands, mastering new skills, and discovering new opportunities through education.
+
+---
+
+# 📜 License
+
+License information will be added in a future release.
+
+---
+
+# 🌟 Insel 1o1
+
+**Learn. Explore. Progress.**
+
+Transforming education into an adventure, one island at a time.
