@@ -1,3 +1,12 @@
 {
-  "quests": {}
+  "quests": {
+    "dailyQuests": "Tägliche Quests",
+    "weeklyQuests": "Wöchentliche Quests",
+    "completedQuests": "Abgeschlossene Quests",
+    "activeQuests": "Aktive Quests",
+    "reward": "Belohnung",
+    "progress": "Fortschritt",
+    "claimReward": "Belohnung einfordern",
+    "viewAll": "Alle anzeigen"
+  }
 }

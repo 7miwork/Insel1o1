@@ -4,11 +4,18 @@
     "pricing": "Preise",
     "about": "Über uns",
     "signIn": "Anmelden",
+    "signUp": "Registrieren",
     "exploreCourses": "Kurse erkunden",
-    "dashboard": "Dashboard",
-    "leaderboard": "Rangliste",
+    "dashboard": "Übersicht",
+    "leaderboard": "Bestenliste",
     "courses": "Kurse",
+    "archipelagos": "Archipele",
     "home": "Startseite",
-    "profile": "Profil"
+    "profile": "Profil",
+    "progress": "Fortschritt",
+    "settings": "Einstellungen",
+    "logout": "Abmelden",
+    "backToArchipelago": "Zurück zum Archipel",
+    "backToHome": "Zurück zur Startseite"
   }
 }

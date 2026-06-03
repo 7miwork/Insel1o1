@@ -1,3 +1,12 @@
 {
-  "shop": {}
+  "shop": {
+    "title": "Shop",
+    "subtitle": "Tausche Münzen gegen besondere Belohnungen",
+    "buyNow": "Jetzt kaufen",
+    "owned": "Im Besitz",
+    "insufficientCoins": "Nicht genügend Münzen",
+    "items": "Artikel",
+    "coins": "Münzen",
+    "gems": "Edelsteine"
+  }
 }

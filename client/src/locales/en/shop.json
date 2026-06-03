@@ -1,3 +1,12 @@
 {
-  "shop": {}
+  "shop": {
+    "title": "Shop",
+    "subtitle": "Exchange coins for special rewards",
+    "buyNow": "Buy Now",
+    "owned": "Owned",
+    "insufficientCoins": "Insufficient coins",
+    "items": "Items",
+    "coins": "Coins",
+    "gems": "Gems"
+  }
 }

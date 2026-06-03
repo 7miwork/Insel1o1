@@ -1,3 +1,12 @@
 {
-  "shop": {}
+  "shop": {
+    "title": "商店",
+    "subtitle": "用金幣兌換特別獎勵",
+    "buyNow": "立即購買",
+    "owned": "已擁有",
+    "insufficientCoins": "金幣不足",
+    "items": "道具",
+    "coins": "金幣",
+    "gems": "寶石"
+  }
 }

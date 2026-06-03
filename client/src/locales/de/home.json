@@ -1,3 +1,47 @@
 {
-  "home": {}
+  "home": {
+    "heroTitle": "Lernen, neu erfunden durch Gamification",
+    "heroDescription": "Begleite Millionen von Schülerinnen und Schülern auf ihrer Lernreise mit Insel 1o1 – der nächsten Generation von EdTech, die Bildung spannend, interaktiv und belohnend macht.",
+    "getStarted": "Kostenlos starten",
+    "watchDemo": "Demo ansehen",
+    "exploreArchipelagos": "Archipele erkunden",
+    "beginAdventure": "Abenteuer beginnen",
+    "activeStudents": "Aktive Lernende",
+    "courses": "Kurse",
+    "satisfaction": "Zufriedenheit",
+    "powerfulFeatures": "Leistungsstarke Funktionen",
+    "featureDescription": "Alles, was du für ein aussergewöhnliches Lernerlebnis brauchst",
+    "gamifiedLearning": "Gamifiziertes Lernen",
+    "gamifiedDescription": "Erlebe Lernen durch ein fesselndes Archipel-System mit XP, Leveln und Belohnungen.",
+    "multiRoleSystem": "Mehrrollen-System",
+    "multiRoleDescription": "Unterstützung für Lernende, Lehrpersonen, Eltern und Administratoren mit rollenbasierter Zugriffskontrolle.",
+    "achievementSystem": "Erfolgssystem",
+    "achievementDescription": "Schalte Erfolge frei, sammle Serien und erklimme Bestenlisten, während du Fortschritte machst.",
+    "globalLearning": "Globales Lernen",
+    "globalDescription": "Lerne auf Englisch, Deutsch oder Chinesisch (Traditionell) mit vollständiger Internationalisierungsunterstützung.",
+    "readyToTransform": "Bereit, dein Lernen zu verändern?",
+    "joinThousands": "Schliesse dich Tausenden von Lernenden an, die bereits mit Insel 1o1 lernen",
+    "enterEmail": "E-Mail-Adresse eingeben",
+    "startLearning": "Jetzt mit dem Lernen starten",
+    "mathKingdom": "Mathematik-Königreich",
+    "englishLiterature": "Englische Literatur",
+    "xpEarned": "Verdiente XP",
+    "level": "Level",
+    "streak": "Serie",
+    "tagline": "EdTech-Plattform der nächsten Generation",
+    "whyChooseTitle": "Warum Insel 1o1 wählen?",
+    "benefits": {
+      "personalizedLearning": "Personalisierte Lernpfade für jede:n Lernende:n",
+      "realTimeTracking": "Echtzeit-Fortschrittsverfolgung und Analysen",
+      "gamification": "Fesselndes Gamification-System",
+      "multiLanguageSupport": "Mehrsprachige Unterstützung",
+      "teacherParentDashboards": "Dashboards für Lehrpersonen und Eltern",
+      "secureScalable": "Sichere und skalierbare Plattform"
+    },
+    "archipelagoWelcomeTitle": "Willkommen im Archipel",
+    "archipelagoWelcomeDesc": "Deine Lernreise beginnt hier",
+    "trackProgress": "Verfolge deinen Fortschritt mit detaillierten Analysen und Einblicken",
+    "learningConsistency": "Lernkonsistenz",
+    "courseCompletion": "Kursabschluss"
+  }
 }

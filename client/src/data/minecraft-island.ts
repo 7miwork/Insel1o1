@@ -6,6 +6,15 @@ export interface CodeBlock {
   icon: string;
 }
 
+export interface LessonVideo {
+  enabled: boolean;
+  title: string;
+  description: string;
+  provider: '' | 'youtube' | 'peertube' | 'vimeo' | 'mp4';
+  url: string;
+  thumbnail: string;
+}
+
 export interface Lesson {
   id: number;
   title: string;
@@ -19,6 +28,7 @@ export interface Lesson {
   studentActivity: string;
   teacherTip: string;
   quiz: QuizQuestion[];
+  video?: LessonVideo;
   xpReward: number;
   unlocks?: number[];
 }
@@ -1526,7 +1536,7 @@ Was war deine größte Herausforderung? Welches Konzept hat dir am besten gefall
     title: '🏝️ Die letzte Insel',
     description: 'Du hast alle Inseln des Minecraft Education Block Coding Archipels abgeschlossen. Vor dir liegt die letzte Insel – mit Belohnung, Abenteuer und dem Abschluss deiner Reise.',
     phase: 'final-project',
-    duration: 90,
+    duration: 60,
     difficulty: 'advanced',
     objectives: [
       'Die letzte Herausforderung meistern',

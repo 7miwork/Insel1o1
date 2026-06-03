@@ -1,3 +1,12 @@
 {
-  "quests": {}
+  "quests": {
+    "dailyQuests": "每日任務",
+    "weeklyQuests": "每週任務",
+    "completedQuests": "已完成的任務",
+    "activeQuests": "進行中的任務",
+    "reward": "獎勵",
+    "progress": "進度",
+    "claimReward": "領取獎勵",
+    "viewAll": "檢視全部"
+  }
 }

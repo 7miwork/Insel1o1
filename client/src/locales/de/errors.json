@@ -1,3 +1,10 @@
 {
-  "errors": {}
+  "errors": {
+    "generic": "Ein Fehler ist aufgetreten. Bitte versuche es erneut.",
+    "networkError": "Netzwerkfehler. Bitte überprüfe deine Internetverbindung.",
+    "notFound": "Die gesuchte Seite wurde nicht gefunden.",
+    "unauthorized": "Du bist nicht berechtigt, auf diese Seite zuzugreifen.",
+    "validation": "Bitte überprüfe deine Eingabe.",
+    "serverError": "Serverfehler. Bitte versuche es später erneut."
+  }
 }

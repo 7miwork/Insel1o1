@@ -1,3 +1,22 @@
 {
-  "footer": {}
+  "footer": {
+    "product": "Produkt",
+    "company": "Unternehmen",
+    "resources": "Ressourcen",
+    "legal": "Rechtliches",
+    "features": "Funktionen",
+    "pricing": "Preise",
+    "security": "Sicherheit",
+    "about": "Über uns",
+    "blog": "Blog",
+    "careers": "Karriere",
+    "documentation": "Dokumentation",
+    "support": "Hilfe",
+    "community": "Community",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "contact": "Kontakt",
+    "allRightsReserved": "Alle Rechte vorbehalten.",
+    "followUs": "Folge uns"
+  }
 }

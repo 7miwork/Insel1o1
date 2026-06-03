@@ -1,237 +1,428 @@
-import React, { useState } from 'react';
-import { useLocation, useRoute } from 'wouter';
-import { RewardAnimation } from '@/components/RewardAnimation';
-import { calculateQuizReward, calculateLessonReward } from '@/lib/reward-system';
-import { MINECRAFT_LESSONS, Lesson } from '@/data/minecraft-island';
+import React, { useState, useMemo } from "react";
+import { useLocation, useRoute } from "wouter";
+import {
+  ChevronLeft,
+  Clock,
+  Star,
+  GraduationCap,
+  Sparkles,
+  CheckCircle2,
+  BookOpen,
+  Code2,
+  Lightbulb,
+  Hammer,
+  Trophy,
+  ArrowRight,
+  RotateCcw,
+} from "lucide-react";
+import { useI18n } from "@/contexts/I18nContext";
+import {
+  MINECRAFT_LESSONS,
+  type Lesson,
+  type QuizQuestion,
+} from "@/data/minecraft-island";
+import { VideoContainer } from "@/components/VideoContainer";
+import { QuizSection } from "@/components/QuizSection";
+import { RewardSection } from "@/components/RewardSection";
+import { RewardAnimation } from "@/components/RewardAnimation";
+import { calculateQuizReward, calculateLessonReward } from "@/lib/reward-system";
+
+/**
+ * Phase accent colors. The hero band is the visual anchor of the lesson page.
+ */
+const phaseAccents: Record<Lesson["phase"], { from: string; to: string; ring: string }> = {
+  "getting-started": { from: "#34d399", to: "#059669", ring: "#10b981" },
+  "loops":          { from: "#60a5fa", to: "#2563eb", ring: "#3b82f6" },
+  "conditionals":   { from: "#fb923c", to: "#ea580c", ring: "#f97316" },
+  "creative":       { from: "#a78bfa", to: "#7c3aed", ring: "#8b5cf6" },
+  "final-project":  { from: "#facc15", to: "#d97706", ring: "#eab308" },
+};
+
+const difficultyKeyMap: Record<Lesson["difficulty"], string> = {
+  beginner: "lesson.beginner",
+  intermediate: "lesson.intermediate",
+  advanced: "lesson.advanced",
+};
+
+const phaseLabelMap: Record<Lesson["phase"], string> = {
+  "getting-started": "lesson.gettingStarted",
+  "loops": "lesson.loops",
+  "conditionals": "lesson.conditionals",
+  "creative": "lesson.creative",
+  "final-project": "lesson.finalProject",
+};
 
 export const MinecraftLessonPage: React.FC = () => {
   const [, params] = useRoute('/lesson/:id');
-  const lessonId = parseInt(params?.id || '1');
+  const lessonId = parseInt(params?.id || '1', 10);
   const [, setLocation] = useLocation();
+  const { t } = useI18n();
 
   const lesson = MINECRAFT_LESSONS.find((l) => l.id === lessonId) as Lesson | undefined;
-  const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
-  const [quizAnswers, setQuizAnswers] = useState<number[]>([]);
-  const [showReward, setShowReward] = useState(false);
-  const [rewardData, setRewardData] = useState({ xp: 0, coins: 0 });
-  const [quizComplete, setQuizComplete] = useState(false);
-  const [lessonComplete, setLessonComplete] = useState(false);
+  const [showRewardAnimation, setShowRewardAnimation] = useState(false);
+  const [reward, setReward] = useState({ xp: 0, coins: 0 });
+  const [completed, setCompleted] = useState(false);
 
+  const accent = useMemo(
+    () => (lesson ? phaseAccents[lesson.phase] : phaseAccents["getting-started"]),
+    [lesson]
+  );
+
+  // Lesson not found
   if (!lesson) {
     return (
-      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Lesson Not Found</h1>
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 flex items-center justify-center px-4">
+        <div className="max-w-md text-center card-elevated p-8 rounded-2xl">
+          <div className="w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 mx-auto flex items-center justify-center mb-4">
+            <Lightbulb className="w-7 h-7" />
+          </div>
+          <h1 className="text-2xl font-extrabold text-slate-900">
+            {t("lesson.lessonNotFound")}
+          </h1>
+          <p className="text-slate-600 mt-2">
+            {t("lesson.lessonNotFoundDesc")}
+          </p>
           <button
+            type="button"
             onClick={() => setLocation('/archipelago')}
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg"
+            className="btn btn-primary btn-md mt-5"
           >
-            Back to Archipelago
+            <ChevronLeft className="w-4 h-4" />
+            {t("lesson.backToArchipelago")}
           </button>
         </div>
       </div>
     );
   }
 
-  const handleQuizAnswer = (answerIndex: number) => {
-    const newAnswers = [...quizAnswers, answerIndex];
-    setQuizAnswers(newAnswers);
+  const handleQuizComplete = (result: {
+    correctCount: number;
+    total: number;
+    score: number;
+  }) => {
+    const difficulty =
+      lesson.difficulty === 'beginner'
+        ? 'easy'
+        : lesson.difficulty === 'intermediate'
+        ? 'medium'
+        : 'hard';
 
-    if (currentQuizIndex < (lesson.quiz?.length || 0) - 1) {
-      setCurrentQuizIndex(currentQuizIndex + 1);
-    } else {
-      completeQuiz(newAnswers);
-    }
-  };
-
-  const completeQuiz = (answers: number[]) => {
-    const correctAnswers = answers.filter(
-      (answer, index) => answer === lesson.quiz?.[index]?.correctAnswer
-    ).length;
-    const score = Math.round((correctAnswers / (lesson.quiz?.length || 1)) * 100);
-
-    const difficulty = lesson.difficulty === 'beginner' ? 'easy' : lesson.difficulty === 'intermediate' ? 'medium' : 'hard';
-    const quizReward = calculateQuizReward(score, difficulty);
+    const quizReward = calculateQuizReward(result.score, difficulty);
     const lessonReward = calculateLessonReward(lesson.difficulty, 1800);
-
     const totalXP = quizReward.baseXP + quizReward.bonusXP + lessonReward.xp;
     const totalCoins = quizReward.coinReward + lessonReward.coins;
 
-    setRewardData({ xp: totalXP, coins: totalCoins });
-    setShowReward(true);
-    setQuizComplete(true);
-    setLessonComplete(true);
+    setReward({ xp: totalXP, coins: totalCoins });
+    setShowRewardAnimation(true);
+    setCompleted(true);
   };
 
-  const currentQuestion = lesson.quiz?.[currentQuizIndex];
-  const phaseColors: Record<string, string> = {
-    'getting-started': 'from-green-400 to-green-600',
-    'loops': 'from-blue-400 to-blue-600',
-    'conditionals': 'from-orange-400 to-orange-600',
-    'creative': 'from-purple-400 to-purple-600',
-    'final-project': 'from-yellow-400 to-yellow-600',
+  const heroStyle = {
+    background: `linear-gradient(135deg, ${accent.from} 0%, ${accent.to} 100%)`,
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      {showReward && (
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      {showRewardAnimation && (
         <RewardAnimation
-          xp={rewardData.xp}
-          coins={rewardData.coins}
-          onComplete={() => setShowReward(false)}
+          xp={reward.xp}
+          coins={reward.coins}
+          onComplete={() => setShowRewardAnimation(false)}
         />
       )}
 
-      {/* Header */}
-      <div className={`bg-gradient-to-r ${phaseColors[lesson.phase]} p-8`}>
-        <button
-          onClick={() => setLocation('/archipelago')}
-          className="mb-4 text-white hover:text-gray-200 flex items-center gap-2"
-        >
-          ← Back to Archipelago
-        </button>
-        <h1 className="text-4xl font-bold mb-2">{lesson.title}</h1>
-        <p className="text-lg opacity-90">{lesson.description}</p>
-        <div className="mt-4 flex gap-4 text-sm">
-          <span>⏱️ {lesson.duration} minutes</span>
-          <span>📊 {lesson.difficulty}</span>
-          <span>⭐ {lesson.xpReward} XP</span>
+      {/* ========================================================
+          1. HERO BANNER
+          ======================================================== */}
+      <header
+        className="relative overflow-hidden text-white"
+        style={heroStyle}
+      >
+        <div
+          className="absolute inset-0 opacity-30 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15) 0%, transparent 40%)",
+          }}
+          aria-hidden
+        />
+
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+          <button
+            type="button"
+            onClick={() => setLocation('/archipelago')}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 hover:text-white mb-6 transition-colors"
+            aria-label={t("lesson.backToArchipelago")}
+          >
+            <ChevronLeft className="w-4 h-4" />
+            {t("lesson.backToArchipelago")}
+          </button>
+
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur px-3 py-1 text-xs font-bold uppercase tracking-wider">
+              {t("common.lesson")} {lesson.id}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur px-3 py-1 text-xs font-semibold">
+              <GraduationCap className="w-3.5 h-3.5" />
+              {t(difficultyKeyMap[lesson.difficulty])}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur px-3 py-1 text-xs font-semibold">
+              <Clock className="w-3.5 h-3.5" />
+              {lesson.duration} {t("lesson.minutesShort")}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur px-3 py-1 text-xs font-semibold">
+              <Star className="w-3.5 h-3.5" fill="currentColor" />
+              +{lesson.xpReward} XP
+            </span>
+          </div>
+
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight max-w-3xl">
+            {lesson.title}
+          </h1>
+          <p className="text-base sm:text-lg text-white/90 mt-3 max-w-3xl">
+            {lesson.description}
+          </p>
         </div>
-      </div>
+      </header>
 
-      {/* Main Content */}
-      <div className="max-w-4xl mx-auto p-8">
-        {!quizComplete ? (
-          <>
-            {/* Lesson Content */}
-            <div className="bg-gray-800 rounded-lg p-8 mb-8">
-              <h2 className="text-2xl font-bold mb-4">📚 Lesson Content</h2>
-              <div className="prose prose-invert max-w-none">
-                <p className="whitespace-pre-wrap text-gray-300">{lesson.content}</p>
-              </div>
+      {/* ========================================================
+          MAIN — sections 2 through 9
+          ======================================================== */}
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+        {/* 2. LESSON OVERVIEW */}
+        <section
+          className="lesson-section animate-fadeInUp"
+          aria-label={t("lesson.overview")}
+        >
+          <div className="lesson-section-title">
+            <span className="icon-bubble" aria-hidden>
+              <BookOpen className="w-5 h-5" />
+            </span>
+            <h2>{t("lesson.overview")}</h2>
+          </div>
+          <p className="text-slate-600 leading-relaxed">{lesson.description}</p>
+        </section>
 
-              {/* Code Blocks */}
-              {lesson.codeBlocks && lesson.codeBlocks.length > 0 && (
-                <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4">💻 Code Blocks</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {lesson.codeBlocks.map((block, idx) => (
-                      <div key={idx} className="bg-gray-700 p-4 rounded-lg">
-                        <div className="text-2xl mb-2">{block.icon}</div>
-                        <h4 className="font-bold mb-2">{block.name}</h4>
-                        <p className="text-sm text-gray-300 mb-3">{block.description}</p>
-                        <code className="bg-black px-3 py-2 rounded text-sm text-green-400">
+        {/* 3. LEARNING OBJECTIVES */}
+        {lesson.objectives?.length > 0 && (
+          <section
+            className="lesson-section animate-fadeInUp"
+            aria-label={t("lesson.learningObjectives")}
+          >
+            <div className="lesson-section-title">
+              <span
+                className="icon-bubble"
+                style={{
+                  background: "linear-gradient(135deg,#bbf7d0,#4ade80)",
+                  color: "#14532d",
+                }}
+                aria-hidden
+              >
+                <CheckCircle2 className="w-5 h-5" />
+              </span>
+              <h2>{t("lesson.learningObjectives")}</h2>
+            </div>
+            <ul className="grid sm:grid-cols-2 gap-2.5">
+              {lesson.objectives.map((obj, idx) => (
+                <li key={idx} className="objective-item">
+                  <CheckCircle2
+                    className="w-4 h-4 mt-0.5 shrink-0 text-cyan-600"
+                    aria-hidden
+                  />
+                  <span>{obj}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* 4. VIDEO CONTAINER */}
+        <VideoContainer
+          enabled={Boolean(lesson.video?.enabled)}
+          label={t("lesson.videoContainer")}
+        />
+
+        {/* 5. LESSON CONTENT */}
+        <section
+          className="lesson-section animate-fadeInUp"
+          aria-label={t("lesson.content")}
+        >
+          <div className="lesson-section-title">
+            <span
+              className="icon-bubble"
+              style={{
+                background: "linear-gradient(135deg,#fed7aa,#fb923c)",
+                color: "#9a3412",
+              }}
+              aria-hidden
+            >
+              <Sparkles className="w-5 h-5" />
+            </span>
+            <h2>{t("lesson.content")}</h2>
+          </div>
+          <div className="prose prose-slate max-w-none">
+            <div className="text-slate-700 leading-relaxed whitespace-pre-wrap">
+              {lesson.content}
+            </div>
+          </div>
+
+          {lesson.codeBlocks && lesson.codeBlocks.length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-lg font-bold flex items-center gap-2 mb-4 text-slate-900">
+                <Code2 className="w-5 h-5 text-cyan-600" />
+                {t("lesson.codeBlocks")}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {lesson.codeBlocks.map((block, idx) => (
+                  <div
+                    key={idx}
+                    className="card p-4 hover:border-cyan-300 transition-colors"
+                  >
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl shrink-0" aria-hidden>
+                        {block.icon}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-bold text-slate-900">{block.name}</h4>
+                        <p className="text-sm text-slate-600 mt-1">
+                          {block.description}
+                        </p>
+                        <code className="block mt-3 bg-slate-900 text-emerald-300 rounded-lg px-3 py-2 text-sm font-mono overflow-x-auto">
                           {block.example}
                         </code>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Student Activity */}
-              {lesson.studentActivity && (
-                <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4">👨‍💻 Student Activity</h3>
-                  <div className="bg-gray-700 p-4 rounded-lg">
-                    <p className="whitespace-pre-wrap text-gray-300">{lesson.studentActivity}</p>
-                  </div>
-                </div>
-              )}
-
-              {/* Teacher Tip */}
-              {lesson.teacherTip && (
-                <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4">💡 Teacher Tip</h3>
-                  <div className="bg-blue-900 border-l-4 border-blue-400 p-4 rounded">
-                    <p className="text-gray-300">{lesson.teacherTip}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Start Quiz Button */}
-            <button
-              onClick={() => setCurrentQuizIndex(0)}
-              className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-lg text-lg"
-            >
-              ✅ Start Quiz & Earn Rewards
-            </button>
-          </>
-        ) : (
-          <>
-            {/* Quiz Complete */}
-            <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-lg p-8 text-center">
-              <h2 className="text-4xl font-bold mb-4">🎉 Lesson Complete!</h2>
-              <p className="text-xl mb-6">Great job! You've earned rewards:</p>
-              <div className="flex justify-center gap-8 mb-8">
-                <div className="bg-black bg-opacity-30 px-6 py-4 rounded-lg">
-                  <div className="text-3xl font-bold">+{rewardData.xp}</div>
-                  <div className="text-sm">XP</div>
-                </div>
-                <div className="bg-black bg-opacity-30 px-6 py-4 rounded-lg">
-                  <div className="text-3xl font-bold">+{rewardData.coins}</div>
-                  <div className="text-sm">Coins</div>
-                </div>
-              </div>
-
-              <div className="flex gap-4 justify-center">
-                <button
-                  onClick={() => setLocation('/archipelago')}
-                  className="bg-white text-green-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg"
-                >
-                  Back to Archipelago
-                </button>
-                {lesson.unlocks && lesson.unlocks.length > 0 && (
-                  <button
-                    onClick={() => setLocation(`/lesson/${lesson.unlocks?.[0]}`)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
-                  >
-                    Next Lesson →
-                  </button>
-                )}
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* Quiz Section */}
-        {currentQuestion && !quizComplete && (
-          <div className="mt-8 bg-gray-800 rounded-lg p-8">
-            <h2 className="text-2xl font-bold mb-6">
-              Question {currentQuizIndex + 1} of {lesson.quiz?.length}
-            </h2>
-            <p className="text-lg mb-6">{currentQuestion.question}</p>
-
-            <div className="space-y-3 mb-8">
-              {currentQuestion.options.map((option: string, idx: number) => (
-                <button
-                  key={idx}
-                  onClick={() => handleQuizAnswer(idx)}
-                  className="w-full text-left bg-gray-700 hover:bg-gray-600 p-4 rounded-lg transition"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full border-2 border-gray-500 flex items-center justify-center">
-                      {String.fromCharCode(65 + idx)}
                     </div>
-                    <span>{option}</span>
                   </div>
-                </button>
-              ))}
+                ))}
+              </div>
             </div>
+          )}
 
-            {/* Progress Bar */}
-            <div className="w-full bg-gray-700 rounded-full h-2">
-              <div
-                className="bg-blue-500 h-2 rounded-full transition-all"
-                style={{
-                  width: `${((currentQuizIndex + 1) / (lesson.quiz?.length || 1)) * 100}%`,
-                }}
-              />
+          {lesson.studentActivity && (
+            <div className="mt-8">
+              <h3 className="text-lg font-bold flex items-center gap-2 mb-3 text-slate-900">
+                <Hammer className="w-5 h-5 text-amber-600" />
+                {t("lesson.studentActivity")}
+              </h3>
+              <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-900 whitespace-pre-wrap">
+                {lesson.studentActivity}
+              </div>
             </div>
-          </div>
+          )}
+
+          {lesson.teacherTip && (
+            <div className="mt-6">
+              <h3 className="text-lg font-bold flex items-center gap-2 mb-3 text-slate-900">
+                <Lightbulb className="w-5 h-5 text-violet-600" />
+                {t("lesson.teacherTip")}
+              </h3>
+              <div className="rounded-xl border-l-4 border-violet-400 bg-violet-50 p-4 text-slate-700">
+                {lesson.teacherTip}
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* 6. MISSION */}
+        {lesson.objectives?.length > 0 && (
+          <section
+            className="lesson-section animate-fadeInUp"
+            aria-label={t("lesson.mission")}
+          >
+            <div className="lesson-section-title">
+              <span
+                className="icon-bubble"
+                style={{
+                  background: "linear-gradient(135deg,#a5f3fc,#22d3ee)",
+                  color: "#155e75",
+                }}
+                aria-hidden
+              >
+                <Trophy className="w-5 h-5" />
+              </span>
+              <h2>{t("lesson.mission")}</h2>
+            </div>
+            <div className="rounded-2xl border border-cyan-200 bg-gradient-to-br from-cyan-50 to-sky-50 p-5 sm:p-6">
+              <p className="text-base sm:text-lg text-cyan-900 font-medium">
+                {lesson.objectives[0]}
+              </p>
+              {lesson.objectives.length > 1 && (
+                <ul className="mt-3 grid sm:grid-cols-2 gap-2">
+                  {lesson.objectives.slice(1).map((o, idx) => (
+                    <li
+                      key={idx}
+                      className="text-sm text-cyan-800 flex items-start gap-2"
+                    >
+                      <ArrowRight
+                        className="w-4 h-4 mt-0.5 shrink-0 text-cyan-500"
+                        aria-hidden
+                      />
+                      {o}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </section>
         )}
-      </div>
+
+        {/* 7. QUIZ / KNOWLEDGE CHALLENGE */}
+        {lesson.quiz && lesson.quiz.length > 0 && (
+          <QuizSection
+            questions={lesson.quiz}
+            xpPreview={lesson.xpReward}
+            onComplete={handleQuizComplete}
+            onRetry={() => setCompleted(false)}
+          />
+        )}
+
+        {/* 8. REWARD SECTION (after completion) */}
+        {completed && (
+          <RewardSection
+            xp={reward.xp}
+            coins={reward.coins}
+            title={t("lesson.lessonComplete")}
+            description={t("lesson.lessonCompleteDesc")}
+            unlocks={lesson.unlocks}
+            onBackToMap={() => setLocation("/archipelago")}
+            onContinue={() =>
+              lesson.unlocks?.[0] && setLocation(`/lesson/${lesson.unlocks[0]}`)
+            }
+          />
+        )}
+      </main>
+
+      {/* 9. FOOTER NAVIGATION */}
+      <footer className="border-t border-slate-200 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-wrap items-center justify-between gap-3">
+          <button
+            type="button"
+            onClick={() => setLocation("/archipelago")}
+            className="btn btn-outline btn-md"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            {t("lesson.backToMap")}
+          </button>
+          {!completed && lesson.quiz && lesson.quiz.length > 0 && (
+            <span className="text-sm text-slate-500 flex items-center gap-1.5">
+              <Trophy className="w-4 h-4 text-amber-500" />
+              +{lesson.xpReward} {t("common.xp")} {t("lesson.xpPreview").toLowerCase()}
+            </span>
+          )}
+          {completed && (
+            <button
+              type="button"
+              onClick={() => {
+                setCompleted(false);
+              }}
+              className="btn btn-ghost btn-md"
+            >
+              <RotateCcw className="w-4 h-4" />
+              {t("common.retry")}
+            </button>
+          )}
+        </div>
+      </footer>
     </div>
   );
 };

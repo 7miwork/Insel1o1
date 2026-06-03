@@ -1,350 +1,537 @@
 @import "tailwindcss";
 
-/* Minecraft-Inspired Gamification Theme */
+/* =============================================================
+   Insel 1o1 — Modern Design System
+   Inspired by Duolingo · Khan Academy · Codecademy · Coursera
+   ============================================================= */
 
 :root {
-  /* Minecraft Color Palette */
-  --minecraft-dark: #1a1a2e;
-  --minecraft-darker: #0f0f1e;
-  --minecraft-accent-yellow: #ffeb3b;
-  --minecraft-accent-green: #4caf50;
-  --minecraft-accent-orange: #ff9800;
-  --minecraft-accent-red: #f44336;
-  --minecraft-accent-blue: #2196f3;
-  --minecraft-text-light: #ffffff;
-  --minecraft-text-dark: #1a1a2e;
-  --minecraft-gold: #ffd700;
-  --minecraft-emerald: #50c878;
-  
-  /* Tailwind Overrides */
-  --primary: #2196f3;
-  --primary-foreground: #ffffff;
-  --secondary: #ffeb3b;
-  --secondary-foreground: #1a1a2e;
-  --accent: #4caf50;
-  --accent-foreground: #ffffff;
-  --background: #0f0f1e;
-  --foreground: #ffffff;
-  --card: #1a1a2e;
-  --card-foreground: #ffffff;
-  --border: #2a2a3e;
-  --input: #2a2a3e;
-  --radius: 0.25rem;
+  /* Primary — Ocean / Island brand (teal-cyan) */
+  --brand-50:  #ecfeff;
+  --brand-100: #cffafe;
+  --brand-200: #a5f3fc;
+  --brand-300: #67e8f9;
+  --brand-400: #22d3ee;
+  --brand-500: #06b6d4;
+  --brand-600: #0891b2;
+  --brand-700: #0e7490;
+  --brand-800: #155e75;
+  --brand-900: #164e63;
+
+  /* Accent — Sunset (warm CTA) */
+  --accent-400: #fb923c;
+  --accent-500: #f97316;
+  --accent-600: #ea580c;
+
+  /* Success / XP / Gold */
+  --success-400: #4ade80;
+  --success-500: #22c55e;
+  --success-600: #16a34a;
+  --gold-400: #facc15;
+  --gold-500: #eab308;
+  --gold-600: #ca8a04;
+
+  /* Danger / Wrong */
+  --danger-500: #ef4444;
+  --danger-600: #dc2626;
+
+  /* Theme tokens */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --primary: 192 91% 36%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 199 89% 78%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 24 95% 53%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --ring: 192 91% 36%;
+  --radius: 0.75rem;
 }
 
-/* Pixel Art Font */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-/* Global Styles */
-* {
-  box-sizing: border-box;
+.dark {
+  --background: 222 47% 6%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 9%;
+  --card-foreground: 210 40% 98%;
+  --border: 217 33% 17%;
+  --input: 217 33% 17%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
 }
+
+/* =============================================================
+   Base
+   ============================================================= */
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.55;
 }
 
-/* Pixel Art Buttons */
-button, [role="button"] {
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* =============================================================
+   Brand Button System
+   ============================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  border-radius: var(--radius);
+  transition: transform 150ms ease, box-shadow 200ms ease,
+              background-color 200ms ease, color 200ms ease, border-color 200ms ease;
   cursor: pointer;
-  position: relative;
-  border: 2px solid var(--minecraft-accent-yellow);
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-  color: #ffffff;
-  font-weight: bold;
-  padding: 0.75rem 1.5rem;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 1px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
 }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
-  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+.btn:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 3px;
 }
 
-button:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
-}
-
-button:disabled {
-  opacity: 0.5;
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.55;
   cursor: not-allowed;
-  background: #808080;
-  border-color: #606060;
-}
-
-/* Minecraft-Style Cards */
-.minecraft-card {
-  background: linear-gradient(135deg, #1a1a2e 0%, #2a2a3e 100%);
-  border: 3px solid var(--minecraft-accent-yellow);
-  box-shadow: 
-    0 4px 0 rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  position: relative;
-}
-
-.minecraft-card::before {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  background: linear-gradient(135deg, rgba(255, 235, 59, 0.3) 0%, transparent 100%);
   pointer-events: none;
 }
 
-/* Minecraft-Style Inputs */
-input, textarea, select {
-  background-color: var(--input);
-  color: var(--foreground);
-  border: 2px solid var(--border);
-  padding: 0.75rem;
-  font-size: 1rem;
-  transition: all 0.2s ease;
+.btn-sm { height: 2.25rem; padding: 0 0.875rem; font-size: 0.8125rem; }
+.btn-md { height: 2.625rem; padding: 0 1.125rem; font-size: 0.9375rem; }
+.btn-lg { height: 3rem;    padding: 0 1.5rem;   font-size: 1rem; }
+.btn-xl { height: 3.5rem;  padding: 0 2rem;     font-size: 1.0625rem; }
+
+.btn-primary {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: #ffffff;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset,
+              0 4px 14px rgba(8,145,178,0.30);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset,
+              0 8px 22px rgba(8,145,178,0.35);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-accent {
+  background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(234,88,12,0.30);
+}
+.btn-accent:hover {
+  background: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(234,88,12,0.40);
 }
 
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+.btn-success {
+  background: linear-gradient(135deg, #4ade80 0%, #16a34a 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(22,163,74,0.30);
+}
+.btn-success:hover {
+  background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+  transform: translateY(-1px);
 }
 
-/* XP Progress Bar */
-.xp-progress {
-  background: linear-gradient(90deg, #1a1a2e 0%, #2a2a3e 100%);
-  border: 2px solid var(--minecraft-accent-yellow);
-  height: 24px;
-  border-radius: 0;
+.btn-outline {
+  background: transparent;
+  color: hsl(var(--foreground));
+  border: 1.5px solid hsl(var(--border));
+}
+.btn-outline:hover {
+  background: hsl(var(--muted));
+  border-color: var(--brand-300);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: hsl(var(--foreground));
+}
+.btn-ghost:hover {
+  background: hsl(var(--muted));
+}
+
+.btn-link {
+  background: transparent;
+  color: var(--brand-700);
+  padding: 0;
+  height: auto;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.btn-link:hover { color: var(--brand-800); }
+
+.btn-danger {
+  background: var(--danger-500);
+  color: #ffffff;
+}
+.btn-danger:hover { background: var(--danger-600); }
+
+/* =============================================================
+   Card System
+   ============================================================= */
+.card {
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(15,23,42,0.04),
+              0 4px 12px rgba(15,23,42,0.04);
+  transition: box-shadow 200ms ease, transform 200ms ease, border-color 200ms ease;
+}
+
+.card-elevated {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 4px 8px rgba(15,23,42,0.05),
+              0 20px 40px rgba(15,23,42,0.08);
+}
+
+.card-interactive {
+  cursor: pointer;
+}
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(15,23,42,0.05),
+              0 12px 28px rgba(15,23,42,0.10);
+  border-color: var(--brand-300);
+}
+
+/* =============================================================
+   Status Badges
+   ============================================================= */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.badge-locked    { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+.badge-available { background: #ecfeff; color: #0e7490; border-color: #a5f3fc; }
+.badge-progress  { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.badge-completed { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+
+.dark .badge-locked    { background: #1e293b; color: #cbd5e1; border-color: #334155; }
+.dark .badge-available { background: rgba(8,145,178,0.18); color: #67e8f9; border-color: rgba(8,145,178,0.40); }
+.dark .badge-progress  { background: rgba(202,138,4,0.18); color: #facc15; border-color: rgba(202,138,4,0.40); }
+.dark .badge-completed { background: rgba(22,163,74,0.18); color: #4ade80; border-color: rgba(22,163,74,0.40); }
+
+/* =============================================================
+   XP / Progress Bars
+   ============================================================= */
+.progress-track {
+  position: relative;
+  width: 100%;
+  height: 0.625rem;
+  background: hsl(var(--muted));
+  border-radius: 999px;
   overflow: hidden;
-  position: relative;
 }
-
-.xp-progress-fill {
-  background: linear-gradient(90deg, #4caf50 0%, #45a049 100%);
+.progress-track-lg { height: 0.875rem; }
+.progress-fill {
   height: 100%;
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, #06b6d4 0%, #22d3ee 100%);
+  border-radius: 999px;
+  transition: width 600ms cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
-
-.xp-progress-fill::after {
+.progress-fill-xp {
+  background: linear-gradient(90deg, #4ade80 0%, #22c55e 100%);
+}
+.progress-fill-gold {
+  background: linear-gradient(90deg, #facc15 0%, #f59e0b 100%);
+}
+.progress-fill::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  animation: shimmer 2s infinite;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  animation: shimmer 2.4s linear infinite;
 }
-
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
+  0%   { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
 
-/* Level Badge */
-.level-badge {
-  background: linear-gradient(135deg, var(--minecraft-accent-yellow) 0%, #ffb300 100%);
-  color: var(--minecraft-text-dark);
-  border: 2px solid #ff9800;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
+/* =============================================================
+   Lesson Structure Sections
+   ============================================================= */
+.lesson-section {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 1rem;
+  padding: 1.75rem;
+  box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+}
+.lesson-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: hsl(var(--foreground));
+}
+.lesson-section-title .icon-bubble {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%);
+  color: #0e7490;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.objective-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%);
+  border: 1px solid #ccfbf1;
+  border-radius: 0.75rem;
+  color: #134e4a;
+  font-weight: 500;
+}
+.dark .objective-item {
+  background: linear-gradient(135deg, rgba(13,148,136,0.10) 0%, rgba(8,145,178,0.10) 100%);
+  border-color: rgba(13,148,136,0.25);
+  color: #99f6e4;
+}
+
+/* =============================================================
+   Video Container
+   ============================================================= */
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-radius: 1rem;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  font-size: 1.5rem;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
-  position: relative;
+  color: #e2e8f0;
+  box-shadow: 0 20px 40px rgba(15,23,42,0.30);
 }
-
-.level-badge::before {
+.video-frame::before {
   content: '';
   position: absolute;
-  inset: -4px;
-  border: 2px solid var(--minecraft-accent-yellow);
-  opacity: 0.3;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(34,211,238,0.18) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(249,115,22,0.15) 0%, transparent 50%);
+  pointer-events: none;
 }
+.video-play-button {
+  position: relative;
+  z-index: 2;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.95);
+  color: #0e7490;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.30);
+  transition: transform 200ms ease;
+}
+.video-play-button:hover { transform: scale(1.06); }
 
-/* Coins Display */
-.coins-display {
+/* =============================================================
+   Quiz UI
+   ============================================================= */
+.quiz-card {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 1rem;
+  padding: 1.75rem;
+  box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+}
+.quiz-option {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--minecraft-accent-yellow);
-  border-radius: 0;
-  color: white;
-  font-weight: bold;
-  font-size: 1.125rem;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
-}
-
-.coins-icon {
-  font-size: 1.5rem;
-  animation: bounce 1s infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-/* Island Status Indicators */
-.island-active {
-  border-color: var(--minecraft-accent-green);
-  box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
-}
-
-.island-completed {
-  border-color: var(--minecraft-accent-yellow);
-  opacity: 0.8;
-}
-
-.island-locked {
-  border-color: #808080;
-  opacity: 0.6;
-  filter: grayscale(50%);
-}
-
-/* Lesson Item */
-.lesson-item {
-  background: linear-gradient(135deg, #1a1a2e 0%, #2a2a3e 100%);
-  border-left: 4px solid var(--minecraft-accent-green);
-  padding: 1rem;
-  margin: 0.5rem 0;
-  transition: all 0.2s ease;
+  gap: 0.875rem;
+  width: 100%;
+  text-align: left;
+  padding: 1rem 1.125rem;
+  background: hsl(var(--card));
+  border: 1.5px solid hsl(var(--border));
+  border-radius: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
   cursor: pointer;
+  transition: border-color 200ms ease, background 200ms ease, transform 150ms ease;
 }
-
-.lesson-item:hover {
-  transform: translateX(4px);
-  border-left-color: var(--minecraft-accent-yellow);
-  background: linear-gradient(135deg, #2a2a3e 0%, #3a3a4e 100%);
+.quiz-option:hover {
+  border-color: var(--brand-400);
+  background: #f0f9ff;
+  transform: translateX(2px);
 }
-
-.lesson-item.completed {
-  border-left-color: var(--minecraft-accent-green);
-  opacity: 0.7;
+.quiz-option.is-selected {
+  border-color: var(--brand-500);
+  background: #ecfeff;
 }
-
-.lesson-item.locked {
-  border-left-color: #808080;
-  opacity: 0.5;
-  cursor: not-allowed;
+.quiz-option.is-correct {
+  border-color: var(--success-500);
+  background: #dcfce7;
+  color: #14532d;
 }
-
-/* XP Badge */
-.xp-badge {
-  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0;
-  font-weight: bold;
+.quiz-option.is-incorrect {
+  border-color: var(--danger-500);
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+.quiz-option .letter {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
   font-size: 0.875rem;
-  border: 1px solid var(--minecraft-accent-yellow);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
-  display: inline-block;
+  flex-shrink: 0;
 }
+.quiz-option.is-selected .letter { background: var(--brand-500); color: #fff; }
+.quiz-option.is-correct .letter  { background: var(--success-500); color: #fff; }
+.quiz-option.is-incorrect .letter { background: var(--danger-500); color: #fff; }
 
-/* Achievement Badge */
-.achievement-badge {
-  background: linear-gradient(135deg, var(--minecraft-accent-yellow) 0%, #ffb300 100%);
-  color: var(--minecraft-text-dark);
-  padding: 0.5rem 1rem;
-  border-radius: 0;
-  font-weight: bold;
-  border: 2px solid #ff9800;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
-  display: inline-block;
-  margin: 0.5rem;
+/* =============================================================
+   Reward
+   ============================================================= */
+.reward-card {
   position: relative;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  text-align: center;
+  color: #78350f;
+  box-shadow: 0 12px 28px rgba(202,138,4,0.25);
+  overflow: hidden;
+}
+.reward-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 0%, rgba(255,255,255,0.5) 0%, transparent 40%),
+              radial-gradient(circle at 80% 100%, rgba(252,211,77,0.6) 0%, transparent 50%);
+  pointer-events: none;
+}
+.reward-card .reward-amount {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #92400e 0%, #b45309 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.achievement-badge::before {
-  content: '⭐';
-  margin-right: 0.5rem;
+/* =============================================================
+   Animations
+   ============================================================= */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.40); }
+  50%      { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
+}
+@keyframes confetti-pop {
+  0%   { opacity: 0; transform: scale(0.5) translateY(0); }
+  60%  { opacity: 1; transform: scale(1.15) translateY(-30px); }
+  100% { opacity: 0; transform: scale(1) translateY(-60px); }
+}
+.animate-fadeInUp  { animation: fadeInUp 0.45s ease-out both; }
+.animate-pulseGlow { animation: pulseGlow 1.6s ease-out infinite; }
+.confetti {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  animation: confetti-pop 1.4s ease-out forwards;
 }
 
-/* Animations */
-@keyframes pixelPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+/* =============================================================
+   Form Controls
+   ============================================================= */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  border: 1.5px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px rgba(6,182,212,0.18);
 }
 
-@keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); }
-  50% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.8); }
-}
-
-.pulse-animation {
-  animation: pixelPulse 0.5s ease-in-out;
-}
-
-.glow-animation {
-  animation: glowPulse 2s ease-in-out infinite;
-}
-
-/* Minecraft Grid Background */
-.minecraft-bg {
-  background-image: 
-    linear-gradient(0deg, transparent 24%, rgba(255, 235, 59, 0.05) 25%, rgba(255, 235, 59, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 235, 59, 0.05) 75%, rgba(255, 235, 59, 0.05) 76%, transparent 77%, transparent),
-    linear-gradient(90deg, transparent 24%, rgba(255, 235, 59, 0.05) 25%, rgba(255, 235, 59, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 235, 59, 0.05) 75%, rgba(255, 235, 59, 0.05) 76%, transparent 77%, transparent);
-  background-size: 50px 50px;
-  background-color: var(--minecraft-darker);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  button {
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
-  }
-
-  .level-badge {
-    width: 50px;
-    height: 50px;
-    font-size: 1.25rem;
-  }
-
-  .coins-display {
-    font-size: 1rem;
-  }
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--minecraft-darker);
-  border: 1px solid var(--minecraft-accent-yellow);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--minecraft-accent-green) 0%, #45a049 100%);
-  border: 1px solid var(--minecraft-accent-yellow);
-  border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #45a049 0%, #3d8b40 100%);
-}
-
-/* Container */
+/* =============================================================
+   Container
+   ============================================================= */
 .container {
   width: 100%;
   margin-left: auto;
@@ -352,18 +539,26 @@ input:focus, textarea:focus, select:focus {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+@media (min-width: 640px)  { .container { max-width: 640px;  padding-left: 1.5rem; padding-right: 1.5rem; } }
+@media (min-width: 768px)  { .container { max-width: 768px;  } }
+@media (min-width: 1024px) { .container { max-width: 1024px; padding-left: 2rem; padding-right: 2rem; } }
+@media (min-width: 1280px) { .container { max-width: 1200px; } }
 
-@media (min-width: 640px) {
-  .container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
+/* =============================================================
+   Scrollbar
+   ============================================================= */
+::-webkit-scrollbar         { width: 10px; height: 10px; }
+::-webkit-scrollbar-track   { background: hsl(var(--muted)); }
+::-webkit-scrollbar-thumb   { background: linear-gradient(180deg, #67e8f9, #06b6d4); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #22d3ee, #0891b2); }
 
-@media (min-width: 1024px) {
-  .container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    max-width: 1280px;
+/* =============================================================
+   Reduced motion
+   ============================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

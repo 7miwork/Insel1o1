@@ -9,6 +9,8 @@
     "lesson_one": "Lektion",
     "lesson_other": "Lektionen",
     "startLesson": "Lektion starten",
+    "openLesson": "Lektion öffnen",
+    "continueLesson": "Lektion fortsetzen",
     "exploreCourse": "Kurs erkunden",
     "inDevelopment": "In Entwicklung",
     "comingSoon": "Demnächst",
@@ -24,6 +26,13 @@
     "lessonPath": "Lernpfad",
     "lesson": "Lektion",
     "startCourse": "Kurs starten",
+    "statusLocked": "Gesperrt",
+    "statusAvailable": "Verfügbar",
+    "statusInProgress": "In Bearbeitung",
+    "statusCompleted": "Abgeschlossen",
+    "yourProgress": "Dein Fortschritt",
+    "totalXP": "Gesamt-XP",
+    "islandsCompleted": "Inseln abgeschlossen",
     "lesson1": "Grundlagen der Steuerung",
     "lesson1sub": "Bewegung, Orientierung und Koordinaten in Minecraft Education",
     "lesson1desc": "Bevor wir mit Block Coding und Agenten arbeiten, lernst du die wichtigsten Steuerungen in Minecraft Education kennen. Bewege dich sicher durch die Welt, überwinde Hindernisse und orientiere dich mit Koordinaten und Wegmarkierungen.",
@@ -125,80 +134,6 @@
       "Fehler korrigieren"
     ],
     "lesson4preview": "Du kannst den Agenten nun gezielt durch die Welt bewegen und einfache Navigationsaufgaben lösen.",
-    "lesson5": "Bauen mit dem Agenten",
-    "lesson5sub": "Der Agent wird zum Baumeister",
-    "lesson5desc": "Der Agent wird zum Baumeister. Mit den ersten Baubefehlen lernst du, wie der Agent automatisch Blöcke platzieren und einfache Bauwerke erstellen kann.",
-    "lesson5objectives": [
-      "Baubefehle verstehen",
-      "Blöcke platzieren",
-      "Den Agenten als Baumeister nutzen",
-      "Bauaufgaben planen",
-      "Fehler erkennen und korrigieren",
-      "Einfache Bauwerke automatisieren"
-    ],
-    "lesson5preview": "Du hast gelernt, wie der Agent Blöcke platzieren und erste Bauaufgaben übernehmen kann. Damit beginnt der Weg zum automatisierten Bauen.",
-    "lesson6": "Schleifen - Aufgaben automatisch wiederholen",
-    "lesson6sub": "Wiederholungen automatisieren",
-    "lesson6desc": "Lerne, wie du mit Schleifen Befehle automatisch wiederholen kannst. Der Agent fuehrt Aufgaben mehrfach aus, ohne dass du den Code immer wieder schreiben musst.",
-    "lesson6objectives": [
-      "Schleifen verstehen",
-      "Wiederholungen erkennen",
-      "Wiederholungsblöcke einsetzen",
-      "Bewegungen automatisieren",
-      "Aufgaben effizient lösen",
-      "Wiederkehrende Abläufe planen"
-    ],
-    "lesson6preview": "Du hast gelernt, wie Programme Aufgaben automatisch wiederholen können. Damit sparst du Zeit und kannst größere Projekte einfacher umsetzen.",
-    "lesson7": "Bedingungen und Entscheidungen",
-    "lesson7sub": "Wenn-Dann-Logik für den Agenten",
-    "lesson7desc": "Programme treffen Entscheidungen. Der Agent lernt, unterschiedlich zu reagieren, abhängig von einer Situation oder Bedingung.",
-    "lesson7objectives": [
-      "Bedingungen verstehen",
-      "Entscheidungen programmieren",
-      "Wenn-Dann-Logik anwenden",
-      "Situationen erkennen",
-      "Reaktionen steuern",
-      "Programme intelligenter machen"
-    ],
-    "lesson7preview": "Du hast gelernt, wie Programme Entscheidungen treffen. Damit wird dein Agent deutlich intelligenter und kann auf seine Umgebung reagieren.",
-    "lesson8": "Ereignisse und Chat-Befehle",
-    "lesson8sub": "Programme reagieren auf Eingaben",
-    "lesson8desc": "Programme können auf Ereignisse reagieren. Der Agent und Minecraft sollen Aktionen ausführen, wenn ein bestimmter Auslöser eintritt oder ein Chat-Befehl verwendet wird.",
-    "lesson8objectives": [
-      "Ereignisse verstehen",
-      "Chat-Befehle verwenden",
-      "Auslöser erkennen",
-      "Aktionen starten",
-      "Programme interaktiv machen",
-      "Ereignisse mit Befehlen verbinden"
-    ],
-    "lesson8preview": "Du hast gelernt, wie Programme auf Ereignisse reagieren. Dadurch werden deine Projekte interaktiv und können auf Eingaben der Spieler antworten.",
-    "lesson9": "Variablen und Daten speichern",
-    "lesson9sub": "Informationen mit Variablen merken",
-    "lesson9desc": "Programme können sich Informationen merken. Mit Variablen lassen sich Werte speichern, verändern und später wiederverwenden.",
-    "lesson9objectives": [
-      "Variablen verstehen",
-      "Werte speichern",
-      "Werte verändern",
-      "Informationen wiederverwenden",
-      "Daten verwalten",
-      "Programme intelligenter machen"
-    ],
-    "lesson9preview": "Du hast gelernt, wie Programme Informationen speichern und wiederverwenden können. Damit werden deine Projekte deutlich leistungsfähiger.",
-    "lesson10": "Eigenes Projekt und Abschlussabenteuer",
-    "lesson10sub": "Alles kombinieren",
-    "lesson10desc": "Nutze alles, was du bisher gelernt hast. Plane dein eigenes Projekt und kombiniere die Faehigkeiten aus den vorherigen Lektionen.",
-    "lesson10objectives": [
-      "Vorwissen anwenden",
-      "Eigene Loesungen entwickeln",
-      "Mehrere Coding-Konzepte kombinieren",
-      "Projekte planen",
-      "Fehler selbststaendig beheben",
-      "Komplexere Aufgaben loesen"
-    ],
-    "lesson10preview": "Du hast die Ausbildung des Minecraft Education Block Coding Archipels fast abgeschlossen. Vor dir liegt nur noch die geheimnisvolle letzte Insel.",
-    "lesson11": "🏝️ Die letzte Insel",
-    "lesson11sub": "Belohnung, Abenteuer und Abschluss",
     "lesson4tasks": [
       {
         "title": "Gerader Weg",
@@ -223,6 +158,18 @@
     "lesson4reward": "Pfadfinder-Abzeichen",
     "lesson4rewardDesc": "Für die erfolgreiche Navigation des Agenten durch seine ersten Herausforderungen.",
     "lesson4conclusion": "Du kannst den Agenten nun gezielt durch die Welt bewegen und einfache Navigationsaufgaben lösen.",
+    "lesson5": "Bauen mit dem Agenten",
+    "lesson5sub": "Der Agent wird zum Baumeister",
+    "lesson5desc": "Der Agent wird zum Baumeister. Mit den ersten Baubefehlen lernst du, wie der Agent automatisch Blöcke platzieren und einfache Bauwerke erstellen kann.",
+    "lesson5objectives": [
+      "Baubefehle verstehen",
+      "Blöcke platzieren",
+      "Den Agenten als Baumeister nutzen",
+      "Bauaufgaben planen",
+      "Fehler erkennen und korrigieren",
+      "Einfache Bauwerke automatisieren"
+    ],
+    "lesson5preview": "Du hast gelernt, wie der Agent Blöcke platzieren und erste Bauaufgaben übernehmen kann. Damit beginnt der Weg zum automatisierten Bauen.",
     "lesson5tasks": [
       {
         "title": "Erste Mauer",
@@ -251,6 +198,18 @@
     "lesson5reward": "Baumeister-Abzeichen",
     "lesson5rewardDesc": "Für den erfolgreichen Einsatz der ersten Baubefehle.",
     "lesson5conclusion": "Du hast gelernt, wie der Agent Blöcke platzieren und erste Bauaufgaben übernehmen kann. Damit beginnt der Weg zum automatisierten Bauen.",
+    "lesson6": "Schleifen - Aufgaben automatisch wiederholen",
+    "lesson6sub": "Wiederholungen automatisieren",
+    "lesson6desc": "Lerne, wie du mit Schleifen Befehle automatisch wiederholen kannst. Der Agent fuehrt Aufgaben mehrfach aus, ohne dass du den Code immer wieder schreiben musst.",
+    "lesson6objectives": [
+      "Schleifen verstehen",
+      "Wiederholungen erkennen",
+      "Wiederholungsblöcke einsetzen",
+      "Bewegungen automatisieren",
+      "Aufgaben effizient lösen",
+      "Wiederkehrende Abläufe planen"
+    ],
+    "lesson6preview": "Du hast gelernt, wie Programme Aufgaben automatisch wiederholen können. Damit sparst du Zeit und kannst größere Projekte einfacher umsetzen.",
     "lesson6tasks": [
       {
         "title": "Erste Schleife",
@@ -279,6 +238,18 @@
     "lesson6reward": "Schleifen-Meister",
     "lesson6rewardDesc": "Du hast die Kraft der Wiederholung erfolgreich eingesetzt.",
     "lesson6conclusion": "Du hast gelernt, wie Programme Aufgaben automatisch wiederholen können. Damit sparst du Zeit und kannst größere Projekte einfacher umsetzen.",
+    "lesson7": "Bedingungen und Entscheidungen",
+    "lesson7sub": "Wenn-Dann-Logik für den Agenten",
+    "lesson7desc": "Programme treffen Entscheidungen. Der Agent lernt, unterschiedlich zu reagieren, abhängig von einer Situation oder Bedingung.",
+    "lesson7objectives": [
+      "Bedingungen verstehen",
+      "Entscheidungen programmieren",
+      "Wenn-Dann-Logik anwenden",
+      "Situationen erkennen",
+      "Reaktionen steuern",
+      "Programme intelligenter machen"
+    ],
+    "lesson7preview": "Du hast gelernt, wie Programme Entscheidungen treffen. Damit wird dein Agent deutlich intelligenter und kann auf seine Umgebung reagieren.",
     "lesson7tasks": [
       {
         "title": "Hindernis erkennen",
@@ -307,6 +278,18 @@
     "lesson7reward": "Logik-Entdecker",
     "lesson7rewardDesc": "Du hast die ersten Entscheidungen erfolgreich programmiert.",
     "lesson7conclusion": "Du hast gelernt, wie Programme Entscheidungen treffen. Damit wird dein Agent deutlich intelligenter und kann auf seine Umgebung reagieren.",
+    "lesson8": "Ereignisse und Chat-Befehle",
+    "lesson8sub": "Programme reagieren auf Eingaben",
+    "lesson8desc": "Programme können auf Ereignisse reagieren. Der Agent und Minecraft sollen Aktionen ausführen, wenn ein bestimmter Auslöser eintritt oder ein Chat-Befehl verwendet wird.",
+    "lesson8objectives": [
+      "Ereignisse verstehen",
+      "Chat-Befehle verwenden",
+      "Auslöser erkennen",
+      "Aktionen starten",
+      "Programme interaktiv machen",
+      "Ereignisse mit Befehlen verbinden"
+    ],
+    "lesson8preview": "Du hast gelernt, wie Programme auf Ereignisse reagieren. Dadurch werden deine Projekte interaktiv und können auf Eingaben der Spieler antworten.",
     "lesson8tasks": [
       {
         "title": "Erster Chat-Befehl",
@@ -336,64 +319,71 @@
     "lesson8reward": "Ereignis-Meister",
     "lesson8rewardDesc": "Du hast erfolgreich Programme mit Ereignissen und Chat-Befehlen gesteuert.",
     "lesson8conclusion": "Du hast gelernt, wie Programme auf Ereignisse reagieren. Dadurch werden deine Projekte interaktiv und können auf Eingaben der Spieler antworten.",
+    "lesson9": "Variablen und Daten speichern",
+    "lesson9sub": "Mit Variablen Werte merken",
+    "lesson9desc": "Lerne, wie du mit Variablen Werte speicherst, änderst und wiederverwendest.",
+    "lesson9objectives": [
+      "Variablen verstehen",
+      "Werte speichern",
+      "Werte ändern",
+      "Informationen wiederverwenden",
+      "Daten verwalten",
+      "Programme intelligenter machen"
+    ],
+    "lesson9preview": "Du hast gelernt, wie Programme Informationen speichern und wiederverwenden können. Das macht deine Projekte deutlich leistungsfähiger.",
     "lesson9tasks": [
-      {
-        "title": "Erste Variable",
-        "description": "Erstelle eine Variable mit dem Wert 0."
-      },
-      {
-        "title": "Schritte zählen",
-        "description": "Zähle die Schritte des Agenten."
-      },
-      {
-        "title": "Variable in Bedingungen",
-        "description": "Nutze Variablen in Bedingungen."
-      }
+      { "title": "Erste Variable", "description": "Erstelle eine Variable mit dem Wert 0." },
+      { "title": "Schritte zählen", "description": "Zähle die Schritte des Agenten." },
+      { "title": "Variablen in Bedingungen", "description": "Verwende Variablen in Bedingungen." }
     ],
     "lesson9knowledge": [
-      "Variable - Eine Schachtel mit Namen für Werte",
+      "Variable - Eine beschriftete Box zum Speichern von Werten",
       "Wert - Was in der Variable gespeichert ist",
-      "Speichern - Einen Wert ablegen",
-      "Ändern - Den Wert verändern",
-      "Daten - Informationen für das Programm",
-      "Information - Alles, was das Programm sich merkt"
+      "Speichern - Einen Wert in eine Variable legen",
+      "Ändern - Den Wert anpassen",
+      "Daten - Informationen, die das Programm nutzt"
     ],
     "lesson9mission": {
       "title": "Der Gedächtnis-Agent",
-      "description": "Programmiere den Agenten so, dass er sich eine Zahl merkt, diese bei jedem Schritt erhöht und sie am Ende ausgibt."
+      "description": "Bringe dem Agenten bei, sich eine Zahl zu merken, sie bei jedem Schritt zu erhöhen und am Ende auszugeben."
     },
     "lesson9reward": "Daten-Hüter",
-    "lesson9rewardDesc": "Du hast erfolgreich gelernt, Informationen mit Variablen zu speichern und zu verwalten.",
-    "lesson9conclusion": "Du hast gelernt, wie Programme Informationen speichern und wiederverwenden können. Damit werden deine Projekte deutlich leistungsfähiger.",
+    "lesson9rewardDesc": "Du hast gelernt, Informationen mit Variablen zu speichern und zu verwalten.",
+    "lesson9conclusion": "Du hast gelernt, wie Programme Informationen speichern und wiederverwenden können. Das macht deine Projekte deutlich leistungsfähiger.",
+    "lesson10": "Abschlussprojekt & Abenteuer",
+    "lesson10sub": "Alles kombinieren",
+    "lesson10desc": "Wende alles Gelernte an. Plane dein eigenes Projekt und kombiniere Fähigkeiten aus früheren Lektionen.",
+    "lesson10objectives": [
+      "Vorwissen anwenden",
+      "Eigene Lösungen entwickeln",
+      "Mehrere Coding-Konzepte kombinieren",
+      "Projekte planen",
+      "Fehler eigenständig beheben",
+      "Komplexe Aufgaben lösen"
+    ],
+    "lesson10preview": "Du hast das Archipel Minecraft Education Block Coding fast abgeschlossen. Vor dir liegt nur noch die geheimnisvolle letzte Insel.",
     "lesson10tasks": [
-      {
-        "title": "Projektphase 1: Planung",
-        "description": "Ueberlege ein Projekt mit 3 Konzepten."
-      },
-      {
-        "title": "Projektphase 2: Umsetzung",
-        "description": "Setze dein Projekt Schritt fuer Schritt um."
-      },
-      {
-        "title": "Projektphase 3: Praesentation",
-        "description": "Zeige dein Projekt der Klasse."
-      }
+      { "title": "Projektphase 1: Planung", "description": "Plane ein Projekt mit 3 Konzepten." },
+      { "title": "Projektphase 2: Umsetzung", "description": "Baue dein Projekt Schritt für Schritt." },
+      { "title": "Projektphase 3: Präsentation", "description": "Stelle dein Projekt der Klasse vor." }
     ],
     "lesson10knowledge": [
-      "Agent - Der Agent fuehrt Befehle aus",
-      "Schleifen - Aufgaben automatisch wiederholen",
-      "Bedingungen - Entscheidungen treffen",
-      "Variablen - Werte merken",
-      "Ereignisse - Auf Chat-Befehle reagieren",
-      "Bauen - Bloeke platzieren"
+      "Agent - Führt Befehle aus",
+      "Schleifen - Automatisieren Wiederholungen",
+      "Bedingungen - Treffen Entscheidungen",
+      "Variablen - Merken sich Werte",
+      "Ereignisse - Reagieren auf Chat-Befehle",
+      "Bauen - Platziert Blöcke"
     ],
     "lesson10mission": {
       "title": "Der Weg zur letzten Insel",
-      "description": "Nutze die Faehigkeiten aller bisherigen Inseln fuer die Abschlussaufgabe."
+      "description": "Setze alle Fähigkeiten der vorherigen Inseln für die finale Challenge ein."
     },
     "lesson10reward": "Archipel-Meister",
-    "lesson10rewardDesc": "Du hast alle Ausbildungsinseln erfolgreich abgeschlossen und bist bereit fuer die letzte Reise.",
-    "lesson10conclusion": "Du hast die Ausbildung des Minecraft Education Block Coding Archipels fast abgeschlossen. Vor dir liegt nur noch die geheimnisvolle letzte Insel.",
-    "lesson11desc": "Du hast alle Inseln des Minecraft Education Block Coding Archipels abgeschlossen. Vor dir liegt die letzte Insel – mit Belohnung, Abenteuer und dem Abschluss deiner Reise."
+    "lesson10rewardDesc": "Du hast alle Trainings-Inseln erfolgreich abgeschlossen und bist bereit für die letzte Reise.",
+    "lesson10conclusion": "Du hast das Archipel Minecraft Education Block Coding fast abgeschlossen. Vor dir liegt nur noch die geheimnisvolle letzte Insel.",
+    "lesson11": "🏝️ Die letzte Insel",
+    "lesson11sub": "Belohnung, Abenteuer und Abschluss",
+    "lesson11desc": "Du hast alle Inseln des Minecraft Education Block Coding Archipels abgeschlossen. Vor dir liegt die letzte Insel – mit Belohnungen, Abenteuer und dem Abschluss deiner Reise."
   }
 }

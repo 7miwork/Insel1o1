@@ -1,7 +1,8 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { useLocation } from "wouter";
-import { ChevronLeft, Compass, Ship, Map as MapIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, Compass, Ship, Map as MapIcon, Sparkles, Lock, CheckCircle2, PlayCircle, Star, GraduationCap } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
+import { StatusBadge, type LessonStatus } from "@/components/StatusBadge";
 import {
   programmingArchipelago,
   type ArchipelagoCourse,
@@ -447,6 +448,8 @@ function CourseView({
   setHoveredId: (id: string | null) => void;
 }) {
   const lessonCount = course.lessons.length;
+  const availableCount = course.lessons.filter((l) => l.available).length;
+  const progressPct = lessonCount > 0 ? Math.round((availableCount / lessonCount) * 100) : 0;
 
   return (
     <div className="space-y-8">
@@ -475,14 +478,32 @@ function CourseView({
             <p className="text-cyan-200/70 text-sm sm:text-base max-w-xl">
               {t(course.descriptionKey)}
             </p>
-            <div className="flex items-center gap-4 mt-4">
-              <span className="text-xs text-white/50 flex items-center gap-1">
+            <div className="flex flex-wrap items-center gap-4 mt-4">
+              <span className="text-xs text-white/70 flex items-center gap-1.5">
                 <Ship className="w-3.5 h-3.5" />
                 {lessonCount > 0
                   ? `${lessonCount} ${t("archipelago.lesson_other")}`
                   : t("archipelago.comingSoon")}
               </span>
+              <span className="text-xs text-white/70 flex items-center gap-1.5">
+                <Star className="w-3.5 h-3.5" fill="currentColor" />
+                {t("archipelago.totalXP")}: {(lessonCount * 75).toLocaleString()}
+              </span>
             </div>
+            {lessonCount > 0 && (
+              <div className="mt-4 max-w-md">
+                <div className="flex items-center justify-between text-xs text-white/70 mb-1.5">
+                  <span>{t("archipelago.yourProgress")}</span>
+                  <span className="font-bold text-white">{progressPct}%</span>
+                </div>
+                <div className="progress-track progress-track-lg bg-white/10" aria-hidden>
+                  <div
+                    className="progress-fill progress-fill-gold"
+                    style={{ width: `${progressPct}%` }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -716,34 +737,49 @@ function LessonsMapView({
       </div>
 
       {/* Lesson Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-        {course.lessons.map((lesson, idx) => (
-          <div
-            key={lesson.id}
-            onClick={() => lesson.available && onLessonClick(lesson.id)}
-            className={`relative bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 transition-all duration-300 ${
-              lesson.available
-                ? "hover:bg-white/15 hover:border-white/20 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
-                : "opacity-40 cursor-not-allowed"
-            }`}
-          >
-            <div className="flex flex-col items-center text-center gap-2">
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
-                style={{ backgroundColor: course.color }}
-              >
-                {idx + 1}
-              </div>
-              <span className="text-xs text-cyan-200/70">
-                {t("archipelago.lesson")} {idx + 1}
-              </span>
-            </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {course.lessons.map((lesson, idx) => {
+          const status: LessonStatus = lesson.available
+            ? idx === 0 || (idx > 0 && course.lessons[idx - 1]?.available)
+              ? idx === 0
+                ? "available"
+                : "in-progress"
+              : "available"
+            : "locked";
+          return (
             <div
-              className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full opacity-30"
-              style={{ backgroundColor: course.color }}
-            />
-          </div>
-        ))}
+              key={lesson.id}
+              onClick={() => lesson.available && onLessonClick(lesson.id)}
+              className={`relative bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 transition-all duration-300 ${
+                lesson.available
+                  ? "hover:bg-white/15 hover:border-white/20 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+                  : "opacity-50 cursor-not-allowed"
+              }`}
+            >
+              <div className="flex items-start justify-between gap-2 mb-3">
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
+                  style={{ backgroundColor: course.color }}
+                >
+                  {idx + 1}
+                </div>
+                <StatusBadge status={status} />
+              </div>
+              <h4 className="text-sm font-semibold text-white line-clamp-1">
+                {t(lesson.titleKey)}
+              </h4>
+              {lesson.subtitleKey && (
+                <p className="text-xs text-cyan-200/60 line-clamp-2 mt-0.5">
+                  {t(lesson.subtitleKey)}
+                </p>
+              )}
+              <div
+                className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full opacity-40"
+                style={{ backgroundColor: course.color }}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

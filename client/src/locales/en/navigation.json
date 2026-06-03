@@ -4,11 +4,18 @@
     "pricing": "Pricing",
     "about": "About",
     "signIn": "Sign In",
+    "signUp": "Sign Up",
     "exploreCourses": "Explore Courses",
     "dashboard": "Dashboard",
     "leaderboard": "Leaderboard",
     "courses": "Courses",
+    "archipelagos": "Archipelagos",
     "home": "Home",
-    "profile": "Profile"
+    "profile": "Profile",
+    "progress": "Progress",
+    "settings": "Settings",
+    "logout": "Logout",
+    "backToArchipelago": "Back to Archipelago",
+    "backToHome": "Back to Home"
   }
 }

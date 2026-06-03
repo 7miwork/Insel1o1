@@ -1,3 +1,10 @@
 {
-  "errors": {}
+  "errors": {
+    "generic": "發生錯誤。請再試一次。",
+    "networkError": "網路錯誤。請檢查您的網路連線。",
+    "notFound": "找不到您要查找的頁面。",
+    "unauthorized": "您沒有權限存取此頁面。",
+    "validation": "請檢查您的輸入。",
+    "serverError": "伺服器錯誤。請稍後再試。"
+  }
 }
