@@ -1,256 +1,310 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "wouter";
-import { LogOut, Menu, X, Bell, Users, Building2, BarChart3, Settings, AlertCircle, TrendingUp, Activity } from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
-import { authService } from "@/lib/auth-service";
+import {
+  Home,
+  Map as MapIcon,
+  BookOpen,
+  Trophy,
+  Star,
+  BarChart3,
+  Settings,
+  User as UserIcon,
+  Users,
+  Building2,
+  Activity,
+  AlertCircle,
+  TrendingUp,
+  Plus,
+  Shield,
+  ChevronRight,
+} from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { mockSystemStats, mockActivityLogs, mockRevenueData, mockUserDistribution, mockEngagementData, mockSystemAlerts, mockUsers, mockSchools } from "@/data/admin-data";
+import {
+  DashboardLayout,
+  type DashboardNavItem,
+} from "@/components/DashboardLayout";
+import {
+  StatCard,
+  SectionHeading,
+} from "@/components/DashboardWidgets";
+
+type Tab = "overview" | "users" | "schools" | "activity" | "settings";
+
+const SYSTEM_STATS = {
+  totalUsers: 12450,
+  totalSchools: 32,
+  activeUsers24h: 3210,
+  systemUptime: 99.97,
+  alerts: [
+    { id: 1, level: "warning" as const, title: "High server load",      message: "API latency increased by 18% in the last hour." },
+    { id: 2, level: "info"    as const, title: "Scheduled maintenance",  message: "Database optimization tonight at 02:00 UTC." },
+  ],
+};
+
+const REVENUE_DATA = [
+  { month: "Jan", revenue: 8200  },
+  { month: "Feb", revenue: 9100  },
+  { month: "Mar", revenue: 10400 },
+  { month: "Apr", revenue: 11200 },
+  { month: "May", revenue: 12300 },
+  { month: "Jun", revenue: 13800 },
+];
+
+const USER_DIST = [
+  { name: "Students",  value: 8200, color: "#06b6d4" },
+  { name: "Teachers",  value: 1850, color: "#22c55e" },
+  { name: "Parents",   value: 1900, color: "#f59e0b" },
+  { name: "Admins",    value: 500,  color: "#a78bfa" },
+];
+
+const ENGAGEMENT = [
+  { day: "Mon", value: 62 },
+  { day: "Tue", value: 71 },
+  { day: "Wed", value: 75 },
+  { day: "Thu", value: 68 },
+  { day: "Fri", value: 78 },
+  { day: "Sat", value: 55 },
+  { day: "Sun", value: 48 },
+];
+
+const USERS = [
+  { id: 1, name: "Anna Becker",     email: "anna.becker@example.com",  role: "Student",  status: "active",   lastLogin: "2h ago"  },
+  { id: 2, name: "Mr. Tom Werner",  email: "tom.werner@school.edu",    role: "Teacher",  status: "active",   lastLogin: "1d ago"  },
+  { id: 3, name: "Lukas Schäfer",   email: "lukas.s@example.com",      role: "Student",  status: "inactive", lastLogin: "3w ago"  },
+  { id: 4, name: "Dr. Sarah J.",    email: "sarah@riverside.edu",      role: "Teacher",  status: "active",   lastLogin: "5h ago"  },
+  { id: 5, name: "Mia Wagner",      email: "mia.w@example.com",        role: "Student",  status: "active",   lastLogin: "30m ago" },
+];
+
+const SCHOOLS = [
+  { id: 1, name: "Riverside Academy", city: "Berlin",  students: 450, teachers: 35, classes: 18, plan: "Premium",  endDate: "2025-12-31", status: "active"   as const },
+  { id: 2, name: "Sunrise School",    city: "Munich",  students: 320, teachers: 24, classes: 14, plan: "Standard", endDate: "2025-08-15", status: "active"   as const },
+  { id: 3, name: "Nordsee Gymnasium", city: "Hamburg", students: 180, teachers: 12, classes:  8, plan: "Standard", endDate: "2024-04-01", status: "inactive" as const },
+];
+
+const ACTIVITY_LOGS = [
+  { id: 1, user: "Anna Becker",   action: "Lesson completed",  details: "Loops & Iteration",   time: "2h ago",  status: "success" },
+  { id: 2, user: "Mr. Werner",    action: "Created quiz",      details: "Mathematics Module 5", time: "5h ago",  status: "success" },
+  { id: 3, user: "System",        action: "Backup completed",  details: "Nightly snapshot",     time: "12h ago", status: "success" },
+  { id: 4, user: "Sarah J.",      action: "Updated grade",      details: "Class 10A · 92/100",   time: "1d ago",  status: "success" },
+  { id: 5, user: "System",        action: "Server alert",       details: "CPU load > 80%",        time: "2d ago",  status: "alert"   },
+];
+
+const SETTINGS_LIST = [
+  { title: "Email configuration",   desc: "Configure email providers and templates" },
+  { title: "API keys",                desc: "Manage integrations and webhooks" },
+  { title: "Security",                desc: "Two-factor auth, password policies" },
+  { title: "Backup & recovery",       desc: "Schedule and monitor backups" },
+  { title: "Maintenance mode",        desc: "Take the platform offline temporarily" },
+  { title: "System logs",             desc: "Export, view and search logs" },
+];
 
 export default function AdminDashboard() {
-  const [, setLocation] = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'schools' | 'activity' | 'settings'>('overview');
   const { t } = useI18n();
+  const [, setLocation] = useLocation();
+  const [activeTab, setActiveTab] = useState<Tab>("overview");
 
-  const handleLogout = async () => {
-    await authService.logout();
-    setLocation("/");
-  };
-
-  const menuItems = [
-    { id: 'overview', label: 'Overview', icon: '📊' },
-    { id: 'users', label: 'Users', icon: '👥' },
-    { id: 'schools', label: 'Schools', icon: '🏫' },
-    { id: 'activity', label: 'Activity', icon: '📋' },
-    { id: 'settings', label: 'Settings', icon: '⚙️' },
+  const navItems: DashboardNavItem[] = [
+    { to: "/",            id: "home",         labelKey: "nav.home",         icon: <Home className="w-4 h-4" /> },
+    { to: "/archipelago", id: "archipelago",  labelKey: "nav.archipelagos", icon: <MapIcon className="w-4 h-4" /> },
+    { to: "/courses",     id: "courses",      labelKey: "nav.courses",      icon: <BookOpen className="w-4 h-4" /> },
+    { to: "/dashboard",   id: "achievements", labelKey: "nav.achievements", icon: <Trophy className="w-4 h-4" /> },
+    { to: "/dashboard",   id: "xp",           labelKey: "nav.xpLevels",     icon: <Star className="w-4 h-4" /> },
+    { to: "/dashboard",   id: "progress",     labelKey: "nav.progress",     icon: <BarChart3 className="w-4 h-4" /> },
+    { to: "/login",       id: "settings",     labelKey: "nav.settings",     icon: <Settings className="w-4 h-4" /> },
+    { to: "/dashboard",   id: "profile",      labelKey: "nav.profile",      icon: <UserIcon className="w-4 h-4" /> },
   ];
 
-  const renderOverviewTab = () => (
-    <div className="space-y-8">
-      {/* System Alerts */}
-      {mockSystemAlerts.some(a => !a.resolved) && (
+  const tabs: { id: Tab; labelKey: string; icon: React.ReactNode }[] = [
+    { id: "overview", labelKey: "dashboard.professionalDashboard", icon: <BarChart3 className="w-4 h-4" /> },
+    { id: "users",    labelKey: "dashboard.activeStudents",          icon: <Users className="w-4 h-4" /> },
+    { id: "schools",  labelKey: "dashboard.totalUsers",              icon: <Building2 className="w-4 h-4" /> },
+    { id: "activity", labelKey: "dashboard.recentActivity",         icon: <Activity className="w-4 h-4" /> },
+    { id: "settings", labelKey: "common.settings",                  icon: <Settings className="w-4 h-4" /> },
+  ];
+
+  const handleNav = (item: DashboardNavItem) => {
+    if (item.to && item.to !== "#") setLocation(item.to);
+  };
+
+  return (
+    <DashboardLayout
+      titleKey="dashboard.adminDashboard"
+      subtitleKey="dashboard.adminSubtitle"
+      navItems={navItems}
+      activeKey="/dashboard"
+      onNavigate={handleNav}
+    >
+      <div className="mb-6 flex flex-wrap gap-2">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => setActiveTab(tab.id)}
+            className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-colors ${
+              activeTab === tab.id
+                ? "bg-cyan-600 text-white shadow-sm"
+                : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
+            }`}
+          >
+            {tab.icon}
+            {t(tab.labelKey)}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === "overview" && <OverviewTab />}
+      {activeTab === "users" && <UsersTab />}
+      {activeTab === "schools" && <SchoolsTab />}
+      {activeTab === "activity" && <ActivityTab />}
+      {activeTab === "settings" && <SettingsTab />}
+    </DashboardLayout>
+  );
+}
+
+function OverviewTab() {
+  const { t } = useI18n();
+  return (
+    <div className="space-y-6">
+      {/* Alerts */}
+      {SYSTEM_STATS.alerts.length > 0 && (
         <div className="space-y-3">
-          {mockSystemAlerts.filter(a => !a.resolved).map((alert) => (
+          {SYSTEM_STATS.alerts.map((a) => (
             <div
-              key={alert.id}
-              className="rounded-lg p-4 border-l-4 flex items-start gap-4"
-              style={{
-                backgroundColor: alert.type === 'error' ? '#fef2f2' : alert.type === 'warning' ? '#fffbeb' : '#f0f9ff',
-                borderColor: alert.type === 'error' ? '#ef4444' : alert.type === 'warning' ? '#f59e0b' : '#3b82f6',
-              }}
+              key={a.id}
+              className={`flex items-start gap-3 rounded-2xl border-l-4 p-4 ${
+                a.level === "warning"
+                  ? "border-amber-400 bg-amber-50"
+                  : "border-cyan-400 bg-cyan-50"
+              }`}
             >
               <AlertCircle
-                className="w-5 h-5 flex-shrink-0 mt-0.5"
-                style={{
-                  color: alert.type === 'error' ? '#ef4444' : alert.type === 'warning' ? '#f59e0b' : '#3b82f6',
-                }}
+                className={`mt-0.5 h-5 w-5 shrink-0 ${
+                  a.level === "warning" ? "text-amber-500" : "text-cyan-500"
+                }`}
               />
-              <div className="flex-1">
-                <h4 className="font-semibold text-gray-900">{alert.title}</h4>
-                <p className="text-sm text-gray-600 mt-1">{alert.message}</p>
+              <div>
+                <p className="text-sm font-bold text-slate-900">{a.title}</p>
+                <p className="text-xs text-slate-600">{a.message}</p>
               </div>
             </div>
           ))}
         </div>
       )}
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[
-          { label: 'Total Users', value: mockSystemStats.totalUsers.toLocaleString(), icon: '👥', color: '#3b82f6' },
-          { label: 'Total Schools', value: mockSystemStats.totalSchools, icon: '🏫', color: '#10b981' },
-          { label: 'Active Users (24h)', value: mockSystemStats.activeUsers24h.toLocaleString(), icon: '🟢', color: '#f59e0b' },
-          { label: 'System Uptime', value: `${mockSystemStats.systemUptime}%`, icon: '⬆️', color: '#8b5cf6' },
-        ].map((stat, idx) => (
-          <div
-            key={idx}
-            className="rounded-xl p-6 border transition hover:shadow-lg"
-            style={{
-              backgroundColor: "#ffffff",
-              borderColor: "#e5e7eb",
-            }}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-3xl">{stat.icon}</span>
-              <span
-                className="text-xs font-bold px-2 py-1 rounded"
-                style={{
-                  backgroundColor: `${stat.color}20`,
-                  color: stat.color,
-                }}
-              >
-                ↑ 12%
-              </span>
-            </div>
-            <p className="text-gray-600 text-sm mb-1">{stat.label}</p>
-            <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-          </div>
-        ))}
-      </div>
+      <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <StatCard label={t("dashboard.totalUsers")}   value={SYSTEM_STATS.totalUsers.toLocaleString()} icon={<Users className="w-5 h-5" />} accent="from-cyan-500 to-teal-600" trend={{ value: "+12%", positive: true }} />
+        <StatCard label="Schools"                   value={SYSTEM_STATS.totalSchools} icon={<Building2 className="w-5 h-5" />} accent="from-emerald-500 to-teal-500" />
+        <StatCard label={t("dashboard.activeNow")}   value={SYSTEM_STATS.activeUsers24h.toLocaleString()} icon={<Activity className="w-5 h-5" />} accent="from-amber-400 to-orange-500" trend={{ value: "+5%", positive: true }} />
+        <StatCard label={t("dashboard.systemHealth")} value={`${SYSTEM_STATS.systemUptime}%`} icon={<Shield className="w-5 h-5" />} accent="from-violet-500 to-fuchsia-500" />
+      </section>
 
-      {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Revenue Chart */}
-        <div
-          className="lg:col-span-2 rounded-xl p-6 border"
-          style={{
-            backgroundColor: "#ffffff",
-            borderColor: "#e5e7eb",
-          }}
-        >
-          <h3 className="text-lg font-bold text-gray-900 mb-6">Monthly Revenue</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={mockRevenueData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="month" stroke="#6b7280" />
-              <YAxis stroke="#6b7280" />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#ffffff",
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "8px",
-                }}
-              />
-              <Bar dataKey="revenue" fill="#3b82f6" radius={[8, 8, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* User Distribution */}
-        <div
-          className="rounded-xl p-6 border"
-          style={{
-            backgroundColor: "#ffffff",
-            borderColor: "#e5e7eb",
-          }}
-        >
-          <h3 className="text-lg font-bold text-gray-900 mb-6">User Distribution</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={mockUserDistribution}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={100}
-                paddingAngle={2}
-                dataKey="value"
-              >
-                {mockUserDistribution.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-          <div className="mt-4 space-y-2">
-            {mockUserDistribution.map((item, idx) => (
-              <div key={idx} className="flex items-center justify-between text-sm">
-                <div className="flex items-center gap-2">
+      <section className="grid gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2 card-elevated p-5">
+          <SectionHeading icon={<TrendingUp className="w-4 h-4" />} title="Monthly revenue" />
+          <div className="flex h-44 items-end gap-2">
+            {REVENUE_DATA.map((d) => {
+              const max = Math.max(...REVENUE_DATA.map((r) => r.revenue));
+              return (
+                <div key={d.month} className="flex flex-1 flex-col items-center gap-1">
                   <div
-                    className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: item.color }}
+                    className="w-full rounded-lg bg-gradient-to-t from-cyan-500 to-teal-400"
+                    style={{ height: `${(d.revenue / max) * 100}%` }}
+                    title={`€${d.revenue.toLocaleString()}`}
                   />
-                  <span className="text-gray-600">{item.name}</span>
+                  <span className="text-[10px] font-bold text-slate-500">{d.month}</span>
                 </div>
-                <span className="font-bold text-gray-900">{item.value}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
-      </div>
 
-      {/* Engagement Chart */}
-      <div
-        className="rounded-xl p-6 border"
-        style={{
-          backgroundColor: "#ffffff",
-          borderColor: "#e5e7eb",
-        }}
-      >
-        <h3 className="text-lg font-bold text-gray-900 mb-6">Weekly Engagement</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={mockEngagementData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis dataKey="name" stroke="#6b7280" />
-            <YAxis stroke="#6b7280" />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "#ffffff",
-                border: "1px solid #e5e7eb",
-                borderRadius: "8px",
-              }}
-            />
-            <Line type="monotone" dataKey="engagement" stroke="#10b981" strokeWidth={2} dot={{ fill: '#10b981' }} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+        <div className="card-elevated p-5">
+          <SectionHeading icon={<Users className="w-4 h-4" />} title="User distribution" />
+          <ul className="space-y-2">
+            {USER_DIST.map((u) => (
+              <li key={u.name} className="flex items-center gap-3">
+                <span
+                  className="h-3 w-3 shrink-0 rounded-full"
+                  style={{ background: u.color }}
+                  aria-hidden
+                />
+                <span className="flex-1 text-sm text-slate-700">{u.name}</span>
+                <span className="text-sm font-bold text-cyan-700">{u.value.toLocaleString()}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="card-elevated p-5">
+        <SectionHeading icon={<BarChart3 className="w-4 h-4" />} title="Weekly engagement" />
+        <div className="flex h-44 items-end gap-2">
+          {ENGAGEMENT.map((e) => {
+            const max = Math.max(...ENGAGEMENT.map((x) => x.value));
+            return (
+              <div key={e.day} className="flex flex-1 flex-col items-center gap-1">
+                <div
+                  className="w-full rounded-lg bg-gradient-to-t from-cyan-500 to-teal-400"
+                  style={{ height: `${(e.value / max) * 100}%` }}
+                  title={`${e.value}%`}
+                />
+                <span className="text-[10px] font-bold text-slate-500">{e.day}</span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
+}
 
-  const renderUsersTab = () => (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">User Management</h2>
-        <button
-          className="px-4 py-2 rounded-lg font-medium text-white transition"
-          style={{ backgroundColor: '#3b82f6' }}
-        >
-          + Add User
-        </button>
-      </div>
-
-      <div
-        className="rounded-xl border overflow-hidden"
-        style={{
-          backgroundColor: "#ffffff",
-          borderColor: "#e5e7eb",
-        }}
-      >
-        <table className="w-full">
-          <thead style={{ backgroundColor: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
+function UsersTab() {
+  return (
+    <div className="card-elevated p-5">
+      <SectionHeading
+        icon={<Users className="w-4 h-4" />}
+        title="User management"
+        description="Manage all platform users"
+        action={
+          <button type="button" className="btn btn-primary btn-sm">
+            <Plus className="h-4 w-4" />
+            Add user
+          </button>
+        }
+      />
+      <div className="overflow-hidden rounded-xl border border-slate-200">
+        <table className="w-full text-sm">
+          <thead className="bg-slate-50 text-left text-xs uppercase tracking-wider text-slate-500">
             <tr>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Name</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Email</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Role</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Status</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Last Login</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Actions</th>
+              <th className="px-4 py-3">Name</th>
+              <th className="px-4 py-3">Email</th>
+              <th className="px-4 py-3">Role</th>
+              <th className="px-4 py-3">Status</th>
+              <th className="px-4 py-3">Last login</th>
             </tr>
           </thead>
-          <tbody>
-            {mockUsers.map((user) => (
-              <tr key={user.id} style={{ borderBottom: "1px solid #e5e7eb" }}>
-                <td className="px-6 py-4 text-sm text-gray-900 font-medium">{user.firstName} {user.lastName}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{user.email}</td>
-                <td className="px-6 py-4 text-sm">
-                  <span
-                    className="px-3 py-1 rounded-full text-xs font-medium"
-                    style={{
-                      backgroundColor: '#dbeafe',
-                      color: '#1e40af',
-                    }}
-                  >
-                    {user.role}
+          <tbody className="divide-y divide-slate-100">
+            {USERS.map((u) => (
+              <tr key={u.id} className="hover:bg-slate-50">
+                <td className="px-4 py-3 font-semibold text-slate-900">{u.name}</td>
+                <td className="px-4 py-3 text-slate-600">{u.email}</td>
+                <td className="px-4 py-3">
+                  <span className="inline-flex items-center rounded-full bg-cyan-50 px-2.5 py-0.5 text-xs font-bold text-cyan-700">
+                    {u.role}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm">
+                <td className="px-4 py-3">
                   <span
-                    className="px-3 py-1 rounded-full text-xs font-medium"
-                    style={{
-                      backgroundColor: user.status === 'active' ? '#dcfce7' : '#fee2e2',
-                      color: user.status === 'active' ? '#166534' : '#991b1b',
-                    }}
+                    className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${
+                      u.status === "active"
+                        ? "bg-emerald-50 text-emerald-700"
+                        : "bg-slate-100 text-slate-600"
+                    }`}
                   >
-                    {user.status}
+                    {u.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-600">{new Date(user.lastLogin).toLocaleDateString()}</td>
-                <td className="px-6 py-4 text-sm space-x-2">
-                  <button className="text-blue-600 hover:text-blue-700 font-medium">Edit</button>
-                  <button className="text-red-600 hover:text-red-700 font-medium">Suspend</button>
-                </td>
+                <td className="px-4 py-3 text-slate-600">{u.lastLogin}</td>
               </tr>
             ))}
           </tbody>
@@ -258,285 +312,122 @@ export default function AdminDashboard() {
       </div>
     </div>
   );
+}
 
-  const renderSchoolsTab = () => (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">School Management</h2>
-        <button
-          className="px-4 py-2 rounded-lg font-medium text-white transition"
-          style={{ backgroundColor: '#3b82f6' }}
-        >
-          + Add School
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mockSchools.map((school) => (
-          <div
-            key={school.id}
-            className="rounded-xl p-6 border"
-            style={{
-              backgroundColor: "#ffffff",
-              borderColor: "#e5e7eb",
-            }}
-          >
-            <div className="flex items-start justify-between mb-4">
+function SchoolsTab() {
+  return (
+    <div className="space-y-3">
+      <SectionHeading
+        icon={<Building2 className="w-4 h-4" />}
+        title="School management"
+        description="Manage all schools on the platform"
+        action={
+          <button type="button" className="btn btn-primary btn-sm">
+            <Plus className="h-4 w-4" />
+            Add school
+          </button>
+        }
+      />
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {SCHOOLS.map((s) => (
+          <div key={s.id} className="card card-interactive p-5">
+            <div className="flex items-start justify-between gap-2">
               <div>
-                <h3 className="text-lg font-bold text-gray-900">{school.name}</h3>
-                <p className="text-sm text-gray-600">{school.city}, {school.country}</p>
+                <h3 className="text-sm font-extrabold text-slate-900">{s.name}</h3>
+                <p className="text-xs text-slate-500">{s.city}</p>
               </div>
               <span
-                className="px-3 py-1 rounded-full text-xs font-medium"
-                style={{
-                  backgroundColor: school.status === 'active' ? '#dcfce7' : '#fee2e2',
-                  color: school.status === 'active' ? '#166534' : '#991b1b',
-                }}
+                className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                  s.status === "active"
+                    ? "bg-emerald-50 text-emerald-700"
+                    : "bg-slate-100 text-slate-600"
+                }`}
               >
-                {school.status}
+                {s.status}
               </span>
             </div>
-
-            <div className="grid grid-cols-3 gap-4 mb-4 py-4 border-y border-gray-200">
-              <div>
-                <p className="text-2xl font-bold text-gray-900">{school.studentCount}</p>
-                <p className="text-xs text-gray-600">Students</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">{school.teacherCount}</p>
-                <p className="text-xs text-gray-600">Teachers</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">{school.classCount}</p>
-                <p className="text-xs text-gray-600">Classes</p>
-              </div>
+            <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
+              <Cell label="Students" value={s.students} />
+              <Cell label="Teachers" value={s.teachers} />
+              <Cell label="Classes"  value={s.classes} />
+            </dl>
+            <div className="mt-3 space-y-1 text-xs text-slate-600">
+              <p>Plan: <strong className="text-slate-900">{s.plan}</strong></p>
+              <p>Renews: {s.endDate}</p>
             </div>
-
-            <div className="space-y-2 mb-4">
-              <p className="text-sm text-gray-600"><strong>Principal:</strong> {school.principalName}</p>
-              <p className="text-sm text-gray-600"><strong>Plan:</strong> <span className="font-semibold capitalize">{school.subscriptionPlan}</span></p>
-              <p className="text-sm text-gray-600"><strong>Expires:</strong> {new Date(school.subscriptionEndDate).toLocaleDateString()}</p>
-            </div>
-
-            <div className="flex gap-2">
-              <button className="flex-1 px-3 py-2 rounded-lg text-sm font-medium text-blue-600 hover:bg-blue-50 transition">Edit</button>
-              <button className="flex-1 px-3 py-2 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition">Deactivate</button>
+            <div className="mt-3 flex gap-2">
+              <button type="button" className="btn btn-outline btn-sm flex-1">
+                Edit
+                <ChevronRight className="h-3.5 w-3.5" />
+              </button>
             </div>
           </div>
         ))}
       </div>
     </div>
   );
+}
 
-  const renderActivityTab = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900">System Activity</h2>
-
-      <div
-        className="rounded-xl border overflow-hidden"
-        style={{
-          backgroundColor: "#ffffff",
-          borderColor: "#e5e7eb",
-        }}
-      >
-        <table className="w-full">
-          <thead style={{ backgroundColor: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
-            <tr>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">User</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Action</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Details</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Time</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {mockActivityLogs.map((log) => (
-              <tr key={log.id} style={{ borderBottom: "1px solid #e5e7eb" }}>
-                <td className="px-6 py-4 text-sm text-gray-900 font-medium">{log.userName}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{log.action}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{log.details}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{new Date(log.timestamp).toLocaleString()}</td>
-                <td className="px-6 py-4 text-sm">
-                  <span
-                    className="px-3 py-1 rounded-full text-xs font-medium"
-                    style={{
-                      backgroundColor: log.status === 'success' ? '#dcfce7' : '#fee2e2',
-                      color: log.status === 'success' ? '#166534' : '#991b1b',
-                    }}
-                  >
-                    {log.status}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+function ActivityTab() {
+  return (
+    <div className="card-elevated p-5">
+      <SectionHeading icon={<Activity className="w-4 h-4" />} title="System activity" />
+      <ul className="divide-y divide-slate-100">
+        {ACTIVITY_LOGS.map((l) => (
+          <li key={l.id} className="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
+            <span
+              className={`inline-flex h-7 w-7 items-center justify-center rounded-full text-[10px] font-bold ${
+                l.status === "success"
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "bg-amber-50 text-amber-700"
+              }`}
+            >
+              {l.user.split(" ").map((p) => p[0]).join("").slice(0, 2)}
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold text-slate-900">
+                {l.user} <span className="font-normal text-slate-500">· {l.action}</span>
+              </p>
+              <p className="truncate text-xs text-slate-500">{l.details}</p>
+            </div>
+            <span className="text-xs text-slate-500">{l.time}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
+}
 
-  const renderSettingsTab = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900">System Settings</h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {[
-          { title: 'Email Configuration', description: 'Configure email settings for notifications' },
-          { title: 'API Keys', description: 'Manage API keys and integrations' },
-          { title: 'Security Settings', description: 'Configure security policies and 2FA' },
-          { title: 'Backup & Recovery', description: 'Configure automated backups' },
-          { title: 'Maintenance Mode', description: 'Enable/disable maintenance mode' },
-          { title: 'System Logs', description: 'View and export system logs' },
-        ].map((setting, idx) => (
+function SettingsTab() {
+  return (
+    <div className="card-elevated p-5">
+      <SectionHeading icon={<Settings className="w-4 h-4" />} title="System settings" />
+      <div className="grid gap-3 sm:grid-cols-2">
+        {SETTINGS_LIST.map((s) => (
           <div
-            key={idx}
-            className="rounded-xl p-6 border flex items-center justify-between"
-            style={{
-              backgroundColor: "#ffffff",
-              borderColor: "#e5e7eb",
-            }}
+            key={s.title}
+            className="flex items-center justify-between rounded-2xl border border-slate-200 p-4 hover:border-cyan-300 transition-colors"
           >
             <div>
-              <h3 className="font-semibold text-gray-900">{setting.title}</h3>
-              <p className="text-sm text-gray-600 mt-1">{setting.description}</p>
+              <p className="text-sm font-bold text-slate-900">{s.title}</p>
+              <p className="text-xs text-slate-500">{s.desc}</p>
             </div>
-            <button
-              className="px-4 py-2 rounded-lg font-medium text-white transition"
-              style={{ backgroundColor: '#3b82f6' }}
-            >
+            <button type="button" className="btn btn-outline btn-sm">
               Configure
+              <ChevronRight className="h-3.5 w-3.5" />
             </button>
           </div>
         ))}
       </div>
     </div>
   );
+}
 
+function Cell({ label, value }: { label: string; value: number }) {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#f8f9fa" }}>
-      {/* Mobile Sidebar Overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 z-40 md:hidden bg-black/50"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <aside
-        className={`fixed left-0 top-0 h-screen w-64 z-50 transform transition-transform md:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-        style={{
-          backgroundColor: "#ffffff",
-          borderRight: "1px solid #e5e7eb",
-          boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <div className="p-6">
-          {/* Logo */}
-          <div className="flex items-center gap-3 mb-8">
-            <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold"
-              style={{ backgroundColor: "#3b82f6" }}
-            >
-              ⚙️
-            </div>
-            <span className="text-xl font-bold text-gray-900">Insel 1o1</span>
-          </div>
-
-          {/* Navigation */}
-          <nav className="space-y-1 mb-8">
-            {menuItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  setActiveTab(item.id as any);
-                  setSidebarOpen(false);
-                }}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition text-gray-700 hover:bg-gray-50"
-                style={{
-                  backgroundColor: activeTab === item.id ? "#f3f4f6" : "transparent",
-                  borderLeft: activeTab === item.id ? "3px solid #3b82f6" : "3px solid transparent",
-                }}
-              >
-                <span className="text-xl">{item.icon}</span>
-                <span className="font-medium">{item.label}</span>
-              </button>
-            ))}
-          </nav>
-
-          {/* Bottom Actions */}
-          <div className="absolute bottom-6 left-6 right-6 space-y-3">
-            <LanguageSwitcher />
-            <button
-              onClick={handleLogout}
-              className="w-full px-4 py-3 rounded-lg font-medium flex items-center gap-2 transition"
-              style={{
-                backgroundColor: "#fee2e2",
-                color: "#dc2626",
-              }}
-            >
-              <LogOut className="w-4 h-4" />
-              Logout
-            </button>
-          </div>
-        </div>
-      </aside>
-
-      {/* Main Content */}
-      <main className="md:ml-64">
-        {/* Top Navigation */}
-        <nav
-          className="sticky top-0 z-40 border-b"
-          style={{
-            backgroundColor: "#ffffff",
-            borderColor: "#e5e7eb",
-            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.05)",
-          }}
-        >
-          <div className="px-6 py-4 flex items-center justify-between">
-            {/* Left */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="md:hidden text-gray-700 hover:text-gray-900"
-              >
-                {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-              <h1 className="text-2xl font-bold text-gray-900">Admin Console</h1>
-            </div>
-
-            {/* Right */}
-            <div className="flex items-center gap-4">
-              <button className="p-2 rounded-lg hover:bg-gray-100 transition">
-                <Bell className="w-5 h-5 text-gray-600" />
-              </button>
-              <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
-                <div className="text-right">
-                  <p className="text-sm font-medium text-gray-900">Admin User</p>
-                  <p className="text-xs text-gray-500">System Administrator</p>
-                </div>
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
-                  style={{ backgroundColor: "#3b82f6" }}
-                >
-                  A
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
-
-        {/* Page Content */}
-        <div className="p-6 md:p-8">
-          {activeTab === 'overview' && renderOverviewTab()}
-          {activeTab === 'users' && renderUsersTab()}
-          {activeTab === 'schools' && renderSchoolsTab()}
-          {activeTab === 'activity' && renderActivityTab()}
-          {activeTab === 'settings' && renderSettingsTab()}
-        </div>
-      </main>
+    <div className="rounded-lg bg-slate-50 p-2">
+      <p className="text-base font-extrabold text-slate-900">{value}</p>
+      <p className="text-[10px] uppercase tracking-wider text-slate-500">{label}</p>
     </div>
   );
 }
