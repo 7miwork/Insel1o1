@@ -1,496 +1,466 @@
 import React, { useState } from "react";
 import { useLocation } from "wouter";
 import {
-  Home,
-  Map as MapIcon,
-  BookOpen,
-  Trophy,
-  Star,
-  BarChart3,
-  Settings,
-  User as UserIcon,
   Compass,
   Flame,
-  GraduationCap,
-  Sparkles,
-  ChevronRight,
-  Zap,
+  Map as MapIcon,
+  Trophy,
+  Star,
   Target,
-  CheckCircle2,
   Lock,
+  CheckCircle2,
   PlayCircle,
-  Award,
+  ArrowRight,
+  Swords,
   Clock,
+  Shield,
+  Zap,
+  ChevronRight,
+  Eye,
+  Sparkles,
 } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { authService } from "@/lib/auth-service";
 import { StatusBadge, type LessonStatus } from "@/components/StatusBadge";
-import { DashboardLayout, type DashboardNavItem } from "@/components/DashboardLayout";
 
-interface Activity {
-  id: number;
-  title: string;
-  type: "lesson" | "quiz" | "reward";
-  time: string;
-  xp: number;
-  icon: React.ReactNode;
-}
+/* ─── data ──────────────────────────────────────────────────────────────── */
 
-interface IslandProgress {
+interface Island {
   id: number;
   name: string;
   emoji: string;
-  status: LessonStatus;
+  status: "visited" | "current" | "coming";
   progress: number;
-  lessons: { id: number; name: string; status: LessonStatus }[];
+  difficulty: string;
+  lessons: { name: string; status: "done" | "active" | "locked" }[];
 }
 
-interface Achievement {
-  id: number;
-  name: string;
-  description: string;
-  icon: string;
-  status: "locked" | "in-progress" | "unlocked";
-  progress: number;
-}
-
-const ACTIVITIES: Activity[] = [
-  { id: 1, title: "Variables & Data Storage",  type: "lesson", time: "2h ago", xp: 50,  icon: <BookOpen className="w-4 h-4" /> },
-  { id: 2, title: "Loops Challenge",            type: "quiz",   time: "5h ago", xp: 75,  icon: <Trophy className="w-4 h-4" /> },
-  { id: 3, title: "First Wall Reward",           type: "reward", time: "1d ago", xp: 60,  icon: <Award  className="w-4 h-4" /> },
-  { id: 4, title: "Agent Basics",                type: "lesson", time: "2d ago", xp: 50,  icon: <BookOpen className="w-4 h-4" /> },
-  { id: 5, title: "Functions Mastery",           type: "lesson", time: "3d ago", xp: 80,  icon: <BookOpen className="w-4 h-4" /> },
-];
-
-const ISLANDS: IslandProgress[] = [
+const JOURNEY: Island[] = [
   {
     id: 1,
     name: "Mathematics Kingdom",
     emoji: "🏝️",
-    status: "in-progress",
-    progress: 85,
+    status: "visited",
+    progress: 100,
+    difficulty: "Beginner",
     lessons: [
-      { id: 1, name: "Movement Basics",     status: "completed" },
-      { id: 2, name: "Block Coding Intro",  status: "completed" },
-      { id: 3, name: "Your First Program",  status: "in-progress" },
+      { name: "Movement Basics",    status: "done" },
+      { name: "Block Coding Intro",  status: "done" },
+      { name: "Your First Program",  status: "done" },
     ],
   },
   {
     id: 2,
     name: "Science Lab",
     emoji: "🔬",
-    status: "available",
+    status: "current",
     progress: 40,
+    difficulty: "Beginner",
     lessons: [
-      { id: 1, name: "Lab Safety",         status: "completed" },
-      { id: 2, name: "First Experiment",   status: "available" },
+      { name: "Lab Safety",       status: "done" },
+      { name: "First Experiment", status: "active" },
+      { name: "Cell Biology",     status: "locked" },
     ],
   },
   {
     id: 3,
     name: "History Voyage",
     emoji: "⚓",
-    status: "locked",
+    status: "coming",
     progress: 0,
+    difficulty: "Intermediate",
     lessons: [
-      { id: 1, name: "Ancient Civilizations", status: "locked" },
+      { name: "Ancient Civilizations", status: "locked" },
+    ],
+  },
+  {
+    id: 4,
+    name: "Art Studio",
+    emoji: "🎨",
+    status: "coming",
+    progress: 0,
+    difficulty: "Intermediate",
+    lessons: [
+      { name: "Color Theory", status: "locked" },
     ],
   },
 ];
 
-const ACHIEVEMENTS: Achievement[] = [
-  { id: 1, name: "First Steps",      description: "Complete your first lesson",         icon: "🚀", status: "unlocked",    progress: 100 },
-  { id: 2, name: "Quiz Master",      description: "Score 100% on 5 quizzes",            icon: "🎯", status: "in-progress", progress: 60  },
-  { id: 3, name: "Streak Warrior",   description: "Maintain a 7-day streak",             icon: "🔥", status: "in-progress", progress: 85  },
-  { id: 4, name: "Code Ninja",       description: "Complete the Programming Realm",     icon: "🥷", status: "locked",      progress: 0   },
-  { id: 5, name: "Speed Runner",     description: "Complete a lesson in under 5 min",   icon: "⚡", status: "locked",      progress: 0   },
-  { id: 6, name: "Marathon Runner",  description: "Complete 100 lessons",                icon: "🏃", status: "in-progress", progress: 42  },
+interface Quest {
+  id: number;
+  title: string;
+  xp: number;
+  completed: boolean;
+  icon: React.ReactNode;
+}
+
+const DAILY_QUESTS: Quest[] = [
+  { id: 1, title: "Learn for 30 minutes", xp: 50,  completed: true,  icon: <Clock className="w-5 h-5" /> },
+  { id: 2, title: "Complete a quiz",       xp: 75,  completed: false, icon: <Target className="w-5 h-5" /> },
+  { id: 3, title: "Earn 50 XP",            xp: 50,  completed: true,  icon: <Zap className="w-5 h-5" /> },
+  { id: 4, title: "Read a story",          xp: 25,  completed: false, icon: <Eye className="w-5 h-5" /> },
 ];
+
+const WEEKLY_QUESTS: Quest[] = [
+  { id: 5, title: "Complete 5 lessons",    xp: 200, completed: false, icon: <CheckCircle2 className="w-5 h-5" /> },
+  { id: 6, title: "Explore a new island",  xp: 150, completed: false, icon: <Compass className="w-5 h-5" /> },
+  { id: 7, title: "Maintain a 7-day streak", xp: 300, completed: false, icon: <Flame className="w-5 h-5" /> },
+];
+
+interface Badge {
+  id: number;
+  name: string;
+  icon: string;
+  status: "unlocked" | "in-progress" | "locked";
+  progress: number;
+  description: string;
+}
+
+const BADGES: Badge[] = [
+  { id: 1, name: "First Steps",      icon: "🚀", status: "unlocked",    progress: 100, description: "Complete your first lesson" },
+  { id: 2, name: "Quiz Master",      icon: "🎯", status: "in-progress", progress: 60,  description: "Score 100% on 5 quizzes" },
+  { id: 3, name: "Streak Warrior",   icon: "🔥", status: "in-progress", progress: 85,  description: "Maintain a 7-day streak" },
+  { id: 4, name: "Block Builder",    icon: "🧱", status: "unlocked",    progress: 100, description: "Build 10 structures" },
+  { id: 5, name: "Code Ninja",       icon: "🥷", status: "locked",      progress: 0,   description: "Complete the Programming Realm" },
+  { id: 6, name: "Speed Runner",     icon: "⚡", status: "locked",      progress: 0,   description: "Finish a lesson in under 5 min" },
+  { id: 7, name: "Marathon Runner",  icon: "🏃", status: "in-progress", progress: 42,  description: "Complete 100 lessons" },
+  { id: 8, name: "Legend",           icon: "👑", status: "locked",      progress: 0,   description: "Reach level 30" },
+];
+
+interface Reward {
+  id: number;
+  icon: string;
+  name: string;
+  time: string;
+  type: "xp" | "badge" | "unlock";
+}
+
+const REWARDS: Reward[] = [
+  { id: 1, icon: "⭐", name: "50 XP earned",  time: "2h ago",  type: "xp" },
+  { id: 2, icon: "🎯", name: "Quiz Master badge", time: "5h ago",  type: "badge" },
+  { id: 3, icon: "🏝️", name: "Science Lab unlocked", time: "1d ago",  type: "unlock" },
+  { id: 4, icon: "🧱", name: "Block Builder badge",  time: "3d ago",  type: "badge" },
+];
+
+/* ─── page ──────────────────────────────────────────────────────────────── */
 
 export default function StudentDashboard() {
   const { t } = useI18n();
   const [, setLocation] = useLocation();
   const user = authService.getCurrentUser();
 
-  const [xp] = useState(720);
-  const [maxXp] = useState(1000);
-  const [level] = useState(3);
+  const [level] = useState(5);
+  const [xp] = useState(2450);
+  const [maxXp] = useState(3000);
   const [streak] = useState(12);
-  const [coins] = useState(145);
+  const [coins] = useState(340);
   const xpPct = (xp / maxXp) * 100;
-  const xpNeeded = maxXp - xp;
 
-  const navItems: DashboardNavItem[] = [
-    { to: "/",             id: "home",         labelKey: "nav.home",         icon: <Home className="w-4 h-4" /> },
-    { to: "/archipelago",  id: "archipelago",  labelKey: "nav.archipelagos", icon: <MapIcon className="w-4 h-4" /> },
-    { to: "/courses",      id: "courses",      labelKey: "nav.courses",      icon: <BookOpen className="w-4 h-4" /> },
-    { to: "#",             id: "achievements", labelKey: "nav.achievements", icon: <Trophy className="w-4 h-4" />, badge: 8 },
-    { to: "/dashboard",    id: "xp",           labelKey: "nav.xpLevels",     icon: <Star className="w-4 h-4" /> },
-    { to: "/dashboard",    id: "progress",     labelKey: "nav.progress",     icon: <BarChart3 className="w-4 h-4" /> },
-    { to: "/login",        id: "settings",     labelKey: "nav.settings",     icon: <Settings className="w-4 h-4" /> },
-    { to: "/dashboard",    id: "profile",      labelKey: "nav.profile",      icon: <UserIcon className="w-4 h-4" /> },
-  ];
-
-  const handleNav = (item: DashboardNavItem) => {
-    if (item.to && item.to !== "#") setLocation(item.to);
-  };
+  const currentIsland = JOURNEY.find((i) => i.status === "current");
+  const completedIslands = JOURNEY.filter((i) => i.status === "visited").length;
+  const totalBadges = BADGES.filter((b) => b.status === "unlocked").length;
 
   return (
-    <DashboardLayout
-      titleKey="dashboard.studentDashboard"
-      subtitleKey="dashboard.studentSubtitle"
-      navItems={navItems}
-      activeKey="/dashboard"
-      onNavigate={handleNav}
-    >
-      {/* ── Hero / Welcome ─────────────────────────────────────── */}
-      <section
-        className="relative overflow-hidden rounded-3xl border border-cyan-100 bg-gradient-to-br from-cyan-600 via-cyan-700 to-teal-700 p-6 text-white shadow-lg sm:p-8"
-      >
-        <div
-          className="pointer-events-none absolute inset-0 opacity-25"
-          style={{
-            background:
-              "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15) 0%, transparent 40%)",
-          }}
-          aria-hidden
-        />
-        <div className="relative grid gap-6 md:grid-cols-3">
-          <div className="md:col-span-2 space-y-4">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" />
-              {t("dashboard.welcomeBackExplorer")}
-            </span>
-            <h2 className="text-2xl font-extrabold sm:text-3xl">
-              {t("dashboard.welcomeBackExplorer")}
-            </h2>
-            <p className="max-w-xl text-sm text-cyan-50/90 sm:text-base">
-              {t("dashboard.recommendedLesson")}: <strong>Loops & Iteration</strong>
-            </p>
-            <div className="flex flex-wrap gap-3 pt-1">
-              <button
-                type="button"
-                onClick={() => setLocation("/archipelago")}
-                className="btn btn-accent btn-md"
-              >
-                <Compass className="h-4 w-4" />
-                {t("dashboard.continueLearning")}
-              </button>
-              <button
-                type="button"
-                onClick={() => setLocation("/leaderboard")}
-                className="btn btn-outline btn-md border-white/40 text-white hover:bg-white/10 hover:text-white"
-              >
-                <Trophy className="h-4 w-4" />
-                {t("dashboard.viewLeaderboard")}
-              </button>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-[#0c1222] via-[#0f1b2d] to-[#0a1628] text-white">
+      {/* ── Hero: Player Card + Welcome ──────────────────────── */}
+      <section className="relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 right-10 w-96 h-96 bg-violet-500/8 rounded-full blur-[120px]" />
+        </div>
 
-          <div className="rounded-2xl bg-white/10 p-5 backdrop-blur">
-            <div className="grid grid-cols-2 gap-3">
-              <Stat label={t("common.level")} value={level} icon={<GraduationCap className="h-4 w-4" />} />
-              <Stat label={t("common.xp")} value={xp} icon={<Star className="h-4 w-4" />} />
-              <Stat label={t("common.coins")} value={coins} icon={<Award className="h-4 w-4" />} />
-              <Stat label={t("common.streak")} value={streak} icon={<Flame className="h-4 w-4" />} />
-            </div>
-          </div>
-        </div>
-      </section>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-8 sm:pt-14 sm:pb-10">
+          <div className="flex flex-col lg:flex-row gap-8 items-start">
+            {/* Player Card */}
+            <div className="flex-shrink-0 w-full lg:w-80 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 p-6 shadow-2xl">
+              <div className="flex items-center gap-4 mb-5">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-2xl font-extrabold text-white shadow-lg shadow-amber-500/30">
+                  {(user?.firstName?.[0] ?? "E").toUpperCase()}
+                  {(user?.lastName?.[0] ?? "X").toUpperCase()}
+                </div>
+                <div>
+                  <p className="text-lg font-extrabold text-white">
+                    {user?.firstName ?? "Explorer"} {user?.lastName ?? ""}
+                  </p>
+                  <p className="text-sm text-cyan-300 font-semibold">
+                    {t("adventure.codingExplorer")}
+                  </p>
+                </div>
+              </div>
 
-      {/* ── XP Progress ─────────────────────────────────────────── */}
-      <section className="mt-6 card-elevated rounded-2xl p-5 sm:p-6">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h3 className="text-base font-extrabold text-slate-900">
-              {t("dashboard.xpProgress")}
-            </h3>
-            <p className="text-sm text-slate-500">
-              {`${xpNeeded} XP needed for next level`}
-            </p>
-          </div>
-          <div className="text-right">
-            <p className="text-2xl font-extrabold text-cyan-700">
-              {xp} <span className="text-sm font-semibold text-slate-400">/ {maxXp} XP</span>
-            </p>
-            <p className="text-xs font-semibold text-slate-500">Level {level}</p>
-          </div>
-        </div>
-        <div className="progress-track progress-track-lg mt-4" aria-hidden>
-          <div className="progress-fill" style={{ width: `${xpPct}%` }} />
-        </div>
-        <div className="mt-4 grid grid-cols-3 gap-3 text-center text-xs">
-          <Pill label={t("dashboard.nextGoal")} value={`Level ${level + 1}`} icon={<Target className="h-4 w-4" />} />
-          <Pill label={t("dashboard.weeklyGoal")} value="70%" icon={<Zap className="h-4 w-4" />} />
-          <Pill label={t("dashboard.learningStreak")} value={`${streak} ${t("dashboard.daysShort")}`} icon={<Flame className="h-4 w-4" />} />
-        </div>
-      </section>
+              <div className="space-y-3">
+                {/* Level */}
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-slate-400 flex items-center gap-1.5">
+                    <Star className="w-4 h-4 text-amber-400" />
+                    {t("common.level")}
+                  </span>
+                  <span className="text-lg font-extrabold text-amber-400">{level}</span>
+                </div>
 
-      {/* ── Quick Actions ───────────────────────────────────────── */}
-      <section className="mt-6">
-        <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-slate-500">
-          {t("dashboard.quickActions")}
-        </h3>
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <ActionCard
-            onClick={() => setLocation("/archipelago")}
-            icon={<Compass className="h-5 w-5" />}
-            title={t("dashboard.continueLearning")}
-            color="from-cyan-500 to-teal-600"
-            desc={t("dashboard.exploreArchipelagos")}
-          />
-          <ActionCard
-            onClick={() => setLocation("/leaderboard")}
-            icon={<Trophy className="h-5 w-5" />}
-            title={t("dashboard.viewLeaderboard")}
-            color="from-amber-400 to-orange-500"
-            desc="Top 100 explorer"
-          />
-          <ActionCard
-            onClick={() => setLocation("/courses")}
-            icon={<BookOpen className="h-5 w-5" />}
-            title={t("dashboard.coursesOverview")}
-            color="from-violet-500 to-fuchsia-500"
-            desc="5 enrolled"
-          />
-          <ActionCard
-            onClick={() => setLocation("/courses")}
-            icon={<Trophy className="h-5 w-5" />}
-            title={t("dashboard.viewAchievements")}
-            color="from-emerald-500 to-teal-500"
-            desc="8 unlocked"
-          />
-        </div>
-      </section>
-
-      {/* ── Islands + Achievements ─────────────────────────────── */}
-      <section className="mt-8 grid gap-6 lg:grid-cols-3">
-        {/* Islands */}
-        <div className="lg:col-span-2 space-y-3">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
-            {t("dashboard.coursesOverview")}
-          </h3>
-          {ISLANDS.map((island) => (
-            <div
-              key={island.id}
-              className="card card-interactive p-5"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl" aria-hidden>{island.emoji}</span>
-                  <div>
-                    <h4 className="font-bold text-slate-900">{island.name}</h4>
-                    <p className="text-xs text-slate-500">
-                      {island.lessons.length} {t("common.lesson").toLowerCase()}
-                    </p>
+                {/* XP Bar */}
+                <div>
+                  <div className="flex justify-between text-xs text-slate-400 mb-1">
+                    <span>{xp} XP</span>
+                    <span>{maxXp} XP</span>
+                  </div>
+                  <div className="progress-track" aria-hidden>
+                    <div className="progress-fill progress-fill-xp" style={{ width: `${xpPct}%` }} />
                   </div>
                 </div>
-                <StatusBadge status={island.status} />
-              </div>
-              <div className="mt-4">
-                <div className="mb-1.5 flex items-center justify-between text-xs text-slate-500">
-                  <span>{t("dashboard.averageProgress")}</span>
-                  <span className="font-bold text-slate-700">{island.progress}%</span>
-                </div>
-                <div className="progress-track" aria-hidden>
-                  <div
-                    className={`progress-fill ${
-                      island.status === "completed"
-                        ? "progress-fill-gold"
-                        : island.status === "in-progress"
-                        ? "progress-fill"
-                        : "progress-fill"
-                    }`}
-                    style={{
-                      width: `${island.progress}%`,
-                      opacity: island.status === "locked" ? 0.4 : 1,
-                    }}
-                  />
+
+                {/* Stats row */}
+                <div className="grid grid-cols-3 gap-2 pt-2">
+                  <div className="text-center rounded-xl bg-white/5 p-2">
+                    <p className="text-xs text-slate-400">{t("common.coins")}</p>
+                    <p className="text-base font-extrabold text-amber-400">{coins}</p>
+                  </div>
+                  <div className="text-center rounded-xl bg-white/5 p-2">
+                    <p className="text-xs text-slate-400">{t("common.streak")}</p>
+                    <p className="text-base font-extrabold text-orange-400">{streak}d</p>
+                  </div>
+                  <div className="text-center rounded-xl bg-white/5 p-2">
+                    <p className="text-xs text-slate-400">{t("dashboard.achievementsCount")}</p>
+                    <p className="text-base font-extrabold text-violet-400">{totalBadges}</p>
+                  </div>
                 </div>
               </div>
-              <ul className="mt-4 space-y-1.5">
-                {island.lessons.map((lesson) => (
-                  <li
-                    key={lesson.id}
-                    className="flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm hover:bg-slate-50"
-                  >
-                    {lesson.status === "completed" ? (
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-                    ) : lesson.status === "in-progress" ? (
-                      <PlayCircle className="h-4 w-4 text-cyan-500" />
-                    ) : (
-                      <Lock className="h-4 w-4 text-slate-400" />
-                    )}
-                    <span
-                      className={
-                        lesson.status === "locked"
-                          ? "text-slate-400"
-                          : "text-slate-700"
-                      }
-                    >
-                      {lesson.name}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+            </div>
+
+            {/* Welcome + Main CTA */}
+            <div className="flex-1 space-y-6">
+              <div>
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+                  {t("adventure.welcomeBack")}
+                </h1>
+                <p className="text-base sm:text-lg text-slate-400 mt-2 max-w-lg">
+                  {t("dashboard.recommendedLesson")}: <strong className="text-cyan-300">Loops & Iteration</strong>
+                </p>
+              </div>
+
+              {/* Main CTA — Continue Adventure */}
               <button
                 type="button"
-                disabled={island.status === "locked"}
-                onClick={() => setLocation("/archipelago")}
-                className="btn btn-primary btn-sm mt-4 w-full"
+                onClick={() => currentIsland && setLocation(`/archipelago`)}
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-5 rounded-2xl text-lg font-extrabold text-white bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-400 hover:via-orange-400 hover:to-red-400 shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/50 transition-all duration-300 hover:-translate-y-1"
               >
-                {island.status === "completed"
-                  ? t("common.review")
-                  : island.status === "in-progress"
-                  ? t("dashboard.continueBtn")
-                  : t("dashboard.start")}
-                <ChevronRight className="h-4 w-4" />
+                <Compass className="w-6 h-6" />
+                {t("adventure.continueAdventure")}
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-            </div>
-          ))}
-        </div>
 
-        {/* Achievements + Activity */}
-        <div className="space-y-6">
-          <div>
-            <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-slate-500">
-              {t("dashboard.achievementsOverview")}
-            </h3>
-            <div className="grid grid-cols-3 gap-2">
-              {ACHIEVEMENTS.map((a) => (
-                <div
-                  key={a.id}
-                  className={`relative rounded-2xl border p-3 text-center transition-all ${
-                    a.status === "unlocked"
-                      ? "border-amber-200 bg-amber-50"
-                      : a.status === "in-progress"
-                      ? "border-cyan-200 bg-cyan-50"
-                      : "border-slate-200 bg-slate-50 opacity-60"
-                  }`}
-                >
-                  <div className="text-2xl">{a.icon}</div>
-                  <p className="mt-1 text-[11px] font-bold text-slate-900 line-clamp-1">
-                    {a.name}
-                  </p>
-                  <p className="text-[10px] text-slate-500 line-clamp-2">
-                    {a.description}
-                  </p>
-                  {a.status !== "unlocked" && a.progress > 0 && (
-                    <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-white">
-                      <div
-                        className="h-full bg-cyan-500"
-                        style={{ width: `${a.progress}%` }}
-                      />
-                    </div>
-                  )}
+              {/* Quick stats */}
+              <div className="grid grid-cols-3 gap-3 max-w-md">
+                <div className="rounded-2xl bg-white/5 border border-white/10 p-3 text-center">
+                  <p className="text-2xl font-extrabold text-cyan-400">{completedIslands}</p>
+                  <p className="text-xs text-slate-400 mt-0.5">{t("adventure.visitedIslands")}</p>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Activity feed */}
-          <div>
-            <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-slate-500">
-              {t("dashboard.recentActivity")}
-            </h3>
-            <div className="card-elevated rounded-2xl p-4">
-              {ACTIVITIES.length === 0 ? (
-                <EmptyState
-                  title={t("dashboard.noDataYet")}
-                  description={t("dashboard.startFirstAdventure")}
-                />
-              ) : (
-                <ol className="space-y-3">
-                  {ACTIVITIES.map((a) => (
-                    <li key={a.id} className="flex items-center gap-3">
-                      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-cyan-50 text-cyan-700">
-                        {a.icon}
-                      </span>
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-semibold text-slate-900">
-                          {a.title}
-                        </p>
-                        <p className="flex items-center gap-1 text-xs text-slate-500">
-                          <Clock className="h-3 w-3" /> {a.time}
-                        </p>
-                      </div>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-bold text-emerald-700">
-                        +{a.xp} XP
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-              )}
+                <div className="rounded-2xl bg-white/5 border border-white/10 p-3 text-center">
+                  <p className="text-2xl font-extrabold text-amber-400">{JOURNEY.length - completedIslands}</p>
+                  <p className="text-xs text-slate-400 mt-0.5">{t("adventure.comingIslands")}</p>
+                </div>
+                <div className="rounded-2xl bg-white/5 border border-white/10 p-3 text-center">
+                  <p className="text-2xl font-extrabold text-violet-400">{streak}</p>
+                  <p className="text-xs text-slate-400 mt-0.5">{t("adventure.daysInARow")}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
-    </DashboardLayout>
-  );
-}
 
-function Stat({ label, value, icon }: { label: string; value: React.ReactNode; icon: React.ReactNode }) {
-  return (
-    <div className="rounded-xl bg-white/10 p-3 backdrop-blur">
-      <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-cyan-100/80">
-        {icon}
-        {label}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-12 space-y-8">
+        {/* ── Journey Map ───────────────────────────────────────── */}
+        <section>
+          <h2 className="text-xl font-extrabold text-white mb-4 flex items-center gap-2">
+            <MapIcon className="w-5 h-5 text-cyan-400" />
+            {t("adventure.yourJourney")}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {JOURNEY.map((island, idx) => (
+              <button
+                key={island.id}
+                type="button"
+                onClick={() => island.status !== "coming" && setLocation("/archipelago")}
+                className={`relative rounded-2xl p-5 border transition-all duration-300 text-left ${
+                  island.status === "current"
+                    ? "bg-white/10 border-cyan-400/50 shadow-lg shadow-cyan-500/20 hover:-translate-y-1"
+                    : island.status === "visited"
+                    ? "bg-white/5 border-white/10 hover:bg-white/8"
+                    : "bg-white/[0.02] border-white/5 opacity-50"
+                }`}
+              >
+                {/* Route connector */}
+                {idx < JOURNEY.length - 1 && (
+                  <div className="absolute top-1/2 -right-2 w-4 h-0.5 bg-white/20 hidden sm:block" />
+                )}
+
+                <div className="flex items-start justify-between gap-2 mb-3">
+                  <span className="text-4xl drop-shadow-lg">{island.emoji}</span>
+                  {island.status === "current" && (
+                    <span className="px-2 py-0.5 rounded-full bg-cyan-400 text-cyan-900 text-[10px] font-bold uppercase">
+                      {t("adventure.currentIsland")}
+                    </span>
+                  )}
+                  {island.status === "visited" && (
+                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                  )}
+                  {island.status === "coming" && (
+                    <Lock className="w-5 h-5 text-slate-600" />
+                  )}
+                </div>
+
+                <h3 className="text-sm font-bold text-white mb-1">{island.name}</h3>
+                <p className="text-xs text-slate-500 mb-2">{island.difficulty}</p>
+
+                {island.status !== "coming" && (
+                  <div className="w-full h-1.5 rounded-full bg-white/10 mb-2">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-cyan-300"
+                      style={{ width: `${island.progress}%` }}
+                    />
+                  </div>
+                )}
+
+                <span className="text-xs text-slate-500">
+                  {island.lessons.filter((l) => l.status === "done").length}/{island.lessons.length} lessons
+                </span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Two-column: Quests + Rewards ──────────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Quests */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Daily Quests */}
+            <section>
+              <h2 className="text-lg font-extrabold text-white mb-3 flex items-center gap-2">
+                <Target className="w-5 h-5 text-amber-400" />
+                {t("adventure.dailyQuests")}
+              </h2>
+              <div className="space-y-2">
+                {DAILY_QUESTS.map((q) => (
+                  <div
+                    key={q.id}
+                    className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-all ${
+                      q.completed
+                        ? "bg-emerald-500/10 border border-emerald-500/30"
+                        : "bg-white/5 border border-white/10 hover:bg-white/8"
+                    }`}
+                  >
+                    <span className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      q.completed ? "bg-emerald-500 text-white" : "bg-white/10 text-slate-400"
+                    }`}>
+                      {q.completed ? <CheckCircle2 className="w-4 h-4" /> : q.icon}
+                    </span>
+                    <span className={`flex-1 text-sm font-medium ${
+                      q.completed ? "text-emerald-300" : "text-slate-300"
+                    }`}>
+                      {q.title}
+                    </span>
+                    <span className="text-xs font-bold text-amber-400">+{q.xp} XP</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Weekly Quests */}
+            <section>
+              <h2 className="text-lg font-extrabold text-white mb-3 flex items-center gap-2">
+                <Trophy className="w-5 h-5 text-violet-400" />
+                {t("adventure.weeklyQuests")}
+              </h2>
+              <div className="space-y-2">
+                {WEEKLY_QUESTS.map((q) => (
+                  <div
+                    key={q.id}
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 bg-white/5 border border-white/10 hover:bg-white/8 transition-all"
+                  >
+                    <span className="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 text-slate-400">
+                      {q.icon}
+                    </span>
+                    <span className="flex-1 text-sm font-medium text-slate-300">{q.title}</span>
+                    <span className="text-xs font-bold text-amber-400">+{q.xp} XP</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+
+          {/* Rewards */}
+          <div className="space-y-6">
+            <section>
+              <h2 className="text-lg font-extrabold text-white mb-3 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-amber-400" />
+                {t("adventure.lastRewards")}
+              </h2>
+              <div className="space-y-2">
+                {REWARDS.map((r) => (
+                  <div
+                    key={r.id}
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 bg-white/5 border border-white/10"
+                  >
+                    <span className="text-2xl">{r.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-white truncate">{r.name}</p>
+                      <p className="text-xs text-slate-500">{r.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Streak card */}
+            <section className="rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30 p-5 text-center">
+              <Flame className="w-10 h-10 text-orange-400 mx-auto mb-2 animate-pulse" />
+              <p className="text-3xl font-extrabold text-orange-400">{streak}</p>
+              <p className="text-sm text-orange-300">{t("adventure.daysInARow")}</p>
+            </section>
+          </div>
+        </div>
+
+        {/* ── Badge Collection ──────────────────────────────────── */}
+        <section>
+          <h2 className="text-xl font-extrabold text-white mb-4 flex items-center gap-2">
+            <Shield className="w-5 h-5 text-amber-400" />
+            {t("dashboard.achievementsOverview")}
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {BADGES.map((badge) => (
+              <div
+                key={badge.id}
+                className={`rounded-2xl border p-4 text-center transition-all ${
+                  badge.status === "unlocked"
+                    ? "bg-amber-500/10 border-amber-500/30 shadow-lg shadow-amber-500/10"
+                    : badge.status === "in-progress"
+                    ? "bg-cyan-500/10 border-cyan-500/30"
+                    : "bg-white/[0.02] border-white/5 opacity-50"
+                }`}
+              >
+                <div className="text-3xl mb-2">{badge.icon}</div>
+                <p className="text-xs font-bold text-white">{badge.name}</p>
+                <p className="text-[10px] text-slate-500 mt-0.5">{badge.description}</p>
+                {badge.status !== "unlocked" && badge.progress > 0 && (
+                  <div className="mt-2 h-1 w-full rounded-full bg-white/10">
+                    <div
+                      className="h-full rounded-full bg-cyan-400"
+                      style={{ width: `${badge.progress}%` }}
+                    />
+                  </div>
+                )}
+                {badge.status === "unlocked" && (
+                  <span className="inline-block mt-2 text-[10px] font-bold text-amber-400 uppercase">
+                    Unlocked ✓
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
-      <div className="mt-1 text-lg font-extrabold text-white">{value}</div>
-    </div>
-  );
-}
-
-function Pill({ label, value, icon }: { label: string; value: string; icon: React.ReactNode }) {
-  return (
-    <div className="flex flex-col items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 py-2">
-      <span className="text-slate-500">{icon}</span>
-      <span className="text-sm font-bold text-slate-900">{value}</span>
-      <span className="text-[10px] uppercase tracking-wider text-slate-500">
-        {label}
-      </span>
-    </div>
-  );
-}
-
-function ActionCard({
-  onClick,
-  icon,
-  title,
-  desc,
-  color,
-}: {
-  onClick: () => void;
-  icon: React.ReactNode;
-  title: string;
-  desc: string;
-  color: string;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="group card card-interactive p-4 text-left"
-    >
-      <span
-        className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${color} text-white shadow-sm transition-transform group-hover:scale-110`}
-      >
-        {icon}
-      </span>
-      <p className="mt-3 text-sm font-bold text-slate-900">{title}</p>
-      <p className="mt-0.5 text-xs text-slate-500">{desc}</p>
-    </button>
-  );
-}
-
-function EmptyState({ title, description }: { title: string; description: string }) {
-  return (
-    <div className="flex flex-col items-center gap-2 py-6 text-center">
-      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-400">
-        <Sparkles className="h-5 w-5" />
-      </span>
-      <p className="text-sm font-semibold text-slate-700">{title}</p>
-      <p className="text-xs text-slate-500">{description}</p>
     </div>
   );
 }
