@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import { useLocation } from "wouter";
-import { ChevronLeft, ChevronRight, Compass, Ship, Map as MapIcon, Sparkles, Lock, CheckCircle2, PlayCircle, Star, GraduationCap } from "lucide-react";
+import { ChevronLeft, ChevronRight, Compass, Ship, Map as MapIcon, Sparkles, Lock, CheckCircle2, PlayCircle, Star, GraduationCap, Wind, Trophy, Zap } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { StatusBadge, type LessonStatus } from "@/components/StatusBadge";
 import {
@@ -18,7 +18,7 @@ type ViewLevel = "world" | "course" | "lessons";
  *   course  → Shows a specific course (e.g., Minecraft Education Basic)
  *   lessons → Shows the lesson islands inside a course (a learning path)
  *
- * Design: Tropical archipelago, calm colors, glassmorphism, gentle animations.
+ * Design: Tropical archipelago, pirate adventure theme, world map experience.
  */
 export default function ArchipelagoMap() {
   const [, setLocation] = useLocation();
@@ -115,7 +115,7 @@ export default function ArchipelagoMap() {
             {viewLevel === "world" && (
               <span className="flex items-center gap-1">
                 <Compass className="w-3.5 h-3.5" />
-                {t("archipelago.startExploring")}
+                Explore & Discover
               </span>
             )}
             {viewLevel === "course" && selectedCourse && (
@@ -127,7 +127,7 @@ export default function ArchipelagoMap() {
             {viewLevel === "lessons" && selectedCourse && (
               <span className="flex items-center gap-1">
                 <Ship className="w-3.5 h-3.5" />
-                {t(selectedCourse.titleKey)} → {t("archipelago.lessonPath")}
+                {t(selectedCourse.titleKey)} → Learning Path
               </span>
             )}
           </div>
@@ -168,7 +168,7 @@ export default function ArchipelagoMap() {
       </main>
 
       <footer className="relative z-20 text-center py-4 text-xs text-white/30">
-        {t("archipelago.dragHint")}
+        Set sail on your learning adventure 🌊⚓
       </footer>
 
       <style>{`
@@ -217,216 +217,106 @@ function WorldMapView({
 }) {
   return (
     <div className="space-y-8">
-      {/* Subtitle */}
-      <div className="text-center">
+      {/* Title */}
+      <div className="text-center space-y-2">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white">🗺️ Explore the Archipelago</h2>
         <p className="text-cyan-200/70 text-sm sm:text-base italic">
           {t(config.subtitleKey)}
         </p>
       </div>
 
-      {/* SVG World Map with large course islands */}
-      <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-4 sm:p-8 border border-white/10 shadow-xl">
-        <svg
-          className="w-full h-64 sm:h-80 md:h-96 rounded-2xl"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <defs>
-            <radialGradient id="oceanGrad" cx="50%" cy="50%" r="60%">
-              <stop offset="0%" stopColor="#0D9488" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="#115E59" stopOpacity="0.05" />
-            </radialGradient>
-            <filter id="softGlow">
-              <feGaussianBlur stdDeviation="2" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            <pattern id="wavePattern" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse">
-              <path
-                d="M0,7.5 Q3.75,3.75 7.5,7.5 T15,7.5"
-                stroke="rgba(13,148,136,0.12)"
-                fill="none"
-                strokeWidth="0.4"
-              />
-            </pattern>
-          </defs>
-
-          <rect width="100" height="100" fill="url(#oceanGrad)" />
-          <rect width="100" height="100" fill="url(#wavePattern)" />
-
-          {/* Connection path between course islands */}
-          {config.courses.filter(c => c.available).length > 1 && (
-            <path
-              d={config.courses
-                .filter((c) => c.available)
-                .map((c, i) => (i === 0 ? `M${c.x},${c.y}` : `L${c.x},${c.y}`))
-                .join(" ")}
-              stroke="rgba(253, 230, 138, 0.15)"
-              strokeWidth="1"
-              fill="none"
-              strokeDasharray="3,3"
-            />
-          )}
-
-          {/* Course islands – significantly larger than lesson islands */}
-          {config.courses.map((course) => {
-            const isHovered = hoveredId === course.id;
-            const lessonCount = course.lessons.length;
-
-            return (
-              <g
-                key={course.id}
-                onClick={() => course.available && onCourseClick(course)}
-                onMouseEnter={() => setHoveredId(course.id)}
-                onMouseLeave={() => setHoveredId(null)}
-                className={course.available ? "cursor-pointer" : "cursor-not-allowed"}
-                style={{
-                  transformOrigin: `${course.x}% ${course.y}%`,
-                  opacity: course.available ? 1 : 0.4,
-                }}
-              >
-                {/* Outer glow ring */}
-                <circle
-                  cx={course.x}
-                  cy={course.y}
-                  r={isHovered ? 20 : 17}
-                  fill={course.color}
-                  opacity={isHovered ? 0.2 : 0.08}
-                  className="transition-all duration-500"
-                />
-
-                {/* Sandy beach ring */}
-                <circle
-                  cx={course.x}
-                  cy={course.y}
-                  r={isHovered ? 16 : 14}
-                  fill="#FDE68A"
-                  opacity="0.25"
-                  className="transition-all duration-500"
-                />
-
-                {/* Main island */}
-                <circle
-                  cx={course.x}
-                  cy={course.y}
-                  r={isHovered ? 13 : 11}
-                  fill={course.color}
-                  filter="url(#softGlow)"
-                  className="transition-all duration-500"
-                />
-
-                {/* Inner highlight */}
-                <circle
-                  cx={course.x - 3}
-                  cy={course.y - 3}
-                  r={isHovered ? 6 : 5}
-                  fill="rgba(255,255,255,0.1)"
-                  className="transition-all duration-500"
-                />
-
-                {/* Emoji icon – larger for course islands */}
-                <text
-                  x={course.x}
-                  y={course.y + 3}
-                  textAnchor="middle"
-                  fontSize={isHovered ? "7" : "6"}
-                  className="pointer-events-none transition-all duration-500"
-                >
-                  {course.emoji}
-                </text>
-
-                {/* Course label */}
-                <text
-                  x={course.x}
-                  y={course.y + 22}
-                  textAnchor="middle"
-                  fontSize="2.5"
-                  fill="white"
-                  fontWeight="bold"
-                  opacity={isHovered ? 1 : 0.8}
-                  className="pointer-events-none transition-all duration-500"
-                >
-                  {t(course.titleKey).split(" Education")[0]}
-                </text>
-
-                {/* Lesson count badge */}
-                {lessonCount > 0 && (
-                  <g>
-                    <circle
-                      cx={course.x + 12}
-                      cy={course.y - 10}
-                      r="4"
-                      fill="#FDE68A"
-                      opacity="0.9"
-                    />
-                    <text
-                      x={course.x + 12}
-                      y={course.y - 8.5}
-                      textAnchor="middle"
-                      fontSize="2.5"
-                      fill="#0D9488"
-                      fontWeight="bold"
-                      className="pointer-events-none"
-                    >
-                      {lessonCount}
-                    </text>
-                  </g>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-
-      {/* Course Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      {/* Archipelago Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {config.courses.map((course) => {
+          const isHovered = hoveredId === course.id;
           const lessonCount = course.lessons.length;
+          const completedCount = course.lessons.filter((l) => l.completed).length;
+          const progress = Math.round((completedCount / lessonCount) * 100);
+
           return (
             <div
               key={course.id}
               onClick={() => course.available && onCourseClick(course)}
-              className={`relative group bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 transition-all duration-300 overflow-hidden ${
+              onMouseEnter={() => setHoveredId(course.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              className={`relative overflow-hidden rounded-2xl transition-all duration-300 cursor-pointer ${
                 course.available
-                  ? "hover:bg-white/15 hover:border-white/20 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                  ? isHovered
+                    ? "scale-105 shadow-2xl"
+                    : "hover:shadow-xl"
                   : "opacity-50 cursor-not-allowed"
               }`}
             >
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl"
-                style={{ backgroundColor: course.color }}
-              />
+              {/* Background Hero Image placeholder */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-teal-600/30 opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
 
-              <div className="relative z-10 space-y-3">
-                <div className="flex items-start justify-between">
-                  <span className="text-5xl drop-shadow-lg">{course.emoji}</span>
-                  <span className="text-xs font-semibold text-white bg-white/10 px-3 py-1.5 rounded-full">
-                    {lessonCount > 0
-                      ? `${lessonCount} ${t("archipelago.lesson_other")}`
-                      : t("archipelago.comingSoon")}
-                  </span>
+              <div className="relative p-6 sm:p-8 text-white min-h-96 flex flex-col">
+                {/* Top section with emoji and info */}
+                <div className="mb-auto">
+                  <div className="text-5xl mb-4">🏝️</div>
+                  <h3 className="text-2xl sm:text-3xl font-bold mb-2">
+                    {t(course.titleKey)}
+                  </h3>
+                  <p className="text-cyan-100 text-sm sm:text-base mb-4 line-clamp-2">
+                    {t(course.descriptionKey)}
+                  </p>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-3 gap-3 mb-4">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
+                      <p className="text-xs text-cyan-200">Islands</p>
+                      <p className="text-lg font-bold">{lessonCount}</p>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
+                      <p className="text-xs text-amber-200">XP</p>
+                      <p className="text-lg font-bold">{Math.round(lessonCount * 100)}</p>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
+                      <p className="text-xs text-emerald-200">Level</p>
+                      <p className="text-lg font-bold">
+                        {course.difficulty === "Beginner"
+                          ? "⭐"
+                          : course.difficulty === "Intermediate"
+                          ? "⭐⭐"
+                          : "⭐⭐⭐"}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-white">{t(course.titleKey)}</h3>
-                <p className="text-sm text-cyan-200/70 line-clamp-2">
-                  {t(course.descriptionKey)}
-                </p>
-                {course.available && lessonCount > 0 && (
-                  <div className="pt-2">
-                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-300 group-hover:text-white transition-colors">
-                      {t("archipelago.exploreCourse")}
-                      <ChevronLeft className="w-3.5 h-3.5 rotate-180" />
-                    </span>
+
+                {/* Progress section */}
+                <div className="space-y-2 border-t border-white/10 pt-4">
+                  <div className="flex justify-between text-sm">
+                    <span>{t("archipelago.explored") ?? "Explored"}</span>
+                    <span className="font-bold">{progress}%</span>
+                  </div>
+                  <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-500"
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                  <p className="text-xs text-cyan-200">
+                    {completedCount} of {lessonCount} islands discovered
+                  </p>
+                </div>
+
+                {/* Status Badge */}
+                {!course.available && (
+                  <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-sm px-3 py-1 rounded-lg flex items-center gap-1">
+                    <Lock className="w-4 h-4" />
+                    <span className="text-xs font-bold">Locked</span>
+                  </div>
+                )}
+
+                {course.isCurrent && (
+                  <div className="absolute top-4 right-4 bg-amber-500/80 backdrop-blur-sm px-3 py-1 rounded-lg flex items-center gap-1">
+                    <Wind className="w-4 h-4" />
+                    <span className="text-xs font-bold">Current</span>
                   </div>
                 )}
               </div>
-
-              {/* Color accent bar */}
-              <div
-                className="absolute bottom-0 left-6 right-6 h-1 rounded-full opacity-40"
-                style={{ backgroundColor: course.color }}
-              />
             </div>
           );
         })}
@@ -435,11 +325,13 @@ function WorldMapView({
   );
 }
 
-// ─── Course View ────────────────────────────────────────────────────────────────
+// ─── Course View ────────────────────────────────────────────────────────────
 function CourseView({
   course,
   t,
   onExploreLessons,
+  hoveredId,
+  setHoveredId,
 }: {
   course: ArchipelagoCourse;
   t: (key: string, fallback?: string) => string;
@@ -447,109 +339,107 @@ function CourseView({
   hoveredId: string | null;
   setHoveredId: (id: string | null) => void;
 }) {
-  const lessonCount = course.lessons.length;
-  const availableCount = course.lessons.filter((l) => l.available).length;
-  const progressPct = lessonCount > 0 ? Math.round((availableCount / lessonCount) * 100) : 0;
-
   return (
     <div className="space-y-8">
-      {/* Course Hero */}
-      <div
-        className="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-white/10"
-        style={{
-          background: `linear-gradient(135deg, ${course.color}22, ${course.color}44)`,
-        }}
-      >
-        <div
-          className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-10"
-          style={{ backgroundColor: course.color }}
-        />
-        <div
-          className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full opacity-10"
-          style={{ backgroundColor: course.color }}
-        />
+      {/* Hero Section */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-500/20 to-teal-600/30 p-8 sm:p-12 border border-white/20 min-h-96 flex items-end">
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+        <div className="relative z-10 space-y-4 w-full">
+          <div className="text-6xl">🏝️</div>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white">
+            {t(course.titleKey)}
+          </h2>
+          <p className="text-cyan-100 text-lg">
+            {t(course.descriptionKey)}
+          </p>
 
-        <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-          <span className="text-6xl sm:text-7xl drop-shadow-xl">{course.emoji}</span>
-          <div className="flex-1">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-              {t(course.titleKey)}
-            </h2>
-            <p className="text-cyan-200/70 text-sm sm:text-base max-w-xl">
-              {t(course.descriptionKey)}
-            </p>
-            <div className="flex flex-wrap items-center gap-4 mt-4">
-              <span className="text-xs text-white/70 flex items-center gap-1.5">
-                <Ship className="w-3.5 h-3.5" />
-                {lessonCount > 0
-                  ? `${lessonCount} ${t("archipelago.lesson_other")}`
-                  : t("archipelago.comingSoon")}
-              </span>
-              <span className="text-xs text-white/70 flex items-center gap-1.5">
-                <Star className="w-3.5 h-3.5" fill="currentColor" />
-                {t("archipelago.totalXP")}: {(lessonCount * 75).toLocaleString()}
-              </span>
+          {/* Quick Stats */}
+          <div className="grid grid-cols-4 gap-4 pt-4 border-t border-white/10">
+            <div className="text-center">
+              <p className="text-cyan-200 text-sm">Islands</p>
+              <p className="text-2xl font-bold text-white">{course.lessons.length}</p>
             </div>
-            {lessonCount > 0 && (
-              <div className="mt-4 max-w-md">
-                <div className="flex items-center justify-between text-xs text-white/70 mb-1.5">
-                  <span>{t("archipelago.yourProgress")}</span>
-                  <span className="font-bold text-white">{progressPct}%</span>
-                </div>
-                <div className="progress-track progress-track-lg bg-white/10" aria-hidden>
-                  <div
-                    className="progress-fill progress-fill-gold"
-                    style={{ width: `${progressPct}%` }}
-                  />
-                </div>
-              </div>
-            )}
+            <div className="text-center">
+              <p className="text-amber-200 text-sm">Total XP</p>
+              <p className="text-2xl font-bold text-white">{Math.round(course.lessons.length * 100)}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-emerald-200 text-sm">Completed</p>
+              <p className="text-2xl font-bold text-white">{course.lessons.filter((l) => l.completed).length}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-rose-200 text-sm">Progress</p>
+              <p className="text-2xl font-bold text-white">
+                {Math.round((course.lessons.filter((l) => l.completed).length / course.lessons.length) * 100)}%
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      {lessonCount > 0 && (
-        <>
-          {/* Start Course Button */}
-          <div className="text-center">
-            <button
-              onClick={onExploreLessons}
-              className="inline-flex items-center gap-2 px-10 py-4 rounded-xl text-white font-semibold text-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
-              style={{
-                background: `linear-gradient(135deg, ${course.color}, ${course.color}dd)`,
-              }}
-            >
-              {t("archipelago.startCourse")}
-              <ChevronLeft className="w-5 h-5 rotate-180" />
-            </button>
-          </div>
+      {/* Lesson Preview Cards */}
+      <div className="space-y-4">
+        <h3 className="text-2xl font-bold text-white flex items-center gap-2">
+          ⛓️ Island Path ({course.lessons.length} islands)
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {course.lessons.map((lesson, idx) => {
+            const isHovered = hoveredId === `lesson-${lesson.id}`;
 
-          {/* Lesson preview cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {course.lessons.map((lesson, idx) => (
+            return (
               <div
                 key={lesson.id}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5 flex items-center gap-3"
+                onMouseEnter={() => setHoveredId(`lesson-${lesson.id}`)}
+                onMouseLeave={() => setHoveredId(null)}
+                className={`relative overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 p-4 transition-all duration-300 ${
+                  isHovered ? "scale-105 shadow-xl border-cyan-300" : ""
+                }`}
               >
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shrink-0"
-                  style={{ backgroundColor: course.color }}
-                >
+                {/* Number Badge */}
+                <div className="absolute top-3 left-3 bg-amber-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
                   {idx + 1}
                 </div>
-                <span className="text-xs text-cyan-200/70">
-                  {t("archipelago.lesson")} {idx + 1}
-                </span>
+
+                {/* Status Icons */}
+                <div className="absolute top-3 right-3">
+                  {lesson.completed ? (
+                    <CheckCircle2 className="w-6 h-6 text-emerald-400" />
+                  ) : lesson.available ? (
+                    <div className="w-6 h-6 rounded-full border-2 border-cyan-400 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-cyan-400 rounded-full" />
+                    </div>
+                  ) : (
+                    <Lock className="w-6 h-6 text-slate-400" />
+                  )}
+                </div>
+
+                <div className="mt-6 space-y-2">
+                  <h4 className="text-white font-bold line-clamp-2">{lesson.title}</h4>
+                  <p className="text-cyan-100 text-sm line-clamp-2">{lesson.subtitle}</p>
+                  <div className="flex gap-2 pt-2 text-xs text-cyan-200">
+                    <span>⏱ {lesson.duration ?? 10}m</span>
+                    <span>⭐ {lesson.xp ?? 50} XP</span>
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
-        </>
-      )}
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Continue Button */}
+      <button
+        onClick={onExploreLessons}
+        className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg transform hover:scale-105"
+      >
+        <Wind className="w-5 h-5" />
+        Begin Your Voyage
+      </button>
     </div>
   );
 }
 
-// ─── Lessons Map View ───────────────────────────────────────────────────────────
+// ─── Lessons Map View ────────────────────────────────────────────────────────
 function LessonsMapView({
   course,
   t,
@@ -563,224 +453,143 @@ function LessonsMapView({
   hoveredId: string | null;
   setHoveredId: (id: string | null) => void;
 }) {
+  const completedCount = course.lessons.filter((l) => l.completed).length;
+
   return (
     <div className="space-y-8">
-      {/* Section Title */}
-      <div className="text-center">
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-1">
-          {t("archipelago.lessonPath")}
-        </h2>
-        <p className="text-cyan-200/60 text-sm">
-          {course.lessons.length} {t("archipelago.island_other")}
+      {/* Header */}
+      <div className="text-center space-y-2">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white">⛓️ Island Learning Path</h2>
+        <p className="text-cyan-200 text-sm">
+          {completedCount} of {course.lessons.length} islands discovered
         </p>
       </div>
 
-      {/* SVG Island Map with learning path */}
-      <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-4 sm:p-8 border border-white/10 shadow-xl">
-        <svg
-          className="w-full h-64 sm:h-80 md:h-96 rounded-2xl"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <defs>
-            <radialGradient id="islandOcean" cx="50%" cy="50%" r="60%">
-              <stop offset="0%" stopColor="#0D9488" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#115E59" stopOpacity="0.05" />
-            </radialGradient>
-            <filter id="islandGlow">
-              <feGaussianBlur stdDeviation="1" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            <pattern id="wavePattern2" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
-              <path
-                d="M0,6 Q3,3 6,6 T12,6"
-                stroke="rgba(13,148,136,0.1)"
-                fill="none"
-                strokeWidth="0.3"
-              />
-            </pattern>
-          </defs>
-
-          <rect width="100" height="100" fill="url(#islandOcean)" />
-          <rect width="100" height="100" fill="url(#wavePattern2)" />
-
-          {/* Learning path connection lines */}
-          <path
-            d={course.lessons
-              .filter((l) => l.available)
-              .map((l, i) => {
-                if (i === 0) return `M${l.x},${l.y}`;
-                return `L${l.x},${l.y}`;
-              })
-              .join(" ")}
-            stroke={course.color}
-            strokeWidth="0.5"
-            fill="none"
-            strokeDasharray="1.5,2"
-            opacity="0.4"
+      {/* Overall Progress */}
+      <div className="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 p-6">
+        <div className="flex justify-between text-cyan-200 text-sm mb-2">
+          <span>Voyage Progress</span>
+          <span className="font-bold">
+            {Math.round((completedCount / course.lessons.length) * 100)}%
+          </span>
+        </div>
+        <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden border border-cyan-300">
+          <div
+            className="h-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 transition-all duration-500"
+            style={{
+              width: `${(completedCount / course.lessons.length) * 100}%`,
+            }}
           />
-
-          {/* Start marker */}
-          <text x={course.lessons[0]?.x ?? 10} y={(course.lessons[0]?.y ?? 10) - 8} textAnchor="middle" fontSize="2" fill="#FDE68A" opacity="0.6" fontWeight="bold">
-            START
-          </text>
-
-          {/* Lesson Islands */}
-          {course.lessons.map((lesson, idx) => {
-            const isHovered = hoveredId === `lesson-${lesson.id}`;
-
-            return (
-              <g
-                key={lesson.id}
-                onClick={() => lesson.available && onLessonClick(lesson.id)}
-                onMouseEnter={() => setHoveredId(`lesson-${lesson.id}`)}
-                onMouseLeave={() => setHoveredId(null)}
-                className={lesson.available ? "cursor-pointer" : "cursor-not-allowed"}
-                style={{
-                  transformOrigin: `${lesson.x}% ${lesson.y}%`,
-                  opacity: lesson.available ? 1 : 0.35,
-                }}
-              >
-                {/* Water ring */}
-                <circle
-                  cx={lesson.x}
-                  cy={lesson.y}
-                  r={lesson.isMainIsland || lesson.isFinalIsland ? (isHovered ? 11 : 9) : (isHovered ? 6.5 : 5.5)}
-                  fill={course.color}
-                  opacity={isHovered ? 0.25 : 0.1}
-                  className="transition-all duration-500"
-                />
-
-                {/* Sandy beach */}
-                <circle
-                  cx={lesson.x}
-                  cy={lesson.y}
-                  r={lesson.isMainIsland || lesson.isFinalIsland ? (isHovered ? 9 : 7.5) : (isHovered ? 5 : 4.2)}
-                  fill="#FDE68A"
-                  opacity={lesson.isMainIsland ? 0.35 : 0.2}
-                  className="transition-all duration-500"
-                />
-
-                {/* Island */}
-                <circle
-                  cx={lesson.x}
-                  cy={lesson.y}
-                  r={lesson.isMainIsland || lesson.isFinalIsland ? (isHovered ? 7.5 : 6.5) : (isHovered ? 4 : 3.5)}
-                  fill={lesson.isFinalIsland ? "#7C3AED" : (lesson.isMainIsland ? "#7C3AED" : course.color)}
-                  filter={lesson.isMainIsland ? "url(#islandGlow)" : "url(#islandGlow)"}
-                  className={`transition-all duration-500 ${lesson.isMainIsland ? "animate-pulse-glow" : ""}`}
-                />
-
-                {/* Golden crown for main island */}
-                  {(lesson.isMainIsland || lesson.isFinalIsland) && (
-                  <text
-                    x={lesson.x}
-                    y={lesson.y - 9}
-                    textAnchor="middle"
-                    fontSize="3.5"
-                    className="pointer-events-none"
-                  >
-                    👑
-                  </text>
-                )}
-
-                {/* Lesson number */}
-                <text
-                  x={lesson.x}
-                  y={lesson.y + 1.5}
-                  textAnchor="middle"
-                  fontSize={isHovered ? "3" : "2.5"}
-                  fill={lesson.isMainIsland ? "#FDE68A" : "white"}
-                  fontWeight="bold"
-                  className="pointer-events-none transition-all duration-500"
-                >
-                  {idx + 1}
-                </text>
-
-                {/* Hover label - lesson name */}
-                {isHovered && (
-                  <g>
-                    <text
-                      x={lesson.x}
-                      y={lesson.y - 8}
-                      textAnchor="middle"
-                      fontSize="2.2"
-                      fill="white"
-                      opacity="0.95"
-                      fontWeight="bold"
-                      className="pointer-events-none"
-                    >
-                      {t(lesson.titleKey)}
-                    </text>
-                    {lesson.subtitleKey && (
-                      <text
-                        x={lesson.x}
-                        y={lesson.y - 5}
-                        textAnchor="middle"
-                        fontSize="1.6"
-                        fill="#FDE68A"
-                        opacity="0.8"
-                        className="pointer-events-none"
-                      >
-                        {t(lesson.subtitleKey)}
-                      </text>
-                    )}
-                  </g>
-                )}
-              </g>
-            );
-          })}
-        </svg>
+        </div>
       </div>
 
-      {/* Lesson Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      {/* Lessons Grid - Island Path */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {course.lessons.map((lesson, idx) => {
-          const status: LessonStatus = lesson.available
-            ? idx === 0 || (idx > 0 && course.lessons[idx - 1]?.available)
-              ? idx === 0
-                ? "available"
-                : "in-progress"
-              : "available"
-            : "locked";
+          const isHovered = hoveredId === `${lesson.id}`;
+          const isPrevious = idx === 0;
+          const isCurrent = lesson.current;
+          const isNext = idx === completedCount && lesson.available;
+
           return (
             <div
               key={lesson.id}
               onClick={() => lesson.available && onLessonClick(lesson.id)}
-              className={`relative bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 transition-all duration-300 ${
-                lesson.available
-                  ? "hover:bg-white/15 hover:border-white/20 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
-                  : "opacity-50 cursor-not-allowed"
+              onMouseEnter={() => setHoveredId(`${lesson.id}`)}
+              onMouseLeave={() => setHoveredId(null)}
+              className={`relative group overflow-hidden rounded-2xl p-6 transition-all duration-300 cursor-pointer ${
+                lesson.completed
+                  ? "bg-gradient-to-br from-emerald-500/20 to-green-600/20 border-2 border-emerald-400 shadow-lg"
+                  : lesson.current
+                  ? "bg-gradient-to-br from-amber-500/20 to-orange-600/20 border-2 border-amber-400 shadow-lg scale-105"
+                  : lesson.available
+                  ? "bg-white/10 border border-white/20 hover:border-cyan-300 " + (isHovered ? "scale-105 shadow-xl" : "")
+                  : "bg-slate-800/20 border border-slate-600 opacity-40 cursor-not-allowed"
               }`}
             >
-              <div className="flex items-start justify-between gap-2 mb-3">
-                <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
-                  style={{ backgroundColor: course.color }}
-                >
-                  {idx + 1}
-                </div>
-                <StatusBadge status={status} />
-              </div>
-              <h4 className="text-sm font-semibold text-white line-clamp-1">
-                {t(lesson.titleKey)}
-              </h4>
-              {lesson.subtitleKey && (
-                <p className="text-xs text-cyan-200/60 line-clamp-2 mt-0.5">
-                  {t(lesson.subtitleKey)}
-                </p>
-              )}
+              {/* Island Number Badge */}
               <div
-                className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full opacity-40"
-                style={{ backgroundColor: course.color }}
-              />
+                className={`absolute top-4 left-4 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-200 ${
+                  lesson.completed
+                    ? "bg-emerald-500 text-white"
+                    : lesson.current
+                    ? "bg-amber-500 text-white animate-pulse"
+                    : lesson.available
+                    ? "bg-cyan-500 text-white"
+                    : "bg-slate-600 text-slate-300"
+                }`}
+              >
+                {idx + 1}
+              </div>
+
+              {/* Status Icon */}
+              <div className="absolute top-4 right-4">
+                {lesson.completed ? (
+                  <div className="flex items-center gap-1 bg-emerald-500/80 px-2 py-1 rounded-lg">
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                    <span className="text-xs font-bold text-white">Done</span>
+                  </div>
+                ) : lesson.current ? (
+                  <div className="flex items-center gap-1 bg-amber-500/80 px-2 py-1 rounded-lg animate-pulse">
+                    <Compass className="w-4 h-4 text-white" />
+                    <span className="text-xs font-bold text-white">Current</span>
+                  </div>
+                ) : lesson.available ? (
+                  <div className="flex items-center gap-1 bg-cyan-500/80 px-2 py-1 rounded-lg">
+                    <PlayCircle className="w-4 h-4 text-white" />
+                    <span className="text-xs font-bold text-white">Ready</span>
+                  </div>
+                ) : (
+                  <Lock className="w-5 h-5 text-slate-400" />
+                )}
+              </div>
+
+              {/* Content */}
+              <div className="mt-8 space-y-2">
+                <h3 className="text-lg font-bold text-white line-clamp-2 group-hover:text-cyan-200 transition-colors">
+                  {lesson.title}
+                </h3>
+                <p className="text-sm text-cyan-100 line-clamp-2">{lesson.subtitle}</p>
+
+                {/* Stats */}
+                <div className="flex gap-3 pt-3 text-xs text-cyan-200 border-t border-white/10">
+                  <span>⏱ {lesson.duration ?? 10} min</span>
+                  <span>⚡ {lesson.xp ?? 50} XP</span>
+                </div>
+              </div>
+
+              {/* Hover Label */}
+              {lesson.available && (
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 via-slate-950 to-transparent p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-200">
+                  <p className="text-white font-bold text-sm flex items-center gap-1">
+                    <Wind className="w-4 h-4" />
+                    Start Lesson
+                  </p>
+                </div>
+              )}
             </div>
           );
         })}
       </div>
+
+      {/* Motivation Message */}
+      {completedCount < course.lessons.length && (
+        <div className="bg-gradient-to-r from-amber-500/20 to-orange-600/20 border border-amber-400/50 rounded-xl p-6 text-center">
+          <p className="text-white font-bold text-lg">
+            {completedCount === course.lessons.length - 1
+              ? "🎉 Almost there! One more island to complete this expedition!"
+              : "⛵ Keep exploring! Adventure awaits!"}
+          </p>
+        </div>
+      )}
+
+      {completedCount === course.lessons.length && (
+        <div className="bg-gradient-to-r from-emerald-500/20 to-green-600/20 border border-emerald-400/50 rounded-xl p-6 text-center">
+          <p className="text-white font-bold text-lg">
+            🏴‍☠️ Congratulations! You've mastered {t(course.titleKey)}!
+          </p>
+        </div>
+      )}
     </div>
   );
 }
