@@ -8,12 +8,13 @@ import {
   type ArchipelagoCourse,
 } from "@/data/archipelago-config";
 
-type ViewLevel = "world" | "course" | "lessons";
+type ViewLevel = "launch" | "world" | "course" | "lessons";
 
 /**
  * ArchipelagoMap – The gamified learning map for the Programmier-Archipel.
  *
- * Three zoom levels:
+ * Four zoom levels:
+ *   launch  → Welcome screen with treasure map aesthetic
  *   world   → Shows the archipelago with large course islands
  *   course  → Shows a specific course (e.g., Minecraft Education Basic)
  *   lessons → Shows the lesson islands inside a course (a learning path)
@@ -25,7 +26,7 @@ export default function ArchipelagoMap() {
   const { t } = useI18n();
   const config = programmingArchipelago;
 
-  const [viewLevel, setViewLevel] = useState<ViewLevel>("world");
+  const [viewLevel, setViewLevel] = useState<ViewLevel>("launch");
   const [selectedCourse, setSelectedCourse] = useState<ArchipelagoCourse | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
@@ -48,13 +49,15 @@ export default function ArchipelagoMap() {
   );
 
   const handleBack = useCallback(() => {
-    if (viewLevel === "lessons") {
+    if (viewLevel === "launch") {
+      setLocation("/dashboard");
+    } else if (viewLevel === "lessons") {
       setViewLevel("course");
     } else if (viewLevel === "course") {
       setSelectedCourse(null);
       setViewLevel("world");
     }
-  }, [viewLevel]);
+  }, [viewLevel, setLocation]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-cyan-900 via-teal-800 to-emerald-900 overflow-hidden relative">
@@ -136,6 +139,16 @@ export default function ArchipelagoMap() {
 
       {/* Main Content */}
       <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        {viewLevel === "launch" && (
+          <LaunchView
+            config={config}
+            t={t}
+            onStartExploring={() => setViewLevel("world")}
+            hoveredId={hoveredId}
+            setHoveredId={setHoveredId}
+          />
+        )}
+
         {viewLevel === "world" && (
           <WorldMapView
             config={config}
@@ -197,6 +210,166 @@ export default function ArchipelagoMap() {
         .animate-wave-slow { animation: wave-slow 8s ease-in-out infinite; }
         .animate-wave-slower { animation: wave-slower 12s ease-in-out infinite; }
       `}</style>
+    </div>
+  );
+}
+
+// ─── Launch View ────────────────────────────────────────────────────────────
+function LaunchView({
+  config,
+  t,
+  onStartExploring,
+  hoveredId,
+  setHoveredId,
+}: {
+  config: { titleKey: string; subtitleKey: string; courses: ArchipelagoCourse[] };
+  t: (key: string, fallback?: string) => string;
+  onStartExploring: () => void;
+  hoveredId: string | null;
+  setHoveredId: (id: string | null) => void;
+}) {
+  return (
+    <div className="space-y-12 py-12">
+      {/* Header Section */}
+      <div className="text-center space-y-3">
+        <h1 className="text-4xl sm:text-5xl font-bold text-white flex items-center justify-center gap-3">
+          ⚓ {t(config.titleKey)}
+        </h1>
+        <p className="text-cyan-200/80 text-lg italic">
+          {t(config.subtitleKey)}
+        </p>
+      </div>
+
+      {/* Treasure Map Visualization */}
+      <div className="relative bg-gradient-to-br from-amber-900/20 to-orange-800/20 border-2 border-amber-700/40 rounded-3xl p-12 overflow-hidden">
+        {/* Map texture background */}
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: "radial-gradient(circle at 20% 30%, rgba(255,200,124,0.3) 0%, transparent 50%)",
+          mixBlendMode: "overlay"
+        }} />
+
+        <div className="relative z-10 space-y-8">
+          {/* Course Circles Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            {config.courses.slice(0, 2).map((course, idx) => {
+              const isHovered = hoveredId === `launch-${course.id}`;
+              const colors = [
+                { ring: "from-cyan-400 to-teal-500", bg: "from-cyan-600 to-teal-700" },
+                { ring: "from-purple-400 to-violet-500", bg: "from-purple-600 to-violet-700" },
+                { ring: "from-amber-400 to-orange-500", bg: "from-amber-600 to-orange-700" },
+                { ring: "from-pink-400 to-rose-500", bg: "from-pink-600 to-rose-700" },
+              ];
+              const color = colors[idx % colors.length];
+
+              return (
+                <div
+                  key={course.id}
+                  onMouseEnter={() => setHoveredId(`launch-${course.id}`)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  className="flex flex-col items-center gap-4"
+                >
+                  {/* Big Circle - Course Icon */}
+                  <div
+                    className={`relative w-32 h-32 rounded-full cursor-pointer transition-all duration-300 ${
+                      isHovered ? "scale-110 shadow-2xl" : "shadow-lg"
+                    }`}
+                    style={{
+                      background: `linear-gradient(135deg, ${color.bg.split(" ")[1]} 0%, ${color.bg.split(" ")[2]} 100%)`,
+                      boxShadow: isHovered
+                        ? `0 0 40px rgba(${idx === 0 ? "34, 211, 238" : "147, 51, 234"}, 0.6), inset 0 0 20px rgba(255,255,255,0.2)`
+                        : `0 0 20px rgba(0,0,0,0.3), inset 0 0 10px rgba(255,255,255,0.1)`,
+                    }}
+                  >
+                    {/* Outer ring */}
+                    <div
+                      className="absolute inset-0 rounded-full opacity-60"
+                      style={{
+                        background: `conic-gradient(${idx === 0 ? "from-cyan-300" : "from-purple-300"}, ${idx === 0 ? "to-teal-300" : "to-violet-300"})`,
+                        padding: "2px",
+                        WebkitMask: "linear-gradient(#fff 0%, #fff) content-box, linear-gradient(#fff 0%, #fff)",
+                        WebkitMaskComposite: "xor",
+                        maskComposite: "exclude",
+                      }}
+                    />
+
+                    {/* Inner content */}
+                    <div className="absolute inset-0 rounded-full flex items-center justify-center text-5xl">
+                      {idx === 0 ? "⛏️" : "✨"}
+                    </div>
+
+                    {/* Badge Number */}
+                    <div className="absolute -top-2 -right-2 w-10 h-10 bg-amber-500 rounded-full border-2 border-white flex items-center justify-center font-bold text-white text-sm shadow-lg">
+                      {idx + 1}
+                    </div>
+                  </div>
+
+                  {/* Course Name */}
+                  <p className="text-center text-white font-bold text-lg">
+                    {t(course.titleKey)}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Course Info Cards Below */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-amber-600/30">
+            {config.courses.slice(0, 2).map((course, idx) => {
+              const isHovered = hoveredId === `card-${course.id}`;
+
+              return (
+                <div
+                  key={course.id}
+                  onMouseEnter={() => setHoveredId(`card-${course.id}`)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  className={`bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 transition-all duration-300 cursor-pointer ${
+                    isHovered ? "border-cyan-300 scale-105 shadow-lg" : ""
+                  }`}
+                >
+                  <h3 className="font-bold text-white text-center mb-1">
+                    {t(course.titleKey)}
+                  </h3>
+                  <p className="text-cyan-100 text-xs text-center line-clamp-2">
+                    {t(course.descriptionKey)}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Status Summary */}
+      <div className="grid grid-cols-3 gap-4">
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-4 text-center">
+          <p className="text-amber-200 text-sm font-semibold">Islands</p>
+          <p className="text-2xl font-bold text-white">
+            {config.courses.reduce((sum, c) => sum + c.lessons.length, 0)}
+          </p>
+        </div>
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-4 text-center">
+          <p className="text-cyan-200 text-sm font-semibold">Courses</p>
+          <p className="text-2xl font-bold text-white">{config.courses.length}</p>
+        </div>
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-4 text-center">
+          <p className="text-emerald-200 text-sm font-semibold">XP Available</p>
+          <p className="text-2xl font-bold text-white">
+            {Math.round(config.courses.reduce((sum, c) => sum + c.lessons.length * 100, 0) / 100)}K
+          </p>
+        </div>
+      </div>
+
+      {/* Start Button */}
+      <div className="text-center pt-4">
+        <button
+          onClick={onStartExploring}
+          className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 shadow-xl transform hover:scale-105 mx-auto text-lg"
+        >
+          <Ship className="w-6 h-6" />
+          Start Exploring
+        </button>
+        <p className="text-white/40 text-sm mt-4">Set sail on your learning adventure! 🏴‍☠️</p>
+      </div>
     </div>
   );
 }
