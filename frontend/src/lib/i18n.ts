@@ -4,7 +4,6 @@
  * This file loads and manages translations for the application.
  * Translations are loaded from JSON files in the public/i18n directory.
  */
-
 type Language = 'en' | 'de' | 'zh-TW';
 
 interface TranslationData {
@@ -57,7 +56,7 @@ export const translations: Translations = {
     },
     navigation: {
       home: 'Home',
-      dashboard: 'Dashboard',
+      dashboard: "Captain's Deck",
       profile: 'Profile',
       courses: 'Courses',
       shop: 'Shop',
@@ -67,7 +66,7 @@ export const translations: Translations = {
       parent: 'Parent Portal',
     },
     gamification: {
-      xp: 'Experience Points',
+      xp: 'Explorer Experience',
       level: 'Level',
       streak: 'Learning Streak',
       archipelago: 'Archipelago',
@@ -76,8 +75,31 @@ export const translations: Translations = {
       boss: 'Boss Battle',
       unlock: 'Unlock',
       locked: 'Locked',
-      completed: 'Completed',
+      completed: 'Collected',
       inProgress: 'In Progress',
+      title: 'Captain\'s Deck',
+      continueAdventure: 'Continue Adventure',
+      currentVoyage: 'Current Voyage',
+      currentIsland: 'Island 1',
+      nextIsland: 'Island 2',
+      progress: 'Progress',
+      timeLeft: 'Time Left',
+      quests: {
+        title: 'Daily & Weekly Quests',
+        daily: 'Daily Quests',
+        weekly: 'Weekly Quests',
+        adventureGoals: 'Explore new islands and earn XP.',
+        dailyDesc: 'Complete today’s learning mission to earn rewards.',
+        weeklyDesc: 'Finish weekly challenges for extra treasure.',
+        adventureGoals: 'Explore new islands and earn XP.'
+      },
+      achievements: {
+        title: 'Treasure Collection',
+        collected: 'Items Collected',
+        unlocked: 'Unlocked',
+        status: 'Collected',
+      },
+      motivation: 'Continue your voyage – a new island awaits!'
     },
     shop: {
       buyNow: 'Buy Now',
@@ -139,7 +161,7 @@ export const translations: Translations = {
     },
     navigation: {
       home: 'Startseite',
-      dashboard: 'Dashboard',
+      dashboard: 'Kapitänsdeck',
       profile: 'Profil',
       courses: 'Kurse',
       shop: 'Shop',
@@ -160,16 +182,39 @@ export const translations: Translations = {
       locked: 'Gesperrt',
       completed: 'Abgeschlossen',
       inProgress: 'In Bearbeitung',
+      title: 'Kapitänsdeck',
+      continueAdventure: 'Abenteuer fortsetzen',
+      currentVoyage: 'Aktuelle Reise',
+      currentIsland: 'Insel 1',
+      nextIsland: 'Insel 2',
+      progress: 'Fortschritt',
+      timeLeft: 'Zeit Left',
+      quests: {
+        title: 'Tägliche & Wöchentliche Quests',
+        daily: 'Tägliche Quests',
+        weekly: 'Wöchentliche Quests',
+        adventureGoals: 'Entdecke neue Inseln und sammle XP.',
+        dailyDesc: 'Erfülle heute’s Lernmission für Belohnungen.',
+        weeklyDesc: 'Schließe wöchentliche Herausforderungen für Schätze.',
+        adventureGoals: 'Entdecke neue Inseln und sammle XP.'
+      },
+      achievements: {
+        title: 'Schatzsammlung',
+        collected: 'Gegenstände Gesammelt',
+        unlocked: 'Gesperrt',
+        status: 'Gesammelt',
+      },
+      motivation: 'Fortsetze deine Reise – eine neue Insel wartet!'
     },
     shop: {
-      buyNow: 'Jetzt kaufen',
+      buyNow: 'Jetzt Kaufen',
       price: 'Preis',
-      subscription: 'Abonnement',
+      subscription: 'Abo',
       course: 'Kurs',
-      bundle: 'Paket',
-      addToCart: 'In den Warenkorb',
+      bundle: 'Bundle',
+      addToCart: 'In Den Warenkorb',
       checkout: 'Zur Kasse',
-      cart: 'Einkaufswarenkorb',
+      cart: 'Einkaufswagen',
       total: 'Gesamt',
     },
     dashboard: {
@@ -221,7 +266,7 @@ export const translations: Translations = {
     },
     navigation: {
       home: '首頁',
-      dashboard: '儀表板',
+      dashboard: '舵手deck',
       profile: '個人資料',
       courses: '課程',
       shop: '商店',
@@ -242,9 +287,32 @@ export const translations: Translations = {
       locked: '已鎖定',
       completed: '已完成',
       inProgress: '進行中',
+      title: '舵手deck',
+      continueAdventure: '繼續冒險',
+      currentVoyage: '當前航程',
+      currentIsland: '島嶼 1',
+      nextIsland: '島嶼 2',
+      progress: '進度',
+      timeLeft: '剩餘時間',
+      quests: {
+        title: '每日與週期任務',
+        daily: '每日任務',
+        weekly: '週期任務',
+        adventureGoals: '探索新島嶼並獲得 XP.',
+        dailyDesc: '完成今天的學習任務以獲得獎勵.',
+        weeklyDesc: '完成週期挑戰獲取寶藏.',
+        adventureGoals: '探索新島嶼並獲得 XP.'
+      },
+      achievements: {
+        title: '寶物收藏',
+        collected: '已收集項目',
+        unlocked: '解鎖',
+        status: '已收集',
+      },
+      motivation: '繼續你的航程——新島嶼在等待！'
     },
     shop: {
-      buyNow: '立即購買',
+      buyNow: '現在購買',
       price: '價格',
       subscription: '訂閱',
       course: '課程',
@@ -267,9 +335,9 @@ export const translations: Translations = {
   },
 };
 
-/**
- * Load translations from a specific language
- */
+ /**
+  * Load translations from a specific language
+  */
 export function loadTranslations(language: Language): TranslationData {
   return translations[language];
 }
