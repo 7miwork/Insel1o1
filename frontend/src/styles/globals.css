@@ -225,6 +225,20 @@ html {
   }
 }
 
+@keyframes spillDrop {
+  0% {
+    transform: translateY(-80px);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /* Scene reveal animations */
 .scene {
   opacity: 0;
