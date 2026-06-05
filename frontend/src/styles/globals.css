@@ -79,7 +79,131 @@ html {
   @apply bg-gray-600;
 }
 
-/* Animations */
+/* ================================================
+   FONT DISPLAY (Caveat for display text)
+   ================================================ */
+.font-display {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.font-hand {
+  font-family: 'Caveat', cursive;
+}
+
+/* ================================================
+   SCROLL REVEAL ANIMATIONS
+   ================================================ */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================================================
+   WAVE ANIMATIONS
+   ================================================ */
+.wave {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  animation: waveMove 8s linear infinite;
+}
+
+.wave-1 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23ffffff15' d='M0,40 C240,100 480,0 720,40 C960,80 1200,0 1440,40 L1440,120 L0,120 Z'/%3E%3C/svg%3E");
+  background-size: 1440px 120px;
+  animation-duration: 8s;
+  opacity: 0.5;
+}
+
+.wave-2 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23ffffff10' d='M0,60 C240,20 480,80 720,60 C960,40 1200,100 1440,60 L1440,120 L0,120 Z'/%3E%3C/svg%3E");
+  background-size: 1440px 120px;
+  animation-duration: 11s;
+  animation-direction: reverse;
+  opacity: 0.4;
+}
+
+.wave-3 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23ffffff08' d='M0,80 C240,40 480,100 720,80 C960,60 1200,20 1440,80 L1440,120 L0,120 Z'/%3E%3C/svg%3E");
+  background-size: 1440px 120px;
+  animation-duration: 14s;
+  opacity: 0.3;
+}
+
+@keyframes waveMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ================================================
+   FLOATING ANIMATIONS
+   ================================================ */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes drift {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(30px);
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateX(5px) rotate(2deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(-2deg);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* ================================================
+   BASIC ANIMATIONS
+   ================================================ */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -111,7 +235,9 @@ html {
   }
 }
 
-/* Utility Classes */
+/* ================================================
+   UTILITY CLASSES
+   ================================================ */
 .prose {
   @apply text-foreground;
 }

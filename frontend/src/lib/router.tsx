@@ -10,6 +10,7 @@ import RegisterPage from '@/pages/Register';
 import DashboardPage from '@/pages/Dashboard';
 import CoursesPage from '@/pages/Courses';
 import ArchipelagoPage from '@/pages/Archipelago';
+import LandingPage from '@/pages/LandingPage';
 
 // Protected Route Component
 interface ProtectedRouteProps {
@@ -45,6 +46,7 @@ export default function AppRouter() {
     <Router>
       <Routes>
         {/* Public Routes */}
+        <Route path="/" element={<LandingPage />} />
         <Route
           path="/login"
           element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <LoginPage />}
@@ -79,9 +81,6 @@ export default function AppRouter() {
             </ProtectedRoute>
           }
         />
-
-        {/* Default Route */}
-        <Route path="/" element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} replace />} />
 
         {/* 404 Route */}
         <Route path="*" element={<Navigate to="/" replace />} />
