@@ -201,6 +201,42 @@ html {
   }
 }
 
+@keyframes dockSway {
+  0%, 100% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+}
+
+@keyframes flicker {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  25% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  75% {
+    opacity: 0.9;
+  }
+}
+
+/* Scene reveal animations */
+.scene {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scene-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
 /* ================================================
    BASIC ANIMATIONS
    ================================================ */
