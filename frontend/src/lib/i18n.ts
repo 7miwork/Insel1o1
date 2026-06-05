@@ -64,6 +64,7 @@ export const translations: Translations = {
       admin: 'Admin Panel',
       teacher: 'Teacher Dashboard',
       parent: 'Parent Portal',
+      parentDashboard: 'Parent Dashboard',
     },
     gamification: {
       xp: 'Explorer Experience',
@@ -251,6 +252,7 @@ export const translations: Translations = {
       admin: 'Admin-Panel',
       teacher: 'Lehrer-Dashboard',
       parent: 'Elternportal',
+      parentDashboard: 'Eltern-Dashboard',
     },
     gamification: {
       xp: 'Erfahrungspunkte',
@@ -438,6 +440,7 @@ export const translations: Translations = {
       admin: '管理員面板',
       teacher: '教師儀表板',
       parent: '家長入口',
+      parentDashboard: '家長儀表板',
     },
     gamification: {
       xp: '經驗值',

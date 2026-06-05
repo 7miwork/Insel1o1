@@ -23,6 +23,7 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
   const navigationItems = [
     { label: t('navigation.dashboard'), href: '/dashboard' },
     { label: t('navigation.courses'), href: '/courses' },
+    { label: t('navigation.parentDashboard'), href: '/dashboard/parent' },
     { label: t('navigation.profile'), href: '/profile' },
     { label: t('navigation.settings'), href: '/settings' },
   ];

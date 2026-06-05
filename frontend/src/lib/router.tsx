@@ -11,6 +11,7 @@ import DashboardPage from '@/pages/Dashboard';
 import CoursesPage from '@/pages/Courses';
 import ArchipelagoPage from '@/pages/Archipelago';
 import LandingPage from '@/pages/LandingPage';
+import ParentDashboardPage from '@/pages/ParentDashboard';
 
 // Protected Route Component
 interface ProtectedRouteProps {
@@ -78,6 +79,14 @@ export default function AppRouter() {
           element={
             <ProtectedRoute>
               <ArchipelagoPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/parent"
+          element={
+            <ProtectedRoute>
+              <ParentDashboardPage />
             </ProtectedRoute>
           }
         />
