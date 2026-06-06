@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { authService, User } from "@/lib/auth-service";
 import StudentDashboard from "@/pages/StudentDashboard";
 import ProfessionalDashboard from "@/pages/ProfessionalDashboard";
+import ParentDashboard from "@/pages/ParentDashboard";
 
 export default function DashboardRouter() {
   const [user, setUser] = useState<User | null>(null);
@@ -39,6 +40,11 @@ export default function DashboardRouter() {
     return <StudentDashboard />;
   }
 
-  // Route to professional dashboard for all other roles
+  // Route to dedicated parent dashboard
+  if (user.role === "parent") {
+    return <ParentDashboard />;
+  }
+
+  // Route to professional dashboard for other roles
   return <ProfessionalDashboard user={user} />;
 }
