@@ -4,6 +4,7 @@ import { authService, User } from "@/lib/auth-service";
 import StudentDashboard from "@/pages/StudentDashboard";
 import ProfessionalDashboard from "@/pages/ProfessionalDashboard";
 import ParentDashboard from "@/pages/ParentDashboard";
+import TeacherDashboard from "@/pages/TeacherDashboard";
 
 export default function DashboardRouter() {
   const [user, setUser] = useState<User | null>(null);
@@ -43,6 +44,11 @@ export default function DashboardRouter() {
   // Route to dedicated parent dashboard
   if (user.role === "parent") {
     return <ParentDashboard />;
+  }
+
+  // Route to dedicated teacher dashboard
+  if (user.role === "teacher") {
+    return <TeacherDashboard />;
   }
 
   // Route to professional dashboard for other roles
