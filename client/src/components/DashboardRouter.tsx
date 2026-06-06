@@ -5,6 +5,7 @@ import StudentDashboard from "@/pages/StudentDashboard";
 import ProfessionalDashboard from "@/pages/ProfessionalDashboard";
 import ParentDashboard from "@/pages/ParentDashboard";
 import TeacherDashboard from "@/pages/TeacherDashboard";
+import AdminDashboard from "@/pages/AdminDashboard";
 
 export default function DashboardRouter() {
   const [user, setUser] = useState<User | null>(null);
@@ -49,6 +50,11 @@ export default function DashboardRouter() {
   // Route to dedicated teacher dashboard
   if (user.role === "teacher") {
     return <TeacherDashboard />;
+  }
+
+  // Route to dedicated admin dashboard
+  if (user.role === "admin") {
+    return <AdminDashboard />;
   }
 
   // Route to professional dashboard for other roles
