@@ -50,7 +50,9 @@
     "recentActivityDescription": "Deine letzten Lernaktivitäten und Errungenschaften",
     "loading": "Wird geladen...",
     "welcome": "Willkommen zurück",
-    "subtitle": "Hier ist eine Übersicht deiner Lernreise"
+    "subtitle": "Hier ist eine Übersicht deiner Lernreise",
+    "adminDashboard": "Admin-Dashboard",
+    "adminSubtitle": "Plattformverwaltung und Kontrollzentrum"
   },
   "studentDashboard": {
     "captainsDeck": "Kommandozentrale des Kapitäns",

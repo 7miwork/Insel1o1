@@ -50,7 +50,9 @@
     "recentActivityDescription": "Your recent learning activities and achievements",
     "loading": "Loading...",
     "welcome": "Welcome back",
-    "subtitle": "Here is an overview of your learning journey"
+    "subtitle": "Here is an overview of your learning journey",
+    "adminDashboard": "Admin Dashboard",
+    "adminSubtitle": "Platform administration and control center"
   },
   "studentDashboard": {
     "captainsDeck": "Captain's Deck",

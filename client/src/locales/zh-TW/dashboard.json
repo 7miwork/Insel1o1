@@ -47,7 +47,9 @@
     "totalIslands": "共10個島嶼",
     "completedLesson": "已完成",
     "xpReward": "XP",
-    "recentActivityDescription": "您最近的學習活動和成就"
+    "recentActivityDescription": "您最近的學習活動和成就",
+    "adminDashboard": "管理員儀表板",
+    "adminSubtitle": "平台管理和控制中心"
   },
   "studentDashboard": {
     "captainsDeck": "船長的指揮室",
