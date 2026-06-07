@@ -53,12 +53,18 @@
     "adventureReward": "Adventure Reward",
     "crewSectionTitle": "Meet the Crew",
     "crew": {
-      "captainLearningWorlds": "Captain of Learning Worlds",
-      "captainLearningWorldsDesc": "Vision, direction and overall concept of Insel1o1. Shapes the learning universe and connects education with adventure-based exploration.",
-      "learningNavigator": "Learning Navigator",
-      "learningNavigatorDesc": "Educational structure and learning design. Designs learning paths, ensures clarity in progression, and makes sure students, parents and teachers understand the learning journey.",
-      "pobbie": "Pobbie – The Code Rabbit 🐰",
-      "pobbieDesc": "Developer and system builder. Builds and implements the entire platform, turns ideas into working systems, and brings the learning world to life through code."
+      "captain": {
+        "title": "Captain of Learning Worlds",
+        "description": "Steers the fleet of knowledge, charting bold courses across the seas of education and turning every lesson into a daring adventure."
+      },
+      "navigator": {
+        "title": "Learning Navigator",
+        "description": "Maps the learning archipelago, plotting clear routes for explorers of all ages so they never lose their bearing on the quest for knowledge."
+      },
+      "pobbie": {
+        "title": "Pobbie – The Code Rabbit 🐰",
+        "description": "Our trusty code rabbit, hopping through the codebase to build the ship that carries every learner safely to new horizons."
+      }
     }
   },
   "lesson": {

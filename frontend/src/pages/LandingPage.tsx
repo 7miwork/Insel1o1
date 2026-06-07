@@ -3,6 +3,7 @@
 import React from 'react';
 import { usei18n } from '@/contexts/i18nContext';
 import { useNavigate } from 'react-router-dom';
+import { features } from '@/data/features';
 
 // ──────────────── SIMPLIFIED LANDING PAGE ────────────────
 // Clean, professional, minimal.
@@ -90,11 +91,7 @@ export default function LandingPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              { key: 'feature1', icon: '🎮' },
-              { key: 'feature2', icon: '🧭' },
-              { key: 'feature3', icon: '🏆' },
-            ].map((item) => (
+            {features.map((item) => (
               <div key={item.key} className="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
                 <div className="text-2xl mb-3">{item.icon}</div>
                 <h3 className="font-semibold text-[#0a4a7a] text-lg mb-2">
@@ -146,10 +143,11 @@ export default function LandingPage() {
               <span className="text-white/50 font-semibold">Insel 1o1</span>
             </div>
             <LanguageToggle />
-            <div className="flex gap-4">
-              <button onClick={() => navigate('/login')} className="hover:text-white/50">{t('common.login')}</button>
-              <button onClick={() => navigate('/register')} className="hover:text-white/50">{t('common.register')}</button>
-            </div>
+          <div className="flex gap-4 items-center">
+            <button onClick={() => navigate('/login')} className="hover:text-white/50">{t('common.login')}</button>
+            <button onClick={() => navigate('/register')} className="hover:text-white/50">{t('common.register')}</button>
+            <button onClick={() => navigate('/about')} className="hover:text-white/50">{t('navigation.about')}</button>
+          </div>
           </div>
           <div className="border-t border-white/10 mt-6 pt-4 text-center">
             <p>{t('landing.footer.copyright')}</p>

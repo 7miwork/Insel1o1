@@ -276,28 +276,28 @@ export const translations: Translations = {
         terms: 'Terms',
       }
     },
-    // New sections for About page
-    crew: {
-      captain: {
-        title: 'Captain of Learning Worlds',
-        description: 'Vision, direction and overall concept of Insel1o1. Shapes the learning universe and connects education with adventure-based exploration.',
+      // New sections for About page with pirate-themed text
+      crew: {
+        captain: {
+          title: 'Captain of Learning Worlds',
+          description: 'Steers the fleet of knowledge, charting bold courses across the seas of education and turning every lesson into a daring adventure.'
+        },
+        navigator: {
+          title: 'Learning Navigator',
+          description: 'Maps the learning archipelago, plotting clear routes for explorers of all ages so they never lose their bearing on the quest for knowledge.'
+        },
+        pobbie: {
+          title: 'Pobbie – The Code Rabbit 🐰',
+          description: 'Our trusty code rabbit, hopping through the codebase to build the ship that carries every learner safely to new horizons.'
+        }
       },
-      navigator: {
-        title: 'Learning Navigator',
-        description: 'Educational structure and learning design. Designs learning paths, ensures clarity in progression, and makes sure students, parents and teachers understand the learning journey.',
+      about: {
+        intro: 'Meet the daring crew steering the Insel1o1 archipelago, where every lesson is an expedition across uncharted islands.',
+        missionTitle: 'Our Mission',
+        missionContent: 'To turn education into a grand adventure, guiding students, parents, and teachers to discover new islands of knowledge together.',
+        visionTitle: 'Our Vision',
+        visionContent: 'A boundless sea of learning where curiosity is the compass and every learner becomes a fearless explorer.'
       },
-      pobbie: {
-        title: 'Pobbie – The Code Rabbit 🐰',
-        description: 'Developer and system builder. Builds and implements the entire platform, turns ideas into working systems, and brings the learning world to life through code.',
-      },
-    },
-    about: {
-      intro: 'We are the crew behind Insel1o1 — building a learning world where education feels like an adventure across islands.',
-      missionTitle: 'Our Mission',
-      missionContent: 'Transform learning into an exploration experience where students, parents, and teachers progress through knowledge like discovering new islands.',
-      visionTitle: 'Our Vision',
-      visionContent: 'A world where education feels like exploration, not obligation.',
-    },
   },
   de: {
     common: {
