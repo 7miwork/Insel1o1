@@ -65,6 +65,7 @@ export const translations: Translations = {
       teacher: 'Teacher Dashboard',
       parent: 'Parent Portal',
       parentDashboard: 'Parent Dashboard',
+      about: 'About Us',
     },
     gamification: {
       xp: 'Explorer Experience',
@@ -264,7 +265,29 @@ export const translations: Translations = {
         privacy: 'Privacy',
         terms: 'Terms',
       }
-    }
+    },
+    // New sections for About page
+    crew: {
+      captain: {
+        title: 'Captain of Learning Worlds',
+        description: 'Vision, direction and overall concept of Insel1o1. Shapes the learning universe and connects education with adventure-based exploration.',
+      },
+      navigator: {
+        title: 'Learning Navigator',
+        description: 'Educational structure and learning design. Designs learning paths, ensures clarity in progression, and makes sure students, parents and teachers understand the learning journey.',
+      },
+      pobbie: {
+        title: 'Pobbie – The Code Rabbit 🐰',
+        description: 'Developer and system builder. Builds and implements the entire platform, turns ideas into working systems, and brings the learning world to life through code.',
+      },
+    },
+    about: {
+      intro: 'We are the crew behind Insel1o1 — building a learning world where education feels like an adventure across islands.',
+      missionTitle: 'Our Mission',
+      missionContent: 'Transform learning into an exploration experience where students, parents, and teachers progress through knowledge like discovering new islands.',
+      visionTitle: 'Our Vision',
+      visionContent: 'A world where education feels like exploration, not obligation.',
+    },
   },
   de: {
     common: {
@@ -313,6 +336,7 @@ export const translations: Translations = {
       teacher: 'Lehrer-Dashboard',
       parent: 'Elternportal',
       parentDashboard: 'Eltern-Dashboard',
+      about: 'Über Uns',
     },
     gamification: {
       xp: 'Erfahrungspunkte',
@@ -512,7 +536,28 @@ export const translations: Translations = {
         privacy: 'Datenschutz',
         terms: 'AGB',
       }
-    }
+    },
+    crew: {
+      captain: {
+        title: 'Kapitän der Lernwelten',
+        description: 'Vision, Richtung und Gesamtkonzept von Insel1o1. Formt das Lernuniversum und verbindet Bildung mit abenteuerbasierter Erkundung.',
+      },
+      navigator: {
+        title: 'Lernnavigator',
+        description: 'Bildungsstruktur und Lerndesign. Entwirft Lernpfade, sorgt für Klarheit im Fortschritt und stellt sicher, dass Schüler, Eltern und Lehrer die Lernreise verstehen.',
+      },
+      pobbie: {
+        title: 'Pobbie – Der Code Hase 🐰',
+        description: 'Entwickler und Systembauer. Baut und implementiert die gesamte Plattform, verwandelt Ideen in funktionierende Systeme und erweckt die Lernwelt durch Code zum Leben.',
+      },
+    },
+    about: {
+      intro: 'Wir sind die Crew hinter Insel1o1 – wir bauen eine Lernwelt, in der Bildung wie ein Abenteuer über Inseln hinweg wirkt.',
+      missionTitle: 'Unsere Mission',
+      missionContent: 'Lernen in ein Erkundungserlebnis verwandeln, bei dem Schüler, Eltern und Lehrer Wissen entdecken wie neue Inseln.',
+      visionTitle: 'Unsere Vision',
+      visionContent: 'Eine Welt, in der Bildung wie Erkundung wirkt, nicht wie Verpflichtung.',
+    },
   },
   'zh-TW': {
     common: {
@@ -549,10 +594,9 @@ export const translations: Translations = {
       invalidCredentials: '無效的電子郵件或密碼',
       emailTaken: '電子郵件已被使用',
       passwordTooShort: '密碼必須至少 8 個字符',
-    },
     navigation: {
       home: '首頁',
-      dashboard: '舵手甲板',
+      dashboard: "船長的甲板",
       profile: '個人資料',
       courses: '課程',
       shop: '商店',
@@ -561,6 +605,8 @@ export const translations: Translations = {
       teacher: '教師儀表板',
       parent: '家長入口',
       parentDashboard: '家長儀表板',
+      about: '關於我們',
+    },
     },
     gamification: {
       xp: '經驗值',
@@ -760,7 +806,28 @@ export const translations: Translations = {
         privacy: '隱私政策',
         terms: '服務條款',
       }
-    }
+    },
+    crew: {
+      captain: {
+        title: '學習世界的船長',
+        description: '願景、方向與 Insel1o1 的整體概念。塑造學習宇宙，將教育與冒險探索相結合。',
+      },
+      navigator: {
+        title: '學習導航員',
+        description: '教育結構與學習設計。設計學習路徑，確保進度清晰，讓學生、家長與教師了解學習旅程。',
+      },
+      pobbie: {
+        title: 'Pobbie – 程式碼兔子 🐰',
+        description: '開發者與系統建構者。構建並實作整個平台，將想法轉化為可運作的系統，透過程式碼讓學習世界活起來。',
+      },
+    },
+    about: {
+      intro: '我們是 Insel1o1 背後的船員——打造一個學習世界，讓教育像跨越島嶼的冒險般。',
+      missionTitle: '我們的使命',
+      missionContent: '將學習轉化為探索體驗，讓學生、家長與教師像發現新島嶼般進步。',
+      visionTitle: '我們的願景',
+      visionContent: '一個教育感覺像探索，而非義務的世界。',
+    },
   },
 };
 
