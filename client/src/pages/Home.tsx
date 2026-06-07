@@ -2,11 +2,8 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import {
   BookOpen,
-  Zap,
-  Users,
   Trophy,
   ArrowRight,
-  Globe,
   Sparkles,
   CheckCircle2,
   Map as MapIcon,
@@ -25,62 +22,34 @@ import {
 import { useI18n } from "@/contexts/I18nContext";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { Footer } from "@/components/Footer";
+import { FEATURES, type FeatureConfig } from "@/data/features";
+
+/** Map of feature icon names to Lucide components */
+const iconMap: Record<string, React.ReactNode> = {
+  Compass: <Compass className="w-6 h-6" />,
+  Route: <Route className="w-6 h-6" />,
+  TrendingUp: <TrendingUp className="w-6 h-6" />,
+  Home: <HomeIcon className="w-6 h-6" />,
+  School: <School className="w-6 h-6" />,
+  Award: <Award className="w-6 h-6" />,
+  Smartphone: <Smartphone className="w-6 h-6" />,
+  Shield: <Shield className="w-6 h-6" />,
+};
+
+/** Hydrate feature configs with rendered icon elements */
+function useFeatures() {
+  const features = FEATURES.map((f: FeatureConfig) => ({
+    ...f,
+    icon: iconMap[f.iconName] ?? <Compass className="w-6 h-6" />,
+  }));
+  return features;
+}
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [, setLocation] = useLocation();
   const { t } = useI18n();
-
-  const features = [
-    {
-      icon: <Compass className="w-6 h-6" />,
-      titleKey: "home.feature_adventureLearning",
-      descriptionKey: "home.feature_adventureLearningDesc",
-      color: "from-amber-400 to-orange-500",
-    },
-    {
-      icon: <Route className="w-6 h-6" />,
-      titleKey: "home.feature_interactivePaths",
-      descriptionKey: "home.feature_interactivePathsDesc",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: <TrendingUp className="w-6 h-6" />,
-      titleKey: "home.feature_personalProgress",
-      descriptionKey: "home.feature_personalProgressDesc",
-      color: "from-emerald-500 to-teal-500",
-    },
-    {
-      icon: <HomeIcon className="w-6 h-6" />,
-      titleKey: "home.feature_parentInsights",
-      descriptionKey: "home.feature_parentInsightsDesc",
-      color: "from-violet-500 to-purple-500",
-    },
-    {
-      icon: <School className="w-6 h-6" />,
-      titleKey: "home.feature_teacherDashboard",
-      descriptionKey: "home.feature_teacherDashboardDesc",
-      color: "from-rose-500 to-pink-500",
-    },
-    {
-      icon: <Award className="w-6 h-6" />,
-      titleKey: "home.feature_motivation",
-      descriptionKey: "home.feature_motivationDesc",
-      color: "from-fuchsia-500 to-pink-500",
-    },
-    {
-      icon: <Smartphone className="w-6 h-6" />,
-      titleKey: "home.feature_learnAnywhere",
-      descriptionKey: "home.feature_learnAnywhereDesc",
-      color: "from-sky-500 to-indigo-500",
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      titleKey: "home.feature_privacySecurity",
-      descriptionKey: "home.feature_privacySecurityDesc",
-      color: "from-slate-500 to-slate-600",
-    },
-  ];
+  const features = useFeatures();
 
   const stats = [
     { value: "50K+", label: t("home.activeStudents") },
