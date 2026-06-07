@@ -11,6 +11,7 @@ import enFooter from "@/locales/en/footer.json";
 import enLeaderboard from "@/locales/en/leaderboard.json";
 import enNotifications from "@/locales/en/notifications.json";
 import enQuests from "@/locales/en/quests.json";
+import enPricing from "@/locales/en/pricing.json";
 import enShop from "@/locales/en/shop.json";
 
 import deCommon from "@/locales/de/common.json";
@@ -25,6 +26,7 @@ import deFooter from "@/locales/de/footer.json";
 import deLeaderboard from "@/locales/de/leaderboard.json";
 import deNotifications from "@/locales/de/notifications.json";
 import deQuests from "@/locales/de/quests.json";
+import dePricing from "@/locales/de/pricing.json";
 import deShop from "@/locales/de/shop.json";
 
 import zhTwCommon from "@/locales/zh-TW/common.json";
@@ -39,6 +41,7 @@ import zhTwFooter from "@/locales/zh-TW/footer.json";
 import zhTwLeaderboard from "@/locales/zh-TW/leaderboard.json";
 import zhTwNotifications from "@/locales/zh-TW/notifications.json";
 import zhTwQuests from "@/locales/zh-TW/quests.json";
+import zhTwPricing from "@/locales/zh-TW/pricing.json";
 import zhTwShop from "@/locales/zh-TW/shop.json";
 
 type Language = "en" | "de" | "zh-TW";
@@ -66,6 +69,7 @@ const translations: Record<Language, any> = {
     ...enLeaderboard,
     ...enNotifications,
     ...enQuests,
+    ...enPricing,
     ...enShop,
   },
   de: {
@@ -81,6 +85,7 @@ const translations: Record<Language, any> = {
     ...deLeaderboard,
     ...deNotifications,
     ...deQuests,
+    ...dePricing,
     ...deShop,
   },
   "zh-TW": {
@@ -96,6 +101,7 @@ const translations: Record<Language, any> = {
     ...zhTwLeaderboard,
     ...zhTwNotifications,
     ...zhTwQuests,
+    ...zhTwPricing,
     ...zhTwShop,
   },
 };
