@@ -6,17 +6,9 @@
     "watchDemo": "Watch Demo",
     "activeStudents": "Active Students",
     "courses": "Courses",
-    "satisfaction": "Satisfaction",
-    "powerfulFeatures": "Powerful Features",
-    "featureDescription": "Everything you need for an exceptional learning experience",
-    "gamifiedLearning": "Gamified Learning",
-    "gamifiedDescription": "Experience learning through an engaging archipelago-based system with XP, levels, and rewards.",
-    "multiRoleSystem": "Multi-Role System",
-    "multiRoleDescription": "Support for students, teachers, parents, and administrators with role-based access control.",
-    "achievementSystem": "Achievement System",
-    "achievementDescription": "Unlock achievements, earn streaks, and climb the leaderboards as you progress.",
-    "globalLearning": "Global Learning",
-    "globalDescription": "Learn in English, German, or Traditional Chinese with full internationalization support.",
+    "satisfaction": "Satisfaction Rate",
+    "powerfulFeatures": "Why Students, Parents & Teachers Love Insel 1o1",
+    "featureDescription": "A learning platform designed around real educational outcomes — not technology.",
     "readyToTransform": "Ready to Transform Your Learning?",
     "joinThousands": "Join thousands of students already learning with Insel 1o1",
     "enterEmail": "Enter your email",
@@ -40,6 +32,30 @@
     "archipelagoWelcomeDesc": "Your learning journey starts here",
     "trackProgress": "Track your progress with detailed analytics and insights",
     "learningConsistency": "Learning Consistency",
-    "courseCompletion": "Course Completion"
+    "courseCompletion": "Course Completion",
+
+    "feature_adventureLearning": "Adventure-Based Learning",
+    "feature_adventureLearningDesc": "Learning should feel like an adventure. Students explore islands, unlock new areas, complete challenges and discover knowledge through an engaging journey rather than traditional lessons.",
+
+    "feature_interactivePaths": "Interactive Learning Paths",
+    "feature_interactivePathsDesc": "Structured learning paths guide students step-by-step through subjects and help them stay focused and motivated.",
+
+    "feature_personalProgress": "Personal Learning Progress",
+    "feature_personalProgressDesc": "Track achievements, completed lessons and subject progress with clear visual indicators and meaningful feedback.",
+
+    "feature_parentInsights": "Parent Insights",
+    "feature_parentInsightsDesc": "Parents can easily monitor learning activity, progress, strengths and areas that may need additional support.",
+
+    "feature_teacherDashboard": "Teacher Dashboard",
+    "feature_teacherDashboardDesc": "Teachers receive classroom insights, assignment tracking, student performance analytics and support indicators.",
+
+    "feature_motivation": "Motivation and Achievements",
+    "feature_motivationDesc": "Achievements, rewards and learning milestones help students stay engaged and build positive learning habits.",
+
+    "feature_learnAnywhere": "Learn Anywhere",
+    "feature_learnAnywhereDesc": "Access learning content from desktop, tablet or smartphone and continue learning from anywhere.",
+
+    "feature_privacySecurity": "Privacy and Security",
+    "feature_privacySecurityDesc": "Safe learning environments, secure accounts and privacy-conscious design help protect students and families."
   }
 }

@@ -1,45 +1,63 @@
 {
   "home": {
-    "heroTitle": "透過遊戲化重新想像學習",
-    "heroDescription": "與數百萬名學生一起加入Insel 1o1的學習之旅，這是下一代教育科技平台，使教育變得引人入勝、互動式且有獎勵。",
+    "heroTitle": "通過遊戲化重新定義學習",
+    "heroDescription": "與數百萬學生一起加入 Insel 1o1 的學習之旅，這款次世代教育科技平台讓學習變得有趣、互動且富有成就感。",
     "getStarted": "免費開始",
-    "watchDemo": "觀看演示",
+    "watchDemo": "觀看示範",
+    "exploreArchipelagos": "探索群島",
+    "beginAdventure": "開始冒險",
     "activeStudents": "活躍學生",
-    "courses": "課程",
+    "courses": "課程數",
     "satisfaction": "滿意度",
-    "powerfulFeatures": "強大功能",
-    "featureDescription": "您需要的一切，以獲得非凡的學習體驗",
-    "gamifiedLearning": "遊戲化學習",
-    "gamifiedDescription": "通過引人入勝的群島系統體驗學習，具有XP、等級和獎勵。",
-    "multiRoleSystem": "多角色系統",
-    "multiRoleDescription": "支援學生、教師、家長和管理員，具有基於角色的存取控制。",
-    "achievementSystem": "成就系統",
-    "achievementDescription": "解鎖成就、獲得連勝並在進步時攀登排行榜。",
-    "globalLearning": "全球學習",
-    "globalDescription": "用英文、德文或繁體中文學習，具有完整的國際化支援。",
-    "readyToTransform": "準備好改變您的學習了嗎？",
-    "joinThousands": "加入已經與Insel 1o1學習的數千名學生",
+    "powerfulFeatures": "為什麼學生、家長與教師都喜愛 Insel 1o1",
+    "featureDescription": "一個圍繞真實教育成果設計的學習平台——而不是技術。",
+    "readyToTransform": "準備好改變你的學習體驗了嗎？",
+    "joinThousands": "加入數千名已經在使用 Insel 1o1 學習的學生行列",
     "enterEmail": "輸入您的電子郵件",
     "startLearning": "立即開始學習",
-    "tagline": "Next-Generation EdTech 平台",
+    "mathKingdom": "數學王國",
+    "englishLiterature": "英國文學",
+    "xpEarned": "獲得的 XP",
+    "level": "等級",
+    "streak": "連續天數",
+    "tagline": "次世代教育科技平台",
     "whyChooseTitle": "為什麼選擇 Insel 1o1？",
     "benefits": {
       "personalizedLearning": "為每位學生提供個人化學習路徑",
       "realTimeTracking": "即時進度追蹤與分析",
       "gamification": "引人入勝的遊戲化系統",
       "multiLanguageSupport": "多語言支援",
-      "teacherParentDashboards": "教師和家長儀表板",
+      "teacherParentDashboards": "教師與家長儀表板",
       "secureScalable": "安全且可擴展的平台"
     },
     "archipelagoWelcomeTitle": "歡迎來到群島",
-    "archipelagoWelcomeDesc": "您的學習之旅從這裡開始",
-    "trackProgress": "透過詳細的分析和見解追蹤您的進度",
+    "archipelagoWelcomeDesc": "你的學習之旅從這裡開始",
+    "trackProgress": "透過詳細分析與洞察追蹤你的進度",
     "learningConsistency": "學習持續性",
     "courseCompletion": "課程完成率",
-    "mathKingdom": "數學王國",
-    "englishLiterature": "英語文學",
-    "xpEarned": "XP 獲得",
-    "level": "等級",
-    "streak": "連勝"
+
+    "feature_adventureLearning": "冒險式學習",
+    "feature_adventureLearningDesc": "學習應該像一場冒險。學生探索島嶼、解鎖新區域、完成挑戰，透過引人入勝的旅程來發現知識，而非傳統的課堂教學。",
+
+    "feature_interactivePaths": "互動式學習路徑",
+    "feature_interactivePathsDesc": "結構化的學習路徑引導學生逐步學習各科目，幫助他們保持專注與動力。",
+
+    "feature_personalProgress": "個人學習進度",
+    "feature_personalProgressDesc": "透過清晰的視覺化指標和有意義的回饋，追蹤成就、已完成的課程與科目進度。",
+
+    "feature_parentInsights": "家長洞察",
+    "feature_parentInsightsDesc": "家長可以輕鬆監控學習活動、進度、優勢及可能需要額外支援的領域。",
+
+    "feature_teacherDashboard": "教師儀表板",
+    "feature_teacherDashboardDesc": "教師獲得課堂洞察、作業追蹤、學生表現分析及支援指標。",
+
+    "feature_motivation": "動力與成就",
+    "feature_motivationDesc": "成就、獎勵與學習里程碑幫助學生保持參與度並建立正向的學習習慣。",
+
+    "feature_learnAnywhere": "隨時隨地學習",
+    "feature_learnAnywhereDesc": "可從桌上型電腦、平板或智慧型手機存取學習內容，隨時隨地繼續學習。",
+
+    "feature_privacySecurity": "隱私與安全",
+    "feature_privacySecurityDesc": "安全的學習環境、受保護的帳戶及注重隱私的設計，有助於保護學生與家庭。"
   }
 }

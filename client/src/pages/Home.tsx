@@ -13,6 +13,14 @@ import {
   PlayCircle,
   Star,
   GraduationCap,
+  Compass,
+  Route,
+  TrendingUp,
+  Home as HomeIcon,
+  School,
+  Award,
+  Smartphone,
+  Shield,
 } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { GlobalHeader } from "@/components/GlobalHeader";
@@ -25,28 +33,52 @@ export default function Home() {
 
   const features = [
     {
-      icon: <Zap className="w-6 h-6" />,
-      titleKey: "home.gamifiedLearning",
-      descriptionKey: "home.gamifiedDescription",
+      icon: <Compass className="w-6 h-6" />,
+      titleKey: "home.feature_adventureLearning",
+      descriptionKey: "home.feature_adventureLearningDesc",
       color: "from-amber-400 to-orange-500",
     },
     {
-      icon: <Users className="w-6 h-6" />,
-      titleKey: "home.multiRoleSystem",
-      descriptionKey: "home.multiRoleDescription",
+      icon: <Route className="w-6 h-6" />,
+      titleKey: "home.feature_interactivePaths",
+      descriptionKey: "home.feature_interactivePathsDesc",
       color: "from-blue-500 to-cyan-500",
     },
     {
-      icon: <Trophy className="w-6 h-6" />,
-      titleKey: "home.achievementSystem",
-      descriptionKey: "home.achievementDescription",
-      color: "from-violet-500 to-fuchsia-500",
+      icon: <TrendingUp className="w-6 h-6" />,
+      titleKey: "home.feature_personalProgress",
+      descriptionKey: "home.feature_personalProgressDesc",
+      color: "from-emerald-500 to-teal-500",
     },
     {
-      icon: <Globe className="w-6 h-6" />,
-      titleKey: "home.globalLearning",
-      descriptionKey: "home.globalDescription",
-      color: "from-emerald-500 to-teal-500",
+      icon: <HomeIcon className="w-6 h-6" />,
+      titleKey: "home.feature_parentInsights",
+      descriptionKey: "home.feature_parentInsightsDesc",
+      color: "from-violet-500 to-purple-500",
+    },
+    {
+      icon: <School className="w-6 h-6" />,
+      titleKey: "home.feature_teacherDashboard",
+      descriptionKey: "home.feature_teacherDashboardDesc",
+      color: "from-rose-500 to-pink-500",
+    },
+    {
+      icon: <Award className="w-6 h-6" />,
+      titleKey: "home.feature_motivation",
+      descriptionKey: "home.feature_motivationDesc",
+      color: "from-fuchsia-500 to-pink-500",
+    },
+    {
+      icon: <Smartphone className="w-6 h-6" />,
+      titleKey: "home.feature_learnAnywhere",
+      descriptionKey: "home.feature_learnAnywhereDesc",
+      color: "from-sky-500 to-indigo-500",
+    },
+    {
+      icon: <Shield className="w-6 h-6" />,
+      titleKey: "home.feature_privacySecurity",
+      descriptionKey: "home.feature_privacySecurityDesc",
+      color: "from-slate-500 to-slate-600",
     },
   ];
 
@@ -197,31 +229,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features */}
+        {/* Features */}
       <section
         id="features"
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20"
       >
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-100 text-cyan-800 text-xs font-bold uppercase tracking-wider mb-5">
+            <Sparkles className="w-3.5 h-3.5" />
+            {t("home.tagline")}
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
             {t("home.powerfulFeatures")}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
             {t("home.featureDescription")}
           </p>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="card card-interactive p-6 group"
+              className="group relative bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-xl hover:border-slate-300 transition-all duration-300 hover:-translate-y-1"
             >
               <div
-                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} text-white flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform`}
+                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} text-white flex items-center justify-center mb-5 shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-300`}
               >
                 {feature.icon}
               </div>
-              <h3 className="text-base font-bold text-slate-900 mb-2">
+              <h3 className="text-base font-bold text-slate-900 mb-2 leading-snug">
                 {t(feature.titleKey)}
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">

@@ -9,16 +9,8 @@
     "activeStudents": "Aktive Lernende",
     "courses": "Kurse",
     "satisfaction": "Zufriedenheit",
-    "powerfulFeatures": "Leistungsstarke Funktionen",
-    "featureDescription": "Alles, was du für ein aussergewöhnliches Lernerlebnis brauchst",
-    "gamifiedLearning": "Gamifiziertes Lernen",
-    "gamifiedDescription": "Erlebe Lernen durch ein fesselndes Archipel-System mit XP, Leveln und Belohnungen.",
-    "multiRoleSystem": "Mehrrollen-System",
-    "multiRoleDescription": "Unterstützung für Lernende, Lehrpersonen, Eltern und Administratoren mit rollenbasierter Zugriffskontrolle.",
-    "achievementSystem": "Erfolgssystem",
-    "achievementDescription": "Schalte Erfolge frei, sammle Serien und erklimme Bestenlisten, während du Fortschritte machst.",
-    "globalLearning": "Globales Lernen",
-    "globalDescription": "Lerne auf Englisch, Deutsch oder Chinesisch (Traditionell) mit vollständiger Internationalisierungsunterstützung.",
+    "powerfulFeatures": "Warum Schüler, Eltern und Lehrkräfte Insel 1o1 lieben",
+    "featureDescription": "Eine Lernplattform, die um echte Bildungsergebnisse herum entwickelt wurde – nicht um Technologie.",
     "readyToTransform": "Bereit, dein Lernen zu verändern?",
     "joinThousands": "Schliesse dich Tausenden von Lernenden an, die bereits mit Insel 1o1 lernen",
     "enterEmail": "E-Mail-Adresse eingeben",
@@ -42,6 +34,30 @@
     "archipelagoWelcomeDesc": "Deine Lernreise beginnt hier",
     "trackProgress": "Verfolge deinen Fortschritt mit detaillierten Analysen und Einblicken",
     "learningConsistency": "Lernkonsistenz",
-    "courseCompletion": "Kursabschluss"
+    "courseCompletion": "Kursabschluss",
+
+    "feature_adventureLearning": "Abenteuerbasiertes Lernen",
+    "feature_adventureLearningDesc": "Lernen sollte sich wie ein Abenteuer anfühlen. Schüler erkunden Inseln, schalten neue Gebiete frei, meistern Herausforderungen und entdecken Wissen durch eine fesselnde Reise statt durch traditionellen Unterricht.",
+
+    "feature_interactivePaths": "Interaktive Lernpfade",
+    "feature_interactivePathsDesc": "Strukturierte Lernpfade führen Schüler Schritt für Schritt durch die Fächer und helfen ihnen, fokussiert und motiviert zu bleiben.",
+
+    "feature_personalProgress": "Persönlicher Lernfortschritt",
+    "feature_personalProgressDesc": "Verfolge Erfolge, abgeschlossene Lektionen und Fachfortschritte mit klaren visuellen Indikatoren und aussagekräftigem Feedback.",
+
+    "feature_parentInsights": "Einblicke für Eltern",
+    "feature_parentInsightsDesc": "Eltern können Lernaktivitäten, Fortschritte, Stärken und Bereiche, die zusätzliche Unterstützung benötigen, einfach überwachen.",
+
+    "feature_teacherDashboard": "Lehrkraft-Dashboard",
+    "feature_teacherDashboardDesc": "Lehrkräfte erhalten Einblicke in die Klasse, Aufgabenverfolgung, Leistungsanalysen der Schüler und Unterstützungsindikatoren.",
+
+    "feature_motivation": "Motivation und Erfolge",
+    "feature_motivationDesc": "Erfolge, Belohnungen und Lernmeilensteine helfen Schülern, engagiert zu bleiben und positive Lerngewohnheiten aufzubauen.",
+
+    "feature_learnAnywhere": "Überall lernen",
+    "feature_learnAnywhereDesc": "Greife von Desktop, Tablet oder Smartphone auf Lerninhalte zu und lerne von überall aus weiter.",
+
+    "feature_privacySecurity": "Datenschutz und Sicherheit",
+    "feature_privacySecurityDesc": "Sichere Lernumgebungen, geschützte Konten und datenschutzbewusstes Design helfen, Schüler und Familien zu schützen."
   }
 }
