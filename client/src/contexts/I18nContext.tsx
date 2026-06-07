@@ -13,6 +13,7 @@ import enNotifications from "@/locales/en/notifications.json";
 import enQuests from "@/locales/en/quests.json";
 import enPricing from "@/locales/en/pricing.json";
 import enShop from "@/locales/en/shop.json";
+import enAbout from "@/locales/en/about.json";
 
 import deCommon from "@/locales/de/common.json";
 import deHome from "@/locales/de/home.json";
@@ -71,6 +72,7 @@ const translations: Record<Language, any> = {
     ...enQuests,
     ...enPricing,
     ...enShop,
+    ...enAbout,
   },
   de: {
     ...deCommon,

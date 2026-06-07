@@ -19,6 +19,7 @@ import MinecraftLessonPage from "./pages/MinecraftLessonPage";
 import SchoolDashboard from "./pages/SchoolDashboard";
 import Leaderboard from "./pages/Leaderboard";
 import Pricing from "./pages/Pricing";
+import About from "./pages/About";
 
 function AppRouter() {
   return (
@@ -33,7 +34,8 @@ function AppRouter() {
       <Route path={"/minecraft-lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/school-dashboard"} component={SchoolDashboard} />
       <Route path={"/leaderboard"} component={Leaderboard} />
-      <Route path={"/pricing"} component={Pricing} />
+        <Route path={"/pricing"} component={Pricing} />
+        <Route path={"/about"} component={About} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

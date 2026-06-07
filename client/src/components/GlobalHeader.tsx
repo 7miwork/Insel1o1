@@ -14,6 +14,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: "/",              labelKey: "nav.home",         icon: <Home className="w-4 h-4" /> },
   { to: "/archipelago",   labelKey: "nav.archipelagos", icon: <MapIcon className="w-4 h-4" /> },
   { to: "/dashboard",     labelKey: "nav.progress",     icon: <BarChart3 className="w-4 h-4" /> },
+  { to: "/about",         labelKey: "navigation.about", icon: <Settings className="w-4 h-4" /> },
   { to: "/login",         labelKey: "nav.settings",     icon: <Settings className="w-4 h-4" /> },
 ];
 

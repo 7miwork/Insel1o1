@@ -26,6 +26,7 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
     { label: t('navigation.parentDashboard'), href: '/dashboard/parent' },
     { label: t('navigation.profile'), href: '/profile' },
     { label: t('navigation.settings'), href: '/settings' },
+    { label: t('navigation.about'), href: '/about' },
   ];
 
   return (

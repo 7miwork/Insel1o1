@@ -43,6 +43,7 @@ export const translations: Translations = {
       success: 'Success',
       warning: 'Warning',
       info: 'Information',
+      crewSectionTitle: 'Meet the Crew',
     },
     auth: {
       loginTitle: 'Login to Insel 1o1',
@@ -242,7 +243,7 @@ export const translations: Translations = {
       },
       features: {
         title: 'Why Students Love Insel 1o1',
-        subtitle: 'Learning here doesn\'t feel like learning. It feels like living an adventure.',
+        subtitle: "Learning here doesn't feel like learning. It feels like living an adventure.",
         feature1Title: 'Learn Through Play',
         feature1Desc: 'No boring textbooks. Every concept is wrapped in a quest, a puzzle, or a story that makes understanding natural and fun.',
         feature2Title: 'Your Pace, Your Path',
@@ -251,6 +252,15 @@ export const translations: Translations = {
         feature3Desc: 'Every lesson teaches something real – coding, math, languages. And every success is celebrated with XP, badges, and treasures.',
         feature4Title: 'A World That Grows',
         feature4Desc: 'New islands appear regularly. The map is always expanding, offering fresh adventures and new knowledge horizons.',
+        // Added features 5-8
+        feature5Title: 'Teacher Dashboard',
+        feature5Desc: 'Tools for teachers to manage classes, track student progress, and assign quests.',
+        feature6Title: 'Motivation & Achievements',
+        feature6Desc: 'Earn badges, trophies, and streak bonuses to stay motivated throughout the learning journey.',
+        feature7Title: 'Learn Anywhere',
+        feature7Desc: 'Access lessons from any device, anytime, with offline support for uninterrupted learning.',
+        feature8Title: 'Privacy & Security',
+        feature8Desc: 'Your data is protected with industry‑standard encryption and strict privacy policies.',
       },
       cta: {
         title: 'Your Adventure Awaits',
@@ -314,6 +324,7 @@ export const translations: Translations = {
       success: 'Erfolg',
       warning: 'Warnung',
       info: 'Information',
+      crewSectionTitle: 'Das Team',
     },
     auth: {
       loginTitle: 'Bei Insel 1o1 anmelden',

@@ -1,0 +1,23 @@
+{
+  "about": {
+    "intro": "We are the crew behind Insel1o1 — building a learning world where education feels like an adventure across islands.",
+    "missionTitle": "Our Mission",
+    "missionContent": "Transform learning into an exploration experience where students, parents, and teachers progress through knowledge like discovering new islands.",
+    "visionTitle": "Our Vision",
+    "visionContent": "A world where education feels like exploration, not obligation.",
+    "crew": {
+      "captain": {
+        "title": "Captain of Learning Worlds",
+        "description": "Vision, direction and overall concept of Insel1o1. Shapes the learning universe and connects education with adventure-based exploration."
+      },
+      "navigator": {
+        "title": "Learning Navigator",
+        "description": "Educational structure and learning design. Designs learning paths, ensures clarity in progression, and makes sure students, parents and teachers understand the learning journey."
+      },
+      "pobbie": {
+        "title": "Pobbie – The Code Rabbit 🐰",
+        "description": "Developer and system builder. Builds and implements the entire platform, turns ideas into working systems, and brings the learning world to life through code."
+      }
+    }
+  }
+}

@@ -50,7 +50,16 @@
     "videoComingSoon": "Video Coming Soon",
     "videoComingSoonDesc": "An exciting video is on its way. Stay tuned!",
     "reward": "Reward",
-    "adventureReward": "Adventure Reward"
+    "adventureReward": "Adventure Reward",
+    "crewSectionTitle": "Meet the Crew",
+    "crew": {
+      "captainLearningWorlds": "Captain of Learning Worlds",
+      "captainLearningWorldsDesc": "Vision, direction and overall concept of Insel1o1. Shapes the learning universe and connects education with adventure-based exploration.",
+      "learningNavigator": "Learning Navigator",
+      "learningNavigatorDesc": "Educational structure and learning design. Designs learning paths, ensures clarity in progression, and makes sure students, parents and teachers understand the learning journey.",
+      "pobbie": "Pobbie – The Code Rabbit 🐰",
+      "pobbieDesc": "Developer and system builder. Builds and implements the entire platform, turns ideas into working systems, and brings the learning world to life through code."
+    }
   },
   "lesson": {
     "heroTitleSuffix": "Your Learning Adventure",
