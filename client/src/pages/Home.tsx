@@ -1,5 +1,5 @@
 import { useLocation } from "wouter";
-import { GraduationCap, School, ArrowRight, Trophy, BookOpen, Shield, BarChart3, Users, Compass } from "lucide-react";
+import { GraduationCap, School, ArrowRight, Trophy, BookOpen, Shield, BarChart3, Users, Compass, Lock, CheckCircle2, Globe } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { Footer } from "@/components/Footer";
@@ -246,6 +246,41 @@ export default function Home() {
             visual={<FeatureVisualAnywhere />}
             reverse
           />
+        </div>
+      </section>
+
+      {/* ── SECURITY / TRUST SECTION ── */}
+      <section id="security" className="bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
+              Security & Trust
+            </h2>
+            <p className="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
+              {t("home.feature_privacySecurityDesc")}
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { icon: <Lock className="w-5 h-5 text-cyan-600" />, title: "Data Protection", desc: "Verschlüsselte Datenübertragung und sichere Speicherung aller persönlichen Informationen." },
+              { icon: <GraduationCap className="w-5 h-5 text-amber-600" />, title: "Student Privacy", desc: "Kinder- und jugendgeschützte Profile mit elterlicher Einwilligung und transparenter Datenverarbeitung." },
+              { icon: <CheckCircle2 className="w-5 h-5 text-emerald-600" />, title: "School Compliance", desc: "DSGVO-konform und bereit für den Einsatz an Schulen und Bildungseinrichtungen." },
+              { icon: <Globe className="w-5 h-5 text-violet-600" />, title: "Secure Infrastructure", desc: "Stabile und geschützte technische Infrastruktur für zuverlässigen Betrieb." },
+            ].map((item, idx) => (
+              <div key={idx} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+                <div className="mb-3">{item.icon}</div>
+                <h3 className="font-semibold text-slate-900 text-sm mb-1">{item.title}</h3>
+                <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <p className="text-sm text-slate-500 leading-relaxed max-w-2xl mx-auto">
+              Insel1o1 is designed with privacy, safety, and educational responsibility in mind.
+            </p>
+          </div>
         </div>
       </section>
 

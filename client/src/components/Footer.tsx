@@ -13,7 +13,7 @@ const COLUMNS: FooterColumn[] = [
     links: [
       { key: "footer.features", href: "#features", scroll: true },
       { key: "footer.pricing", href: "#pricing" },
-      { key: "footer.security", href: "#security" },
+      { key: "footer.security", href: "#security", scroll: true },
     ],
   },
   {
