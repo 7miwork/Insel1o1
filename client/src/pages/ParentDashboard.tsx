@@ -242,9 +242,8 @@ export default function ParentDashboard() {
 
   const navItems: DashboardNavItem[] = [
     { to: "/",            id: "home",         labelKey: "nav.home",         icon: <Home className="w-4 h-4" /> },
-    { to: "/archipelago", id: "archipelago",  labelKey: "nav.archipelagos", icon: <MapIcon className="w-4 h-4" /> },
     { to: "/courses",     id: "courses",      labelKey: "nav.courses",      icon: <BookOpen className="w-4 h-4" /> },
-    { to: "/leaderboard", id: "leaderboard",  labelKey: "nav.leaderboard",  icon: <Trophy className="w-4 h-4" /> },
+    { to: "/dashboard",   id: "analytics",    labelKey: "nav.analytics",    icon: <BarChart3 className="w-4 h-4" /> },
     { to: "/login",       id: "settings",     labelKey: "nav.settings",     icon: <Settings className="w-4 h-4" /> },
   ];
 

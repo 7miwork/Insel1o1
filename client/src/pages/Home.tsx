@@ -1,367 +1,137 @@
-import { useState } from "react";
 import { useLocation } from "wouter";
 import {
-  BookOpen,
-  Trophy,
+  GraduationCap,
+  School,
   ArrowRight,
   Sparkles,
-  CheckCircle2,
-  Map as MapIcon,
-  PlayCircle,
-  Star,
-  GraduationCap,
-  Compass,
-  Route,
-  TrendingUp,
-  Home as HomeIcon,
-  School,
-  Award,
-  Smartphone,
-  Shield,
+  BookOpen,
 } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { Footer } from "@/components/Footer";
-import { FEATURES, type FeatureConfig } from "@/data/features";
-
-/** Map of feature icon names to Lucide components */
-const iconMap: Record<string, React.ReactNode> = {
-  Compass: <Compass className="w-6 h-6" />,
-  Route: <Route className="w-6 h-6" />,
-  TrendingUp: <TrendingUp className="w-6 h-6" />,
-  Home: <HomeIcon className="w-6 h-6" />,
-  School: <School className="w-6 h-6" />,
-  Award: <Award className="w-6 h-6" />,
-  Smartphone: <Smartphone className="w-6 h-6" />,
-  Shield: <Shield className="w-6 h-6" />,
-};
-
-/** Hydrate feature configs with rendered icon elements */
-function useFeatures() {
-  const features = FEATURES.map((f: FeatureConfig) => ({
-    ...f,
-    icon: iconMap[f.iconName] ?? <Compass className="w-6 h-6" />,
-  }));
-  return features;
-}
 
 export default function Home() {
-  const [email, setEmail] = useState("");
   const [, setLocation] = useLocation();
   const { t } = useI18n();
-  const features = useFeatures();
-
-  const stats = [
-    { value: "50K+", label: t("home.activeStudents") },
-    { value: "1,000+", label: t("home.courses") },
-    { value: "98%", label: t("home.satisfaction") },
-  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50">
+    <div className="min-h-screen bg-white">
       <GlobalHeader
         ctaLabel={t("navigation.signIn")}
         ctaHref="/login"
       />
 
-      {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-7 animate-fadeInUp">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-100 text-cyan-800 text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
-              {t("home.tagline")}
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.05] tracking-tight">
-              {t("home.heroTitle")}
-            </h1>
-
-            <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
-              {t("home.heroDescription")}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <button
-                type="button"
-                onClick={() => setLocation("/register")}
-                className="btn btn-primary btn-lg"
-              >
-                {t("common.startLearning")}
-                <ArrowRight className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => setLocation("/archipelago")}
-                className="btn btn-accent btn-lg"
-              >
-                <MapIcon className="w-4 h-4" />
-                {t("common.exploreArchipelagos")}
-              </button>
-              <button
-                type="button"
-                onClick={() => setLocation("/archipelago")}
-                className="btn btn-outline btn-lg"
-              >
-                <PlayCircle className="w-4 h-4" />
-                {t("common.beginAdventure")}
-              </button>
-            </div>
-
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200/70">
-              {stats.map((stat, idx) => (
-                <div key={idx}>
-                  <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent">
-                    {stat.value}
-                  </p>
-                  <p className="text-sm text-slate-600 mt-1 font-medium">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Hero Visual */}
-          <div className="relative animate-fadeInUp">
-            <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-400 to-violet-400 rounded-3xl blur-3xl opacity-20" aria-hidden />
-            <div className="relative card-elevated rounded-3xl p-6 sm:p-8">
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center shadow-lg">
-                    <BookOpen className="w-7 h-7 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-extrabold text-slate-900">
-                      {t("home.archipelagoWelcomeTitle")}
-                    </p>
-                    <p className="text-sm text-slate-500">
-                      {t("home.archipelagoWelcomeDesc")}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex items-center justify-between text-sm mb-1.5">
-                      <span className="font-semibold text-slate-700">
-                        {t("home.mathKingdom")}
-                      </span>
-                      <span className="font-bold text-cyan-700">85%</span>
-                    </div>
-                    <div className="progress-track progress-track-lg" aria-hidden>
-                      <div
-                        className="progress-fill"
-                        style={{ width: "85%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between text-sm mb-1.5">
-                      <span className="font-semibold text-slate-700">
-                        {t("home.englishLiterature")}
-                      </span>
-                      <span className="font-bold text-cyan-700">60%</span>
-                    </div>
-                    <div className="progress-track progress-track-lg" aria-hidden>
-                      <div
-                        className="progress-fill"
-                        style={{ width: "60%" }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-t border-slate-200 pt-5 grid grid-cols-3 gap-4 text-center">
-                  <div>
-                    <p className="text-2xl font-extrabold text-cyan-700">2,450</p>
-                    <p className="text-xs text-slate-500 mt-1 font-medium">
-                      {t("home.xpEarned")}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-extrabold text-teal-700">5</p>
-                    <p className="text-xs text-slate-500 mt-1 font-medium">
-                      {t("home.level")}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-extrabold text-orange-600">12</p>
-                    <p className="text-xs text-slate-500 mt-1 font-medium">
-                      {t("home.streak")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-        {/* Features */}
-      <section
-        id="features"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20"
-      >
-        <div className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-100 text-cyan-800 text-xs font-bold uppercase tracking-wider mb-5">
-            <Sparkles className="w-3.5 h-3.5" />
+      {/* ── HERO SECTION ── neutral, clean, premium */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-28 md:pb-20 text-center">
+          {/* Subtle badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold tracking-wide mb-6">
+            <Sparkles className="w-3.5 h-3.5 text-slate-400" />
             {t("home.tagline")}
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
-            {t("home.powerfulFeatures")}
-          </h2>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            {t("home.featureDescription")}
+
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 leading-[1.1] tracking-tight mb-5">
+            {t("home.heroTitle")}
+          </h1>
+
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed mb-10">
+            {t("home.heroDescription")}
           </p>
-        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="group relative bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-xl hover:border-slate-300 transition-all duration-300 hover:-translate-y-1"
+          {/* ── Dual Entry ── */}
+          <div className="grid sm:grid-cols-2 gap-4 max-w-xl mx-auto">
+            <button
+              onClick={() => setLocation("/student")}
+              className="group flex items-center justify-between gap-3 rounded-2xl border-2 border-amber-200 bg-amber-50 hover:bg-amber-100 hover:border-amber-300 px-6 py-5 text-left transition-all"
             >
-              <div
-                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} text-white flex items-center justify-center mb-5 shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-300`}
-              >
-                {feature.icon}
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
+                  <GraduationCap className="w-5 h-5 text-amber-700" />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900">Für Schüler</p>
+                  <p className="text-sm text-slate-500">Lerne durch ein Abenteuer</p>
+                </div>
               </div>
-              <h3 className="text-base font-bold text-slate-900 mb-2 leading-snug">
-                {t(feature.titleKey)}
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                {t(feature.descriptionKey)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+              <ArrowRight className="w-5 h-5 text-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </button>
 
-      {/* Benefits */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        <div className="bg-gradient-to-br from-cyan-50 to-teal-50 rounded-3xl p-8 sm:p-12 lg:p-16 border border-cyan-100/50">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-8">
-                {t("home.whyChooseTitle")}
-              </h2>
-              <ul className="space-y-3.5">
-                {[
-                  "home.benefits.personalizedLearning",
-                  "home.benefits.realTimeTracking",
-                  "home.benefits.gamification",
-                  "home.benefits.multiLanguageSupport",
-                  "home.benefits.teacherParentDashboards",
-                  "home.benefits.secureScalable",
-                ].map((key, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start gap-3 text-slate-700 font-medium"
-                  >
-                    <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 shrink-0">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                    </span>
-                    {t(key)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative">
-              <div
-                className="absolute -inset-4 bg-gradient-to-tr from-cyan-300 to-violet-300 rounded-3xl blur-2xl opacity-25"
-                aria-hidden
-              />
-              <div className="relative card-elevated rounded-3xl p-7 sm:p-9">
-                <div className="text-center mb-5">
-                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-teal-600 text-white shadow-md">
-                    <Trophy className="w-7 h-7" />
-                  </span>
-                  <p className="text-slate-600 mt-3 font-semibold">
-                    {t("home.trackProgress")}
-                  </p>
+            <button
+              onClick={() => setLocation("/dashboard")}
+              className="group flex items-center justify-between gap-3 rounded-2xl border-2 border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 px-6 py-5 text-left transition-all"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center">
+                  <School className="w-5 h-5 text-slate-600" />
                 </div>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex items-center justify-between text-sm mb-1.5">
-                      <span className="font-semibold text-slate-700">
-                        {t("home.learningConsistency")}
-                      </span>
-                      <span className="font-bold text-cyan-700">92%</span>
-                    </div>
-                    <div className="progress-track progress-track-lg" aria-hidden>
-                      <div
-                        className="progress-fill"
-                        style={{ width: "92%" }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between text-sm mb-1.5">
-                      <span className="font-semibold text-slate-700">
-                        {t("home.courseCompletion")}
-                      </span>
-                      <span className="font-bold text-cyan-700">78%</span>
-                    </div>
-                    <div className="progress-track progress-track-lg" aria-hidden>
-                      <div
-                        className="progress-fill"
-                        style={{ width: "78%" }}
-                      />
-                    </div>
-                  </div>
+                <div>
+                  <p className="font-bold text-slate-900">Für Schulen & Lehrer</p>
+                  <p className="text-sm text-slate-500">Professionelles Dashboard</p>
                 </div>
               </div>
-            </div>
+              <ArrowRight className="w-5 h-5 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </button>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        <div className="relative overflow-hidden rounded-3xl p-10 sm:p-14 text-center bg-gradient-to-br from-cyan-600 via-cyan-700 to-teal-700 shadow-2xl">
-          <div
-            className="absolute inset-0 opacity-30 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(0,0,0,0.2) 0%, transparent 40%)",
-            }}
-            aria-hidden
-          />
-          <div className="relative z-10 space-y-5">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur text-white text-xs font-bold uppercase tracking-wider">
-              <Star className="w-3.5 h-3.5" fill="currentColor" />
-              {t("home.readyToTransform")}
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-              {t("home.readyToTransform")}
+      {/* ── BENEFITS SECTION ── clean, minimal */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
+              {t("home.powerfulFeatures")}
             </h2>
-            <p className="text-lg text-cyan-50/90 max-w-2xl mx-auto">
-              {t("home.joinThousands")}
+            <p className="text-slate-500 max-w-xl mx-auto">
+              {t("home.featureDescription")}
             </p>
-            <form
-              className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto pt-2"
-              onSubmit={(e) => {
-                e.preventDefault();
-                setLocation("/register");
-              }}
-            >
-              <input
-                type="email"
-                placeholder={t("home.enterEmail")}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1"
-                aria-label={t("home.enterEmail")}
-              />
-              <button
-                type="submit"
-                className="btn btn-accent btn-lg shadow-xl"
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { icon: "🎯", titleKey: "home.benefits.personalizedLearning" },
+              { icon: "📊", titleKey: "home.benefits.realTimeTracking" },
+              { icon: "🏆", titleKey: "home.benefits.gamification" },
+              { icon: "🌍", titleKey: "home.benefits.multiLanguageSupport" },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="rounded-xl border border-slate-100 bg-white p-5 hover:border-slate-200 hover:shadow-sm transition-all"
               >
-                <GraduationCap className="w-4 h-4" />
-                {t("common.startLearning")}
-              </button>
-            </form>
+                <div className="text-2xl mb-3">{item.icon}</div>
+                <h3 className="font-semibold text-slate-900 text-sm">
+                  {t(item.titleKey)}
+                </h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA SECTION ── simple, single */}
+      <section className="py-16 md:py-20 bg-slate-50">
+        <div className="max-w-xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
+            {t("home.readyToTransform")}
+          </h2>
+          <p className="text-slate-500 mb-8">
+            {t("home.joinThousands")}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              onClick={() => setLocation("/student")}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3 text-sm transition-all"
+            >
+              <GraduationCap className="w-4 h-4" />
+              {t("common.startLearning")}
+            </button>
+            <button
+              onClick={() => setLocation("/dashboard")}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 font-semibold px-6 py-3 text-sm border border-slate-200 transition-all"
+            >
+              <BookOpen className="w-4 h-4" />
+              Zum Dashboard
+            </button>
           </div>
         </div>
       </section>

@@ -24,10 +24,10 @@ export default function DashboardRouter() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-950 dark:to-blue-950 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-indigo-200 dark:border-indigo-800 border-t-indigo-600 dark:border-t-indigo-400 rounded-full animate-spin"></div>
-          <p className="text-gray-600 dark:text-gray-400 font-medium">Loading...</p>
+          <div className="w-10 h-10 border-2 border-slate-200 border-t-slate-600 rounded-full animate-spin"></div>
+          <p className="text-sm text-slate-500 font-medium">Loading...</p>
         </div>
       </div>
     );
@@ -37,26 +37,24 @@ export default function DashboardRouter() {
     return null;
   }
 
-  // Route to gamified student interface
-  if (user.role === "student") {
-    return <StudentDashboard />;
-  }
-
-  // Route to dedicated parent dashboard
+  // Route: professional users go to specialized dashboards
   if (user.role === "parent") {
     return <ParentDashboard />;
   }
 
-  // Route to dedicated teacher dashboard
   if (user.role === "teacher") {
     return <TeacherDashboard />;
   }
 
-  // Route to dedicated admin dashboard
   if (user.role === "admin") {
     return <AdminDashboard />;
   }
 
-  // Route to professional dashboard for other roles
+  // Route to professional dashboard for other non-student roles
+  if (user.role !== "student") {
+    return <ProfessionalDashboard user={user} />;
+  }
+
+  // Default: professional dashboard
   return <ProfessionalDashboard user={user} />;
 }

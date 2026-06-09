@@ -3,13 +3,10 @@ import { useLocation } from "wouter";
 import {
   Menu,
   X,
-  Home,
-  Map as MapIcon,
   BookOpen,
-  Trophy,
-  Star,
   BarChart3,
   Settings,
+  Compass,
   User as UserIcon,
   Search,
   Bell,
@@ -17,8 +14,6 @@ import {
   Sun,
   Moon,
   ChevronDown,
-  Compass,
-  Inbox,
 } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { authService, type User } from "@/lib/auth-service";

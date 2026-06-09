@@ -12,6 +12,7 @@ import { useNotification } from "./contexts/NotificationContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import DashboardRouter from "./components/DashboardRouter";
+import StudentDashboard from "./pages/StudentDashboard";
 import Courses from "./pages/Courses";
 import ArchipelagoMap from "./pages/ArchipelagoMap";
 import LessonPage from "./pages/LessonPage";
@@ -27,6 +28,7 @@ function AppRouter() {
       <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/login"} component={Login} />
+      <Route path={"/student"} component={StudentDashboard} />
       <Route path={"/dashboard"} component={DashboardRouter} />
       <Route path={"/courses"} component={Courses} />
       <Route path={"/archipelago"} component={ArchipelagoMap} />
