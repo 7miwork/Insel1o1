@@ -28,9 +28,9 @@ const COLUMNS: FooterColumn[] = [
   {
     titleKey: "footer.resources",
     links: [
-      { key: "footer.documentation", href: "#docs" },
-      { key: "footer.support", href: "#support" },
-      { key: "footer.community", href: "#community" },
+      { key: "footer.documentation", href: "#docs", route: "/docs" },
+      { key: "footer.support", href: "#support", route: "/support" },
+      { key: "footer.community", href: "#community", route: "/community" },
     ],
   },
   {

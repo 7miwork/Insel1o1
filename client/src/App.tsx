@@ -23,6 +23,9 @@ import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
+import Docs from "./pages/Docs";
+import Support from "./pages/Support";
+import Community from "./pages/Community";
 
 function AppRouter() {
   return (
@@ -42,6 +45,9 @@ function AppRouter() {
         <Route path={"/about"} component={About} />
         <Route path={"/blog"} component={Blog} />
         <Route path={"/careers"} component={Careers} />
+        <Route path={"/docs"} component={Docs} />
+        <Route path={"/support"} component={Support} />
+        <Route path={"/community"} component={Community} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
