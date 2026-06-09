@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { BookOpen, Menu, X, Home, Map as MapIcon, BarChart3, Settings } from "lucide-react";
+import { BookOpen, Menu, X, Home, GraduationCap, School } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
@@ -11,20 +11,14 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { to: "/",              labelKey: "nav.home",         icon: <Home className="w-4 h-4" /> },
-  { to: "/archipelago",   labelKey: "nav.archipelagos", icon: <MapIcon className="w-4 h-4" /> },
-  { to: "/dashboard",     labelKey: "nav.progress",     icon: <BarChart3 className="w-4 h-4" /> },
-  { to: "/about",         labelKey: "navigation.about", icon: <Settings className="w-4 h-4" /> },
-  { to: "/login",         labelKey: "nav.settings",     icon: <Settings className="w-4 h-4" /> },
+  { to: "/", labelKey: "nav.home", icon: <Home className="w-4 h-4" /> },
+  { to: "/about", labelKey: "navigation.about", icon: <BookOpen className="w-4 h-4" /> },
 ];
 
 interface GlobalHeaderProps {
-  /** Show the language switcher on the right (defaults to true). */
   showLanguageSwitcher?: boolean;
-  /** Show a CTA button (e.g. "Start Adventure") on the right. */
   ctaLabel?: string;
   ctaHref?: string;
-  /** Toggle background blur/translucency. Defaults to true. */
   translucent?: boolean;
 }
 
@@ -50,25 +44,22 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
       }`}
       role="banner"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3">
         <Link
           to="/"
           className="flex items-center gap-2.5 group"
           aria-label={t("common.appName")}
         >
-          <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-teal-600 text-white flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-            <BookOpen className="w-5 h-5" />
+          <span className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center">
+            <BookOpen className="w-4 h-4" />
           </span>
-          <span className="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-cyan-700 to-teal-700 bg-clip-text text-transparent">
+          <span className="text-sm font-bold text-slate-900 tracking-tight">
             {t("common.appName")}
           </span>
         </Link>
 
         {/* Desktop nav */}
-        <nav
-          className="hidden md:flex items-center gap-1"
-          aria-label="Primary"
-        >
+        <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
           {NAV_ITEMS.map((item) => (
             <button
               key={item.to}
@@ -76,8 +67,8 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
               onClick={() => navigate(item.to)}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
                 isActive(item.to)
-                  ? "bg-cyan-50 text-cyan-700"
-                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                  ? "bg-slate-100 text-slate-900"
+                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-700"
               }`}
             >
               {item.icon}
@@ -96,7 +87,7 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
             <button
               type="button"
               onClick={() => navigate(ctaHref)}
-              className="btn btn-primary btn-md hidden sm:inline-flex"
+              className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-slate-900 text-white px-4 py-2 text-sm font-semibold hover:bg-slate-800 transition-colors hidden sm:inline-flex"
             >
               {ctaLabel}
             </button>
@@ -104,7 +95,7 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
-            className="md:hidden btn btn-ghost btn-sm p-2"
+            className="md:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
           >
@@ -126,14 +117,36 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
               }}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2 ${
                 isActive(item.to)
-                  ? "bg-cyan-50 text-cyan-700"
-                  : "text-slate-600 hover:bg-slate-100"
+                  ? "bg-slate-100 text-slate-900"
+                  : "text-slate-500 hover:bg-slate-50"
               }`}
             >
               {item.icon}
               {t(item.labelKey)}
             </button>
           ))}
+          <button
+            type="button"
+            onClick={() => {
+              navigate("/student");
+              setMenuOpen(false);
+            }}
+            className="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 text-amber-700 bg-amber-50 hover:bg-amber-100 mt-2"
+          >
+            <GraduationCap className="w-4 h-4" />
+            {t("common.startLearning")}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              navigate("/dashboard");
+              setMenuOpen(false);
+            }}
+            className="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 text-slate-900 bg-slate-100 hover:bg-slate-200"
+          >
+            <School className="w-4 h-4" />
+            {t("navigation.signIn")}
+          </button>
           {showLanguageSwitcher && (
             <div className="pt-2 border-t border-slate-100 sm:hidden">
               <LanguageSwitcher />
