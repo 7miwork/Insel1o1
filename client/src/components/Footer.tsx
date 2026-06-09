@@ -1,10 +1,11 @@
 import React from "react";
 import { BookOpen, Twitter, Linkedin, Github } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
+import { useLocation } from "wouter";
 
 interface FooterColumn {
   titleKey: string;
-  links: { key: string; href: string; scroll?: boolean }[];
+  links: { key: string; href: string; scroll?: boolean; route?: string }[];
 }
 
 const COLUMNS: FooterColumn[] = [
@@ -12,16 +13,16 @@ const COLUMNS: FooterColumn[] = [
     titleKey: "footer.product",
     links: [
       { key: "footer.features", href: "#features", scroll: true },
-      { key: "footer.pricing", href: "#pricing" },
+      { key: "footer.pricing", href: "#pricing", route: "/pricing" },
       { key: "footer.security", href: "#security", scroll: true },
     ],
   },
   {
     titleKey: "footer.company",
     links: [
-      { key: "footer.about", href: "#about" },
-      { key: "footer.blog", href: "#blog" },
-      { key: "footer.careers", href: "#careers" },
+      { key: "footer.about", href: "#about", route: "/about" },
+      { key: "footer.blog", href: "#blog", route: "/blog" },
+      { key: "footer.careers", href: "#careers", route: "/careers" },
     ],
   },
   {
@@ -44,7 +45,25 @@ const COLUMNS: FooterColumn[] = [
 
 export const Footer: React.FC = () => {
   const { t } = useI18n();
+  const [, setLocation] = useLocation();
   const year = new Date().getFullYear();
+
+  const handleClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    link: { href: string; scroll?: boolean; route?: string }
+  ) => {
+    if (link.route) {
+      e.preventDefault();
+      setLocation(link.route);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    if (link.scroll) {
+      e.preventDefault();
+      const el = document.getElementById(link.href.replace("#", ""));
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <footer className="border-t border-slate-200 bg-white">
@@ -72,12 +91,8 @@ export const Footer: React.FC = () => {
                 {col.links.map((link) => (
                   <li key={link.key}>
                     <a
-                      href={link.scroll ? undefined : link.href}
-                      onClick={link.scroll ? (e) => {
-                        e.preventDefault();
-                        const el = document.getElementById(link.href.replace("#", ""));
-                        if (el) el.scrollIntoView({ behavior: "smooth" });
-                      } : undefined}
+                      href={link.href}
+                      onClick={(e) => handleClick(e, link)}
                       className="text-slate-600 hover:text-cyan-700 transition-colors cursor-pointer"
                     >
                       {t(link.key)}
