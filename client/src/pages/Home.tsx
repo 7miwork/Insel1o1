@@ -1,8 +1,165 @@
 import { useLocation } from "wouter";
-import { GraduationCap, School, ArrowRight, Trophy, BookOpen, Shield } from "lucide-react";
+import { GraduationCap, School, ArrowRight, Trophy, BookOpen, Shield, BarChart3, Users, Compass } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { Footer } from "@/components/Footer";
+
+/* ─────────────────────────────────────────────────────────────────────
+   MOCK FEATURE VISUALS (clean SaaS-style UI cards)
+   ───────────────────────────────────────────────────────────────────── */
+
+function FeatureVisualLearning() {
+  return (
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="flex items-center gap-2 mb-3">
+        <div className="w-8 h-8 rounded-lg bg-cyan-50 flex items-center justify-center">
+          <BookOpen className="w-4 h-4 text-cyan-600" />
+        </div>
+        <div className="flex-1">
+          <div className="h-2.5 bg-slate-200 rounded-full w-3/4 mb-1" />
+          <div className="h-2 bg-slate-100 rounded-full w-1/2" />
+        </div>
+      </div>
+      <div className="space-y-2">
+        {["Mathe", "Wissenschaft", "Sprache"].map((s, i) => (
+          <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg bg-slate-50">
+            <div className="w-8 h-8 rounded-md bg-white border border-slate-200 flex items-center justify-center text-xs font-bold text-slate-500">
+              {["M", "W", "S"][i]}
+            </div>
+            <div className="flex-1">
+              <div className="text-xs font-semibold text-slate-700">{s}</div>
+              <div className="mt-1 h-1.5 bg-slate-200 rounded-full">
+                <div className="h-full bg-cyan-500 rounded-full" style={{ width: `${[75, 60, 85][i]}%` }} />
+              </div>
+            </div>
+            <span className="text-[10px] font-bold text-slate-400">{[75, 60, 85][i]}%</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FeatureVisualProgress() {
+  return (
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center">
+            <Trophy className="w-4 h-4 text-amber-600" />
+          </div>
+          <div>
+            <div className="h-2.5 bg-slate-200 rounded-full w-24 mb-1" />
+            <div className="h-2 bg-slate-100 rounded-full w-16" />
+          </div>
+        </div>
+        <span className="text-2xl font-bold text-slate-900">87%</span>
+      </div>
+      <div className="grid grid-cols-7 gap-1.5">
+        {[45, 72, 85, 68, 90, 30, 80].map((v, i) => (
+          <div key={i} className="flex flex-col items-center gap-1">
+            <div className="w-full h-16 rounded bg-slate-100 flex items-end">
+              <div className={`w-full rounded ${v > 70 ? "bg-cyan-500" : v > 50 ? "bg-slate-300" : "bg-slate-200"}`} style={{ height: `${v}%` }} />
+            </div>
+            <span className="text-[8px] text-slate-400">{["M", "D", "M", "D", "F", "S", "S"][i]}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FeatureVisualTeachers() {
+  return (
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="flex items-center gap-2 mb-3">
+        <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+          <Users className="w-4 h-4 text-emerald-600" />
+        </div>
+        <div className="flex-1">
+          <div className="h-2.5 bg-slate-200 rounded-full w-2/3 mb-1" />
+          <div className="h-2 bg-slate-100 rounded-full w-1/3" />
+        </div>
+      </div>
+      <div className="space-y-2">
+        {[{ n: "Anna B.", g: "92%", s: "on-track" }, { n: "Lukas S.", g: "78%", s: "needs-attention" }, { n: "Mia W.", g: "95%", s: "on-track" }].map((student, i) => (
+          <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg bg-slate-50">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-[10px] font-bold text-white">
+              {student.n.split(" ").map(w => w[0]).join("")}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="text-xs font-semibold text-slate-700 truncate">{student.n}</div>
+              <div className="text-[10px] text-slate-400">Grade: {student.g}</div>
+            </div>
+            <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${
+              student.s === "on-track" ? "bg-emerald-50 text-emerald-600" : "bg-amber-50 text-amber-600"
+            }`}>
+              {student.s === "on-track" ? "✓" : "!"}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FeatureVisualAnywhere() {
+  return (
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="flex items-center gap-2 mb-3">
+        <div className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center">
+          <Compass className="w-4 h-4 text-violet-600" />
+        </div>
+        <div className="flex-1">
+          <div className="h-2.5 bg-slate-200 rounded-full w-2/3 mb-1" />
+          <div className="h-2 bg-slate-100 rounded-full w-1/2" />
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-2">
+        {["💻 Desktop", "📱 Tablet", "📱 Handy"].map((d, i) => (
+          <div key={i} className="p-2 rounded-lg bg-slate-50 border border-slate-200 text-center">
+            <div className="text-xs text-slate-600">{d}</div>
+            <div className="mt-1.5 h-1 bg-slate-200 rounded-full">
+              <div className="h-full bg-violet-500 rounded-full" style={{ width: `${[95, 70, 85][i]}%` }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   FEATURE BLOCK (alternating layout)
+   ───────────────────────────────────────────────────────────────────── */
+
+interface FeatureBlockProps {
+  titleKey: string;
+  descKey: string;
+  visual: React.ReactNode;
+  reverse?: boolean;
+}
+
+function FeatureBlock({ titleKey, descKey, visual, reverse = false }: FeatureBlockProps) {
+  const { t } = useI18n();
+  return (
+    <div className={`grid md:grid-cols-2 gap-8 md:gap-12 items-center ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}>
+      <div>
+        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">
+          {t(titleKey)}
+        </h3>
+        <p className="text-sm text-slate-500 leading-relaxed">
+          {t(descKey)}
+        </p>
+      </div>
+      {visual}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   LANDING PAGE
+   ───────────────────────────────────────────────────────────────────── */
 
 export default function Home() {
   const [, setLocation] = useLocation();
@@ -15,7 +172,7 @@ export default function Home() {
         ctaHref="/login"
       />
 
-      {/* ── HERO ── Minimal, no animations, clean */}
+      {/* ── HERO ── */}
       <section className="bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 md:pt-24 md:pb-16 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 leading-tight tracking-tight mb-4">
@@ -25,7 +182,7 @@ export default function Home() {
             {t("home.heroDescription")}
           </p>
 
-          {/* ── Two Clear Entry Points ── */}
+          {/* Two entry points */}
           <div className="grid sm:grid-cols-2 gap-4 max-w-md mx-auto">
             <button
               onClick={() => setLocation("/student")}
@@ -47,39 +204,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Benefits (3 items, no icons beyond text) ── */}
+      {/* ── FEATURES SECTION ── SaaS-grade, alternating layout */}
       <section className="bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-18">
-          <div className="text-center mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+          {/* Section header */}
+          <div className="text-center mb-14">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
               {t("home.powerfulFeatures")}
             </h2>
-            <p className="text-sm text-slate-500 max-w-md mx-auto">
+            <p className="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
               {t("home.featureDescription")}
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-4">
-            {[
-              { icon: <BookOpen className="w-5 h-5 text-cyan-600" />, titleKey: "home.benefits.personalizedLearning" },
-              { icon: <Trophy className="w-5 h-5 text-amber-600" />, titleKey: "home.benefits.gamification" },
-              { icon: <Shield className="w-5 h-5 text-emerald-600" />, titleKey: "home.benefits.secureScalable" },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="rounded-xl border border-slate-200 bg-white p-5"
-              >
-                <div className="mb-2">{item.icon}</div>
-                <h3 className="font-semibold text-slate-900 text-sm">
-                  {t(item.titleKey)}
-                </h3>
-              </div>
-            ))}
-          </div>
+          {/* Feature 1: Learning Paths */}
+          <FeatureBlock
+            titleKey="home.feature_interactivePaths"
+            descKey="home.feature_interactivePathsDesc"
+            visual={<FeatureVisualLearning />}
+          />
+
+          {/* Feature 2: Progress Tracking */}
+          <FeatureBlock
+            titleKey="home.feature_personalProgress"
+            descKey="home.feature_personalProgressDesc"
+            visual={<FeatureVisualProgress />}
+            reverse
+          />
+
+          {/* Feature 3: Teacher & Parent Dashboards */}
+          <FeatureBlock
+            titleKey="home.feature_teacherDashboard"
+            descKey="home.feature_teacherDashboardDesc"
+            visual={<FeatureVisualTeachers />}
+          />
+
+          {/* Feature 4: Learn Anywhere */}
+          <FeatureBlock
+            titleKey="home.feature_learnAnywhere"
+            descKey="home.feature_learnAnywhereDesc"
+            visual={<FeatureVisualAnywhere />}
+            reverse
+          />
         </div>
       </section>
 
-      {/* ── CTA ── Simple, one row */}
+      {/* ── CTA ── */}
       <section className="bg-white">
         <div className="max-w-md mx-auto px-4 sm:px-6 py-14 md:py-18 text-center">
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
