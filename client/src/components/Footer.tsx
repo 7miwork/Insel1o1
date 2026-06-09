@@ -15,6 +15,7 @@ const COLUMNS: FooterColumn[] = [
       { key: "footer.features", href: "#features", scroll: true },
       { key: "footer.pricing", href: "#pricing", route: "/pricing" },
       { key: "footer.security", href: "#security", scroll: true },
+      { key: "footer.roadmap", href: "#roadmap", route: "/roadmap" },
     ],
   },
   {

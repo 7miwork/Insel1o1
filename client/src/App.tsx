@@ -26,6 +26,7 @@ import Careers from "./pages/Careers";
 import Docs from "./pages/Docs";
 import Support from "./pages/Support";
 import Community from "./pages/Community";
+import Roadmap from "./pages/Roadmap";
 
 function AppRouter() {
   return (
@@ -48,6 +49,7 @@ function AppRouter() {
         <Route path={"/docs"} component={Docs} />
         <Route path={"/support"} component={Support} />
         <Route path={"/community"} component={Community} />
+        <Route path={"/roadmap"} component={Roadmap} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
