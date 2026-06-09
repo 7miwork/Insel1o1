@@ -189,16 +189,16 @@ export default function Home() {
               className="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-amber-200 bg-amber-50/60 hover:bg-amber-50 hover:border-amber-300 px-5 py-5 text-center transition-all"
             >
               <GraduationCap className="w-6 h-6 text-amber-600" />
-              <p className="font-bold text-slate-900 text-sm">Für Schüler</p>
-              <p className="text-xs text-slate-500">Lernen als Abenteuer</p>
+              <p className="font-bold text-slate-900 text-sm">{t("home.heroStudentTitle")}</p>
+              <p className="text-xs text-slate-500">{t("home.heroStudentSubtitle")}</p>
             </button>
             <button
               onClick={() => setLocation("/dashboard")}
               className="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 px-5 py-5 text-center transition-all"
             >
               <School className="w-6 h-6 text-slate-500" />
-              <p className="font-bold text-slate-900 text-sm">Für Schulen & Lehrer</p>
-              <p className="text-xs text-slate-500">Professionelle Plattform</p>
+              <p className="font-bold text-slate-900 text-sm">{t("home.heroTeacherTitle")}</p>
+              <p className="text-xs text-slate-500">{t("home.heroTeacherSubtitle")}</p>
             </button>
           </div>
         </div>

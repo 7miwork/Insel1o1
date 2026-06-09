@@ -60,6 +60,11 @@
     "feature_privacySecurity": "Datenschutz und Sicherheit",
     "feature_privacySecurityDesc": "Sichere Lernumgebungen, geschützte Konten und datenschutzbewusstes Design helfen, Schüler und Familien zu schützen.",
     "securityTitle": "Security & Trust",
-    "securitySubtitle": "Insel1o1 ist für die Sicherheit deines Kindes und die Anforderungen von Schulen entwickelt."
+    "securitySubtitle": "Insel1o1 ist für die Sicherheit deines Kindes und die Anforderungen von Schulen entwickelt.",
+    "heroStudentTitle": "Für Schüler",
+    "heroStudentSubtitle": "Lernen als Abenteuer",
+    "heroTeacherTitle": "Für Schulen & Lehrer",
+    "heroTeacherSubtitle": "Professionelle Plattform",
+    "ctaSignIn": "Anmelden"
   }
 }

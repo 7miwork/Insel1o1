@@ -118,6 +118,39 @@ const translations: Record<Language, any> = {
   },
 };
 
+/**
+ * Helper: resolve a dotted key against a translations object.
+ * Returns undefined if any segment is missing.
+ */
+function resolveKey(obj: any, keys: string[]): any {
+  let value: any = obj;
+  for (const k of keys) {
+    if (value && typeof value === "object" && k in value) {
+      value = value[k];
+    } else {
+      return undefined;
+    }
+  }
+  return value;
+}
+
+/**
+ * Helper: convert a dotted key into a human-readable label
+ * (used only as the final safety fallback for missing keys).
+ *   "common.signIn"      -> "Sign in"
+ *   "home.heroTitle"     -> "Hero title"
+ *   "footer.allRightsReserved" -> "All rights reserved"
+ */
+function humanizeKey(key: string): string {
+  const last = key.split(".").pop() ?? key;
+  return last
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/^./, (s) => s.toUpperCase());
+}
+
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     // Try to get from localStorage
@@ -158,11 +191,19 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       if (value && typeof value === "object" && k in value) {
         value = value[k];
       } else {
-        return defaultValue || key;
+        // SAFETY FALLBACK: never show raw key in UI
+        // Try the default value, then English, then humanize the last segment
+        if (defaultValue) return defaultValue;
+        const enValue = resolveKey(translations.en, keys);
+        if (typeof enValue === "string") return enValue;
+        return humanizeKey(key);
       }
     }
 
-    return typeof value === "string" ? value : defaultValue || key;
+    if (typeof value === "string") return value;
+    // SAFETY FALLBACK: also covers non-string (object/number) at the resolved path
+    if (defaultValue) return defaultValue;
+    return humanizeKey(key);
   };
 
   const languages: { code: Language; name: string }[] = [

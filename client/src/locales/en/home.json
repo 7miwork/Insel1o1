@@ -56,6 +56,13 @@
     "feature_learnAnywhereDesc": "Access learning content from desktop, tablet or smartphone and continue learning from anywhere.",
 
     "feature_privacySecurity": "Privacy and Security",
-    "feature_privacySecurityDesc": "Safe learning environments, secure accounts and privacy-conscious design help protect students and families."
+    "feature_privacySecurityDesc": "Safe learning environments, secure accounts and privacy-conscious design help protect students and families.",
+    "securityTitle": "Security & Trust",
+    "securitySubtitle": "Insel1o1 is designed with the safety of your child and the requirements of schools in mind.",
+    "heroStudentTitle": "For Students",
+    "heroStudentSubtitle": "Learning as an adventure",
+    "heroTeacherTitle": "For Schools & Teachers",
+    "heroTeacherSubtitle": "Professional platform",
+    "ctaSignIn": "Sign In"
   }
 }
