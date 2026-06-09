@@ -30,7 +30,7 @@ export default function About() {
 
       {/* Crew Cards */}
       <section>
-        <h2 className="text-2xl font-semibold text-orange-700 mb-6 text-center">{t('crewSectionTitle')}</h2>
+        <h2 className="text-2xl font-semibold text-orange-700 mb-6 text-center">{t('about.crewSectionTitle')}</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {CREW_MEMBERS.map((member) => (
             <div key={member.id} className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center">

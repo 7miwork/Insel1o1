@@ -1,0 +1,24 @@
+{
+  "about": {
+    "intro": "認識帶領 Insel1o1 群島的勇敢船員，每堂課都是橫越未知島嶼的冒險。",
+    "missionTitle": "我們的使命",
+    "missionContent": "將教育變成一場宏大的冒險，引導學生、家長和老師一起發現知識的新島嶼。",
+    "visionTitle": "我們的願景",
+    "visionContent": "一片無邊無際的學習之海，好奇是指南針，每個學習者都成為無畏的探險家。",
+    "crewSectionTitle": "我們的船員",
+    "crew": {
+      "captain": {
+        "title": "Learning Worlds 船長",
+        "description": "駕馭知識的舰队，在教育之海上繪制大膽的航線，將每堂課變成一場大膽的冒險。"
+      },
+      "navigator": {
+        "title": "學習導航員",
+        "description": "繪製學習群島的地圖，為所有年齡的探險家規劃清晰的路線，讓他們在知識探索中永不迷失方向。"
+      },
+      "pobbie": {
+        "title": "Pobbie – 程式兔 🐰",
+        "description": "我們忠實的程式兔，跳過整個程式碼庫，建造一台船，安全地將每個學習者帶到新的視野。"
+      }
+    }
+  }
+}
