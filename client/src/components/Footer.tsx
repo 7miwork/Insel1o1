@@ -4,14 +4,14 @@ import { useI18n } from "@/contexts/I18nContext";
 
 interface FooterColumn {
   titleKey: string;
-  links: { key: string; href: string }[];
+  links: { key: string; href: string; scroll?: boolean }[];
 }
 
 const COLUMNS: FooterColumn[] = [
   {
     titleKey: "footer.product",
     links: [
-      { key: "footer.features", href: "#features" },
+      { key: "footer.features", href: "#features", scroll: true },
       { key: "footer.pricing", href: "#pricing" },
       { key: "footer.security", href: "#security" },
     ],
@@ -72,8 +72,13 @@ export const Footer: React.FC = () => {
                 {col.links.map((link) => (
                   <li key={link.key}>
                     <a
-                      href={link.href}
-                      className="text-slate-600 hover:text-cyan-700 transition-colors"
+                      href={link.scroll ? undefined : link.href}
+                      onClick={link.scroll ? (e) => {
+                        e.preventDefault();
+                        const el = document.getElementById(link.href.replace("#", ""));
+                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                      } : undefined}
+                      className="text-slate-600 hover:text-cyan-700 transition-colors cursor-pointer"
                     >
                       {t(link.key)}
                     </a>

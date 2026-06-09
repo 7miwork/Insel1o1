@@ -205,7 +205,7 @@ export default function Home() {
       </section>
 
       {/* ── FEATURES SECTION ── SaaS-grade, alternating layout */}
-      <section className="bg-slate-50">
+      <section id="features" className="bg-slate-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
           {/* Section header */}
           <div className="text-center mb-14">
