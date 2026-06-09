@@ -14,6 +14,7 @@ import enQuests from "@/locales/en/quests.json";
 import enPricing from "@/locales/en/pricing.json";
 import enShop from "@/locales/en/shop.json";
 import enAbout from "@/locales/en/about.json";
+import enSecurity from "@/locales/en/security.json";
 
 import deCommon from "@/locales/de/common.json";
 import deHome from "@/locales/de/home.json";
@@ -29,6 +30,7 @@ import deNotifications from "@/locales/de/notifications.json";
 import deQuests from "@/locales/de/quests.json";
 import dePricing from "@/locales/de/pricing.json";
 import deShop from "@/locales/de/shop.json";
+import deSecurity from "@/locales/de/security.json";
 
 import zhTwCommon from "@/locales/zh-TW/common.json";
 import zhTwHome from "@/locales/zh-TW/home.json";
@@ -44,6 +46,7 @@ import zhTwNotifications from "@/locales/zh-TW/notifications.json";
 import zhTwQuests from "@/locales/zh-TW/quests.json";
 import zhTwPricing from "@/locales/zh-TW/pricing.json";
 import zhTwShop from "@/locales/zh-TW/shop.json";
+import zhTwSecurity from "@/locales/zh-TW/security.json";
 
 type Language = "en" | "de" | "zh-TW";
 
@@ -73,6 +76,7 @@ const translations: Record<Language, any> = {
     ...enPricing,
     ...enShop,
     ...enAbout,
+    ...enSecurity,
   },
   de: {
     ...deCommon,
@@ -89,6 +93,7 @@ const translations: Record<Language, any> = {
     ...deQuests,
     ...dePricing,
     ...deShop,
+    ...deSecurity,
   },
   "zh-TW": {
     ...zhTwCommon,
@@ -105,6 +110,7 @@ const translations: Record<Language, any> = {
     ...zhTwQuests,
     ...zhTwPricing,
     ...zhTwShop,
+    ...zhTwSecurity,
   },
 };
 

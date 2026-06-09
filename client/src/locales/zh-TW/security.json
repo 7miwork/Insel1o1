@@ -1,0 +1,16 @@
+{
+  "security": {
+    "title": "Security & Trust",
+    "subtitle": "Insel1o1 是為了孩子的安全和學校的需求而設計的。",
+    "dataProtection": "Data Protection",
+    "dataProtectionDesc": "加密數據傳輸和安全存儲所有個人信息。",
+    "studentPrivacy": "Student Privacy",
+    "studentPrivacyDesc": "受家長同意和透明數據處理保護的兒童和青少年檔案。",
+    "schoolCompliance": "School Compliance",
+    "schoolComplianceDesc": "符合GDPR，可隨時在學校和教育機構使用。",
+    "secureInfrastructure": "Secure Infrastructure",
+    "secureInfrastructureDesc": "穩定且受保護的技術基礎設施，確保可靠運行。",
+    "emergencyTitle": "Emergency Information",
+    "trustStatement": "Insel1o1 是以對隱私、安全和教育責任的深思熟慮而設計的。"
+  }
+}

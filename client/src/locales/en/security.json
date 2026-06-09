@@ -1,0 +1,16 @@
+{
+  "security": {
+    "title": "Security & Trust",
+    "subtitle": "Insel1o1 is designed with the safety of your child and the requirements of schools in mind.",
+    "dataProtection": "Data Protection",
+    "dataProtectionDesc": "Encrypted data transmission and secure storage of all personal information.",
+    "studentPrivacy": "Student Privacy",
+    "studentPrivacyDesc": "Child and youth protected profiles with parental consent and transparent data processing.",
+    "schoolCompliance": "School Compliance",
+    "schoolComplianceDesc": "GDPR compliant and ready for use in schools and educational institutions.",
+    "secureInfrastructure": "Secure Infrastructure",
+    "secureInfrastructureDesc": "Stable and protected technical infrastructure for reliable operation.",
+    "emergencyTitle": "Emergency Information",
+    "trustStatement": "Insel1o1 is designed with thoughtfulness for privacy, safety, and educational responsibility."
+  }
+}

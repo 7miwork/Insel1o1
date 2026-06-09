@@ -106,7 +106,7 @@ export default function Pricing() {
             <span className="font-bold text-slate-900">{t("common.appName")}</span>
           </button>
           <button onClick={() => setLocation("/login")} className="px-4 py-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700 transition">
-            {t("common.login")}
+            {t("nav.signIn")}
           </button>
         </div>
       </header>

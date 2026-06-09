@@ -249,36 +249,62 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SECURITY / TRUST SECTION ── */}
-      <section id="security" className="bg-white">
+      {/* ── TRUST / SECURITY SECTION ── */}
+      <section id="security" className="bg-white border-t border-slate-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+          {/* Trust Header */}
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
-              Security & Trust
+              {t("security.title")}
             </h2>
-            <p className="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
-              {t("home.feature_privacySecurityDesc")}
+            <p className="text-sm text-slate-500 max-w-lg mx-auto leading-relaxed">
+              {t("security.subtitle")}
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Trust Principles – minimal, calm, no tech jargon */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
-              { icon: <Lock className="w-5 h-5 text-cyan-600" />, title: "Data Protection", desc: "Verschlüsselte Datenübertragung und sichere Speicherung aller persönlichen Informationen." },
-              { icon: <GraduationCap className="w-5 h-5 text-amber-600" />, title: "Student Privacy", desc: "Kinder- und jugendgeschützte Profile mit elterlicher Einwilligung und transparenter Datenverarbeitung." },
-              { icon: <CheckCircle2 className="w-5 h-5 text-emerald-600" />, title: "School Compliance", desc: "DSGVO-konform und bereit für den Einsatz an Schulen und Bildungseinrichtungen." },
-              { icon: <Globe className="w-5 h-5 text-violet-600" />, title: "Secure Infrastructure", desc: "Stabile und geschützte technische Infrastruktur für zuverlässigen Betrieb." },
+              { icon: <Lock className="w-5 h-5 text-cyan-600" />, titleKey: "security.dataProtection", descKey: "security.dataProtectionDesc" },
+              { icon: <GraduationCap className="w-5 h-5 text-amber-600" />, titleKey: "security.studentPrivacy", descKey: "security.studentPrivacyDesc" },
+              { icon: <CheckCircle2 className="w-5 h-5 text-emerald-600" />, titleKey: "security.schoolCompliance", descKey: "security.schoolComplianceDesc" },
+              { icon: <Globe className="w-5 h-5 text-violet-600" />, titleKey: "security.secureInfrastructure", descKey: "security.secureInfrastructureDesc" },
             ].map((item, idx) => (
-              <div key={idx} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-                <div className="mb-3">{item.icon}</div>
-                <h3 className="font-semibold text-slate-900 text-sm mb-1">{item.title}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+              <div key={idx} className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="mb-4">{item.icon}</div>
+                <h3 className="font-semibold text-slate-900 text-sm mb-2">{t(item.titleKey)}</h3>
+                <p className="text-xs text-slate-500 leading-relaxed">{t(item.descKey)}</p>
               </div>
             ))}
           </div>
 
-          <div className="mt-10 text-center">
+          {/* Emergency Contacts – calm, clear, no fluff */}
+          <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 mb-10">
+            <h3 className="text-sm font-semibold text-slate-900 mb-4">{t("security.emergencyTitle")}</h3>
+            <div className="grid sm:grid-cols-2 gap-4 text-xs">
+              <div className="space-y-1.5">
+                <p className="text-slate-600">
+                  <span className="font-medium text-slate-900">Notfall (CH):</span> 144 Rettungsdienst
+                </p>
+                <p className="text-slate-600">
+                  <span className="font-medium text-slate-900">Vergiftungen:</span> 145 (Tox Info Suisse)
+                </p>
+              </div>
+              <div className="space-y-1.5">
+                <p className="text-slate-600">
+                  <span className="font-medium text-slate-900">Spital Schwyz:</span> 041 818 41 11
+                </p>
+                <p className="text-slate-600">
+                  <span className="font-medium text-slate-900">Hinweis:</span> Notfallpraxis ist geschlossen
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Trust Statement */}
+          <div className="text-center">
             <p className="text-sm text-slate-500 leading-relaxed max-w-2xl mx-auto">
-              Insel1o1 is designed with privacy, safety, and educational responsibility in mind.
+              {t("security.trustStatement")}
             </p>
           </div>
         </div>
