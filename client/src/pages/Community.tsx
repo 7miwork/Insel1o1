@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "wouter";
 import { BookOpen, ArrowLeft, MessageSquare, Users, Briefcase, Bell, Clock } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useI18n } from "@/contexts/I18nContext";
 
 /**
  * Community page – Early Stage Product Structure
@@ -9,6 +10,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
  */
 export default function Community() {
   const [, setLocation] = useLocation();
+  const { t } = useI18n();
 
   const items = [
     { icon: <MessageSquare className="h-4 w-4 text-cyan-600" />, title: "Forum", status: "Planned", desc: "Open discussions for learners, parents and teachers." },
@@ -28,7 +30,7 @@ export default function Community() {
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 text-white">
               <BookOpen className="h-4 w-4" />
             </span>
-            <span className="font-bold text-slate-900">Insel 1o1</span>
+              <span className="font-bold text-slate-900">{t("community.appName")}</span>
           </button>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
@@ -37,7 +39,7 @@ export default function Community() {
               className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-cyan-700 transition"
             >
               <ArrowLeft className="h-4 w-4" />
-              Back
+              {t("community.back")}
             </button>
           </div>
         </div>
@@ -48,13 +50,13 @@ export default function Community() {
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wider text-slate-600 mb-6">
             <Clock className="h-3 w-3" />
-            Building Phase
+            {t("community.badge")}
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-            Community is coming together
+            {t("community.title")}
           </h1>
           <p className="text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
-            A space for learners, teachers and schools will open soon.
+            {t("community.subtitle")}
           </p>
         </div>
 
@@ -84,14 +86,14 @@ export default function Community() {
         {/* CTA – Join early access */}
         <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center">
           <Bell className="h-6 w-6 text-cyan-600 mx-auto mb-3" />
-          <h2 className="text-lg font-bold text-slate-900 mb-2">Join early access list</h2>
+          <h2 className="text-lg font-bold text-slate-900 mb-2">{t("community.ctaTitle")}</h2>
           <p className="text-sm text-slate-500 mb-5 max-w-md mx-auto">
-            Be the first to join the Insel1o1 community when it opens.
+            {t("community.ctaDesc")}
           </p>
           <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
             <input
               type="email"
-              placeholder="you@example.com"
+              placeholder={t("community.ctaPlaceholder")}
               disabled
               className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-500 placeholder:text-slate-400 cursor-not-allowed"
             />
@@ -99,10 +101,10 @@ export default function Community() {
               disabled
               className="rounded-xl bg-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-500 cursor-not-allowed"
             >
-              Join early
+              {t("community.ctaButton")}
             </button>
           </div>
-          <p className="text-[11px] text-slate-400 mt-3">Community platform is coming soon.</p>
+          <p className="text-[11px] text-slate-400 mt-3">{t("community.ctaNote")}</p>
         </div>
       </main>
     </div>

@@ -1,0 +1,23 @@
+{
+  "community": {
+    "badge": "Building Phase",
+    "title": "Community is coming together",
+    "subtitle": "A space for learners, teachers and schools will open soon.",
+    "item1Title": "Forum",
+    "item1Status": "Planned",
+    "item1Desc": "Open discussions for learners, parents and teachers.",
+    "item2Title": "Student Discussions",
+    "item2Status": "Planned",
+    "item2Desc": "Peer-to-peer learning conversations in a safe space.",
+    "item3Title": "Teacher Space",
+    "item3Status": "Planned",
+    "item3Desc": "A dedicated area for educators to exchange best practices.",
+    "ctaTitle": "Join early access list",
+    "ctaDesc": "Be the first to join the Insel1o1 community when it opens.",
+    "ctaPlaceholder": "you@example.com",
+    "ctaButton": "Join early",
+    "ctaNote": "Community platform is coming soon.",
+    "back": "Back",
+    "appName": "Insel 1o1"
+  }
+}

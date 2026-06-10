@@ -1,0 +1,23 @@
+{
+  "community": {
+    "badge": "Aufbauphase",
+    "title": "Die Gemeinschaft formt sich",
+    "subtitle": "Ein Raum für Lernende, Lehrer und Schulen wird bald eröffnet.",
+    "item1Title": "Forum",
+    "item1Status": "Geplant",
+    "item1Desc": "Offene Diskussionen für Lernende, Eltern und Lehrer.",
+    "item2Title": "Schülerdiskussionen",
+    "item2Status": "Geplant",
+    "item2Desc": "Peer-to-Peer-Lerngespräche in einem sicheren Rahmen.",
+    "item3Title": "Lehrerbereich",
+    "item3Status": "Geplant",
+    "item3Desc": "Ein dedizierter Bereich für Pädagogen zum Austausch bewährter Methoden.",
+    "ctaTitle": "Der frühen Zugangsliste beitreten",
+    "ctaDesc": "Seien Sie die Erste, die der Insel1o1-Gemeinschaft beitritt, wenn sie eröffnet wird.",
+    "ctaPlaceholder": "you@example.com",
+    "ctaButton": "Früher Zugang",
+    "ctaNote": "Die Community-Plattform ist demnächst verfügbar.",
+    "back": "Zurück",
+    "appName": "Insel 1o1"
+  }
+}
