@@ -284,18 +284,18 @@ export default function Home() {
             <div className="grid sm:grid-cols-2 gap-4 text-xs">
               <div className="space-y-1.5">
                 <p className="text-slate-600">
-                  <span className="font-medium text-slate-900">Emergency (CH):</span> 144 Rescue Service
+                  <span className="font-medium text-slate-900">{t("security.emergencyCh")}</span> {t("security.emergencyChValue")}
                 </p>
                 <p className="text-slate-600">
-                  <span className="font-medium text-slate-900">Poison Control:</span> 145 (Tox Info Suisse)
+                  <span className="font-medium text-slate-900">{t("security.poisonControl")}</span> {t("security.poisonControlValue")}
                 </p>
               </div>
               <div className="space-y-1.5">
                 <p className="text-slate-600">
-                  <span className="font-medium text-slate-900">Spital Schwyz:</span> 041 818 41 11
+                  <span className="font-medium text-slate-900">{t("security.spitalSchwyz")}</span> {t("security.spitalSchwyzValue")}
                 </p>
                 <p className="text-slate-600">
-                  <span className="font-medium text-slate-900">Note:</span> Emergency practice is closed
+                  <span className="font-medium text-slate-900">{t("security.emergencyNote")}</span> {t("security.emergencyNoteValue")}
                 </p>
               </div>
             </div>

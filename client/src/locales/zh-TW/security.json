@@ -11,6 +11,14 @@
     "secureInfrastructure": "Secure Infrastructure",
     "secureInfrastructureDesc": "穩定且受保護的技術基礎設施，確保可靠運行。",
     "emergencyTitle": "Emergency Information",
+    "emergencyCh": "Emergency (CH):",
+    "emergencyChValue": "144 Rescue Service",
+    "poisonControl": "Poison Control:",
+    "poisonControlValue": "145 (Tox Info Suisse)",
+    "spitalSchwyz": "Spital Schwyz:",
+    "spitalSchwyzValue": "041 818 41 11",
+    "emergencyNote": "Note:",
+    "emergencyNoteValue": "Emergency practice is closed",
     "trustStatement": "Insel1o1 是以對隱私、安全和教育責任的深思熟慮而設計的。"
   }
 }

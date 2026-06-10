@@ -11,6 +11,14 @@
     "secureInfrastructure": "Sichere Infrastruktur",
     "secureInfrastructureDesc": "Stabile und geschützte technische Infrastruktur für zuverlässigen Betrieb.",
     "emergencyTitle": "Notfall-Informationen",
+    "emergencyCh": "Notfall (CH):",
+    "emergencyChValue": "144 Rettungsdienst",
+    "poisonControl": "Vergiftungen:",
+    "poisonControlValue": "145 (Tox Info Suisse)",
+    "spitalSchwyz": "Spital Schwyz:",
+    "spitalSchwyzValue": "041 818 41 11",
+    "emergencyNote": "Hinweis:",
+    "emergencyNoteValue": "Notfallpraxis ist geschlossen",
     "trustStatement": "Insel1o1 ist mit Nachdenklichkeit für Datenschutz, Sicherheit und Bildungsverantwortung entwickelt."
   }
 }
