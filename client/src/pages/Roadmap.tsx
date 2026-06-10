@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "wouter";
 import { BookOpen, ArrowLeft, CheckCircle2, Clock, Circle } from "lucide-react";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 /**
  * Roadmap page – Live Development Transparency Layer
@@ -97,13 +98,16 @@ export default function Roadmap() {
             </span>
             <span className="font-bold text-slate-900">Insel 1o1</span>
           </button>
-          <button
-            onClick={() => setLocation("/")}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-cyan-700 transition"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back
-          </button>
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+            <button
+              onClick={() => setLocation("/")}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-cyan-700 transition"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back
+            </button>
+          </div>
         </div>
       </header>
 

@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useI18n } from "@/contexts/I18nContext";
 import { PRICING } from "@/data/pricing-config";
 import { Compass, Check, ArrowRight } from "lucide-react";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export default function Pricing() {
   const { t } = useI18n();
@@ -105,9 +106,12 @@ export default function Pricing() {
             </span>
             <span className="font-bold text-slate-900">{t("common.appName")}</span>
           </button>
-          <button onClick={() => setLocation("/login")} className="px-4 py-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700 transition">
-            {t("nav.signIn")}
-          </button>
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+            <button onClick={() => setLocation("/login")} className="px-4 py-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700 transition">
+              {t("nav.signIn")}
+            </button>
+          </div>
         </div>
       </header>
 
