@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "wouter";
 import { BookOpen, ArrowLeft, CheckCircle2, Clock, Circle } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useI18n } from "@/contexts/I18nContext";
 
 /**
  * Roadmap page – Live Development Transparency Layer
@@ -72,6 +73,7 @@ const statusMeta: Record<Status, { label: string; icon: React.ReactNode; color: 
 
 export default function Roadmap() {
   const [, setLocation] = useLocation();
+  const { t } = useI18n();
 
   const groups: { status: Status; items: RoadmapItem[] }[] = [
     { status: "completed", items: ROADMAP.filter((i) => i.status === "completed") },
@@ -96,7 +98,7 @@ export default function Roadmap() {
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 text-white">
               <BookOpen className="h-4 w-4" />
             </span>
-            <span className="font-bold text-slate-900">Insel 1o1</span>
+            <span className="font-bold text-slate-900">{t("roadmap.appName")}</span>
           </button>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
@@ -105,7 +107,7 @@ export default function Roadmap() {
               className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-cyan-700 transition"
             >
               <ArrowLeft className="h-4 w-4" />
-              Back
+              {t("roadmap.back")}
             </button>
           </div>
         </div>
@@ -115,10 +117,10 @@ export default function Roadmap() {
         {/* Hero */}
         <div className="text-center mb-12">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-            Product Roadmap
+            {t("roadmap.title")}
           </h1>
           <p className="text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
-            Follow the ongoing development of Insel1o1 in real time.
+            {t("roadmap.subtitle")}
           </p>
         </div>
 

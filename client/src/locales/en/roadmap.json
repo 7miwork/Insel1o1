@@ -1,0 +1,16 @@
+{
+  "roadmap": {
+    "title": "Product Roadmap",
+    "subtitle": "Follow the ongoing development of Insel1o1 in real time.",
+    "overallProgress": "Overall progress",
+    "completed": "completed",
+    "inProgress": "in progress",
+    "planned": "planned",
+    "statusCompleted": "Completed",
+    "statusInProgress": "In Progress",
+    "statusPlanned": "Planned",
+    "updatedNote": "Updated continuously with every significant commit.",
+    "back": "Back",
+    "appName": "Insel 1o1"
+  }
+}
