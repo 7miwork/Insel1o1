@@ -1,0 +1,18 @@
+{
+  "blog": {
+    "badge": "Demnächst",
+    "title": "Beiträge kommen bald",
+    "subtitle": "Wir bereiten Artikel, Lernressourcen und Updates vor, um Schülern, Eltern und Lehrern das Beste aus Insel 1o1 zu ermöglichen.",
+    "whatToExpect": "Was Sie erwartet",
+    "item1": "Lerntipps und bewährte Methoden",
+    "item2": "Produktupdates und Versionshinweise",
+    "item3": "Bildungseinblicke und Forschung",
+    "ctaTitle": "Benachrichtigt werden, wenn wir veröffentlichen",
+    "ctaDesc": "Seien Sie die Erste, die erfahren, wenn neue Inhalte verfügbar sind.",
+    "ctaPlaceholder": "you@example.com",
+    "ctaButton": "Benachrichtigen",
+    "ctaNote": "Der Benachrichtigungsdienst ist demnächst verfügbar.",
+    "back": "Zurück",
+    "appName": "Insel 1o1"
+  }
+}

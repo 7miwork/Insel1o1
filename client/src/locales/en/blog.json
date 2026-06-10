@@ -1,0 +1,18 @@
+{
+  "blog": {
+    "badge": "Coming Soon",
+    "title": "Insights are coming soon",
+    "subtitle": "We're preparing articles, learning resources and updates to help students, parents and teachers get the most out of Insel1o1.",
+    "whatToExpect": "What you can expect",
+    "item1": "Learning tips & best practices",
+    "item2": "Product updates and release notes",
+    "item3": "Education insights and research",
+    "ctaTitle": "Get notified when we publish",
+    "ctaDesc": "Be the first to know when new content goes live.",
+    "ctaPlaceholder": "you@example.com",
+    "ctaButton": "Notify me",
+    "ctaNote": "Notification service is coming soon.",
+    "back": "Back",
+    "appName": "Insel 1o1"
+  }
+}
