@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "wouter";
 import { BookOpen, ArrowLeft, FileText, Layers, GraduationCap, School, Clock } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useI18n } from "@/contexts/I18nContext";
 
 /**
  * Docs page – Early Stage Product Structure
@@ -9,6 +10,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
  */
 export default function Docs() {
   const [, setLocation] = useLocation();
+  const { t } = useI18n();
 
   const sections = [
     { icon: <FileText className="h-4 w-4 text-cyan-600" />, title: "Getting Started", status: "Coming soon", desc: "First steps for students, parents and teachers." },
@@ -35,7 +37,7 @@ export default function Docs() {
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 text-white">
               <BookOpen className="h-4 w-4" />
             </span>
-            <span className="font-bold text-slate-900">Insel 1o1</span>
+              <span className="font-bold text-slate-900">{t("docs.appName")}</span>
           </button>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
@@ -44,7 +46,7 @@ export default function Docs() {
               className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-cyan-700 transition"
             >
               <ArrowLeft className="h-4 w-4" />
-              Back
+              {t("docs.back")}
             </button>
           </div>
         </div>
@@ -55,7 +57,7 @@ export default function Docs() {
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wider text-slate-600 mb-6">
             <Clock className="h-3 w-3" />
-            Early Stage
+            {t("docs.badge")}
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
             Documentation is evolving

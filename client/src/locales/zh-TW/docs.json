@@ -1,0 +1,22 @@
+{
+  "docs": {
+    "badge": "早期階段",
+    "title": "文檔正在發展中",
+    "subtitle": "我們正在積極構建結構化的學習和系統文檔。",
+    "section1Title": "入門指南",
+    "section1Status": "即將推出",
+    "section1Desc": "學生、家長和教師的第一步。",
+    "section2Title": "平台概覽",
+    "section2Status": "進行中",
+    "section2Desc": "Insel1o1 平台如何整合在一起。",
+    "section3Title": "學生系統",
+    "section3Status": "已計劃",
+    "section3Desc": "學習路徑、課程和進度。",
+    "section4Title": "學校儀表板",
+    "section4Status": "已計劃",
+    "section4Desc": "班級管理、分析和報告。",
+    "footerNote": "隨著平台的發展，文檔將不斷擴展。",
+    "back": "返回",
+    "appName": "Insel 1o1"
+  }
+}
