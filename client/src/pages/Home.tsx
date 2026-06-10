@@ -21,10 +21,10 @@ function FeatureVisualLearning() {
         </div>
       </div>
       <div className="space-y-2">
-        {["Mathe", "Wissenschaft", "Sprache"].map((s, i) => (
+        {["Math", "Science", "Language"].map((s, i) => (
           <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg bg-slate-50">
             <div className="w-8 h-8 rounded-md bg-white border border-slate-200 flex items-center justify-center text-xs font-bold text-slate-500">
-              {["M", "W", "S"][i]}
+              {["M", "S", "L"][i]}
             </div>
             <div className="flex-1">
               <div className="text-xs font-semibold text-slate-700">{s}</div>
@@ -116,7 +116,7 @@ function FeatureVisualAnywhere() {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-2">
-        {["💻 Desktop", "📱 Tablet", "📱 Handy"].map((d, i) => (
+        {["💻 Desktop", "📱 Tablet", "📱 Phone"].map((d, i) => (
           <div key={i} className="p-2 rounded-lg bg-slate-50 border border-slate-200 text-center">
             <div className="text-xs text-slate-600">{d}</div>
             <div className="mt-1.5 h-1 bg-slate-200 rounded-full">
@@ -284,10 +284,10 @@ export default function Home() {
             <div className="grid sm:grid-cols-2 gap-4 text-xs">
               <div className="space-y-1.5">
                 <p className="text-slate-600">
-                  <span className="font-medium text-slate-900">Notfall (CH):</span> 144 Rettungsdienst
+                  <span className="font-medium text-slate-900">Emergency (CH):</span> 144 Rescue Service
                 </p>
                 <p className="text-slate-600">
-                  <span className="font-medium text-slate-900">Vergiftungen:</span> 145 (Tox Info Suisse)
+                  <span className="font-medium text-slate-900">Poison Control:</span> 145 (Tox Info Suisse)
                 </p>
               </div>
               <div className="space-y-1.5">
@@ -295,7 +295,7 @@ export default function Home() {
                   <span className="font-medium text-slate-900">Spital Schwyz:</span> 041 818 41 11
                 </p>
                 <p className="text-slate-600">
-                  <span className="font-medium text-slate-900">Hinweis:</span> Notfallpraxis ist geschlossen
+                  <span className="font-medium text-slate-900">Note:</span> Emergency practice is closed
                 </p>
               </div>
             </div>
