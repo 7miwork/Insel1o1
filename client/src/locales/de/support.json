@@ -1,0 +1,17 @@
+{
+  "support": {
+    "badge": "Früher Zugang",
+    "title": "Support-Center",
+    "subtitle": "Wir bauen ein strukturiertes.",
+    "faqTitle": "Häufig gestellte Fragen",
+    "faqStatus": "Demnächst",
+    "faqDesc": "Eine strukturierte Liste häufig gestellter Fragen wird hier verfügbar sein.",
+    "contactTitle": "Kontakt",
+    "contactDesc": "Für frühen Zugang Feedback und Anfragen:",
+    "contactPlaceholder": "you@example.com",
+    "contactButton": "Nachricht senden",
+    "contactNote": "Support ist derzeit im frühen Zugangsstadium.",
+    "back": "Zurück",
+    "appName": "Insel 1o1"
+  }
+}

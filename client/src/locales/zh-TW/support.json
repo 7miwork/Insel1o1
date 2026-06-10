@@ -1,0 +1,17 @@
+{
+  "support": {
+    "badge": "早期訪問",
+    "title": "支持中心",
+    "subtitle": "我們正在構建一個結構化的支持系統。",
+    "faqTitle": "常見問題",
+    "faqStatus": "即將推出",
+    "faqDesc": "這裡將提供結構化的常見問題解答列表。",
+    "contactTitle": "聯繫方式",
+    "contactDesc": "對於早期訪問反饋和查詢：",
+    "contactPlaceholder": "you@example.com",
+    "contactButton": "發送消息",
+    "contactNote": "支持目前處於早期訪問階段。",
+    "back": "返回",
+    "appName": "Insel 1o1"
+  }
+}

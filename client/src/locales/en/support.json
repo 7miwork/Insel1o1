@@ -1,0 +1,17 @@
+{
+  "support": {
+    "badge": "Early Access",
+    "title": "Support Center",
+    "subtitle": "We are building a structured support system.",
+    "faqTitle": "FAQ",
+    "faqStatus": "Coming soon",
+    "faqDesc": "A structured list of frequently asked questions will be available here.",
+    "contactTitle": "Contact",
+    "contactDesc": "For early access feedback and inquiries:",
+    "contactPlaceholder": "you@example.com",
+    "contactButton": "Send message",
+    "contactNote": "Support is currently in early access phase.",
+    "back": "Back",
+    "appName": "Insel 1o1"
+  }
+}
