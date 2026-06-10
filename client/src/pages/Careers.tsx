@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "wouter";
 import { BookOpen, ArrowLeft, Briefcase, GraduationCap, Globe2, Bell } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useI18n } from "@/contexts/I18nContext";
 
 /**
  * Careers page (Coming Soon)
@@ -10,6 +11,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
  */
 export default function Careers() {
   const [, setLocation] = useLocation();
+  const { t } = useI18n();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -23,7 +25,7 @@ export default function Careers() {
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 text-white">
               <BookOpen className="h-4 w-4" />
             </span>
-            <span className="font-bold text-slate-900">Insel 1o1</span>
+              <span className="font-bold text-slate-900">{t("careers.appName")}</span>
           </button>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
@@ -32,7 +34,7 @@ export default function Careers() {
               className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-cyan-700 transition"
             >
               <ArrowLeft className="h-4 w-4" />
-              Back
+              {t("careers.back")}
             </button>
           </div>
         </div>
@@ -42,27 +44,27 @@ export default function Careers() {
         {/* Hero */}
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wider text-slate-600 mb-6">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-            Coming Soon
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
+              {t("careers.badge")}
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-            We're building our team
-          </h1>
-          <p className="text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
-            We're building Insel1o1 with passionate people who care about education, technology, and the future of learning.
-          </p>
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+              {t("careers.title")}
+            </h1>
+            <p className="text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
+              {t("careers.subtitle")}
+            </p>
         </div>
 
         {/* What to Expect */}
         <div className="rounded-2xl border border-slate-200 bg-white p-8 mb-8">
-          <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-5">
-            What you can expect
-          </h2>
+            <h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-5">
+              {t("careers.whatToExpect")}
+            </h2>
           <div className="space-y-4">
             {[
-              { icon: <Briefcase className="h-4 w-4 text-cyan-600" />, label: "Open roles in engineering, design and product" },
-              { icon: <GraduationCap className="h-4 w-4 text-emerald-600" />, label: "Internships for students and graduates" },
-              { icon: <Globe2 className="h-4 w-4 text-violet-600" />, label: "Remote-friendly opportunities across Europe" },
+                { icon: <Briefcase className="h-4 w-4 text-cyan-600" />, label: t("careers.item1") },
+                { icon: <GraduationCap className="h-4 w-4 text-emerald-600" />, label: t("careers.item2") },
+                { icon: <Globe2 className="h-4 w-4 text-violet-600" />, label: t("careers.item3") },
             ].map((item, idx) => (
               <div key={idx} className="flex items-center gap-3 text-sm text-slate-700">
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 border border-slate-200">
@@ -77,14 +79,14 @@ export default function Careers() {
         {/* CTA – Join early */}
         <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center">
           <Bell className="h-6 w-6 text-cyan-600 mx-auto mb-3" />
-          <h2 className="text-lg font-bold text-slate-900 mb-2">Join the mission early</h2>
+          <h2 className="text-lg font-bold text-slate-900 mb-2">{t("careers.ctaTitle")}</h2>
           <p className="text-sm text-slate-500 mb-5 max-w-md mx-auto">
-            Be the first to hear about new roles and opportunities at Insel1o1.
+            {t("careers.ctaDesc")}
           </p>
           <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
             <input
               type="email"
-              placeholder="you@example.com"
+              placeholder={t("careers.ctaPlaceholder")}
               disabled
               className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-500 placeholder:text-slate-400 cursor-not-allowed"
             />
@@ -92,10 +94,10 @@ export default function Careers() {
               disabled
               className="rounded-xl bg-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-500 cursor-not-allowed"
             >
-              Join early
+              {t("careers.ctaButton")}
             </button>
           </div>
-          <p className="text-[11px] text-slate-400 mt-3">Talent network is coming soon.</p>
+          <p className="text-[11px] text-slate-400 mt-3">{t("careers.ctaNote")}</p>
         </div>
       </main>
     </div>
