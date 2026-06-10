@@ -25,7 +25,7 @@ export default function About() {
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 text-white">
               <BookOpen className="h-4 w-4" />
             </span>
-            <span className="font-bold text-slate-900">Insel 1o1</span>
+              <span className="font-bold text-slate-900">{t("about.appName")}</span>
           </button>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
@@ -34,7 +34,7 @@ export default function About() {
               className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-cyan-700 transition"
             >
               <ArrowLeft className="h-4 w-4" />
-              Back
+              {t("about.back")}
             </button>
           </div>
         </div>

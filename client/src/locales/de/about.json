@@ -1,24 +1,6 @@
 {
   "about": {
-    "intro": "Lerne die mutige Crew kennen, die den Insel1o1-Archipel steuert – jede Lektion ist eine Expedition über unbekannte Inseln.",
-    "missionTitle": "Unsere Mission",
-    "missionContent": "Bildung zu einem abenteuerlichen Erlebnis machen, bei dem Schüler, Eltern und Lehrer gemeinsam neue Inseln des Wissens entdecken.",
-    "visionTitle": "Unsere Vision",
-    "visionContent": "Ein grenzenloses Meer des Lernens, in dem Neugier der Kompass ist und jede Lernende zu einem furchtlosen Entdecker wird.",
-    "crewSectionTitle": "Unsere Crew",
-    "crew": {
-      "captain": {
-        "title": "Kapitän der Lernwelten",
-        "description": "Führt die Flotte des Wissens, zeichnet kühne Kurse über die Meere der Bildung und verwandelt jede Lektion in ein abenteuerliches Erlebnis."
-      },
-      "navigator": {
-        "title": "Lern-Navigator",
-        "description": "Kartiert den Lern-Archipel, zeichnet klare Routen für Entdecker aller Altersgruppen, damit sie auf der Suche nach Wissen nie die Orientierung verlieren."
-      },
-      "pobbie": {
-        "title": "Pobbie – Das Code-Haschen 🐰",
-        "description": "Unser treues Code-Haschen, das durch den Codebase hüpft, um das Schiff zu bauen, das jede Lernende sicher zu neuen Horizonten trägt."
-      }
-    }
+    "back": "Zurück",
+    "appName": "Insel 1o1"
   }
 }
