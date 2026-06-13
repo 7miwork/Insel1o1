@@ -40,6 +40,21 @@ function CompassRose({ className = "" }: { className?: string }) {
   );
 }
 
+/** Safely convert a YouTube URL to an embed-compatible URL */
+function toYouTubeEmbed(url: string): string {
+  if (!url) return "";
+  // youtu.be/VIDEO_ID
+  const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+  if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}`;
+  // youtube.com/watch?v=VIDEO_ID
+  const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+  if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}`;
+  // youtube.com/embed/VIDEO_ID (already embed)
+  if (url.includes("youtube.com/embed/")) return url;
+  // Fallback: return as-is (Vimeo, MP4, etc.)
+  return url;
+}
+
 /* ── Decorative Sea Elements SVG Layer ── */
 function SeaElements() {
   return (
@@ -633,9 +648,7 @@ function IslandView({ course, t, onLessonClick }: {
             <div className="relative rounded-xl overflow-hidden shadow-2xl"
               style={{ paddingBottom: "56.25%", border: "2px solid rgba(107,66,38,0.5)" }}>
               <iframe
-                src={showcaseVideo.includes("youtu")
-                  ? `https://www.youtube.com/embed/${showcaseVideo.match(/(?:youtu\.be\/|v=)([^&?/]+)/)?.[1] || ""}`
-                  : showcaseVideo}
+                src={toYouTubeEmbed(showcaseVideo)}
                 className="absolute inset-0 w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
