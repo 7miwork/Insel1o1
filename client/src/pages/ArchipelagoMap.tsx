@@ -1,171 +1,192 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { useLocation } from "wouter";
-import { ChevronLeft, ChevronRight, Compass, Ship, Map as MapIcon, Sparkles, Lock, CheckCircle2, PlayCircle, Star, GraduationCap, Wind, Trophy, Zap } from "lucide-react";
+import { ChevronLeft, Compass, Ship, Map as MapIcon, Lock, CheckCircle2, PlayCircle, Wind, Trophy, Target, Star, Anchor, Eye } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
-import { StatusBadge, type LessonStatus } from "@/components/StatusBadge";
 import {
   programmingArchipelago,
   type ArchipelagoCourse,
 } from "@/data/archipelago-config";
 
-type ViewLevel = "launch" | "world" | "course" | "lessons";
+type ViewLevel = "world" | "course" | "lessons";
 
-/**
- * ArchipelagoMap – The gamified learning map for the Programmier-Archipel.
- *
- * Four zoom levels:
- *   launch  → Welcome screen with treasure map aesthetic
- *   world   → Shows the archipelago with large course islands
- *   course  → Shows a specific course (e.g., Minecraft Education Basic)
- *   lessons → Shows the lesson islands inside a course (a learning path)
- *
- * Design: Tropical archipelago, pirate adventure theme, world map experience.
- */
 export default function ArchipelagoMap() {
   const [, setLocation] = useLocation();
   const { t } = useI18n();
   const config = programmingArchipelago;
 
-  const [viewLevel, setViewLevel] = useState<ViewLevel>("launch");
+  const [viewLevel, setViewLevel] = useState<ViewLevel>("world");
   const [selectedCourse, setSelectedCourse] = useState<ArchipelagoCourse | null>(null);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [selectedLessonId, setSelectedLessonId] = useState<number | null>(null);
 
   const goToCourse = useCallback((course: ArchipelagoCourse) => {
     setSelectedCourse(course);
-    if (course.lessons.length > 0) {
-      setViewLevel("course");
-    }
+    if (course.lessons.length > 0) setViewLevel("course");
   }, []);
 
-  const goToLessons = useCallback(() => {
-    setViewLevel("lessons");
-  }, []);
-
-  const goToLesson = useCallback(
-    (lessonId: number) => {
-      setLocation(`/lesson/${lessonId}`);
-    },
-    [setLocation]
-  );
+  const goToLesson = useCallback((lessonId: number) => {
+    setLocation(`/lesson/${lessonId}`);
+  }, [setLocation]);
 
   const handleBack = useCallback(() => {
-    if (viewLevel === "launch") {
-      setLocation("/dashboard");
-    } else if (viewLevel === "lessons") {
-      setViewLevel("course");
-    } else if (viewLevel === "course") {
-      setSelectedCourse(null);
-      setViewLevel("world");
-    }
+    if (viewLevel === "lessons") { setViewLevel("course"); setSelectedLessonId(null); }
+    else if (viewLevel === "course") { setSelectedCourse(null); setViewLevel("world"); }
+    else setLocation("/dashboard");
   }, [viewLevel, setLocation]);
 
+  const courses = config.courses;
+  const totalLessons = courses.reduce((s, c) => s + c.lessons.length, 0);
+  const completedLessons = courses.reduce((s, c) => s + c.lessons.filter(l => l.completed).length, 0);
+  const progress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cyan-900 via-teal-800 to-emerald-900 overflow-hidden relative">
-      {/* Ocean background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-b from-cyan-800/60 via-teal-700/40 to-emerald-800/60" />
-        <svg
-          className="absolute bottom-0 w-full h-48 opacity-30"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#0D9488" stopOpacity="0.4" />
-              <stop offset="50%" stopColor="#14B8A6" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#0D9488" stopOpacity="0.4" />
-            </linearGradient>
-          </defs>
-          <path
-            fill="url(#waveGrad)"
-            d="M0,32 C360,64 720,0 1080,32 L1440,64 L1440,120 L0,120 Z"
-            className="animate-wave-slow"
-          />
-          <path
-            fill="url(#waveGrad)"
-            d="M0,48 C360,80 720,16 1080,48 L1440,80 L1440,120 L0,120 Z"
-            className="animate-wave-slower"
-            opacity="0.6"
-          />
-        </svg>
-        {/* Floating particles */}
-        <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-cyan-300/30 rounded-full animate-float-slow" />
-        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-teal-300/20 rounded-full animate-float-slower" />
-        <div className="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-emerald-300/25 rounded-full animate-float-slow" />
-        <div className="absolute top-2/3 right-1/3 w-2 h-2 bg-cyan-200/20 rounded-full animate-float-slower" />
-      </div>
+    <div className="min-h-screen bg-gradient-to-b from-amber-900 via-amber-800 to-amber-950 relative">
+      {/* Parchment texture overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
 
       {/* Header */}
-      <header className="relative z-20 bg-white/10 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <header className="relative z-20 bg-amber-950/50 backdrop-blur-sm border-b border-amber-700/40">
+        <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {viewLevel !== "world" ? (
-              <button
-                onClick={handleBack}
-                className="p-2 hover:bg-white/10 rounded-xl transition-all duration-200"
-              >
-                <ChevronLeft className="w-5 h-5 text-white" />
-              </button>
-            ) : null}
+            <button onClick={handleBack} className="p-1.5 hover:bg-amber-700/30 rounded-lg transition-colors">
+              <ChevronLeft className="w-5 h-5 text-amber-200" />
+            </button>
             <div className="flex items-center gap-2">
-              <MapIcon className="w-5 h-5 text-cyan-300" />
-              <h1 className="text-lg sm:text-xl font-bold text-white tracking-tight">
-                {t(config.titleKey)}
+              <MapIcon className="w-4 h-4 text-amber-300" />
+              <h1 className="text-base sm:text-lg font-bold text-amber-100 tracking-tight">
+                {viewLevel === "world" ? t(config.titleKey) : selectedCourse ? t(selectedCourse.titleKey) : ""}
               </h1>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-xs text-cyan-200/80">
-            {viewLevel === "world" && (
-              <span className="flex items-center gap-1">
-                <Compass className="w-3.5 h-3.5" />
-                Explore & Discover
-              </span>
-            )}
-            {viewLevel === "course" && selectedCourse && (
-              <span className="flex items-center gap-1">
-                <Ship className="w-3.5 h-3.5" />
-                {t(selectedCourse.titleKey)}
-              </span>
-            )}
-            {viewLevel === "lessons" && selectedCourse && (
-              <span className="flex items-center gap-1">
-                <Ship className="w-3.5 h-3.5" />
-                {t(selectedCourse.titleKey)} → Learning Path
-              </span>
-            )}
+          <div className="flex items-center gap-2 text-xs text-amber-300/70">
+            {viewLevel === "world" && <><Compass className="w-3 h-3" /> Explore & Discover</>}
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        {viewLevel === "launch" && (
-          <LaunchView
-            config={config}
-            t={t}
-            onStartExploring={() => setViewLevel("world")}
-            hoveredId={hoveredId}
-            setHoveredId={setHoveredId}
-          />
-        )}
-
+      <main className="relative z-10 max-w-7xl mx-auto px-4 py-4 sm:py-6">
         {viewLevel === "world" && (
-          <WorldMapView
-            config={config}
-            t={t}
-            onCourseClick={goToCourse}
-            hoveredId={hoveredId}
-            setHoveredId={setHoveredId}
-          />
+          <div className="flex gap-4">
+            {/* Map Area */}
+            <div className="flex-1">
+              <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] rounded-xl overflow-hidden border-2 border-amber-700/50 shadow-2xl"
+                style={{ background: "linear-gradient(135deg, #92400e 0%, #78350f 30%, #451a03 60%, #92400e 100%)" }}>
+                {/* Grid lines */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.04]">
+                  <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+
+                {/* Sea routes */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  {courses.map((course, i) => {
+                    if (i >= courses.length - 1) return null;
+                    const next = courses[i + 1];
+                    return (
+                      <path key={`route-${course.id}`}
+                        d={`M${course.x},${course.y} Q${(course.x + next.x) / 2 + 10},${(course.y + next.y) / 2 - 15} ${next.x},${next.y}`}
+                        fill="none" stroke="#d97706" strokeWidth="0.3" strokeDasharray="2,1.5" opacity="0.5"
+                      />
+                    );
+                  })}
+                </svg>
+
+                {/* Course nodes */}
+                {courses.map((course) => {
+                  const lessonCount = course.lessons.length;
+                  const courseCompleted = course.lessons.filter(l => l.completed).length;
+                  const allDone = course.available && lessonCount > 0 && courseCompleted === lessonCount;
+                  const hasProgress = courseCompleted > 0 && !allDone;
+                  const svgX = (course.x / 100) * 100;
+                  const svgY = (course.y / 100) * 100;
+
+                  return (
+                    <button key={course.id}
+                      onClick={() => course.available && goToCourse(course)}
+                      disabled={!course.available}
+                      className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer focus:outline-none group"
+                      style={{ left: `${svgX}%`, top: `${svgY}%` }}>
+                      {/* Pulsing ring for current */}
+                      {course.isCurrent && (
+                        <div className="absolute inset-[-10px] rounded-full border-2 border-amber-400 animate-ping opacity-40" />
+                      )}
+                      {/* Node circle */}
+                      <div className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center transition-transform group-hover:scale-110
+                        ${!course.available ? "opacity-40" : ""}
+                        ${allDone ? "ring-2 ring-amber-400 shadow-lg shadow-amber-500/30" : ""}
+                        ${hasProgress ? "ring-2 ring-amber-600" : ""}
+                      `}
+                        style={{
+                          background: allDone
+                            ? "radial-gradient(circle, #f59e0b 0%, #d97706 50%, #92400e 100%)"
+                            : hasProgress
+                            ? "radial-gradient(circle, #78716c 0%, #57534e 50%, #44403c 100%)"
+                            : "radial-gradient(circle, #78716c 0%, #57534e 50%, #44403c 100%)"
+                        }}>
+                        <span className="text-2xl sm:text-3xl">{course.emoji}</span>
+                      </div>
+                      {/* Label */}
+                      <p className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-amber-200 font-medium whitespace-nowrap drop-shadow-lg">
+                        {t(course.titleKey)}
+                      </p>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right side panel */}
+            <div className="hidden lg:block w-56 shrink-0 space-y-3">
+              <div className="bg-amber-950/60 rounded-xl border border-amber-700/40 p-4">
+                <h3 className="text-xs uppercase tracking-wider text-amber-400 font-semibold mb-3">Your Voyage</h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-amber-200">Islands</span>
+                    <span className="font-bold text-amber-100">{completedLessons}/{totalLessons}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-amber-200">Courses</span>
+                    <span className="font-bold text-amber-100">{courses.length}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-amber-200">Progress</span>
+                    <span className="font-bold text-amber-100">{progress}%</span>
+                  </div>
+                  <div className="h-1.5 bg-amber-900/60 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full transition-all" style={{ width: `${progress}%` }} />
+                  </div>
+                </div>
+              </div>
+              <div className="bg-amber-950/60 rounded-xl border border-amber-700/40 p-4">
+                <h3 className="text-xs uppercase tracking-wider text-amber-400 font-semibold mb-3">Legend</h3>
+                <div className="space-y-2 text-xs text-amber-200">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-amber-500 ring-1 ring-amber-400" /> Completed
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-amber-700" /> Available
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-amber-900 ring-1 ring-amber-800" /> Locked
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-0.5 bg-amber-600/50" style={{ borderTop: "1px dashed #d97706" }} /> Sea Route
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
 
         {viewLevel === "course" && selectedCourse && (
           <CourseView
             course={selectedCourse}
             t={t}
-            onExploreLessons={goToLessons}
-            hoveredId={hoveredId}
-            setHoveredId={setHoveredId}
+            onLessonClick={goToLesson}
           />
         )}
 
@@ -174,595 +195,232 @@ export default function ArchipelagoMap() {
             course={selectedCourse}
             t={t}
             onLessonClick={goToLesson}
-            hoveredId={hoveredId}
-            setHoveredId={setHoveredId}
           />
         )}
       </main>
 
-      <footer className="relative z-20 text-center py-4 text-xs text-white/30">
-        Set sail on your learning adventure 🌊⚓
+      <footer className="relative z-20 text-center py-3 text-xs text-amber-600/50">
+        Set sail on your learning adventure
       </footer>
-
-      <style>{`
-        @keyframes float-slow {
-          0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
-          25% { transform: translateY(-15px) translateX(5px); opacity: 0.5; }
-          50% { transform: translateY(-8px) translateX(-5px); opacity: 0.4; }
-          75% { transform: translateY(-20px) translateX(3px); opacity: 0.5; }
-        }
-        @keyframes float-slower {
-          0%, 100% { transform: translateY(0px); opacity: 0.2; }
-          50% { transform: translateY(-25px); opacity: 0.4; }
-        }
-        @keyframes wave-slow {
-          0% { transform: translateX(0); }
-          50% { transform: translateX(-10%); }
-          100% { transform: translateX(0); }
-        }
-        @keyframes wave-slower {
-          0% { transform: translateX(0); }
-          50% { transform: translateX(10%); }
-          100% { transform: translateX(0); }
-        }
-        .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
-        .animate-float-slower { animation: float-slower 8s ease-in-out infinite; }
-        .animate-wave-slow { animation: wave-slow 8s ease-in-out infinite; }
-        .animate-wave-slower { animation: wave-slower 12s ease-in-out infinite; }
-      `}</style>
-    </div>
-  );
-}
-
-// ─── Launch View ────────────────────────────────────────────────────────────
-function LaunchView({
-  config,
-  t,
-  onStartExploring,
-  hoveredId,
-  setHoveredId,
-}: {
-  config: { titleKey: string; subtitleKey: string; courses: ArchipelagoCourse[] };
-  t: (key: string, fallback?: string) => string;
-  onStartExploring: () => void;
-  hoveredId: string | null;
-  setHoveredId: (id: string | null) => void;
-}) {
-  return (
-    <div className="space-y-12 py-12">
-      {/* Header Section */}
-      <div className="text-center space-y-3">
-        <h1 className="text-4xl sm:text-5xl font-bold text-white flex items-center justify-center gap-3">
-          ⚓ {t(config.titleKey)}
-        </h1>
-        <p className="text-cyan-200/80 text-lg italic">
-          {t(config.subtitleKey)}
-        </p>
-      </div>
-
-      {/* Treasure Map Visualization */}
-      <div className="relative bg-gradient-to-br from-amber-900/20 to-orange-800/20 border-2 border-amber-700/40 rounded-3xl p-12 overflow-hidden">
-        {/* Map texture background */}
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: "radial-gradient(circle at 20% 30%, rgba(255,200,124,0.3) 0%, transparent 50%)",
-          mixBlendMode: "overlay"
-        }} />
-
-        <div className="relative z-10 space-y-8">
-          {/* Course Circles Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            {config.courses.slice(0, 2).map((course, idx) => {
-              const isHovered = hoveredId === `launch-${course.id}`;
-              const colors = [
-                { ring: "from-cyan-400 to-teal-500", bg: "from-cyan-600 to-teal-700" },
-                { ring: "from-purple-400 to-violet-500", bg: "from-purple-600 to-violet-700" },
-                { ring: "from-amber-400 to-orange-500", bg: "from-amber-600 to-orange-700" },
-                { ring: "from-pink-400 to-rose-500", bg: "from-pink-600 to-rose-700" },
-              ];
-              const color = colors[idx % colors.length];
-
-              return (
-                <div
-                  key={course.id}
-                  onMouseEnter={() => setHoveredId(`launch-${course.id}`)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  className="flex flex-col items-center gap-4"
-                >
-                  {/* Big Circle - Course Icon */}
-                  <div
-                    className={`relative w-32 h-32 rounded-full cursor-pointer transition-all duration-300 ${
-                      isHovered ? "scale-110 shadow-2xl" : "shadow-lg"
-                    }`}
-                    style={{
-                      background: `linear-gradient(135deg, ${color.bg.split(" ")[1]} 0%, ${color.bg.split(" ")[2]} 100%)`,
-                      boxShadow: isHovered
-                        ? `0 0 40px rgba(${idx === 0 ? "34, 211, 238" : "147, 51, 234"}, 0.6), inset 0 0 20px rgba(255,255,255,0.2)`
-                        : `0 0 20px rgba(0,0,0,0.3), inset 0 0 10px rgba(255,255,255,0.1)`,
-                    }}
-                  >
-                    {/* Outer ring */}
-                    <div
-                      className="absolute inset-0 rounded-full opacity-60"
-                      style={{
-                        background: `conic-gradient(${idx === 0 ? "from-cyan-300" : "from-purple-300"}, ${idx === 0 ? "to-teal-300" : "to-violet-300"})`,
-                        padding: "2px",
-                        WebkitMask: "linear-gradient(#fff 0%, #fff) content-box, linear-gradient(#fff 0%, #fff)",
-                        WebkitMaskComposite: "xor",
-                        maskComposite: "exclude",
-                      }}
-                    />
-
-                    {/* Inner content */}
-                    <div className="absolute inset-0 rounded-full flex items-center justify-center text-5xl">
-                      {idx === 0 ? "⛏️" : "✨"}
-                    </div>
-
-                    {/* Badge Number */}
-                    <div className="absolute -top-2 -right-2 w-10 h-10 bg-amber-500 rounded-full border-2 border-white flex items-center justify-center font-bold text-white text-sm shadow-lg">
-                      {idx + 1}
-                    </div>
-                  </div>
-
-                  {/* Course Name */}
-                  <p className="text-center text-white font-bold text-lg">
-                    {t(course.titleKey)}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Course Info Cards Below */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-amber-600/30">
-            {config.courses.slice(0, 2).map((course, idx) => {
-              const isHovered = hoveredId === `card-${course.id}`;
-
-              return (
-                <div
-                  key={course.id}
-                  onMouseEnter={() => setHoveredId(`card-${course.id}`)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  className={`bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 transition-all duration-300 cursor-pointer ${
-                    isHovered ? "border-cyan-300 scale-105 shadow-lg" : ""
-                  }`}
-                >
-                  <h3 className="font-bold text-white text-center mb-1">
-                    {t(course.titleKey)}
-                  </h3>
-                  <p className="text-cyan-100 text-xs text-center line-clamp-2">
-                    {t(course.descriptionKey)}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* Status Summary */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-4 text-center">
-          <p className="text-amber-200 text-sm font-semibold">Islands</p>
-          <p className="text-2xl font-bold text-white">
-            {config.courses.reduce((sum, c) => sum + c.lessons.length, 0)}
-          </p>
-        </div>
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-4 text-center">
-          <p className="text-cyan-200 text-sm font-semibold">Courses</p>
-          <p className="text-2xl font-bold text-white">{config.courses.length}</p>
-        </div>
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-4 text-center">
-          <p className="text-emerald-200 text-sm font-semibold">XP Available</p>
-          <p className="text-2xl font-bold text-white">
-            {Math.round(config.courses.reduce((sum, c) => sum + c.lessons.length * 100, 0) / 100)}K
-          </p>
-        </div>
-      </div>
-
-      {/* Start Button */}
-      <div className="text-center pt-4">
-        <button
-          onClick={onStartExploring}
-          className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 shadow-xl transform hover:scale-105 mx-auto text-lg"
-        >
-          <Ship className="w-6 h-6" />
-          Start Exploring
-        </button>
-        <p className="text-white/40 text-sm mt-4">Set sail on your learning adventure! 🏴‍☠️</p>
-      </div>
-    </div>
-  );
-}
-
-// ─── World Map View ────────────────────────────────────────────────────────────
-function WorldMapView({
-  config,
-  t,
-  onCourseClick,
-  hoveredId,
-  setHoveredId,
-}: {
-  config: { titleKey: string; subtitleKey: string; courses: ArchipelagoCourse[] };
-  t: (key: string, fallback?: string) => string;
-  onCourseClick: (course: ArchipelagoCourse) => void;
-  hoveredId: string | null;
-  setHoveredId: (id: string | null) => void;
-}) {
-  return (
-    <div className="space-y-8">
-      {/* Title */}
-      <div className="text-center space-y-2">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white">🗺️ Explore the Archipelago</h2>
-        <p className="text-cyan-200/70 text-sm sm:text-base italic">
-          {t(config.subtitleKey)}
-        </p>
-      </div>
-
-      {/* Archipelago Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {config.courses.map((course) => {
-          const isHovered = hoveredId === course.id;
-          const lessonCount = course.lessons.length;
-          const completedCount = course.lessons.filter((l) => l.completed).length;
-          const progress = Math.round((completedCount / lessonCount) * 100);
-
-          return (
-            <div
-              key={course.id}
-              onClick={() => course.available && onCourseClick(course)}
-              onMouseEnter={() => setHoveredId(course.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              className={`relative overflow-hidden rounded-2xl transition-all duration-300 cursor-pointer ${
-                course.available
-                  ? isHovered
-                    ? "scale-105 shadow-2xl"
-                    : "hover:shadow-xl"
-                  : "opacity-50 cursor-not-allowed"
-              }`}
-            >
-              {/* Background Hero Image placeholder */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-teal-600/30 opacity-60" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-
-              <div className="relative p-6 sm:p-8 text-white min-h-96 flex flex-col">
-                {/* Top section with emoji and info */}
-                <div className="mb-auto">
-                  <div className="text-5xl mb-4">🏝️</div>
-                  <h3 className="text-2xl sm:text-3xl font-bold mb-2">
-                    {t(course.titleKey)}
-                  </h3>
-                  <p className="text-cyan-100 text-sm sm:text-base mb-4 line-clamp-2">
-                    {t(course.descriptionKey)}
-                  </p>
-
-                  {/* Stats */}
-                  <div className="grid grid-cols-3 gap-3 mb-4">
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
-                      <p className="text-xs text-cyan-200">Islands</p>
-                      <p className="text-lg font-bold">{lessonCount}</p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
-                      <p className="text-xs text-amber-200">XP</p>
-                      <p className="text-lg font-bold">{Math.round(lessonCount * 100)}</p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 text-center">
-                      <p className="text-xs text-emerald-200">Level</p>
-                      <p className="text-lg font-bold">
-                        {course.difficulty === "Beginner"
-                          ? "⭐"
-                          : course.difficulty === "Intermediate"
-                          ? "⭐⭐"
-                          : "⭐⭐⭐"}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Progress section */}
-                <div className="space-y-2 border-t border-white/10 pt-4">
-                  <div className="flex justify-between text-sm">
-                    <span>{t("archipelago.explored") ?? "Explored"}</span>
-                    <span className="font-bold">{progress}%</span>
-                  </div>
-                  <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-500"
-                      style={{ width: `${progress}%` }}
-                    />
-                  </div>
-                  <p className="text-xs text-cyan-200">
-                    {completedCount} of {lessonCount} islands discovered
-                  </p>
-                </div>
-
-                {/* Status Badge */}
-                {!course.available && (
-                  <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-sm px-3 py-1 rounded-lg flex items-center gap-1">
-                    <Lock className="w-4 h-4" />
-                    <span className="text-xs font-bold">Locked</span>
-                  </div>
-                )}
-
-                {course.isCurrent && (
-                  <div className="absolute top-4 right-4 bg-amber-500/80 backdrop-blur-sm px-3 py-1 rounded-lg flex items-center gap-1">
-                    <Wind className="w-4 h-4" />
-                    <span className="text-xs font-bold">Current</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 }
 
 // ─── Course View ────────────────────────────────────────────────────────────
-function CourseView({
-  course,
-  t,
-  onExploreLessons,
-  hoveredId,
-  setHoveredId,
-}: {
+function CourseView({ course, t, onLessonClick }: {
   course: ArchipelagoCourse;
   t: (key: string, fallback?: string) => string;
-  onExploreLessons: () => void;
-  hoveredId: string | null;
-  setHoveredId: (id: string | null) => void;
+  onLessonClick: (id: number) => void;
 }) {
-  return (
-    <div className="space-y-8">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-500/20 to-teal-600/30 p-8 sm:p-12 border border-white/20 min-h-96 flex items-end">
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-        <div className="relative z-10 space-y-4 w-full">
-          <div className="text-6xl">🏝️</div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            {t(course.titleKey)}
-          </h2>
-          <p className="text-cyan-100 text-lg">
-            {t(course.descriptionKey)}
-          </p>
+  const completedCount = course.lessons.filter(l => l.completed).length;
+  const total = course.lessons.length;
+  const pct = total > 0 ? Math.round((completedCount / total) * 100) : 0;
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-4 gap-4 pt-4 border-t border-white/10">
-            <div className="text-center">
-              <p className="text-cyan-200 text-sm">Islands</p>
-              <p className="text-2xl font-bold text-white">{course.lessons.length}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-amber-200 text-sm">Total XP</p>
-              <p className="text-2xl font-bold text-white">{Math.round(course.lessons.length * 100)}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-emerald-200 text-sm">Completed</p>
-              <p className="text-2xl font-bold text-white">{course.lessons.filter((l) => l.completed).length}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-rose-200 text-sm">Progress</p>
-              <p className="text-2xl font-bold text-white">
-                {Math.round((course.lessons.filter((l) => l.completed).length / course.lessons.length) * 100)}%
-              </p>
-            </div>
-          </div>
-        </div>
+  return (
+    <div className="max-w-4xl mx-auto space-y-6">
+      {/* Course header */}
+      <div className="text-center space-y-1">
+        <span className="text-4xl">{course.emoji}</span>
+        <h2 className="text-2xl font-bold text-amber-100">{t(course.titleKey)}</h2>
+        <p className="text-sm text-amber-300/70">{t(course.descriptionKey)}</p>
       </div>
 
-      {/* Lesson Preview Cards */}
-      <div className="space-y-4">
-        <h3 className="text-2xl font-bold text-white flex items-center gap-2">
-          ⛓️ Island Path ({course.lessons.length} islands)
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Progress */}
+      <div className="bg-amber-950/60 rounded-xl border border-amber-700/40 p-4 max-w-md mx-auto">
+        <div className="flex justify-between text-sm text-amber-200 mb-1">
+          <span>Voyage Progress</span>
+          <span className="font-bold text-amber-100">{pct}%</span>
+        </div>
+        <div className="h-1.5 bg-amber-900/60 rounded-full">
+          <div className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full transition-all" style={{ width: `${pct}%` }} />
+        </div>
+        <p className="text-xs text-amber-300/60 mt-1">{completedCount} of {total} islands discovered</p>
+      </div>
+
+      {/* Island path map */}
+      <div className="relative w-full aspect-[3/1] rounded-xl overflow-hidden border border-amber-700/40 bg-amber-950/30">
+        <svg className="w-full h-full" viewBox="0 0 100 35" preserveAspectRatio="xMidYMid meet">
+          {/* Sea routes between islands */}
           {course.lessons.map((lesson, idx) => {
-            const isHovered = hoveredId === `lesson-${lesson.id}`;
-
+            if (idx >= course.lessons.length - 1) return null;
+            const next = course.lessons[idx + 1];
             return (
-              <div
-                key={lesson.id}
-                onMouseEnter={() => setHoveredId(`lesson-${lesson.id}`)}
-                onMouseLeave={() => setHoveredId(null)}
-                className={`relative overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 p-4 transition-all duration-300 ${
-                  isHovered ? "scale-105 shadow-xl border-cyan-300" : ""
-                }`}
-              >
-                {/* Number Badge */}
-                <div className="absolute top-3 left-3 bg-amber-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
-                  {idx + 1}
-                </div>
-
-                {/* Status Icons */}
-                <div className="absolute top-3 right-3">
-                  {lesson.completed ? (
-                    <CheckCircle2 className="w-6 h-6 text-emerald-400" />
-                  ) : lesson.available ? (
-                    <div className="w-6 h-6 rounded-full border-2 border-cyan-400 flex items-center justify-center">
-                      <div className="w-2 h-2 bg-cyan-400 rounded-full" />
-                    </div>
-                  ) : (
-                    <Lock className="w-6 h-6 text-slate-400" />
-                  )}
-                </div>
-
-                <div className="mt-6 space-y-2">
-                  <h4 className="text-white font-bold line-clamp-2">{lesson.title}</h4>
-                  <p className="text-cyan-100 text-sm line-clamp-2">{lesson.subtitle}</p>
-                  <div className="flex gap-2 pt-2 text-xs text-cyan-200">
-                    <span>⏱ {lesson.duration ?? 10}m</span>
-                    <span>⭐ {lesson.xp ?? 50} XP</span>
-                  </div>
-                </div>
-              </div>
+              <path key={`path-${lesson.id}`}
+                d={`M${lesson.x},${lesson.y} Q${(lesson.x + next.x) / 2},${(lesson.y + next.y) / 2 - 4} ${next.x},${next.y}`}
+                fill="none" stroke="#d97706" strokeWidth="0.4" strokeDasharray="1.5,1" opacity="0.4"
+              />
             );
           })}
-        </div>
+
+          {/* Island nodes */}
+          {course.lessons.map((lesson, idx) => {
+            const isCompleted = lesson.completed;
+            const isCurrent = lesson.current;
+            const isAvailable = lesson.available;
+            const size = lesson.isFinalIsland ? "12" : lesson.isMainIsland ? "10" : "7";
+            const fontSize = lesson.isFinalIsland ? "5" : lesson.isMainIsland ? "4" : "3";
+
+            return (
+              <g key={lesson.id}
+                onClick={() => isAvailable && onLessonClick(lesson.id)}
+                className={isAvailable ? "cursor-pointer" : "cursor-not-allowed"}
+                style={{ transition: "transform 0.2s" }}>
+                {/* Pulsing for current */}
+                {isCurrent && (
+                  <circle cx={lesson.x} cy={lesson.y} r="8" fill="none" stroke="#f59e0b" strokeWidth="0.3" opacity="0.3">
+                    <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite" />
+                  </circle>
+                )}
+                {/* Node background */}
+                <circle cx={lesson.x} cy={lesson.y} r={size}
+                  fill={isCompleted ? "#f59e0b" : isCurrent ? "#d97706" : isAvailable ? "#57534e" : "#44403c"}
+                  stroke={isCompleted ? "#fbbf24" : isCurrent ? "#f59e0b" : isAvailable ? "#78716c" : "#57534e"}
+                  strokeWidth={isCurrent ? "0.8" : "0.4"}
+                />
+                {/* Emoji */}
+                <text x={lesson.x} y={lesson.y + fontSize * 0.35} textAnchor="middle" fontSize={fontSize}
+                  className="pointer-events-none">{lesson.emoji}</text>
+                {/* Lock icon */}
+                {!isAvailable && (
+                  <text x={lesson.x} y={lesson.y + fontSize * 0.35} textAnchor="middle" fontSize="4" fill="#78716c">🔒</text>
+                )}
+                {/* Number */}
+                <text x={lesson.x} y={lesson.y + parseFloat(size) + 1.5} textAnchor="middle" fontSize="2" fill="#d4a574" opacity="0.7">
+                  {idx + 1}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
       </div>
 
-      {/* Continue Button */}
-      <button
-        onClick={onExploreLessons}
-        className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg transform hover:scale-105"
-      >
-        <Wind className="w-5 h-5" />
-        Begin Your Voyage
-      </button>
+      {/* Lesson list */}
+      <div className="space-y-2">
+        {course.lessons.map((lesson, idx) => (
+          <button key={lesson.id}
+            onClick={() => lesson.available && onLessonClick(lesson.id)}
+            disabled={!lesson.available}
+            className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-colors
+              ${lesson.completed ? "bg-amber-900/40 border border-amber-700/40" : ""}
+              ${lesson.current ? "bg-amber-800/40 border border-amber-600/60 ring-1 ring-amber-500/30" : ""}
+              ${lesson.available && !lesson.completed && !lesson.current ? "bg-amber-950/40 border border-amber-800/30 hover:bg-amber-900/40" : ""}
+              ${!lesson.available ? "opacity-40 cursor-not-allowed bg-amber-950/20 border border-amber-900/20" : ""}
+            `}>
+            <span className="text-lg w-8 text-center">{lesson.completed ? "✅" : lesson.current ? "📍" : !lesson.available ? "🔒" : "○"}</span>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-amber-100">{lesson.title}</p>
+              <p className="text-xs text-amber-300/60 truncate">{lesson.subtitle || "Ready to explore"}</p>
+            </div>
+            <div className="text-xs text-amber-400/60 shrink-0">
+              ⚡{lesson.xp ?? 50}
+            </div>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
 
 // ─── Lessons Map View ────────────────────────────────────────────────────────
-function LessonsMapView({
-  course,
-  t,
-  onLessonClick,
-  hoveredId,
-  setHoveredId,
-}: {
+function LessonsMapView({ course, t, onLessonClick }: {
   course: ArchipelagoCourse;
   t: (key: string, fallback?: string) => string;
-  onLessonClick: (lessonId: number) => void;
-  hoveredId: string | null;
-  setHoveredId: (id: string | null) => void;
+  onLessonClick: (id: number) => void;
 }) {
-  const completedCount = course.lessons.filter((l) => l.completed).length;
+  const completedCount = course.lessons.filter(l => l.completed).length;
+  const total = course.lessons.length;
+  const pct = total > 0 ? Math.round((completedCount / total) * 100) : 0;
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="text-center space-y-2">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white">⛓️ Island Learning Path</h2>
-        <p className="text-cyan-200 text-sm">
-          {completedCount} of {course.lessons.length} islands discovered
-        </p>
+    <div className="max-w-4xl mx-auto space-y-6">
+      <div className="text-center space-y-1">
+        <h2 className="text-2xl font-bold text-amber-100">Learning Path</h2>
+        <p className="text-sm text-amber-300/70">{completedCount} of {total} islands discovered</p>
       </div>
 
-      {/* Overall Progress */}
-      <div className="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 p-6">
-        <div className="flex justify-between text-cyan-200 text-sm mb-2">
-          <span>Voyage Progress</span>
-          <span className="font-bold">
-            {Math.round((completedCount / course.lessons.length) * 100)}%
-          </span>
+      <div className="bg-amber-950/60 rounded-xl border border-amber-700/40 p-4 max-w-md mx-auto">
+        <div className="flex justify-between text-sm text-amber-200 mb-1">
+          <span>Progress</span>
+          <span className="font-bold text-amber-100">{pct}%</span>
         </div>
-        <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden border border-cyan-300">
-          <div
-            className="h-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 transition-all duration-500"
-            style={{
-              width: `${(completedCount / course.lessons.length) * 100}%`,
-            }}
-          />
+        <div className="h-1.5 bg-amber-900/60 rounded-full">
+          <div className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full transition-all" style={{ width: `${pct}%` }} />
         </div>
       </div>
 
-      {/* Lessons Grid - Island Path */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {course.lessons.map((lesson, idx) => {
-          const isHovered = hoveredId === `${lesson.id}`;
-          const isPrevious = idx === 0;
-          const isCurrent = lesson.current;
-          const isNext = idx === completedCount && lesson.available;
+      <div className="relative w-full aspect-[3/1] rounded-xl overflow-hidden border border-amber-700/40 bg-amber-950/30">
+        <svg className="w-full h-full" viewBox="0 0 100 35" preserveAspectRatio="xMidYMid meet">
+          {course.lessons.map((lesson, idx) => {
+            if (idx >= course.lessons.length - 1) return null;
+            const next = course.lessons[idx + 1];
+            return (
+              <path key={`path-${lesson.id}`}
+                d={`M${lesson.x},${lesson.y} Q${(lesson.x + next.x) / 2},${(lesson.y + next.y) / 2 - 4} ${next.x},${next.y}`}
+                fill="none" stroke="#d97706" strokeWidth="0.4" strokeDasharray="1.5,1" opacity="0.4"
+              />
+            );
+          })}
 
-          return (
-            <div
-              key={lesson.id}
-              onClick={() => lesson.available && onLessonClick(lesson.id)}
-              onMouseEnter={() => setHoveredId(`${lesson.id}`)}
-              onMouseLeave={() => setHoveredId(null)}
-              className={`relative group overflow-hidden rounded-2xl p-6 transition-all duration-300 cursor-pointer ${
-                lesson.completed
-                  ? "bg-gradient-to-br from-emerald-500/20 to-green-600/20 border-2 border-emerald-400 shadow-lg"
-                  : lesson.current
-                  ? "bg-gradient-to-br from-amber-500/20 to-orange-600/20 border-2 border-amber-400 shadow-lg scale-105"
-                  : lesson.available
-                  ? "bg-white/10 border border-white/20 hover:border-cyan-300 " + (isHovered ? "scale-105 shadow-xl" : "")
-                  : "bg-slate-800/20 border border-slate-600 opacity-40 cursor-not-allowed"
-              }`}
-            >
-              {/* Island Number Badge */}
-              <div
-                className={`absolute top-4 left-4 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-200 ${
-                  lesson.completed
-                    ? "bg-emerald-500 text-white"
-                    : lesson.current
-                    ? "bg-amber-500 text-white animate-pulse"
-                    : lesson.available
-                    ? "bg-cyan-500 text-white"
-                    : "bg-slate-600 text-slate-300"
-                }`}
-              >
-                {idx + 1}
-              </div>
+          {course.lessons.map((lesson, idx) => {
+            const isCompleted = lesson.completed;
+            const isCurrent = lesson.current;
+            const isAvailable = lesson.available;
+            const size = lesson.isFinalIsland ? "12" : lesson.isMainIsland ? "10" : "7";
+            const fontSize = lesson.isFinalIsland ? "5" : lesson.isMainIsland ? "4" : "3";
 
-              {/* Status Icon */}
-              <div className="absolute top-4 right-4">
-                {lesson.completed ? (
-                  <div className="flex items-center gap-1 bg-emerald-500/80 px-2 py-1 rounded-lg">
-                    <CheckCircle2 className="w-4 h-4 text-white" />
-                    <span className="text-xs font-bold text-white">Done</span>
-                  </div>
-                ) : lesson.current ? (
-                  <div className="flex items-center gap-1 bg-amber-500/80 px-2 py-1 rounded-lg animate-pulse">
-                    <Compass className="w-4 h-4 text-white" />
-                    <span className="text-xs font-bold text-white">Current</span>
-                  </div>
-                ) : lesson.available ? (
-                  <div className="flex items-center gap-1 bg-cyan-500/80 px-2 py-1 rounded-lg">
-                    <PlayCircle className="w-4 h-4 text-white" />
-                    <span className="text-xs font-bold text-white">Ready</span>
-                  </div>
-                ) : (
-                  <Lock className="w-5 h-5 text-slate-400" />
+            return (
+              <g key={lesson.id}
+                onClick={() => isAvailable && onLessonClick(lesson.id)}
+                className={isAvailable ? "cursor-pointer" : "cursor-not-allowed"}>
+                {isCurrent && (
+                  <circle cx={lesson.x} cy={lesson.y} r="8" fill="none" stroke="#f59e0b" strokeWidth="0.3" opacity="0.3">
+                    <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite" />
+                  </circle>
                 )}
-              </div>
-
-              {/* Content */}
-              <div className="mt-8 space-y-2">
-                <h3 className="text-lg font-bold text-white line-clamp-2 group-hover:text-cyan-200 transition-colors">
-                  {lesson.title}
-                </h3>
-                <p className="text-sm text-cyan-100 line-clamp-2">{lesson.subtitle}</p>
-
-                {/* Stats */}
-                <div className="flex gap-3 pt-3 text-xs text-cyan-200 border-t border-white/10">
-                  <span>⏱ {lesson.duration ?? 10} min</span>
-                  <span>⚡ {lesson.xp ?? 50} XP</span>
-                </div>
-              </div>
-
-              {/* Hover Label */}
-              {lesson.available && (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 via-slate-950 to-transparent p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-200">
-                  <p className="text-white font-bold text-sm flex items-center gap-1">
-                    <Wind className="w-4 h-4" />
-                    Start Lesson
-                  </p>
-                </div>
-              )}
-            </div>
-          );
-        })}
+                <circle cx={lesson.x} cy={lesson.y} r={size}
+                  fill={isCompleted ? "#f59e0b" : isCurrent ? "#d97706" : isAvailable ? "#57534e" : "#44403c"}
+                  stroke={isCompleted ? "#fbbf24" : isCurrent ? "#f59e0b" : isAvailable ? "#78716c" : "#57534e"}
+                  strokeWidth={isCurrent ? "0.8" : "0.4"}
+                />
+                <text x={lesson.x} y={lesson.y + fontSize * 0.35} textAnchor="middle" fontSize={fontSize}
+                  className="pointer-events-none">{lesson.emoji}</text>
+                {!isAvailable && (
+                  <text x={lesson.x} y={lesson.y + fontSize * 0.35} textAnchor="middle" fontSize="4" fill="#78716c">🔒</text>
+                )}
+                <text x={lesson.x} y={lesson.y + parseFloat(size) + 1.5} textAnchor="middle" fontSize="2" fill="#d4a574" opacity="0.7">
+                  {idx + 1}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
       </div>
 
-      {/* Motivation Message */}
-      {completedCount < course.lessons.length && (
-        <div className="bg-gradient-to-r from-amber-500/20 to-orange-600/20 border border-amber-400/50 rounded-xl p-6 text-center">
-          <p className="text-white font-bold text-lg">
-            {completedCount === course.lessons.length - 1
-              ? "🎉 Almost there! One more island to complete this expedition!"
-              : "⛵ Keep exploring! Adventure awaits!"}
-          </p>
-        </div>
-      )}
-
-      {completedCount === course.lessons.length && (
-        <div className="bg-gradient-to-r from-emerald-500/20 to-green-600/20 border border-emerald-400/50 rounded-xl p-6 text-center">
-          <p className="text-white font-bold text-lg">
-            🏴‍☠️ Congratulations! You've mastered {t(course.titleKey)}!
-          </p>
-        </div>
-      )}
+      <div className="space-y-2">
+        {course.lessons.map((lesson, idx) => (
+          <button key={lesson.id}
+            onClick={() => lesson.available && onLessonClick(lesson.id)}
+            disabled={!lesson.available}
+            className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-colors
+              ${lesson.completed ? "bg-amber-900/40 border border-amber-700/40" : ""}
+              ${lesson.current ? "bg-amber-800/40 border border-amber-600/60 ring-1 ring-amber-500/30" : ""}
+              ${lesson.available && !lesson.completed && !lesson.current ? "bg-amber-950/40 border border-amber-800/30 hover:bg-amber-900/40" : ""}
+              ${!lesson.available ? "opacity-40 cursor-not-allowed bg-amber-950/20 border border-amber-900/20" : ""}
+            `}>
+            <span className="text-lg w-8 text-center">{lesson.completed ? "✅" : lesson.current ? "📍" : !lesson.available ? "🔒" : "○"}</span>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-amber-100">{lesson.title}</p>
+              <p className="text-xs text-amber-300/60 truncate">{lesson.subtitle || "Ready to explore"}</p>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-amber-400/60 shrink-0">
+              <span>⏱{lesson.duration ?? 10}m</span>
+              <span>⚡{lesson.xp ?? 50}</span>
+            </div>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
