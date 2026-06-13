@@ -1,12 +1,12 @@
 {
   "security": {
-    "title": "Security & Trust",
+    "title": "Sicherheit & Vertrauen",
     "subtitle": "Insel1o1 ist für die Sicherheit deines Kindes und die Anforderungen von Schulen entwickelt.",
     "dataProtection": "Datenschutz",
     "dataProtectionDesc": "Verschlüsselte Datenübertragung und sichere Speicherung aller persönlichen Informationen.",
-    "studentPrivacy": "Schülerprivacy",
+    "studentPrivacy": "Schülerdatenschutz",
     "studentPrivacyDesc": "Kinder- und jugendgeschützte Profile mit elterlicher Einwilligung und transparenter Datenverarbeitung.",
-    "schoolCompliance": "School Compliance",
+    "schoolCompliance": "Schulkonformität",
     "schoolComplianceDesc": "DSGVO-konform und bereit für den Einsatz an Schulen und Bildungseinrichtungen.",
     "secureInfrastructure": "Sichere Infrastruktur",
     "secureInfrastructureDesc": "Stabile und geschützte technische Infrastruktur für zuverlässigen Betrieb.",

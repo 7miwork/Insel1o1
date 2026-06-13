@@ -13,10 +13,10 @@ export default function Docs() {
   const { t } = useI18n();
 
   const sections = [
-    { icon: <FileText className="h-4 w-4 text-cyan-600" />, title: "Getting Started", status: "Coming soon", desc: "First steps for students, parents and teachers." },
-    { icon: <Layers className="h-4 w-4 text-amber-600" />, title: "Platform Overview", status: "In progress", desc: "How the Insel1o1 platform fits together." },
-    { icon: <GraduationCap className="h-4 w-4 text-emerald-600" />, title: "Student System", status: "Planned", desc: "Learning paths, lessons, and progress." },
-    { icon: <School className="h-4 w-4 text-violet-600" />, title: "School Dashboard", status: "Planned", desc: "Class management, analytics, and reports." },
+    { icon: <FileText className="h-4 w-4 text-cyan-600" />, title: t("docs.section1Title"), status: t("docs.section1Status"), desc: t("docs.section1Desc") },
+    { icon: <Layers className="h-4 w-4 text-amber-600" />, title: t("docs.section2Title"), status: t("docs.section2Status"), desc: t("docs.section2Desc") },
+    { icon: <GraduationCap className="h-4 w-4 text-emerald-600" />, title: t("docs.section3Title"), status: t("docs.section3Status"), desc: t("docs.section3Desc") },
+    { icon: <School className="h-4 w-4 text-violet-600" />, title: t("docs.section4Title"), status: t("docs.section4Status"), desc: t("docs.section4Desc") },
   ];
 
   const statusColor = (status: string) => {
@@ -60,10 +60,10 @@ export default function Docs() {
             {t("docs.badge")}
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-            Documentation is evolving
+            {t("docs.title")}
           </h1>
           <p className="text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
-            We are actively building structured learning and system documentation.
+            {t("docs.subtitle")}
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export default function Docs() {
 
         {/* Footer Note */}
         <p className="text-xs text-slate-400 text-center mt-10">
-          Docs will continuously expand as the platform grows.
+          {t("docs.footerNote")}
         </p>
       </main>
     </div>
