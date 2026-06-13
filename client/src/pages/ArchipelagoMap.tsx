@@ -131,7 +131,7 @@ export default function ArchipelagoMap() {
     // Delay the actual view change for zoom animation
     setTimeout(() => {
       setEnteringIsland(false);
-      if (course.lessons.length > 0) setViewLevel("course");
+      if ((course.lessons ?? []).length > 0) setViewLevel("course");
     }, 600);
   }, []);
 
@@ -146,8 +146,8 @@ export default function ArchipelagoMap() {
   }, [viewLevel, setLocation]);
 
   const courses = config.courses;
-  const totalLessons = courses.reduce((s, c) => s + c.lessons.length, 0);
-  const completedLessons = courses.reduce((s, c) => s + c.lessons.filter(l => l.completed).length, 0);
+  const totalLessons = courses.reduce((s, c) => s + (c.lessons ?? []).length, 0);
+  const completedLessons = courses.reduce((s, c) => s + (c.lessons ?? []).filter((l: any) => l.completed).length, 0);
   const progress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   return (
@@ -231,8 +231,9 @@ export default function ArchipelagoMap() {
                   })}
                 </svg>
                 {courses.map((course) => {
-                  const lessonCount = course.lessons.length;
-                  const courseCompleted = course.lessons.filter(l => l.completed).length;
+                  const courseLessons = course.lessons ?? [];
+                  const lessonCount = courseLessons.length;
+                  const courseCompleted = courseLessons.filter((l: any) => l.completed).length;
                   const allDone = course.available && lessonCount > 0 && courseCompleted === lessonCount;
                   const hasProgress = courseCompleted > 0 && !allDone;
                   const svgX = (course.x / 100) * 100;
@@ -349,19 +350,21 @@ function IslandView({ course, t, onLessonClick }: {
   t: (key: string, fallback?: string) => string;
   onLessonClick: (id: number) => void;
 }) {
-  const completedCount = course.lessons.filter(l => l.completed).length;
-  const total = course.lessons.length;
+  if (!course) return null;
+  const lessons = course.lessons ?? [];
+  const completedCount = lessons.filter((l: any) => l.completed).length;
+  const total = lessons.length;
   const pct = total > 0 ? Math.round((completedCount / total) * 100) : 0;
 
   // Compute viewBox that fits all lessons with padding
-  const xs = course.lessons.map(l => l.x);
-  const ys = course.lessons.map(l => l.y);
-  const minX = Math.max(0, Math.min(...xs) - 10);
-  const maxX = Math.min(100, Math.max(...xs) + 10);
-  const minY = Math.max(0, Math.min(...ys) - 12);
-  const maxY = Math.min(100, Math.max(...ys) + 12);
-  const vw = maxX - minX;
-  const vh = maxY - minY;
+  const xs = lessons.map((l: any) => l.x ?? 50);
+  const ys = lessons.map((l: any) => l.y ?? 50);
+  const minX = xs.length > 0 ? Math.max(0, Math.min(...xs) - 10) : 0;
+  const maxX = xs.length > 0 ? Math.min(100, Math.max(...xs) + 10) : 100;
+  const minY = ys.length > 0 ? Math.max(0, Math.min(...ys) - 12) : 0;
+  const maxY = ys.length > 0 ? Math.min(100, Math.max(...ys) + 12) : 100;
+  const vw = Math.max(maxX - minX, 1);
+  const vh = Math.max(maxY - minY, 1);
 
   return (
     <div className="max-w-6xl mx-auto space-y-4 animate-[islandEnter_0.6s_ease-out]">
@@ -428,9 +431,10 @@ function IslandView({ course, t, onLessonClick }: {
           </defs>
 
           {/* ── Paths between lessons ── */}
-          {course.lessons.map((lesson, idx) => {
-            if (idx >= course.lessons.length - 1) return null;
-            const next = course.lessons[idx + 1];
+          {lessons.map((lesson: any, idx: number) => {
+            if (idx >= lessons.length - 1) return null;
+            const next = lessons[idx + 1] as any;
+            if (!next) return null;
             const isPathVisible = lesson.completed || lesson.current;
             const isPathLocked = !lesson.completed && !lesson.current && !next.available;
 
@@ -473,7 +477,7 @@ function IslandView({ course, t, onLessonClick }: {
           })}
 
           {/* ── Lesson Nodes (Landmarks) ── */}
-          {course.lessons.map((lesson, idx) => {
+          {lessons.map((lesson: any, idx: number) => {
             const isCompleted = lesson.completed;
             const isCurrent = lesson.current;
             const isAvailable = lesson.available;
@@ -555,7 +559,7 @@ function IslandView({ course, t, onLessonClick }: {
                   fontFamily="serif"
                   className="pointer-events-none"
                   style={{ fontStyle: "italic" }}>
-                  {lesson.title.length > 18 ? lesson.title.substring(0, 16) + "…" : lesson.title}
+                  {(lesson.title ?? "").length > 18 ? (lesson.title ?? "").substring(0, 16) + "…" : (lesson.title ?? "")}
                 </text>
 
                 {/* Step number */}
@@ -596,9 +600,9 @@ function IslandView({ course, t, onLessonClick }: {
 
       {/* ── XP Summary ── */}
       <div className="flex items-center justify-center gap-4 text-xs" style={{ color: "rgba(184,164,138,0.5)" }}>
-        <span>⚡ {course.lessons.reduce((s, l) => s + (l.xp ?? 50), 0)} XP available</span>
+        <span>⚡ {lessons.reduce((s: number, l: any) => s + (l.xp ?? 50), 0)} XP available</span>
         <span>•</span>
-        <span>⏱ {course.lessons.reduce((s, l) => s + (l.duration ?? 10), 0)} min total</span>
+        <span>⏱ {lessons.reduce((s: number, l: any) => s + (l.duration ?? 10), 0)} min total</span>
       </div>
     </div>
   );
