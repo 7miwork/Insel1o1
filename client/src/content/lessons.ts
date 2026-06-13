@@ -18,6 +18,16 @@ import {
 
 // ─── Types ────────────────────────────────────────────────────────────
 
+/** Optional cinematic / showcase media for an island */
+export type IslandMedia = {
+  /** Cinematic / timelapse / build video URL (YouTube, Vimeo, mp4) */
+  introVideoUrl?: string;
+  /** Fallback thumbnail image URL */
+  introImageUrl?: string;
+  /** Optional narrative text describing the showcase */
+  description?: string;
+};
+
 export type Lesson = {
   /** Unique lesson ID (maps to /lesson/:id route) */
   id: string;
@@ -100,6 +110,9 @@ export type Island = {
 
   /** Optional theme icon */
   icon?: string;
+
+  /** Optional cinematic showcase / timelapse media */
+  media?: IslandMedia;
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────
@@ -175,6 +188,10 @@ export const islands: Island[] = [
     y: 50,
     available: true,
     lessons: buildMinecraftLessons(),
+    media: {
+      introVideoUrl: "https://youtu.be/2TStogXT1lc",
+      description: "Minecraft Education timelapse showing how the island worlds were designed and built.",
+    },
   },
   {
     id: "minecraft-advanced",

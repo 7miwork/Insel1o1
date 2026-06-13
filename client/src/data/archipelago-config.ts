@@ -9,7 +9,7 @@
  */
 
 import { islands } from "@/content/lessons";
-import type { Island } from "@/content/lessons";
+import type { Island, IslandMedia } from "@/content/lessons";
 
 // ─── Types (kept for backward compatibility) ───
 
@@ -55,6 +55,8 @@ export interface ArchipelagoCourse {
   lessons: ArchipelagoLesson[];
   /** Whether this course is currently available */
   available: boolean;
+  /** Optional cinematic showcase / timelapse media */
+  media?: IslandMedia;
 }
 
 export interface ArchipelagoConfig {
@@ -81,6 +83,7 @@ function islandToCourse(island: Island): ArchipelagoCourse {
     x: island.x,
     y: island.y,
     available: island.available,
+    media: island.media,
     lessons: island.lessons.map((l) => ({
       id: Number(l.id),
       titleKey: l.titleKey ?? "",

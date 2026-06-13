@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo, useRef } from "react";
 import { useLocation } from "wouter";
-import { ChevronLeft, Compass, Ship, Map as MapIcon, Lock, CheckCircle2, PlayCircle, Wind, Trophy, Target, Star, Anchor, Eye } from "lucide-react";
+import { ChevronLeft, Compass, Ship, Map as MapIcon, Lock, CheckCircle2, PlayCircle, Wind, Trophy, Target, Star, Anchor, Eye, X } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import {
   programmingArchipelago,
@@ -350,8 +350,10 @@ function IslandView({ course, t, onLessonClick }: {
   t: (key: string, fallback?: string) => string;
   onLessonClick: (id: number) => void;
 }) {
+  const [showShowcase, setShowShowcase] = useState(false);
   if (!course) return null;
   const lessons = course.lessons ?? [];
+  const showcaseVideo = course.media?.introVideoUrl;
   const completedCount = lessons.filter((l: any) => l.completed).length;
   const total = lessons.length;
   const pct = total > 0 ? Math.round((completedCount / total) * 100) : 0;
@@ -383,6 +385,16 @@ function IslandView({ course, t, onLessonClick }: {
         <p className="text-sm max-w-lg mx-auto" style={{ color: "#b8a48a" }}>
           {t(course.descriptionKey)}
         </p>
+        {showcaseVideo && (
+          <button
+            onClick={() => setShowShowcase(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-colors hover:opacity-80"
+            style={{ background: "rgba(107,66,38,0.3)", border: "1px solid rgba(107,66,38,0.5)", color: "#d8c49a" }}
+          >
+            <PlayCircle className="w-3.5 h-3.5" />
+            <span>Watch Island Timelapse</span>
+          </button>
+        )}
       </div>
 
       {/* ── Island Map (the main parchment overlay) ── */}
@@ -604,6 +616,40 @@ function IslandView({ course, t, onLessonClick }: {
         <span>•</span>
         <span>⏱ {lessons.reduce((s: number, l: any) => s + (l.duration ?? 10), 0)} min total</span>
       </div>
+
+      {/* ── Showcase Video Overlay ── */}
+      {showShowcase && showcaseVideo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ background: "rgba(0,0,0,0.85)" }}
+          onClick={() => setShowShowcase(false)}>
+          <div className="relative w-full max-w-3xl mx-4"
+            onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setShowShowcase(false)}
+              className="absolute -top-10 right-0 p-1.5 rounded-full transition-colors"
+              style={{ color: "#d8c49a" }}>
+              <X className="w-5 h-5" />
+            </button>
+            <div className="relative rounded-xl overflow-hidden shadow-2xl"
+              style={{ paddingBottom: "56.25%", border: "2px solid rgba(107,66,38,0.5)" }}>
+              <iframe
+                src={showcaseVideo.includes("youtu")
+                  ? `https://www.youtube.com/embed/${showcaseVideo.match(/(?:youtu\.be\/|v=)([^&?/]+)/)?.[1] || ""}`
+                  : showcaseVideo}
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={`${course.name} Showcase`}
+              />
+            </div>
+            {course.media?.description && (
+              <p className="text-center text-xs mt-3" style={{ color: "rgba(184,164,138,0.6)" }}>
+                {course.media.description}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
