@@ -7,6 +7,146 @@ import {
   type ArchipelagoCourse,
 } from "@/data/archipelago-config";
 
+/* ── Decorative Compass Rose SVG ── */
+function CompassRose({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 100 100" className={className} style={{ width: "120px", height: "120px" }}>
+      <g opacity="0.35">
+        {/* Outer ring */}
+        <circle cx="50" cy="50" r="48" fill="none" stroke="#d4a574" strokeWidth="0.8" />
+        <circle cx="50" cy="50" r="45" fill="none" stroke="#d4a574" strokeWidth="0.4" strokeDasharray="3,2" />
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#d4a574" strokeWidth="0.3" />
+        {/* 8-pointed star */}
+        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => {
+          const isMajor = angle % 90 === 0;
+          const innerR = isMajor ? 8 : 16;
+          const outerR = isMajor ? 40 : 32;
+          const rad = (angle * Math.PI) / 180;
+          const x1 = 50 + Math.sin(rad) * innerR;
+          const y1 = 50 - Math.cos(rad) * innerR;
+          const x2 = 50 + Math.sin(rad) * outerR;
+          const y2 = 50 - Math.cos(rad) * outerR;
+          return (
+            <line key={angle} x1={x1} y1={y1} x2={x2} y2={y2}
+              stroke={isMajor ? "#b8860b" : "#d4a574"} strokeWidth={isMajor ? "2" : "1"} opacity={isMajor ? "0.8" : "0.5"} />
+          );
+        })}
+        {/* Cardinal labels */}
+        <text x="50" y="8" textAnchor="middle" fontSize="5" fontWeight="bold" fill="#d4a574">N</text>
+        <text x="92" y="52" textAnchor="middle" fontSize="4" fill="#d4a574">E</text>
+        <text x="50" y="95" textAnchor="middle" fontSize="4" fill="#d4a574">S</text>
+        <text x="8" y="52" textAnchor="middle" fontSize="4" fill="#d4a574">W</text>
+        {/* Center circle */}
+        <circle cx="50" cy="50" r="3" fill="#d4a574" opacity="0.6" />
+        <circle cx="50" cy="50" r="1.5" fill="#92400e" />
+      </g>
+    </svg>
+  );
+}
+
+/* ── Decorative Sea Elements SVG Layer ── */
+function SeaElements() {
+  return (
+    <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+      {/* Wave lines */}
+      <path d="M5,90 Q15,88 25,90 Q35,92 45,90 Q55,88 65,90 Q75,92 85,90 Q95,88 100,90" fill="none" stroke="#d4a574" strokeWidth="0.15" opacity="0.25" />
+      <path d="M0,94 Q10,92 20,94 Q30,96 40,94 Q50,92 60,94 Q70,96 80,94 Q90,92 100,94" fill="none" stroke="#d4a574" strokeWidth="0.12" opacity="0.2" />
+
+      {/* Small sailing ship 1 */}
+      <g transform="translate(12,72) scale(0.4)" opacity="0.35">
+        <path d="M0,0 Q5,-4 10,0" fill="#d4a574" stroke="#d4a574" strokeWidth="0.5" />
+        <line x1="5" y1="0" x2="5" y2="-6" stroke="#d4a574" strokeWidth="0.4" />
+        <path d="M5,-6 Q8,-3 5,-1" fill="#d4a574" opacity="0.7" />
+      </g>
+
+      {/* Small sailing ship 2 */}
+      <g transform="translate(82,82) scale(0.35) rotate(-15)" opacity="0.3">
+        <path d="M0,0 Q4,-3 8,0" fill="#d4a574" stroke="#d4a574" strokeWidth="0.5" />
+        <line x1="4" y1="0" x2="4" y2="-5" stroke="#d4a574" strokeWidth="0.4" />
+        <path d="M4,-5 Q6,-2.5 4,-0.5" fill="#d4a574" opacity="0.7" />
+      </g>
+
+      {/* Whale tail */}
+      <g transform="translate(25,12) scale(0.3)" opacity="0.25">
+        <path d="M0,0 Q3,-5 6,0" fill="none" stroke="#d4a574" strokeWidth="0.8" />
+        <path d="M2,-1 Q4,-6 6,-1" fill="none" stroke="#d4a574" strokeWidth="0.6" />
+      </g>
+
+      {/* Sea serpent */}
+      <g transform="translate(70,15) scale(0.3)" opacity="0.2">
+        <path d="M0,0 Q3,-2 6,0 Q9,2 12,0 Q15,-2 18,0" fill="none" stroke="#d4a574" strokeWidth="0.8" />
+        <circle cx="18" cy="0" r="1" fill="#d4a574" />
+      </g>
+
+      {/* Small fish */}
+      <g transform="translate(55,8) scale(0.2)" opacity="0.25">
+        <path d="M0,0 Q4,-2 8,0 Q4,2 0,0 Z" fill="#d4a574" />
+        <path d="M0,0 L-2,-1.5 L-2,1.5 Z" fill="#d4a574" />
+      </g>
+
+      {/* Clouds */}
+      <g transform="translate(15,3)" opacity="0.15">
+        <ellipse cx="0" cy="0" rx="4" ry="1.5" fill="#d4a574" />
+        <ellipse cx="3" cy="-0.5" rx="3" ry="1.2" fill="#d4a574" />
+      </g>
+      <g transform="translate(78,6)" opacity="0.12">
+        <ellipse cx="0" cy="0" rx="3.5" ry="1.3" fill="#d4a574" />
+        <ellipse cx="2.5" cy="-0.4" rx="2.5" ry="1" fill="#d4a574" />
+      </g>
+
+      {/* "Here be Dragons" text */}
+      <text x="18" y="22" fontSize="2.2" fontFamily="serif" fontStyle="italic" fill="#d4a574" opacity="0.3" transform="rotate(-8, 18, 22)">
+        Here be Dragons
+      </text>
+
+      {/* "Mare Incognitum" text */}
+      <text x="72" y="38" fontSize="1.8" fontFamily="serif" fontStyle="italic" fill="#d4a574" opacity="0.2" transform="rotate(5, 72, 38)">
+        Mare Incognitum
+      </text>
+
+      {/* Treasure X marks */}
+      <g transform="translate(42,78) scale(0.25)" opacity="0.3">
+        <line x1="-2" y1="-2" x2="2" y2="2" stroke="#b8860b" strokeWidth="1" />
+        <line x1="2" y1="-2" x2="-2" y2="2" stroke="#b8860b" strokeWidth="1" />
+      </g>
+
+      {/* Wind lines */}
+      <g opacity="0.2">
+        <path d="M88,42 Q90,41 92,42" fill="none" stroke="#d4a574" strokeWidth="0.3" />
+        <path d="M89,44 Q91,43 93,44" fill="none" stroke="#d4a574" strokeWidth="0.25" />
+      </g>
+
+      {/* Anchor */}
+      <g transform="translate(8,88) scale(0.2)" opacity="0.2">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#d4a574" strokeWidth="1.2" />
+        <circle cx="0" cy="-1" r="1.5" fill="none" stroke="#d4a574" strokeWidth="0.8" />
+        <path d="M-3,8 Q0,6 3,8" fill="none" stroke="#d4a574" strokeWidth="1" />
+      </g>
+
+      {/* Star */}
+      <g transform="translate(92,10) scale(0.25)" opacity="0.25">
+        <polygon points="0,-4 1.2,-1.2 4,0 1.2,1.2 0,4 -1.2,1.2 -4,0 -1.2,-1.2" fill="#d4a574" />
+      </g>
+
+      {/* Coastline decorations - bottom left */}
+      <path d="M2,97 Q5,95 8,96 Q11,97 13,95" fill="none" stroke="#d4a574" strokeWidth="0.12" opacity="0.2" />
+      {/* Coastline decorations - top right */}
+      <path d="M88,2 Q91,3 93,2 Q95,1 97,3" fill="none" stroke="#d4a574" strokeWidth="0.12" opacity="0.15" />
+      {/* Cross-hatch depth markers */}
+      <g transform="translate(5,50)" opacity="0.1">
+        <line x1="0" y1="-1" x2="0" y2="1" stroke="#d4a574" strokeWidth="0.2" />
+        <line x1="-1" y1="0" x2="1" y2="0" stroke="#d4a574" strokeWidth="0.2" />
+      </g>
+      <g transform="translate(95,50)" opacity="0.1">
+        <line x1="0" y1="-1" x2="0" y2="1" stroke="#d4a574" strokeWidth="0.2" />
+        <line x1="-1" y1="0" x2="1" y2="0" stroke="#d4a574" strokeWidth="0.2" />
+      </g>
+      {/* Rope border decoration */}
+      <path d="M3,99 Q8,98 13,99 Q18,100 23,99 Q28,98 33,99 Q38,100 43,99 Q48,98 53,99 Q58,100 63,99 Q68,98 73,99 Q78,100 83,99 Q88,98 93,99 Q97,100 99,99" fill="none" stroke="#d4a574" strokeWidth="0.15" strokeDasharray="1,0.5" opacity="0.12" />
+    </svg>
+  );
+}
+
 type ViewLevel = "world" | "course" | "lessons";
 
 export default function ArchipelagoMap() {
@@ -69,8 +209,21 @@ export default function ArchipelagoMap() {
           <div className="flex gap-4">
             {/* Map Area */}
             <div className="flex-1">
-              <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] rounded-xl overflow-hidden border-2 border-amber-700/50 shadow-2xl"
-                style={{ background: "linear-gradient(135deg, #92400e 0%, #78350f 30%, #451a03 60%, #92400e 100%)" }}>
+              <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] rounded-xl overflow-hidden shadow-2xl"
+                style={{ background: "linear-gradient(135deg, #92400e 0%, #78350f 30%, #451a03 60%, #92400e 100%)", border: "3px solid #78350f", boxShadow: "0 0 30px rgba(0,0,0,0.5), inset 0 0 60px rgba(0,0,0,0.3)" }}>
+                {/* Parchment noise texture */}
+                <div className="absolute inset-0 opacity-[0.06] pointer-events-none"
+                  style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")", backgroundSize: "200px 200px" }} />
+                {/* Burnt edges */}
+                <div className="absolute inset-0 pointer-events-none" style={{
+                  boxShadow: "inset 0 0 50px rgba(0,0,0,0.5), inset 0 0 100px rgba(45,26,3,0.8)",
+                  borderRadius: "inherit"
+                }} />
+                {/* Fold lines */}
+                <div className="absolute inset-0 pointer-events-none opacity-[0.06]">
+                  <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-amber-100" />
+                  <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-amber-100" />
+                </div>
                 {/* Grid lines */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.04]">
                   <defs>
@@ -80,6 +233,12 @@ export default function ArchipelagoMap() {
                   </defs>
                   <rect width="100%" height="100%" fill="url(#grid)" />
                 </svg>
+                {/* Compass Rose - top right */}
+                <div className="absolute top-3 right-3 pointer-events-none">
+                  <CompassRose />
+                </div>
+                {/* Decorative sea elements */}
+                <SeaElements />
 
                 {/* Sea routes */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
