@@ -50,11 +50,11 @@ export default function DashboardRouter() {
     return <AdminDashboard />;
   }
 
-  // Route to professional dashboard for other non-student roles
-  if (user.role !== "student") {
-    return <ProfessionalDashboard user={user} />;
+  // Route students to their adventure dashboard
+  if (user.role === "student") {
+    return <StudentDashboard />;
   }
 
-  // Default: professional dashboard
+  // Default: professional dashboard (for unknown roles)
   return <ProfessionalDashboard user={user} />;
 }
