@@ -1,25 +1,62 @@
+import { useState } from "react";
 import { useLocation } from "wouter";
-import { GraduationCap, School, ArrowRight } from "lucide-react";
+import { GraduationCap, School, ArrowRight, PlayCircle, X } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { Footer } from "@/components/Footer";
 
 /* ─── FEATURE BLOCK ─── */
 
+/** Convert YouTube URL to embed format */
+function toYouTubeEmbed(url: string): string {
+  if (!url) return "";
+  const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+  if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}`;
+  const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+  if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}`;
+  if (url.includes("youtube.com/embed/")) return url;
+  return url;
+}
+
 interface FeatureBlockProps {
   titleKey: string;
   descKey: string;
   reverse?: boolean;
+  videoUrl?: string;
+  videoTitle?: string;
 }
 
-function FeatureBlock({ titleKey, descKey, reverse = false }: FeatureBlockProps) {
+function FeatureBlock({ titleKey, descKey, reverse = false, videoUrl, videoTitle }: FeatureBlockProps) {
   const { t } = useI18n();
+  const [showVideo, setShowVideo] = useState(false);
+
   return (
     <div className={`grid md:grid-cols-2 gap-8 md:gap-12 items-start ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}>
       <div>
         <h3 className="text-lg sm:text-xl font-semibold text-slate-900 mb-2">{t(titleKey)}</h3>
         <p className="text-sm text-slate-500 leading-relaxed">{t(descKey)}</p>
+        {videoUrl && (
+          <button
+            onClick={() => setShowVideo(true)}
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-amber-600 hover:text-amber-700 transition-colors"
+          >
+            <PlayCircle className="w-4 h-4" />
+            Watch Video
+          </button>
+        )}
       </div>
+      {videoUrl && showVideo && (
+        <div className="relative rounded-xl overflow-hidden shadow-lg"
+          style={{ paddingBottom: "56.25%", border: "1px solid #e2e8f0" }}>
+          <iframe
+            src={toYouTubeEmbed(videoUrl)}
+            className="absolute inset-0 w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title={videoTitle || "Feature Video"}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -74,6 +111,12 @@ export default function Home() {
             <FeatureBlock titleKey="home.feature_personalProgress" descKey="home.feature_personalProgressDesc" reverse />
             <FeatureBlock titleKey="home.feature_teacherDashboard" descKey="home.feature_teacherDashboardDesc" />
             <FeatureBlock titleKey="home.feature_learnAnywhere" descKey="home.feature_learnAnywhereDesc" reverse />
+            <FeatureBlock
+              titleKey="home.feature_islandTimelapse"
+              descKey="home.feature_islandTimelapseDesc"
+              videoUrl="https://youtu.be/2TStogXT1lc"
+              videoTitle="Island Building Timelapse"
+            />
           </div>
         </div>
       </section>
