@@ -3,6 +3,7 @@ import { GraduationCap, School, ArrowRight } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { Footer } from "@/components/Footer";
+import { homepageFeatures } from "@/content/features";
 
 /* ─── FEATURE BLOCK ─── */
 
@@ -104,16 +105,18 @@ export default function Home() {
             <p className="text-sm text-slate-500 max-w-lg mx-auto leading-relaxed">{t("home.featureDescription")}</p>
           </div>
           <div className="space-y-10">
-            <FeatureBlock titleKey="home.feature_interactivePaths" descKey="home.feature_interactivePathsDesc" />
-            <FeatureBlock titleKey="home.feature_personalProgress" descKey="home.feature_personalProgressDesc" reverse />
-            <FeatureBlock titleKey="home.feature_teacherDashboard" descKey="home.feature_teacherDashboardDesc" />
-            <FeatureBlock titleKey="home.feature_learnAnywhere" descKey="home.feature_learnAnywhereDesc" reverse />
-            <FeatureBlock
-              titleKey="home.feature_islandTimelapse"
-              descKey="home.feature_islandTimelapseDesc"
-              videoUrl="https://youtu.be/2TStogXT1lc"
-              videoTitle="Island Building Timelapse"
-            />
+            {homepageFeatures
+              .sort((a, b) => a.order - b.order)
+              .map((feature, idx) => (
+                <FeatureBlock
+                  key={feature.id}
+                  titleKey={feature.titleKey}
+                  descKey={feature.descriptionKey}
+                  reverse={idx % 2 === 1}
+                  videoUrl={feature.videoUrl}
+                  videoTitle={feature.videoTitle}
+                />
+              ))}
           </div>
         </div>
       </section>
