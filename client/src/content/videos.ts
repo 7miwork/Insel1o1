@@ -66,15 +66,82 @@ export const videos: Record<string, VideoEntry> = {
     url: "",
     title: "Coding 1.3",
   },
-
-  // ─── Coding — Level 2 ───
+  code1L4: {
+    url: "",
+    title: "Coding 1.4",
+  },
+  code1L5: {
+    url: "",
+    title: "Coding 1.5",
+  },
+  code1L6: {
+    url: "",
+    title: "Coding 1.6",
+  },
+  code1L7: {
+    url: "",
+    title: "Coding 1.7",
+  },
+  code1L8: {
+    url: "",
+    title: "Coding 1.8",
+  },
+  code1L9: {
+    url: "",
+    title: "Coding 1.9",
+  },
+  code1L10: {
+    url: "",
+    title: "Coding 1.10",
+  },
+  code1L11: {
+    url: "",
+    title: "Coding 1.11",
+  },
+  // ─── Coding — Level 2: Bedingungen & Funktionen ───
   code2L1: {
     url: "",
-    title: "Coding 2.1",
+    title: "Coding 2.1 — Einfache Bedingungen",
   },
   code2L2: {
     url: "",
-    title: "Coding 2.2",
+    title: "Coding 2.2 — Mehrfach-Bedingungen",
+  },
+  code2L3: {
+    url: "",
+    title: "Coding 2.3 — Variablen & Zähler",
+  },
+  code2L4: {
+    url: "",
+    title: "Coding 2.4 — Funktionen mit Parametern",
+  },
+  code2L5: {
+    url: "",
+    title: "Coding 2.5 — Bedingungen in Funktionen",
+  },
+  code2L6: {
+    url: "",
+    title: "Coding 2.6 — Komplexe Muster",
+  },
+  code2L7: {
+    url: "",
+    title: "Coding 2.7 — Umgebungs-Checks",
+  },
+  code2L8: {
+    url: "",
+    title: "Coding 2.8 — Redstone-Interaktionen",
+  },
+  code2L9: {
+    url: "",
+    title: "Coding 2.9 — Mini-Spiele",
+  },
+  code2L10: {
+    url: "",
+    title: "Coding 2.10 — Projekt: Interaktive Stadt",
+  },
+  code2L11: {
+    url: "",
+    title: "Coding 2.11 — Sandbox Bay",
   },
 
   // ─── Science ───

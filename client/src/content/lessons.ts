@@ -123,7 +123,7 @@ const toStr = (id: number) => String(id);
 // the existing MINECRAFT_LESSONS + the map positions from the
 // archipelago config (which were defined inline before).
 
-/** Map positions from the old archipelago config (x,y 0–100) */
+/** Map positions from the old archipelago config (x,y 0–100) — Level 1 */
 const MINECRAFT_POSITIONS: Array<{ id: number; x: number; y: number; isMainIsland?: boolean; isFinalIsland?: boolean; emoji: string; titleKey: string; subtitleKey?: string }> = [
   { id: 1,  x: 8,  y: 15, emoji: "🧭", titleKey: "archipelago.lesson1", subtitleKey: "archipelago.lesson1sub" },
   { id: 2,  x: 22, y: 12, emoji: "🧠", titleKey: "archipelago.lesson2", subtitleKey: "archipelago.lesson2sub" },
@@ -136,6 +136,21 @@ const MINECRAFT_POSITIONS: Array<{ id: number; x: number; y: number; isMainIslan
   { id: 9,  x: 64, y: 52, emoji: "🎮", titleKey: "archipelago.lesson9", subtitleKey: "archipelago.lesson9sub" },
   { id: 10, x: 48, y: 55, emoji: "🏙️", titleKey: "archipelago.lesson10", subtitleKey: "archipelago.lesson10sub" },
   { id: 11, x: 32, y: 65, emoji: "🏰", titleKey: "archipelago.lesson11", subtitleKey: "archipelago.lesson11sub", isFinalIsland: true },
+];
+
+/** Map positions — Level 2 (Bedingungen & Funktionen) */
+const LEVEL2_POSITIONS: Array<{ id: number; x: number; y: number; isFinalIsland?: boolean; emoji: string; titleKey: string; subtitleKey?: string }> = [
+  { id: 21, x: 10, y: 15, emoji: "❓",  titleKey: "archipelago.l2Lesson1", subtitleKey: "archipelago.l2Lesson1sub" },
+  { id: 22, x: 22, y: 10, emoji: "🔀",  titleKey: "archipelago.l2Lesson2", subtitleKey: "archipelago.l2Lesson2sub" },
+  { id: 23, x: 36, y: 15, emoji: "📦",  titleKey: "archipelago.l2Lesson3", subtitleKey: "archipelago.l2Lesson3sub" },
+  { id: 24, x: 50, y: 10, emoji: "🔧",  titleKey: "archipelago.l2Lesson4", subtitleKey: "archipelago.l2Lesson4sub" },
+  { id: 25, x: 64, y: 15, emoji: "⚖️",  titleKey: "archipelago.l2Lesson5", subtitleKey: "archipelago.l2Lesson5sub" },
+  { id: 26, x: 78, y: 18, emoji: "♟️",  titleKey: "archipelago.l2Lesson6", subtitleKey: "archipelago.l2Lesson6sub" },
+  { id: 27, x: 85, y: 32, emoji: "🗼",  titleKey: "archipelago.l2Lesson7", subtitleKey: "archipelago.l2Lesson7sub" },
+  { id: 28, x: 78, y: 48, emoji: "🔬",  titleKey: "archipelago.l2Lesson8", subtitleKey: "archipelago.l2Lesson8sub" },
+  { id: 29, x: 64, y: 52, emoji: "🎲",  titleKey: "archipelago.l2Lesson9", subtitleKey: "archipelago.l2Lesson9sub" },
+  { id: 30, x: 48, y: 55, emoji: "🏗️",  titleKey: "archipelago.l2Lesson10", subtitleKey: "archipelago.l2Lesson10sub" },
+  { id: 31, x: 30, y: 62, emoji: "🏖️",  titleKey: "archipelago.l2Lesson11", subtitleKey: "archipelago.l2Lesson11sub", isFinalIsland: true },
 ];
 
 /** Merge rich lesson content from MINECRAFT_LESSONS with map positions */
@@ -157,6 +172,38 @@ function buildMinecraftLessons(): Lesson[] {
       isFinalIsland: pos?.isFinalIsland,
       duration: `${ml.duration} min`,
       // rich content from the original Lesson type
+      phase: ml.phase,
+      difficulty: ml.difficulty,
+      objectives: ml.objectives,
+      content: ml.content,
+      codeBlocks: ml.codeBlocks,
+      studentActivity: ml.studentActivity,
+      teacherTip: ml.teacherTip,
+      quiz: ml.quiz,
+      video: ml.video,
+      xpReward: ml.xpReward,
+      unlocks: ml.unlocks,
+    };
+  });
+}
+
+/** Merge Level 2 lessons from MINECRAFT_LESSONS with Level 2 map positions */
+function buildLevel2Lessons(): Lesson[] {
+  return MINECRAFT_LESSONS.filter((ml) => ml.id >= 21 && ml.id <= 31).map((ml) => {
+    const pos = LEVEL2_POSITIONS.find((p) => p.id === ml.id);
+    return {
+      id: toStr(ml.id),
+      title: ml.title,
+      description: ml.description,
+      videoUrl: ml.video?.enabled ? ml.video.url : undefined,
+      emoji: pos?.emoji ?? "🏝️",
+      titleKey: pos?.titleKey,
+      subtitleKey: pos?.subtitleKey,
+      x: pos?.x ?? 50,
+      y: pos?.y ?? 50,
+      available: true,
+      isFinalIsland: pos?.isFinalIsland,
+      duration: `${ml.duration} min`,
       phase: ml.phase,
       difficulty: ml.difficulty,
       objectives: ml.objectives,
@@ -195,17 +242,17 @@ export const islands: Island[] = [
   },
   {
     id: "minecraft-advanced",
-    name: "Minecraft Advanced",
+    name: "Level 2: Bedingungen & Funktionen",
     theme: "programming",
-    color: "#7C3AED",
-    lightColor: "#EDE9FE",
-    emoji: "⚡",
+    color: "#0F766E",
+    lightColor: "#D1FAE5",
+    emoji: "🧊",
     titleKey: "archipelago.minecraftAdvanced",
     descriptionKey: "archipelago.minecraftAdvancedDesc",
     x: 70,
     y: 50,
     available: true,
-    lessons: [],
+    lessons: buildLevel2Lessons(),
   },
 ];
 

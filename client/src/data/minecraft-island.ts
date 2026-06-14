@@ -1621,5 +1621,1089 @@ Aktiviere deinen Archipel-Meister-Titel und schalte die Profilmarkierung frei.
     xpReward: 500,
     unlocks: [],
   },
+
+  // ═══════════════════════════════════════════════════════════════════
+  //  LEVEL 2: Bedingungen & Funktionen mit Python
+  // ═══════════════════════════════════════════════════════════════════
+
+  {
+    id: 21,
+    title: 'Einfache Bedingungen',
+    description: 'Dein Agent lernt, auf seine Umgebung zu reagieren. Mit if-Abfragen erkennt er Blöcke, Wasser und Hindernisse – und trifft selbstständige Entscheidungen.',
+    phase: 'conditionals',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'if-Abfragen verstehen',
+      'Blöcke mit agent.detect() erkennen',
+      'Bedingungen für Luft, Gras und Wasser prüfen',
+      'Einfache Entscheidungen programmieren',
+      'Nachrichten bei Fund ausgeben',
+      'Grundlagen der Verzweigung',
+    ],
+    content: `
+# Einfache Bedingungen
+
+## Einführung
+Bisher hat dein Agent immer blind Befehle ausgeführt. Aber was, wenn der Agent selbst entscheiden soll, was zu tun ist? In dieser Lektion lernst du **Bedingungen** – damit der Agent auf seine Umgebung reagieren kann.
+
+## Was ist eine Bedingung?
+Eine Bedingung ist eine Frage, die mit **Ja** oder **Nein** beantwortet werden kann. Im Code fragst du zum Beispiel: „Ist vor mir Luft?" Wenn ja → mache das. Wenn nein → mache etwas anderes.
+
+## if in Python
+\`\`\`python
+if agent.detect(AIR, FORWARD):
+    agent.say("Luft vorne!", "Friendly")
+\`\`\`
+Dieses Programm prüft, ob vor dem Agenten Luft ist. Wenn ja, gibt er eine Nachricht aus.
+
+## elif und else
+Mit **elif** (else if) kannst du mehrere Bedingungen prüfen:
+\`\`\`python
+if agent.detect(GRASS, FORWARD):
+    agent.say("Gras gefunden!", "Friendly")
+elif agent.detect(WATER, FORWARD):
+    agent.say("Wasser erkannt!", "Friendly")
+else:
+    agent.say("Nichts Besonderes.", "Friendly")
+\`\`\`
+
+## Wichtige Befehle
+- **agent.detect(AIR, FORWARD)** – Prüft, ob vor dem Agenten Luft ist
+- **agent.detect(GRASS, FORWARD)** – Prüft, ob Gras vorne ist
+- **agent.detect(WATER, FORWARD)** – Prüft, ob Wasser vorne ist
+- **if / elif / else** – Bedingte Verzweigung
+
+## Aufgabe 1: Block-Detektor
+Schreibe ein Programm, das prüft, was vor dem Agenten liegt. Der Agent soll:
+1. Vorwärts gehen
+2. Prüfen: Ist Luft, Gras oder Wasser vorne?
+3. Die richtige Nachricht ausgeben
+
+## Aufgabe 2: Gras-Zähler
+Der Agent geht 10 Schritte vorwärts und zählt bei jedem Schritt, ob Gras vorne ist. Am Ende gibt er die Gesamtzahl der Grasblöcke aus.
+
+## Aufgabe 3: Hindernis-Scanner
+Der Agent erkennt, ob vor ihm ein Hindernis (Stein) oder freier Weg (Luft) ist. Bei Hindernis: nach links drehen und 2 Schritte gehen.
+
+## Reflexion
+Was passiert, wenn du eine if-Bedingung vergisst? Kann der Agent mehrere Bedingungen gleichzeitig prüfen?
+`,
+    codeBlocks: [
+      { name: 'if', description: 'Prüfe eine Bedingung', example: 'if agent.detect(AIR, FORWARD):', icon: '❓' },
+      { name: 'elif', description: 'Alternative Bedingung', example: 'elif agent.detect(GRASS, FORWARD):', icon: '🔄' },
+      { name: 'else', description: 'Andernfalls', example: 'else:', icon: '➡️' },
+      { name: 'detect', description: 'Erkenne einen Block', example: 'agent.detect(AIR, FORWARD)', icon: '🔍' },
+    ],
+    studentActivity: `
+**Aufgabe 1: Block-Detektor**
+1. Gehe 5 Schritte vorwärts.
+2. Prüfe bei jedem Schritt, was vorne ist.
+3. Gib eine Nachricht aus (Luft, Gras, Wasser).
+
+**Aufgabe 2: Gras-Zähler**
+1. Initialisiere eine Variable \`gezaehlt = 0\`.
+2. Gehe 10 Schritte und zähle bei jedem Gras-Block.
+3. Am Ende: \`agent.say("Gefunden: " + str(gezaehlt))\`
+
+**Aufgabe 3: Hindernis-Scanner**
+1. Prüfe, ob vorne Luft ist.
+2. Wenn ja: weitergehen.
+3. Wenn nein: nach links drehen und 2 Schritte gehen.
+
+**Reflexion im Team:**
+Was passiert, wenn du eine if-Bedingung vergisst? Kann der Agent mehrere Bedingungen gleichzeitig prüfen?
+`,
+    teacherTip: 'Beginne damit, dass du die Schüler fragst: „Was würdet ihr tun, wenn vor euch eine Mauer steht?" Übertrage dann diese Logik auf den Agenten. Lasse die Schüler zuerst mit einfachen if-Abfragen experimentieren, bevor sie elif/else einführen.',
+    quiz: [
+      { id: 1, question: 'Was macht agent.detect(AIR, FORWARD)?', options: ['Bewegt den Agenten nach vorne', 'Prüft, ob vorne Luft ist', 'Setzt einen Luftblock', 'Zerstört einen Block'], correctAnswer: 1, explanation: 'agent.detect() prüft, ob ein bestimmter Block vor dem Agenten ist – ohne ihn zu bewegen.' },
+      { id: 2, question: 'Was passiert, wenn die if-Bedingung nicht stimmt?', options: ['Das Programm stürzt ab', 'Der Code im if-Block wird übersprungen', 'Der Agent bewegt sich trotzdem', 'Es wird else ausgeführt'], correctAnswer: 1, explanation: 'Wenn die Bedingung nicht zutrifft, wird der Code im if-Block übersprungen.' },
+      { id: 3, question: 'Wofür steht elif?', options: ['Else if – Alternative Bedingung', 'End line – Zeilenende', 'Else loop – Schleife', 'Electronic – Elektronisch'], correctAnswer: 0, explanation: 'elif steht für „else if" und prüft eine weitere Bedingung, wenn die vorherige nicht zutraf.' },
+      { id: 4, question: 'Wie many Bedingungen kann man mit if/elif/else prüfen?', options: ['Nur eine', 'Genau zwei', 'Mehrere', 'Unendlich viele'], correctAnswer: 2, explanation: 'Man kann beliebig viele elif-Zweige haben, aber nur einen else am Ende.' },
+      { id: 5, question: 'Was ist der Unterschied zwischen detect() und move()?', options: ['Kein Unterschied', 'detect() prüft, move() bewegt', 'detect() ist schneller', 'move() ist deprecated'], correctAnswer: 1, explanation: 'detect() prüft nur, ob ein Block da ist. move() bewegt den Agenten.' },
+    ],
+    xpReward: 75,
+    unlocks: [22],
+  },
+  {
+    id: 22,
+    title: 'Mehrfach-Bedingungen',
+    description: 'Komplexe Entscheidungen mit if/elif/else. Dein Agent lernt, verschiedene Blöcke zu unterscheiden und sortiert sie automatisch in die richtige Richtung.',
+    phase: 'conditionals',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'Mehrfach-Bedingungen verstehen',
+      'if/elif/else kombinieren',
+      'Verschiedene Blöcke unterscheiden',
+      'Sortierlogik programmieren',
+      'Reihenfolge der Prüfungen verstehen',
+      'Komplexe Verzweigungen bauen',
+    ],
+    content: `
+# Mehrfach-Bedingungen
+
+## Einführung
+Manchmal reicht eine einzige Bedingung nicht aus. Was, wenn dein Agent rote UND blaue Wolle unterscheiden und in verschiedene Richtungen sortieren soll? In dieser Lektion lernst du, wie du mehrere Bedingungen hintereinander schaltest.
+
+## Die Kette: if → elif → else
+\`\`\`python
+if agent.detect(RED_WOOL, FORWARD):
+    agent.destroy(FORWARD)
+    agent.set_item(RED_WOOL, 1, 1)
+    agent.place(LEFT)
+elif agent.detect(BLUE_WOOL, FORWARD):
+    agent.destroy(FORWARD)
+    agent.set_item(BLUE_WOOL, 1, 1)
+    agent.place(RIGHT)
+else:
+    agent.say("Keine Wolle gefunden.", "Friendly")
+\`\`\`
+
+## Reihenfolge ist wichtig
+Die Bedingungen werden von oben nach unten geprüft. Sobald eine zutrifft, werden die restlichen übersprungen. Deshalb solltest du die spezifischsten Bedingungen zuerst stellen.
+
+## Wichtige Konzepte
+- **if** – Erste Bedingung (wird zuerst geprüft)
+- **elif** – Weitere Bedingungen (nur wenn vorherige nicht zutraf)
+- **else** – Auffang, wenn keine Bedingung zutrifft
+- **Verschachtelung** – Bedigungen innerhalb von Bedingungen
+
+## Aufgabe 1: Sortiermaschine
+Der Agent steht vor einer Reihe von Blöcken. Er sortiert:
+- Rote Wolle → links
+- Blaue Wolle → rechts
+- Alles andere → ignorieren
+
+## Aufgabe 2: Dreifarben-Sortierer
+Erweitere das Programm: Der Agent erkennt 3 Farben (Rot, Blau, Grün) und platziert jede in eine eigene Richtung.
+
+## Aufgabe 3: Material-Erkennung
+Der Agent erkennt verschiedene Materialien (Stein, Holz, Sand) und gibt eine Beschreibung aus.
+
+## Reflexion
+Was passiert, wenn du die Reihenfolge der elif-Blöcke vertauschst? Warum ist die Reihenfolge wichtig?
+`,
+    codeBlocks: [
+      { name: 'if', description: 'Erste Bedingung prüfen', example: 'if agent.detect(RED_WOOL, FORWARD):', icon: '❓' },
+      { name: 'elif', description: 'Weitere Bedingung', example: 'elif agent.detect(BLUE_WOOL, FORWARD):', icon: '🔄' },
+      { name: 'else', description: 'Auffang-Block', example: 'else:', icon: '➡️' },
+      { name: 'destroy', description: 'Block zerstören', example: 'agent.destroy(FORWARD)', icon: '💥' },
+      { name: 'place', description: 'Block platzieren', example: 'agent.place(LEFT)', icon: '🧱' },
+    ],
+    studentActivity: `
+**Aufgabe 1: Sortiermaschine**
+1. Scanne die Blöcke vor dir.
+2. Rote Wolle → links platzieren.
+3. Blaue Wolle → rechts platzieren.
+4. Teste mit verschiedenen Farben.
+
+**Aufgabe 2: Dreifarben-Sortierer**
+1. Erkenne Rot, Blau und Grün.
+2. Rot → links, Blau → rechts, Grün → nach vorne.
+3. Gib bei jeder Erkennung eine Nachricht aus.
+
+**Aufgabe 3: Material-Erkennung**
+1. Erkenne Stein, Holz und Sand.
+2. Bei Stein: „Hartes Material!"
+3. Bei Holz: „Baumaterial!"
+4. Bei Sand: „Lockeres Material!"
+
+**Reflexion im Team:**
+Was passiert, wenn du die Reihenfolge der elif-Blöcke vertauschst?
+`,
+    teacherTip: 'Erstelle eine Sortierstation mit verschiedenen Wollblöcken auf dem Boden. Die Schüler sollen den Agenten programmieren, um die Blöcke zu sortieren. Beginne mit 2 Farben und erhöhe dann auf 3+. Betone die Reihenfolge der Bedingungen.',
+    quiz: [
+      { id: 1, question: 'In welcher Reihenfolge werden if/elif/else geprüft?', options: ['Von unten nach oben', 'Zufällig', 'Von oben nach unten', 'Gleichzeitig'], correctAnswer: 2, explanation: 'Python prüft die Bedingungen von oben nach unten. Sobald eine zutrifft, werden die restlichen übersprungen.' },
+      { id: 2, question: 'Was passiert, wenn eine elif-Bedingung zutrifft?', options: ['Alle weiteren elif werden auch geprüft', 'Nur else wird noch geprüft', 'Die restlichen Bedingungen werden übersprungen', 'Das Programm stoppt'], correctAnswer: 2, explanation: 'Sobald eine Bedingung zutrifft, werden alle restlichen elif/else-Blöcke übersprungen.' },
+      { id: 3, question: 'Kann man mehrere elif-Blöcke haben?', options: ['Nein, nur einen', 'Ja, beliebig viele', 'Nur zwei', 'Nur mit else'], correctAnswer: 1, explanation: 'Man kann beliebig viele elif-Blöcke verwenden.' },
+      { id: 4, question: 'Was ist der Zweck des else-Blocks?', options: ['Er prüft eine Bedingung', 'Er wird nur bei Fehler ausgeführt', 'Er fängt alle nicht erfüllten Bedingungen ab', 'Er beendet das Programm'], correctAnswer: 2, explanation: 'else wird ausgeführt, wenn keine der vorherigen if/elif-Bedingungen zutraf.' },
+      { id: 5, question: 'Wann sollte man elif statt mehrerer if verwenden?', options: ['Wenn man alle Bedingungen parallel prüfen will', 'Wenn nur eine Bedingung zutreffen soll', 'Wenn man das Programm beenden will', 'Nie – if ist immer besser'], correctAnswer: 1, explanation: 'elif wird verwendet, wenn nur ein Zweig ausgeführt werden soll – wenn die Bedingungen gegenseitig ausschließen.' },
+    ],
+    xpReward: 75,
+    unlocks: [23],
+  },
+  {
+    id: 23,
+    title: 'Variablen & Zähler',
+    description: 'Dein Agent speichert Daten – Punkte, gezählte Blöcke, Zustände. Lerne, wie Variablen funktionieren und wie du damit rechnen kannst.',
+    phase: 'conditionals',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'Variablen erstellen und nutzen',
+      'Werte speichern und ändern',
+      'Zähler verwenden',
+      'Mit Variablen rechnen',
+      'Global-Variablen verstehen',
+      'Daten in Echtzeit ausgeben',
+    ],
+    content: `
+# Variablen & Zähler
+
+## Einführung
+Variablen sind wie Schachteln, in denen du Daten speichern kannst. In dieser Lektion lernst du, wie du mit Variablen Punkte zählst, Blöcke trackst und Ergebnisse speicherst.
+
+## Was ist eine Variable?
+Eine Variable ist ein benannter Speicherplatz. Du kannst ihr einen Wert geben und später ändern:
+\`\`\`python
+gesammelt = 0
+\`\`\`
+
+## Variablen ändern
+\`\`\`python
+gesammelt = 0
+gesammelt = gesammelt + 1  # jetzt ist gesammelt = 1
+# oder kürzer:
+gesammelt += 1             # jetzt ist gesammelt = 2
+\`\`\`
+
+## Global-Variablen
+Wenn du eine Variable in einer Funktion ändern willst, brauchst du **global**:
+\`\`\`python
+gesammelt = 0
+
+def sammle():
+    global gesammelt
+    if agent.detect(STONE, FORWARD):
+        agent.destroy(FORWARD)
+        gesammelt += 1
+        agent.say("Gesammelt: " + str(gesammelt), "Friendly")
+\`\`\`
+
+## Variablen in der Ausgabe
+Verwende **str()**, um Zahlen in Text umzuwandeln:
+\`\`\`python
+agent.say("Punkte: " + str(punkte), "Friendly")
+\`\`\`
+
+## Aufgabe 1: Block-Sammler
+Der Agent geht 10 Schritte vorwärts und zählt alle Steine, die er zerstört. Am Ende gibt er die Gesamtzahl aus.
+
+## Aufgabe 2: Punkte-System
+Erstelle ein einfaches Punktesystem:
+- Stein zerstört = +1 Punkt
+- Holz zerstört = +2 Punkte
+- Am Ende: Gesamtpunkte ausgeben
+
+## Aufgabe 3: Doppel-Zähler
+Zähle gleichzeitig Steine UND Holz in zwei verschiedenen Variablen. Gib beide am Ende aus.
+
+## Reflexion
+Was passiert, wenn du die Variable nicht mit 0 initialisierst? Warum brauchst du das Schlüsselwort global?
+`,
+    codeBlocks: [
+      { name: 'Variable', description: 'Wert speichern', example: 'punkte = 0', icon: '📦' },
+      { name: '+=', description: 'Wert erhöhen', example: 'punkte += 1', icon: '➕' },
+      { name: 'global', description: 'Variable in Funktion ändern', example: 'global gesammelt', icon: '🌐' },
+      { name: 'str()', description: 'Zahl in Text umwandeln', example: 'str(punkte)', icon: '📝' },
+    ],
+    studentActivity: `
+**Aufgabe 1: Block-Sammler**
+1. Initialisiere \`gesammelt = 0\`.
+2. Gehe 10 Schritte vorwärts.
+3. Bei jedem Stein: zerstören und \`gesammelt += 1\`.
+4. Am Ende: \`agent.say("Steine: " + str(gesammelt))\`
+
+**Aufgabe 2: Punkte-System**
+1. \`punkte = 0\`
+2. Stein zerstört: \`punkte += 1\`
+3. Holz zerstört: \`punkte += 2\`
+4. Am Ende ausgeben.
+
+**Aufgabe 3: Doppel-Zähler**
+1. \`steine = 0\` und \`holz = 0\`
+2. Bei Stein: \`steine += 1\`
+3. Bei Holz: \`holz += 1\`
+4. Am Ende beide Werte ausgeben.
+
+**Reflexion im Team:**
+Was passiert, wenn du die Variable nicht mit 0 initialisierst?
+`,
+    teacherTip: 'Zeige zuerst, wie man mit Papier und Stift zählt – dann übertrage das Konzept auf den Code. Erstelle eine Welt mit verstreuten Blöcken differenter Materialien. Die Schüler programmieren den Agenten, um die Blöcke zu sammeln und zu zählen.',
+    quiz: [
+      { id: 1, question: 'Was macht die Zeile "punkte = 0"?', options: ['Setzt punkte auf 1', 'Erstellt eine Variable und speichert 0', 'Löscht die Variable', 'Druckt 0 auf den Bildschirm'], correctAnswer: 1, explanation: 'Die Zeile erstellt eine Variable namens "punkte" und weist ihr den Wert 0 zu.' },
+      { id: 2, question: 'Was bedeutet gesammelt += 1?', options: ['gesammelt wird 1', 'gesammelt wird um 1 erhöht', '1 wird zu gesammelt addiert', 'Antwort 2 und 3 sind richtig'], correctAnswer: 3, explanation: '+= erhöht den aktuellen Wert der Variable um 1. Es ist die Kurzform von gesammelt = gesammelt + 1.' },
+      { id: 3, question: 'Warum braucht man "global" in einer Funktion?', options: ['Damit die Funktion schneller läuft', 'Um eine äußere Variable in der Funktion zu ändern', 'Es ist ein Pflichtbefehl', 'Nur für Fehlermeldungen'], correctAnswer: 1, explanation: 'Ohne "global" erstellt die Funktion eine lokale Variable. Mit "global" greift sie auf die äußere Variable zu.' },
+      { id: 4, question: 'Was passiert, wenn du str() vergisst?', options: ['Nichts – Python wandert automatisch um', 'Ein Fehler – Zahl + Text geht nicht', 'Die Zahl wird gelöscht', 'Der Text wird zur Zahl'], correctAnswer: 1, explanation: 'Python kann Zahl und Text nicht direkt verketten. str() wandelt die Zahl in einen Text um.' },
+      { id: 5, question: 'Was ist der Anfangswert einer Zähler-Variable?', options: ['1', '100', '0', 'Es gibt keinen Anfangswert'], correctAnswer: 2, explanation: 'Ein Zähler beginnt normalerweise bei 0, weil noch nichts gezählt wurde.' },
+    ],
+    xpReward: 75,
+    unlocks: [24],
+  },
+  {
+    id: 24,
+    title: 'Funktionen mit Parametern',
+    description: 'Deine Funktionen werden flexibel. Mit Parametern kannst du denselben Code für verschiedene Materialien, Längen und Formen wiederverwenden.',
+    phase: 'loops',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'Funktionen mit Parametern schreiben',
+      'Eingabewerte an Funktionen übergeben',
+      'Wiederverwendbaren Code erstellen',
+      'Mehrere Parameter kombinieren',
+      'Funktionen aufrufen mit konkreten Werten',
+      'Code modular aufbauen',
+    ],
+    content: `
+# Funktionen mit Parametern
+
+## Einführung
+Du kennst bereits einfache Funktionen mit \`def\`. Aber bisher konntest du ihnen keine Daten übergeben. Mit **Parametern** werden Funktionen flexibel – du kannst Längen, Materialien und Formen als Eingabe verwenden.
+
+## Parameter definieren
+\`\`\`python
+def bau_wand(laenge, material):
+    for i in range(laenge):
+        agent.set_item(material, 1, 1)
+        agent.place(FORWARD)
+        agent.move(FORWARD, 1)
+\`\`\`
+
+## Funktion aufrufen
+\`\`\`python
+bau_wand(5, STONE)    # Baut eine 5-Stein-Wand
+bau_wand(8, WOOD)     # Baut eine 8-Holz-Wand
+\`\`\`
+
+## Mehrere Parameter
+\`\`\`python
+def bau_bruecke(laenge, material):
+    for i in range(laenge):
+        agent.set_item(material, 1, 1)
+        agent.place(DOWN)
+        agent.move(FORWARD, 1)
+\`\`\`
+
+## Wichtige Konzepte
+- **Parameter** – Platzhalter in der Funktionsdefinition (z.B. \`laenge\`)
+- **Argument** – Der konkrete Wert beim Aufruf (z.B. \`5\`)
+- **Wiederverwendbarkeit** – Eine Funktion, viele Anwendungen
+
+## Aufgabe 1: Modulare Brücke
+Schreibe eine Funktion \`bau_bruecke(laenge, material)\` und baue Brücken aus verschiedenen Materialien und Längen.
+
+## Aufgabe 2: Fenster-Funktion
+Erstelle \`bau_fenster(breite, hoehe)\` – der Agent baut ein Fenster aus Glasblöcken.
+
+## Aufgabe 3: Bauplan-Kombination
+Kombiniere mehrere Funktionen: \`bau_wand()\`, \`bau_tuer()\`, \`bau_fenster()\` – um ein ganzes Haus zu bauen.
+
+## Reflexion
+Was passiert, wenn du weniger Argumente übergibst als die Funktion Parameter hat? Was wäre der Vorteil, wenn du die Funktion für verschiedene Häuser wiederverwenden könntest?
+`,
+    codeBlocks: [
+      { name: 'def', description: 'Funktion mit Parametern definieren', example: 'def bau_wand(laenge, material):', icon: '🔧' },
+      { name: 'Parameter', description: 'Eingabewerte übergeben', example: 'bau_wand(5, STONE)', icon: '📥' },
+      { name: 'for range', description: 'Schleife mit Parameter', example: 'for i in range(laenge):', icon: '🔁' },
+      { name: 'set_item', description: 'Item auswählen', example: 'agent.set_item(material, 1, 1)', icon: '🎒' },
+    ],
+    studentActivity: `
+**Aufgabe 1: Modulare Brücke**
+1. Definiere \`def bau_bruecke(laenge, material):\`
+2. Rufe auf: \`bau_bruecke(10, STONE)\`
+3. Teste mit verschiedenen Werten.
+
+**Aufgabe 2: Fenster-Funktion**
+1. \`def bau_fenster(breite, hoehe):\`
+2. Baue ein 3×2-Fenster aus Glas.
+3. Teste mit verschiedenen Größen.
+
+**Aufgabe 3: Bauplan-Kombination**
+1. \`bau_wand(6, STONE)\`
+2. \`bau_tuer()\`
+3. \`bau_fenster(3, 2)\`
+4. Kombiniere alles zu einem Haus.
+
+**Reflexion im Team:**
+Was wäre der Vorteil, wenn du die Funktion für verschiedene Häuser wiederverwenden könntest?
+`,
+    teacherTip: 'Lasse die Schüler zuerst eine Funktion ohne Parameter schreiben (z.B. bau_wand()). Dann zeige, wie man dieselbe Funktion mit verschiedenen Werten aufruft. Das Verständnis für Parameter entsteht am besten durch Experimente.',
+    quiz: [
+      { id: 1, question: 'Was ist der Unterschied zwischen Parameter und Argument?', options: ['Kein Unterschied', 'Parameter = Definition, Argument = Aufruf', 'Parameter ist größer', 'Argument ist ein Fehler'], correctAnswer: 1, explanation: 'Parameter ist der Platzhalter in der Funktionsdefinition. Argument ist der konkrete Wert beim Aufruf.' },
+      { id: 2, question: 'Was macht def bau_wand(laenge, material)?', options: ['Ruft eine Funktion auf', 'Definiert eine Funktion mit zwei Parametern', 'Löscht eine Variable', 'Erstellt eine Schleife'], correctAnswer: 1, explanation: 'def definiert eine neue Funktion mit den Parametern laenge und material.' },
+      { id: 3, question: 'Was passiert, wenn du beim Aufruf zu wenig Argumente übergibst?', options: ['Python errät den fehlenden Wert', 'Ein Fehler – TypeError', 'Die Funktion wird übersprungen', 'Es wird None verwendet'], correctAnswer: 1, explanation: 'Python gibt einen TypeError aus, weil nicht genügend Argumente übergeben wurden.' },
+      { id: 4, question: 'Was ist der Vorteil von Funktionen mit Parametern?', options: ['Der Code läuft schneller', 'Man kann dieselbe Funktion mit verschiedenen Werten verwenden', 'Man braucht keine Schleifen mehr', 'Die Funktion wird automatisch ausgeführt'], correctAnswer: 1, explanation: 'Mit Parametern wird die Funktion flexibel und wiederverwendbar.' },
+      { id: 5, question: 'Wie rufst du eine Funktion auf?', options: ['def bau(5)', 'bau(5)', 'bau[5]', 'bau{5}'], correctAnswer: 1, explanation: 'Man ruft eine Funktion mit dem Namen und Klammern auf: bau(5)' },
+    ],
+    xpReward: 100,
+    unlocks: [25],
+  },
+  {
+    id: 25,
+    title: 'Bedingungen in Funktionen',
+    description: 'Kombiniere Bedingungen mit Funktionen. Deine Funktionen treffen jetzt eigenständige Entscheidungen basierend auf Eingabewerten.',
+    phase: 'conditionals',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'if in Funktionen verwenden',
+      'Basierend auf Parameter entscheiden',
+      'Material-spezifische Logik programmieren',
+      'Fehlerbehandlung in Funktionen',
+      'Komplexe Funktionen bauen',
+      'Verschachtelte Bedingungen',
+    ],
+    content: `
+# Bedingungen in Funktionen
+
+## Einführung
+Was, wenn deine Funktion nicht nur Befehle ausführt, sondern auch Entscheidungen trifft? In dieser Lektion kombinierst du Bedingungen mit Funktionen – damit dein Code intelligent wird.
+
+## if in einer Funktion
+\`\`\`python
+def pruefe_material(material):
+    if material == STONE:
+        agent.say("Stein – hartes Material!", "Friendly")
+    elif material == WOOD:
+        agent.say("Holz – Baustoff!", "Friendly")
+    else:
+        agent.say("Unbekanntes Material.", "Friendly")
+\`\`\`
+
+## Farbcodierte Tür
+\`\`\`python
+def oeffne_tuer(farbe):
+    if farbe == RED_WOOL:
+        agent.say("Zutritt gewährt!", "Friendly")
+        agent.destroy(FORWARD)
+    elif farbe == BLUE_WOOL:
+        agent.say("Falsche Farbe!", "Friendly")
+    else:
+        agent.say("Keine Tür erkannt.", "Friendly")
+\`\`\`
+
+## Bedingungen + Schleifen
+\`\`\`python
+def bau_sicher(laenge):
+    for i in range(laenge):
+        if agent.detect(AIR, DOWN):
+            agent.set_item(STONE, 1, 1)
+            agent.place(DOWN)
+        agent.move(FORWARD, 1)
+\`\`\`
+
+## Aufgabe 1: Farbcodierte Tür
+Schreibe eine Funktion \`oeffne_tuer(farbe)\` – die Tür öffnet sich nur bei der richtigen Farbe.
+
+## Aufgabe 2: Sicheres Bauen
+Der Agent baut nur auf festem Grund. \`bau_sicher(laenge)\` – wenn Luft unten ist → Stein setzen, dann weiter.
+
+## Aufgabe 3: Material-Reaktion
+\`\`\`python
+def reagiere(art):
+    if art == "stein":
+        # Hartes Material – weitergehen
+    elif art == "wasser":
+        # Brücke bauen
+    elif art == "lava":
+        # Alert ausgeben
+\`\`\`
+
+## Reflexion
+Warum ist es nützlich, Bedingungen IN Funktionen zu haben statt außerhalb?
+`,
+    codeBlocks: [
+      { name: 'if in def', description: 'Bedingung in Funktion', example: 'if material == STONE:', icon: '❓' },
+      { name: 'Parameter', description: 'Entscheidung basierend auf Eingabe', example: 'def pruefe(farbe):', icon: '📥' },
+      { name: 'Vergleich', description: 'Werte vergleichen mit ==', example: 'if farbe == RED_WOOL:', icon: '⚖️' },
+      { name: 'Kombination', description: 'if + for in einer Funktion', example: 'for i in range(laenge):', icon: '🔗' },
+    ],
+    studentActivity: `
+**Aufgabe 1: Farbcodierte Tür**
+1. \`def oeffne_tuer(farbe):\`
+2. Bei ROT: „Zutritt!" + Tür öffnen.
+3. Bei BLAU: „Falsche Farbe!"
+4. Teste mit verschiedenen Farben.
+
+**Aufgabe 2: Sicheres Bauen**
+1. \`def bau_sicher(laenge):\`
+2. Bei jedem Schritt: Prüfe ob Luft unten.
+3. Wenn Luft: Stein setzen.
+4. Dann weitergehen.
+
+**Aufgabe 3: Material-Reaktion**
+1. Erkennung: Stein → weiter, Wasser → Brücke, Lava → Alert.
+2. Teste alle drei Fälle.
+
+**Reflexion im Team:**
+Warum ist es nützlich, Bedingungen IN Funktionen zu haben?
+`,
+    teacherTip: 'Erstelle eine Welt mit verschiedenen Wolltoren (rot, blau, grün). Die Schüler programmieren eine Funktion, die je nach Farbe reagiert. Dann erweitere um sicherheitstechnische Bedingungen.',
+    quiz: [
+      { id: 1, question: 'Kann man if in einer Funktion verwenden?', options: ['Nein, das ist verboten', 'Ja, das ist möglich und nützlich', 'Nur mit while', 'Nur außerhalb von Funktionen'], correctAnswer: 1, explanation: 'Ja, if/elif/else funktioniert innerhalb von Funktionen genauso wie außerhalb.' },
+      { id: 2, question: 'Was prüft if material == STONE?', options: ['Ob material und STONE gleich sind', 'Ob material größer als STONE ist', 'Ob material existiert', 'Ob STONE ein String ist'], correctAnswer: 0, explanation: '== prüft, ob zwei Werte gleich sind.' },
+      { id: 3, question: 'Was ist der Vorteil von Bedingungen in Funktionen?', options: ['Der Code wird kürzer', 'Die Funktion wird intelligenter', 'Man braucht keine Parameter', 'Es ist Pflicht'], correctAnswer: 1, explanation: 'Bedingungen in Funktionen ermöglichen es der Funktion, situationsabhängig zu handeln.' },
+      { id: 4, question: 'Was macht bau_sicher(5)?', options: ['Baut 5 Häuser', 'Baut 5 Blöcke sicher auf festem Grund', 'Prüft 5 Bedingungen', 'Zerstört 5 Blöcke'], correctAnswer: 1, explanation: 'Die Funktion baut 5 Blöcke und prüft dabei, ob der Grund fest ist.' },
+      { id: 5, question: 'Was ist == vs. = ?', options: ['Gleicher Operator', '== vergleicht, = weist zu', '= vergleicht, == weist zu', 'Beide weisen zu'], correctAnswer: 1, explanation: '== ist der Vergleichsoperator (prüft Gleichheit). = ist der Zuweisungsoperator (speichert einen Wert).' },
+    ],
+    xpReward: 100,
+    unlocks: [26],
+  },
+  {
+    id: 26,
+    title: 'Komplexe Muster',
+    description: 'Schachbrettmuster, Zickzack und Parkett – dein Agent kombiniert Schleifen und Bedingungen, um kunstvolle Muster zu erzeugen.',
+    phase: 'loops',
+    duration: 60,
+    difficulty: 'intermediate',
+    objectives: [
+      'Verschachtelte Schleifen mit Bedingungen',
+      'Muster mit if/else erzeugen',
+      'Schachbrett-Logik verstehen',
+      'Zickzack-Muster programmieren',
+      'Koordinatenbasierte Muster',
+      'Komplexe Schleifenlogik',
+    ],
+    content: `
+# Komplexe Muster
+
+## Einführung
+Du kennst bereits Schleifen und Bedingungen. Jetzt kombinierst du beides, um kunstvolle Muster zu erzeugen – wie ein Parkettboden oder ein Schachbrett.
+
+## Schachbrett mit if/else
+\`\`\`python
+for zeile in range(8):
+    for spalte in range(8):
+        if (zeile + spalte) % 2 == 0:
+            agent.set_item(WHITE_WOOL, 1, 1)
+        else:
+            agent.set_item(BLACK_WOOL, 1, 1)
+        agent.place(DOWN)
+        agent.move(RIGHT, 1)
+    agent.move(FORWARD, 1)
+    # Zurück zur Startposition der Zeile
+\`\`\`
+
+## Der Modulo-Operator (%)
+\`\`\`python
+ergebnis = 10 % 3  # = 1 (Rest von 10 ÷ 3)
+\`\`\`
+% gibt den Rest einer Division. Mit % 2 kannst du gerade/ungerade Zahlen erkennen.
+
+## Zickzack-Muster
+\`\`\`python
+for i in range(10):
+    if i % 2 == 0:
+        agent.move(FORWARD, 3)
+    else:
+        agent.move(RIGHT, 3)
+\`\`\`
+
+## Aufgabe 1: Schachbrett
+Erstelle ein 6×6-Schachbrett aus weißer und schwarzer Wolle.
+
+## Aufgabe 2: Zickzack-Pfad
+Ein Pfad, der bei geraden Schritten geradeaus und bei ungeraden nach rechts geht.
+
+## Aufgabe 3: Regenbogen-Zeile
+Wechsle bei jedem Schritt die Farbe: Rot, Orange, Gelb, Grün, Blau.
+
+## Reflexion
+Warum braucht man % 2 für Schachbrettmuster? Was passiert, wenn du % 3 verwendest?
+`,
+    codeBlocks: [
+      { name: '%', description: 'Modulo – Rest der Division', example: '(zeile + spalte) % 2', icon: '🔢' },
+      { name: 'for-for', description: 'Verschachtelte Schleifen', example: 'for zeile in range(8):', icon: '🔁' },
+      { name: 'if-else', description: 'Muster-Wechsel', example: 'if (zeile + spalte) % 2 == 0:', icon: '❓' },
+      { name: 'range', description: 'Wiederholungen', example: 'range(8)', icon: '📊' },
+    ],
+    studentActivity: `
+**Aufgabe 1: Schachbrett**
+1. 8×8-Schleife (zeile, spalte).
+2. Wenn (zeile + spalte) % 2 == 0: weiß.
+3. Sonst: schwarz.
+4. Jedes Feld als Block platzieren.
+
+**Aufgabe 2: Zickzack-Pfad**
+1. 10 Schritte.
+2. Gerade: vorwärts 3.
+3. Ungerade: rechts 3.
+
+**Aufgabe 3: Regenbogen-Zeile**
+1. Farbliste: [RED, ORANGE, YELLOW, GREEN, BLUE]
+2. Bei jedem Schritt: nächste Farbe.
+
+**Reflexion im Team:**
+Was passiert, wenn du % 3 statt % 2 verwendest?
+`,
+    teacherTip: 'Zeige zuerst, wie % 2 funktioniert (gerade/ungerade). Dann ein einfaches Schachbrett auf Papier mit nummerierten Feldern. Lasse die Schüler das Muster vorher auf Papier planen, bevor sie den Code schreiben.',
+    quiz: [
+      { id: 1, question: 'Was ist 7 % 2?', options: ['3', '1', '7', '0'], correctAnswer: 1, explanation: '7 ÷ 2 = 3 Rest 1. Also ist 7 % 2 = 1.' },
+      { id: 2, question: 'Wofür steht % in Python?', options: ['Prozent', 'Modulo – Rest der Division', 'Teilen', 'Multiplizieren'], correctAnswer: 1, explanation: '% ist der Modulo-Operator und gibt den Rest einer Division zurück.' },
+      { id: 3, question: 'Warum braucht man verschachtelte Schleifen für ein Schachbrett?', options: ['Für Zeilen UND Spalten', 'Nur für Farben', 'Es geht auch ohne', 'Für Geschwindigkeit'], correctAnswer: 0, explanation: 'Ein Schachbrett hat Zeilen und Spalten – jede braucht eine eigene Schleife.' },
+      { id: 4, question: 'Was bedeutet (2 + 3) % 2 == 0?', options: ['Die Position ist gerade', 'Die Position ist ungerade', 'Es ist eine Fehlermeldung', 'Die Schleife endet'], correctAnswer: 0, explanation: '(2+3) = 5, und 5 % 2 = 1. Also ist die Aussage False (ungerade).' },
+      { id: 5, question: 'Was kann der Modulo-Operator in Mustererkennung?', options: ['Farben mischen', 'Gerade/ungerade Positionen erkennen', 'Blöcke zerstören', 'Geschwindigkeit ändern'], correctAnswer: 1, explanation: 'Mit % 2 kannst du erkennen, ob eine Position gerade oder ungerade ist – ideal für Schachbrettmuster.' },
+    ],
+    xpReward: 100,
+    unlocks: [27],
+  },
+  {
+    id: 27,
+    title: 'Umgebungs-Checks',
+    description: 'Dein Agent scannt seine Umgebung und reagiert intelligent auf Wasser, Höhen und Hindernisse. Er baut nur auf sicherem Grund.',
+    phase: 'getting-started',
+    duration: 60,
+    difficulty: 'advanced',
+    objectives: [
+      'Umgebung mit detect() scannen',
+      'Wasser und Hindernisse erkennen',
+      'Höhenveränderungen verarbeiten',
+      'Sichere Positionen berechnen',
+      'Adaptives Verhalten programmieren',
+      'Komplexe Umgebungsanalysen',
+    ],
+    content: `
+# Umgebungs-Checks
+
+## Einführung
+In der echten Minecraft-Welt ist der Boden nicht immer gleich. Es gibt Hügel, Löcher, Wasser und Lava. In dieser Lektion lernst du, wie dein Agent diese Hindernisse erkennt und intelligent darauf reagiert.
+
+## Mehrere Richtungen scannen
+\`\`\`python
+def scanne_umgebung():
+    if agent.detect(AIR, FORWARD):
+        agent.say("Freier Weg vorne", "Friendly")
+    if agent.detect(WATER, DOWN):
+        agent.say("Wasser unter mir!", "Friendly")
+    if agent.detect(STONE, DOWN):
+        agent.say("Fester Grund", "Friendly")
+\`\`\`
+
+## Sicheres Bauen über Wasser
+\`\`\`python
+def buecke_ueber_wasser():
+    while agent.detect(WATER, FORWARD):
+        agent.set_item(STONE, 1, 1)
+        agent.place(DOWN)
+        agent.move(FORWARD, 1)
+    agent.move(FORWARD, 1)
+\`\`\`
+
+## Position auslesen
+\`\`\`python
+pos = agent.get_position()
+agent.say("Ich bin bei X=" + str(pos.x) + " Y=" + str(pos.y) + " Z=" + str(pos.z))
+\`\`\`
+
+## Aufgabe 1: Sicherer Turm
+Der Agent baut einen Turm. Bei jedem Stockwerk prüft er: Ist der Boden fest? Nur dann weiterbauen.
+
+## Aufgabe 2: Wasser-Brücke
+Der Agent erkennt Wasser und baut automatisch eine Brücke darüber.
+
+## Aufgabe 3: Hügel-Steigung
+Der Agent erkennt, ob vor ihm ein Hügel ist (Block höher) und baut eine Treppe.
+
+## Reflexion
+Was passiert, wenn der Agent ein endloses Wasserfeld erreicht? Wie könnte man das Programm stoppen?
+`,
+    codeBlocks: [
+      { name: 'detect(WATER, DOWN)', description: 'Prüfe Wasser unter dir', example: 'agent.detect(WATER, DOWN)', icon: '💧' },
+      { name: 'detect(AIR, FORWARD)', description: 'Prüfe freien Weg', example: 'agent.detect(AIR, FORWARD)', icon: '🌬️' },
+      { name: 'get_position', description: 'Aktuelle Position abrufen', example: 'agent.get_position()', icon: '📍' },
+      { name: 'while', description: 'Schleife mit Bedingung', example: 'while agent.detect(WATER, FORWARD):', icon: '🔁' },
+    ],
+    studentActivity: `
+**Aufgabe 1: Sicherer Turm**
+1. Prüfe DOWN auf feste Blöcke.
+2. Wenn fest: weiterbauen.
+3. Wenn Luft: stoppen oder absteigen.
+
+**Aufgabe 2: Wasser-Brücke**
+1. Gehe vorwärts.
+2. Bei Wasser: Stein platzieren UND weitergehen.
+3. Bis kein Wasser mehr.
+
+**Aufgabe 3: Hügel-Treppe**
+1. Prüfe, ob vorne ein Block höher ist.
+2. Wenn ja: Stein als Treppe setzen.
+3. Dann weitergehen.
+
+**Reflexion im Team:**
+Was passiert bei endlosem Wasserfeld?
+`,
+    teacherTip: 'Erstelle eine abwechslungsreiche Welt mit Wasser, Hügeln und Löchern. Die Schüler programmieren den Agenten, um verschiedene Hindernisse zu überwinden. Beginne mit einem einfachen Szenario und erweitere dann.',
+    quiz: [
+      { id: 1, question: 'Was prüft agent.detect(WATER, DOWN)?', options: ['Ob Wasser vorne ist', 'Ob Wasser unter dem Agenten ist', 'Ob der Agent schwimmen kann', 'Ob es regnet'], correctAnswer: 1, explanation: 'DOWN prüft die Position unter dem Agenten.' },
+      { id: 2, question: 'Was ist der Unterschied zwischen while und for?', options: ['Kein Unterschied', 'while prüft Bedingung, for zählt', 'for ist schneller', 'while ist nur für Zahlen'], correctAnswer: 1, explanation: 'for läuft eine bestimmte Anzahl Male. while läuft, solange eine Bedingung wahr ist.' },
+      { id: 3, question: 'Was macht agent.get_position()?', options: ['Bewegt den Agenten', 'Gibt die aktuelle Position zurück', 'Setzt eine neue Position', 'Löscht die Position'], correctAnswer: 1, explanation: 'get_position() gibt die X, Y, Z Koordinaten des Agenten zurück.' },
+      { id: 4, question: 'Warum ist es wichtig, nach unten zu scannen?', options: ['Um die Geschwindigkeit zu messen', 'Um den Boden zu prüfen', 'Um die Höhe zu ignorieren', 'Nur aus Neugier'], correctAnswer: 1, explanation: 'Nach unten scannen zeigt, ob der Boden fest, flüssig oder luftig ist – wichtig für sicheres Bauen.' },
+      { id: 5, question: 'Wann endet eine while-Schleife?', options: ['Nach 10 Durchläufen', 'Wenn die Bedingung falsch wird', 'Wenn man stoppt drückt', 'Nie'], correctAnswer: 1, explanation: 'while endet, wenn die Bedingung nicht mehr zutrifft (wahr → falsch).' },
+    ],
+    xpReward: 125,
+    unlocks: [28],
+  },
+  {
+    id: 28,
+    title: 'Redstone-Interaktionen',
+    description: 'Dein Agent reagiert auf Knöpfe, Hebel und Redstone-Signale. Türen öffnen sich nur mit dem richtigen Code – wie in einem Geheimlabor.',
+    phase: 'conditionals',
+    duration: 60,
+    difficulty: 'advanced',
+    objectives: [
+      'Redstone-Signale verstehen',
+      'Chat-Befehle als Trigger nutzen',
+      'Bedingte Aktionen programmieren',
+      'Sicherheitssysteme bauen',
+      'Passwort-Logik implementieren',
+      'Interaktive Objekte steuern',
+    ],
+    content: `
+# Redstone-Interaktionen
+
+## Einführung
+Redstone ist die Elektronik in Minecraft. In dieser Lektion lernst du, wie dein Agent auf Chat-Befehle und Redstone-Signale reagiert – wie ein Sicherheitssystem in einem Geheimlabor.
+
+## Chat als Trigger
+\`\`\`python
+def oeffne_tuer():
+    if player.has_item(GOLD_BLOCK):
+        blocks.fill(AIR, positions.add(player.position(), 0, 1, 0),
+                    positions.add(player.position(), 0, 3, 0))
+        agent.say("Tür geöffnet!", "Friendly")
+    else:
+        agent.say("Kein Goldblock – Zutritt verweigert!", "Friendly")
+
+player.on_chat("oeffne", oeffne_tuer)
+\`\`\`
+
+## Passwort-System
+\`\`\`python
+def check_passwort(geheimnis):
+    if geheimnis == "secretpassword":
+        agent.say("Willkommen!", "Friendly")
+        # Tür öffnen
+    else:
+        agent.say("Falsches Passwort!", "Friendly")
+
+player.on_chat("oeffne123", lambda: check_passwort("oeffne123"))
+\`\`\`
+
+## Mehrstufige Sicherheit
+\`\`\`python
+stufe = 0
+
+def erhoehe_sicherheit():
+    global stufe
+    stufe += 1
+    if stufe >= 3:
+        agent.say("Alarm! Maximale Sicherheit!", "Friendly")
+\`\`\`
+
+## Aufgabe 1: Redstone-Tür
+Eine Tür öffnet sich nur, wenn der Spieler einen Goldblock im Inventar hat UND den richtigen Chat-Befehl sendet.
+
+## Aufgabe 2: Geheimes Labor
+Erstelle ein Passwort-System. Nur mit dem richtigen Befehl öffnet sich der Zugang.
+
+## Aufgabe 3: Alarm-System
+Nach 3 falschen Versuchen wird ein Alarm ausgelöst.
+
+## Reflexion
+Was sind die Schwachstellen eines Passwort-Systems? Wie könnte man es sicherer machen?
+`,
+    codeBlocks: [
+      { name: 'on_chat', description: 'Chat als Trigger nutzen', example: 'player.on_chat("oeffne", oeffne_tuer)', icon: '💬' },
+      { name: 'has_item', description: 'Inventar prüfen', example: 'player.has_item(GOLD_BLOCK)', icon: '🎒' },
+      { name: 'blocks.fill', description: 'Bereich verändern', example: 'blocks.fill(AIR, pos1, pos2)', icon: '🔲' },
+      { name: 'global', description: 'Variable in Funktion ändern', example: 'global stufe', icon: '🌐' },
+    ],
+    studentActivity: `
+**Aufgabe 1: Redstone-Tür**
+1. Prüfe Goldblock im Inventar.
+2. Bei Gold: Tür öffnen (Wände entfernen).
+3. Ohne Gold: „Zutritt verweigert!"
+
+**Aufgabe 2: Geheimes Labor**
+1. Passwort: „secretpassword".
+2. Richtig: Zugang öffnen.
+3. Falsch: „Falsches Passwort!"
+
+**Aufgabe 3: Alarm-System**
+1. Zähle falsche Versuche.
+2. Bei 3+: Alarm auslösen.
+
+**Reflexion im Team:**
+Was sind die Schwachstellen eines Passwort-Systems?
+`,
+    teacherTip: 'Erstelle ein „Geheimlabor" mit verschlossenen Türen. Die Schüler programmieren die Zugangskontrolle. Beginne mit einfachem Gold-Check, dann Passwort-Logik. Diskutiere danach echte Sicherheitssysteme und deren Schwachstellen.',
+    quiz: [
+      { id: 1, question: 'Was macht player.on_chat()?', options: ['Sendet eine Nachricht', 'Reagiert auf einen Chat-Befehl', 'Löscht Nachrichten', 'Zeigt den Chat an'], correctAnswer: 1, explanation: 'on_chat() registriert eine Funktion, die ausgeführt wird, wenn der Spieler einen bestimmten Chat-Befehl sendet.' },
+      { id: 2, question: 'Was macht blocks.fill()?', options: ['Füllt Inventar', 'Füllt einen Bereich mit Blöcken', 'Löscht Blöcke', 'Prüft Blöcke'], correctAnswer: 1, explanation: 'blocks.fill() füllt einen definierten Bereich mit einem bestimmten Blocktyp.' },
+      { id: 3, question: 'Warum braucht man player.has_item() für Sicherheit?', options: ['Weil es Pflicht ist', 'Um zu prüfen, ob der Spieler einen bestimmten Gegenstand hat', 'Für Geschwindigkeit', 'Nur als Dekoration'], correctAnswer: 1, explanation: 'has_item() prüft, ob ein bestimmter Gegenstand im Inventar ist – als zusätzliche Sicherheitsebene.' },
+      { id: 4, question: 'Was ist ein Lambda in Python?', options: ['Ein Fehler', 'Eine anonyme Funktion', 'Ein Typfehler', 'Eine Schleife'], correctAnswer: 1, explanation: 'Lambda ist eine kurze, anonyme Funktion ohne Namen – nützlich für einfache Aufrufe.' },
+      { id: 5, question: 'Was passiert nach 3 falschen Passwörtern im Alarm-System?', options: ['Das Programm löscht sich', 'Ein Alarm wird ausgelöst', 'Die Tür öffnet sich trotzdem', 'Nichts passiert'], correctAnswer: 1, explanation: 'Bei 3 oder mehr Fehlversuchen wird der Alarm ausgelöst – eine typische Sicherheitsmaßnahme.' },
+    ],
+    xpReward: 125,
+    unlocks: [29],
+  },
+  {
+    id: 29,
+    title: 'Mini-Spiele',
+    description: 'Erstelle interaktive Spiele mit deinem Agenten – Punkte, Timer und Spielregeln. Der Agent wird zur Spielfigur.',
+    phase: 'loops',
+    duration: 60,
+    difficulty: 'advanced',
+    objectives: [
+      'Spiellogik programmieren',
+      'Punkte-Systeme erstellen',
+      'Timer und Wartezeiten nutzen',
+      'Spielregeln definieren',
+      'Zufallsgeneratoren verwenden',
+      'Mehrspieler-Interactionen',
+    ],
+    content: `
+# Mini-Spiele
+
+## Einführung
+Jetzt wird es spannend! Du programmierst dein erstes Spiel. Der Agent wird zur Spielfigur, du erstellst Regeln und Punkte. Bist du bereit?
+
+## Wartezeiten mit loops.pause()
+\`\`\`python
+import loops
+
+def countdown():
+    for i in range(5, 0, -1):
+        agent.say(str(i), "Friendly")
+        loops.pause(1000)  # 1 Sekunde warten
+    agent.say("LOS!", "Friendly")
+\`\`\`
+
+## Zufallsgeneratoren
+\`\`\`python
+import random
+
+def zufalls_aufgabe():
+    aufgabe = random.randint(1, 3)
+    if aufgabe == 1:
+        agent.say("Baue eine Brücke!", "Friendly")
+    elif aufgabe == 2:
+        agent.say("Sammle 5 Steine!", "Friendly")
+    else:
+        agent.say("Erkunde den Turm!", "Friendly")
+\`\`\`
+
+## Punkte-System
+\`\`\`python
+punkte = 0
+
+def belohnung():
+    global punkte
+    punkte += 10
+    agent.say("Punkte: " + str(punkte), "Friendly")
+\`\`\`
+
+## Aufgabe 1: Block-Jagd
+Der Agent versteckt sich an verschiedenen Stellen. Der Spieler muss ihn innerhalb eines Zeitlimits finden. Punkte für Geschwindigkeit.
+
+## Aufgabe 2: Bau-Wettbewerb
+Zwei Teams bauen gleichzeitig. Das Team mit dem höheren Score gewinnt. Punkte für jede abgeschlossene Struktur.
+
+## Aufgabe 3: Rätsel-Pfad
+Der Agent stellt 3 Rätsel. Bei richtiger Antwort: +10 Punkte. Bei falscher: –5 Punkte. Am Ende: Gesamtpunktzahl.
+
+## Reflexion
+Was macht ein gutes Spiel aus? Wie können wir Spannung und Fairness programmieren?
+`,
+    codeBlocks: [
+      { name: 'loops.pause()', description: 'Wartezeit einfügen', example: 'loops.pause(1000)', icon: '⏱️' },
+      { name: 'random.randint()', description: 'Zufallszahl generieren', example: 'random.randint(1, 10)', icon: '🎲' },
+      { name: 'for range()', description: 'Countdown-Schleife', example: 'for i in range(5, 0, -1):', icon: '🔁' },
+      { name: 'global', description: 'Punkte in Funktion ändern', example: 'global punkte', icon: '🌐' },
+    ],
+    studentActivity: `
+**Aufgabe 1: Block-Jagd**
+1. Zufällige Position: \`random.randint(1, 10)\`
+2. Zeitlimit: \`loops.pause(30000)\`
+3. Punkte: je schneller, desto mehr.
+
+**Aufgabe 2: Bau-Wettbewerb**
+1. Zähle abgeschlossene Strukturen.
+2. Vergleiche die Punktzahl.
+3. Gewinner bekanntgeben.
+
+**Aufgabe 3: Rätsel-Pfad**
+1. 3 Rätsel mit Antworten.
+2. Richtig: +10, Falsch: –5.
+3. Am Ende Gesamtpunktzahl.
+
+**Reflexion im Team:**
+Was macht ein gutes Spiel aus?
+`,
+    teacherTip: 'Lasse die Schüler zunächst ein einfaches Zählen-Spiel bauen (Zähler + Timer). Dann erweitere um Zufallselemente und Belohnungssysteme. Diskutiere danach, was ein gutes Spiel ausmacht (Spannung, Fairness, Belohnung).',
+    quiz: [
+      { id: 1, question: 'Was macht loops.pause(1000)?', options: ['Pausiert das Spiel für immer', 'Wartet 1 Sekunde', 'Startet neu', 'Löscht den Code'], correctAnswer: 1, explanation: 'loops.pause(1000) wartet 1000 Millisekunden (= 1 Sekunde).' },
+      { id: 2, question: 'Was gibt random.randint(1, 10) zurück?', options: ['Immer 1', 'Immer 10', 'Eine Zufallszahl zwischen 1 und 10', 'Eine Fehlermeldung'], correctAnswer: 2, explanation: 'random.randint(a, b) gibt eine Zufallszahl zwischen a und b (inklusive) zurück.' },
+      { id: 3, question: 'Wofür wird ein Timer in Spielen verwendet?', options: ['Für Grafik', 'Für Wartezeiten und Zeitlimits', 'Für Musik', 'Nur als Dekoration'], correctAnswer: 1, explanation: 'Timers erstellen Spannung (Countdown) und begrenzen die Spielzeit.' },
+      { id: 4, question: 'Was passiert bei for i in range(5, 0, -1)?', options: ['5 bis 1 abwärts zählen', '1 bis 5 aufwärts zählen', 'Nur 5 und 0', 'Einen Fehler'], correctAnswer: 0, explanation: 'range(5, 0, -1) erzeugt die Zahlen 5, 4, 3, 2, 1 – einen Countdown.' },
+      { id: 5, question: 'Was ist der Unterschied zwischen Spiel und Programm?', options: ['Kein Unterschied', 'Spiel hat Regeln und Feedback', 'Spiel ist immer komplexer', 'Nur Spiele haben Variablen'], correctAnswer: 1, explanation: 'Ein Spiel hat interaktive Regeln, Feedback (Punkte) und ein Ziel – im Gegensatz zu einem linearen Programm.' },
+    ],
+    xpReward: 150,
+    unlocks: [30],
+  },
+  {
+    id: 30,
+    title: 'Projekt: Interaktive Stadt',
+    description: 'Das große Finale! Kombiniere alles, was du gelernt hast: Bedingungen, Funktionen, Variablen, Schleifen und Redstone. Jedes Team baut ein interaktives Gebäude.',
+    phase: 'final-project',
+    duration: 60,
+    difficulty: 'advanced',
+    objectives: [
+      'Alle Konzepte kombinieren',
+      'Modulare Funktionen einsetzen',
+      'Teamarbeit organisieren',
+      'Interaktive Gebäude bauen',
+      'Chat-Befehle als Steuerung',
+      'Gesamtprojekt planen',
+    ],
+    content: `
+# Projekt: Interaktive Stadt
+
+## Einführung
+Du hast in den letzten Lektionen alles gelernt: Bedingungen, Funktionen mit Parametern, Variablen, Umgebungs-Checks und Redstone. Jetzt setzt du alles zusammen und baust eine interaktive Stadt.
+
+## Die Stadt besteht aus:
+1. **Haus 1: Bäckerei** – Der Agent backt Brot (Chat: /brot)
+2. **Haus 2: Schmiede** – Der Agent schmiedet Werkzeuge (Chat: /werkzeug)
+3. **Haus 3: Marktplatz** – Der Agent zählt Besucher (Variable)
+4. **Haus 4: Stadttor** – Öffnet sich nur mit Passwort (if/elif)
+
+## Modulares Stadtprojekt
+\`\`\`python
+def hausbau(typ):
+    if typ == "baeckerei":
+        bau_baeckerei()
+    elif typ == "schmiede":
+        bau_schmiede()
+    elif typ == "marktplatz":
+        bau_marktplatz()
+    elif typ == "tor":
+        bau_stadttor()
+\`\`\`
+
+## Chat-Steuerung
+\`\`\`python
+player.on_chat("baeckerei", lambda: hausbau("baeckerei"))
+player.on_chat("schmiede", lambda: hausbau("schmiede"))
+player.on_chat("stadt", lambda: bau_gesamtstadt())
+\`\`\`
+
+## Aufgabe: Interaktive Stadt
+1. **Planung**: Welche Gebäude baut ihr? Wer macht was?
+2. **Funktionen**: Schreibt für jedes Gebäude eine Funktion.
+3. **Chat-Befehle**: Verbindet die Funktionen mit Chat-Befehlen.
+4. **Variablen**: Zählt Besucher, produzierte Gegenstände.
+5. **Testen**: Funktioniert alles? Korrigiert Fehler.
+6. **Präsentation**: Zeigt eure Stadt den anderen Teams.
+
+## Reflexion
+Was hat am besten funktioniert? Was war die größte Herausforderung? Was würdet ihr beim nächsten Mal anders machen?
+`,
+    codeBlocks: [
+      { name: 'def hausbau(typ)', description: 'Hauptfunktion mit Verzweigung', example: 'if typ == "baeckerei":', icon: '🏗️' },
+      { name: 'player.on_chat', description: 'Chat-Befehle steuern Gebäude', example: 'player.on_chat("stadt", bau_gesamtstadt)', icon: '💬' },
+      { name: 'global', description: 'Zähler in Funktionen', example: 'global besucher', icon: '🌐' },
+      { name: 'lambda', description: 'Kurze Funktion', example: 'lambda: hausbau("tor")', icon: '⚡' },
+    ],
+    studentActivity: `
+**Aufgabe: Interaktive Stadt**
+1. Team organisieren (2-3 Personen).
+2. Jede Person baut 1-2 Gebäude.
+3. Funktionen für jedes Gebäude schreiben.
+4. Chat-Befehle verbinden.
+5. Variablen für Zähler einsetzen.
+6. Gesamtstadt testen und präsentieren.
+
+**Reflexion im Team:**
+Was hat am besten funktioniert? Was war die größte Herausforderung?
+`,
+    teacherTip: 'Organisiere die Klasse in Teams von 2-3 Schüler:innen. Jedes Team baut eine Straße mit 2-4 Gebäuden. Ermutige sie, verschiedene Konzepte zu kombinieren. Am Ende gibt es eine „Stadtrundfahrt" – jedes Team zeigt seine Gebäude.',
+    quiz: [
+      { id: 1, question: 'Was ist das Ziel des Stadtprojekts?', options: ['Eine Hausarbeit schreiben', 'Alle Konzepte in einem Projekt kombinieren', 'Einen Roman schreiben', 'Matheaufgaben lösen'], correctAnswer: 1, explanation: 'Das Projekt kombiniert alle gelernten Konzepte: Bedingungen, Funktionen, Variablen und Chat-Befehle.' },
+      { id: 2, question: 'Warum sind Funktionen wichtig für große Projekte?', options: ['Weil es Pflicht ist', 'Weil sie den Code strukturieren und wiederverwendbar machen', 'Weil sie den Code kürzer machen', 'Nur für Fehlermeldungen'], correctAnswer: 1, explanation: 'Funktionen machen Code modular, wiederverwendbar und leichter zu debuggen.' },
+      { id: 3, question: 'Was ist der erste Schritt beim Stadtprojekt?', options: ['Sofort zu programmieren', 'Planung: Welche Gebäude? Wer macht was?', 'Eine Präsentation halten', 'Einen Fehler finden'], correctAnswer: 1, explanation: 'Planung ist der wichtigste Schritt – klären, was gebaut wird und wer was übernimmt.' },
+      { id: 4, question: 'Wie viele Chat-Befehle braucht die Stadt mindestens?', options: ['1', '2-4', '10', 'Keine'], correctAnswer: 1, explanation: 'Mindestens ein Chat-Befehl pro Gebäude – also 2-4 für eine kleine Stadt.' },
+      { id: 5, question: 'Was passiert am Ende des Projekts?', options: ['Das Programm wird gelöscht', 'Präsentation und Reflexion', 'Ein neues Spiel startet', 'Nichts'], correctAnswer: 1, explanation: 'Am Ende wird die Stadt präsentiert und reflektiert – was lief gut, was kann verbessert werden?' },
+    ],
+    xpReward: 200,
+    unlocks: [31],
+  },
+  {
+    id: 31,
+    title: 'Sandbox Bay',
+    description: 'Deine Belohnung! Freies Bauen, Experimentieren und Entdecken. Versteckte Schätze, Easter Eggs und kreative Freiheit erwarten dich.',
+    phase: 'creative',
+    duration: 60,
+    difficulty: 'advanced',
+    objectives: [
+      'Frei experimentieren',
+      'Kreative Projekte umsetzen',
+      'Versteckte Schätze entdecken',
+      'Easter Eggs finden',
+      'Eigenen Code testen',
+      'Von anderen lernen',
+    ],
+    content: `
+# 🏝️ Sandbox Bay
+
+## Willkommen in der Sandbox!
+Du hast alle 10 Lektionen des Level 2 Archipels abgeschlossen. Diese Insel ist deine Belohnung – hier darfst du frei bauen, experimentieren und alles ausprobieren, was du gelernt hast.
+
+## Die Inselbereiche
+
+### 1. Freibau-Zone (freeArea)
+Hier kannst du bauen, was du willst. Keine Regeln, kein Ziel – nur deine Kreativität.
+
+### 2. Experimentier-Werkstatt (labArea)
+Probiere alle Befehle aus, die du gelernt hast. Teste neue Kombinationen und entdecke, was der Agent noch kann.
+
+### 3. Schatzkammer (treasureArea)
+Finde alle versteckten Schätze auf der Insel. Jeder Schatz enthält eine Belohnung:
+- ⭐ **600 XP Bonus**
+- 🏆 **Level-2-Meister-Pokal**
+- 🎖️ **Bedingungsmeister-Abzeichen**
+- 📜 **Dein persönliches Zertifikat**
+
+### 4. Easter-Egg-Ecke (eggArea)
+Versteckte Referenzen und Überraschungen. Findest du alle?
+
+### 5. Hall of Fame (hallArea)
+Dein Name wird in die Ehrenrolle eingetragen. Herzlichen Glückwunsch!
+
+## Die Reise ist abgeschlossen
+| Etappe | Status |
+|--------|--------|
+| Level 1: Grundlagen | ✅ Abgeschlossen |
+| Level 2: Bedingungen & Funktionen | ✅ Abgeschlossen |
+| Sandbox Bay | ★ Aktiv |
+| Nächstes Level | 🔄 In Vorbereitung |
+
+## Reflexion
+Du hast die gesamte Reise durch Level 2 gemeistert – von einfachen if-Abfragen bis hin zu interaktiven Städten. Was war dein Lieblingsprojekt? Was willst du als Nächstes lernen?
+`,
+    codeBlocks: [],
+    studentActivity: `
+**Bereich 1: Freibau**
+Baue, was du willst! Keine Regeln.
+
+**Bereich 2: Experimente**
+Teste alle Befehle aus. Kombiniere neue Dinge.
+
+**Bereich 3: Schatzsuche**
+Finde alle versteckten Schätze und sammle Belohnungen.
+
+**Bereich 4: Easter Eggs**
+Entdecke versteckte Referenzen.
+
+**Bereich 5: Hall of Fame**
+Dein Name wird eingetragen. Herzlichen Glückwunsch!
+`,
+    teacherTip: 'Diese Insel ist die Belohnung für den gesamten Level-2-Kurs. Lasse die Schüler freely explorieren und ihre Kreativität ausleben. Am Ende: Reflexion über die gesamte Reise und was als Nächstes kommt.',
+    quiz: [],
+    xpReward: 600,
+    unlocks: [],
+  },
 ];
 
