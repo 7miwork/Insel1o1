@@ -15,10 +15,8 @@ export interface HomepageFeature {
   titleKey: string;
   /** i18n key for the feature description */
   descriptionKey: string;
-  /** Optional video URL to render inline */
-  videoUrl?: string;
-  /** Optional video title for the iframe */
-  videoTitle?: string;
+  /** Optional — reference to a key in videos.ts (e.g. "preview") */
+  videoKey?: string;
   /** Display order (lower = higher) */
   order: number;
 }
@@ -31,6 +29,7 @@ export const homepageFeatures: HomepageFeature[] = [
     id: "interactive-paths",
     titleKey: "home.feature_interactivePaths",
     descriptionKey: "home.feature_interactivePathsDesc",
+    videoKey: "preview",
     order: 1,
   },
   {
@@ -55,8 +54,7 @@ export const homepageFeatures: HomepageFeature[] = [
     id: "island-timelapse",
     titleKey: "home.feature_islandTimelapse",
     descriptionKey: "home.feature_islandTimelapseDesc",
-    videoUrl: "https://youtu.be/2TStogXT1lc",
-    videoTitle: "Island Building Timelapse",
+    videoKey: "preview",
     order: 5,
   },
 ];

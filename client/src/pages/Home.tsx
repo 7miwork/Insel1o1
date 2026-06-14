@@ -4,6 +4,22 @@ import { useI18n } from "@/contexts/I18nContext";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { Footer } from "@/components/Footer";
 import { homepageFeatures } from "@/content/features";
+import { getVideo, type LanguageCode } from "@/content/videos";
+
+/* ─── VIDEO LANGUAGE MAPPING ─── */
+
+/**
+ * Map the app's Language type (e.g. "zh-TW") to a
+ * videos.ts LanguageCode (e.g. "zhTW").
+ */
+function mapAppLanguage(lang: string): LanguageCode {
+  const map: Record<string, LanguageCode> = {
+    en: "en",
+    de: "de",
+    "zh-TW": "zhTW",
+  };
+  return map[lang] ?? "de";
+}
 
 /* ─── FEATURE BLOCK ─── */
 
@@ -35,7 +51,7 @@ interface FeatureBlockProps {
 }
 
 function FeatureBlock({ titleKey, descKey, reverse = false, videoUrl, videoTitle }: FeatureBlockProps) {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
 
   return (
     <div className={`grid md:grid-cols-2 gap-8 md:gap-12 items-start ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}>
@@ -108,14 +124,21 @@ export default function Home() {
             {homepageFeatures
               .sort((a, b) => a.order - b.order)
               .map((feature, idx) => (
-                <FeatureBlock
-                  key={feature.id}
-                  titleKey={feature.titleKey}
-                  descKey={feature.descriptionKey}
-                  reverse={idx % 2 === 1}
-                  videoUrl={feature.videoUrl}
-                  videoTitle={feature.videoTitle}
-                />
+                (() => {
+                  const resolved = feature.videoKey
+                    ? getVideo(feature.videoKey, mapAppLanguage(language))
+                    : null;
+                  return (
+                    <FeatureBlock
+                      key={feature.id}
+                      titleKey={feature.titleKey}
+                      descKey={feature.descriptionKey}
+                      reverse={idx % 2 === 1}
+                      videoUrl={resolved?.url}
+                      videoTitle={resolved?.title}
+                    />
+                  );
+                })()
               ))}
           </div>
         </div>
