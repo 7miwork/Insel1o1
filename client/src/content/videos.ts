@@ -1,44 +1,105 @@
 /**
- * Feature Videos — Homepage showcase videos
+ * Central Video Library — Insel 1o1
  *
- * Single source of truth for all feature/review/mitimelap videos
- * displayed on the homepage and other pages.
+ * The ONLY place where video links are stored.
+ * All components import from this file.
  *
- * To add a new video: add an entry to `featureVideos` array.
- * The UI will automatically render any video defined here.
+ * Naming Convention:
+ *   {subject}{level}L{lesson}
+ *
+ *   Examples:
+ *     code1L1  = Coding, Level 1, Lesson 1
+ *     code1L2  = Coding, Level 1, Lesson 2
+ *     code2L1  = Coding, Level 2, Lesson 1
+ *     science1L1 = Science, Level 1, Lesson 1
+ *     math3L4    = Math, Level 3, Lesson 4
+ *     language2L1 = Language, Level 2, Lesson 1
+ *
+ *   Special keys:
+ *     preview  = introductory/hero video on homepage
  *
  * Supported providers:
- *   - YouTube (youtu.be, youtube.com/watch, youtube.com/embed)
+ *   - YouTube (youtu.be, youtube.com/watch?v=, youtube.com/embed/)
  *   - Vimeo
- *   - direct mp4 (future)
+ *   - Direct mp4 (future)
  */
 
-export interface FeatureVideo {
-  /** Unique identifier */
-  id: string;
+export type VideoProvider = "youtube" | "vimeo" | "mp4" | "";
+
+export interface VideoEntry {
+  /** Video URL — YouTube, Vimeo, or direct mp4 */
+  url: string;
   /** Display title */
   title: string;
-  /** Video URL (YouTube, Vimeo, or direct mp4) */
-  url: string;
-  /** Short description */
-  description?: string;
-  /** Optional category tag */
-  category?: "timelapse" | "review" | "tutorial" | "trail";
-
-  /** Whether this video requires opt-in (default: false) */
-  requiresConsent?: boolean;
+  /** Optional provider override (auto-detected if omitted) */
+  provider?: VideoProvider;
 }
 
 /**
- * All homepage feature videos.
- * Each entry is rendered as a video card inside the Features section.
+ * All project video links.
+ *
+ * Add new videos here. The UI reads from this single source.
+ *
+ * @example
+ *   code1L1: {
+ *     url: "https://youtu.be/example",
+ *     title: "Variables Introduction"
+ *   },
  */
-export const featureVideos: FeatureVideo[] = [
-  {
-    id: "island-timelapse",
-    title: "Island Building Timelapse",
+export const videos: Record<string, VideoEntry> = {
+  // ─── Homepage / Marketing ───
+  preview: {
     url: "https://youtu.be/2TStogXT1lc",
-    description: "Minecraft Education timelapse showing how the island worlds were designed and built. From first concept to the final learning world.",
-    category: "timelapse",
+    title: "Island Building Timelapse",
   },
-];
+
+  // ─── Coding — Level 1 ───
+  code1L1: {
+    url: "",
+    title: "Coding 1.1 — Grundlagen der Steuerung",
+  },
+  code1L2: {
+    url: "",
+    title: "Coding 1.2",
+  },
+  code1L3: {
+    url: "",
+    title: "Coding 1.3",
+  },
+
+  // ─── Coding — Level 2 ───
+  code2L1: {
+    url: "",
+    title: "Coding 2.1",
+  },
+  code2L2: {
+    url: "",
+    title: "Coding 2.2",
+  },
+
+  // ─── Science ───
+  science1L1: {
+    url: "",
+    title: "Science 1.1",
+  },
+  science1L2: {
+    url: "",
+    title: "Science 1.2",
+  },
+
+  // ─── Math ───
+  math1L1: {
+    url: "",
+    title: "Math 1.1",
+  },
+
+  // ─── Language ───
+  language1L1: {
+    url: "",
+    title: "Language 1.1",
+  },
+  language2L1: {
+    url: "",
+    title: "Language 2.1",
+  },
+};

@@ -6,16 +6,34 @@ This guide shows how to add and manage content **without touching React code**.
 
 ## How to Add a New YouTube Video
 
-Open `src/content/videos.ts` and add an entry:
+Open `src/content/videos.ts` and add an entry to the `videos` object.
+
+### Naming Convention
+
+```
+{subject}{level}L{lesson}
+```
+
+| Key | Meaning |
+|-----|---------|
+| `code1L1` | Coding, Level 1, Lesson 1 |
+| `code1L2` | Coding, Level 1, Lesson 2 |
+| `code2L1` | Coding, Level 2, Lesson 1 |
+| `science1L1` | Science, Level 1, Lesson 1 |
+| `math3L4` | Math, Level 3, Lesson 4 |
+| `language2L1` | Language, Level 2, Lesson 1 |
+| `preview` | Hero/preview video on homepage |
+
+**Pattern:** `subject + level + L + lesson`
+
+### Adding a Video Entry
 
 ```ts
-{
-  id: "new-timelapse",
-  title: "New Timelapse Video",
-  url: "https://youtu.be/VIDEO_ID",       // or https://www.youtube.com/watch?v=VIDEO_ID
-  description: "Description shown below the video",
-  category: "timelapse",                   // "timelapse" | "review" | "tutorial" | "trail"
-}
+// In src/content/videos.ts
+code1L1: {
+  url: "https://youtu.be/example",
+  title: "Variables Introduction"
+},
 ```
 
 **Supported URL formats:**
@@ -23,7 +41,7 @@ Open `src/content/videos.ts` and add an entry:
 - `https://www.youtube.com/watch?v=VIDEO_ID`
 - `https://vimeo.com/VIDEO_ID`
 
-The video will render automatically in the Features section of the homepage.
+Leave `url: ""` for lessons that don't have videos yet. The UI handles empty URLs gracefully.
 
 ---
 
