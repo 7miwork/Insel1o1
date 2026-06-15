@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Star, Trophy, Award, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
+import { Star, Trophy, Award, Sparkles, CheckCircle2, ArrowRight, Ship, Compass, Map, Anchor, Gem, Sailboat } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 
 interface RewardSectionProps {
@@ -27,9 +27,9 @@ const confettiColors = [
   "#06b6d4",
   "#22d3ee",
   "#facc15",
-  "#fb923c",
+  "#f59e0b",
   "#4ade80",
-  "#a78bfa",
+  "#d97706",
 ];
 
 const Confetti: React.FC = () => {
@@ -80,6 +80,8 @@ export const RewardSection: React.FC<RewardSectionProps> = ({
 }) => {
   const { t } = useI18n();
 
+  const isLastIsland = !onContinue && unlocks.length === 0;
+
   return (
     <section
       className="lesson-section animate-fadeInUp"
@@ -96,15 +98,19 @@ export const RewardSection: React.FC<RewardSectionProps> = ({
         >
           <Trophy className="w-5 h-5" />
         </span>
-        <h2>{t("lesson.rewardEarned")}</h2>
+        <h2>Island Cleared</h2>
       </div>
 
       <div className="reward-card relative">
         <Confetti />
         <div className="relative z-10 space-y-5">
-          <div className="flex justify-center">
-            <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/70 shadow-inner">
-              <Sparkles className="w-7 h-7 text-amber-700" />
+          <div className="flex justify-center mb-2">
+            <span className="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-white/80 shadow-lg treasure-bounce">
+              {isLastIsland ? (
+                <Ship className="w-8 h-8 text-amber-700" />
+              ) : (
+                <Gem className="w-8 h-8 text-amber-700" />
+              )}
             </span>
           </div>
           <h3 className="text-2xl font-extrabold">
@@ -173,7 +179,8 @@ export const RewardSection: React.FC<RewardSectionProps> = ({
               onClick={onBackToMap}
               className="btn btn-outline btn-md"
             >
-              {t("lesson.backToMap")}
+              <Compass className="w-4 h-4" />
+              Return to Previous Island
             </button>
           )}
           {onContinue && (
@@ -182,8 +189,19 @@ export const RewardSection: React.FC<RewardSectionProps> = ({
               onClick={onContinue}
               className="btn btn-primary btn-md"
             >
-              {t("lesson.continueToNext")}
+              <Ship className="w-4 h-4" />
+              Continue Voyage
               <ArrowRight className="w-4 h-4" />
+            </button>
+          )}
+          {!onContinue && onBackToMap && (
+            <button
+              type="button"
+              onClick={onBackToMap}
+              className="btn btn-primary btn-md"
+            >
+              <Anchor className="w-4 h-4" />
+              Complete Expedition
             </button>
           )}
         </div>

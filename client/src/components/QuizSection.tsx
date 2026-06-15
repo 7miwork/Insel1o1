@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CheckCircle2, XCircle, ArrowRight, Sparkles, Lightbulb, Trophy, Star, RotateCcw } from "lucide-react";
+import { CheckCircle2, XCircle, ArrowRight, Sparkles, Lightbulb, Trophy, Star, RotateCcw, Gem, Anchor } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import type { QuizQuestion } from "@/data/minecraft-island";
 
@@ -89,11 +89,6 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
     }
   };
 
-  // Helper used in the result phase to derive a score from collected answers.
-  // (not used in production flow anymore — kept for backwards compatibility)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const _countCorrect = (a: AnswerRecord[]) => a.filter((x) => x.isCorrect).length;
-
   if (phase === "intro") {
     return (
       <section
@@ -104,14 +99,14 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
           <span
             className="icon-bubble"
             style={{
-              background: "linear-gradient(135deg,#fde68a,#fcd34d)",
-              color: "#92400e",
+              background: "linear-gradient(135deg,#fbbf24,#d97706)",
+              color: "#78350f",
             }}
             aria-hidden
           >
-            <Trophy className="w-5 h-5" />
+            <Gem className="w-5 h-5" />
           </span>
-          <h2>{t("common.knowledgeChallenge")}</h2>
+          <h2>Treasure Challenge</h2>
         </div>
 
         <div className="space-y-5">
@@ -122,7 +117,7 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
           {xpPreview > 0 && (
             <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-amber-800">
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100">
-                <Star className="w-5 h-5 text-amber-500" fill="currentColor" />
+                <Gem className="w-5 h-5 text-amber-500" />
               </span>
               <div>
                 <p className="text-sm font-semibold">{t("lesson.xpPreview")}</p>
@@ -139,8 +134,8 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
               onClick={start}
               className="btn btn-accent btn-lg"
             >
-              <Sparkles className="w-4 h-4" />
-              {t("lesson.startQuiz")}
+              <Anchor className="w-4 h-4" />
+              Begin Treasure Challenge
               <ArrowRight className="w-4 h-4" />
             </button>
             <span className="text-sm text-[hsl(var(--muted-foreground))]">
@@ -170,14 +165,14 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
           <span
             className="icon-bubble"
             style={{
-              background: "linear-gradient(135deg,#bbf7d0,#4ade80)",
-              color: "#14532d",
+              background: "linear-gradient(135deg,#6ee7b7,#34d399)",
+              color: "#065f46",
             }}
             aria-hidden
           >
             <Trophy className="w-5 h-5" />
           </span>
-          <h2>{t("lesson.quizComplete")}</h2>
+          <h2>Treasure Found!</h2>
         </div>
 
         <div className="space-y-5 text-center">
@@ -185,15 +180,15 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
             {t("lesson.quizCompleteDesc")}
           </p>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="rounded-xl border border-cyan-200 bg-cyan-50 p-5">
-              <p className="text-xs uppercase tracking-wider text-cyan-700 font-semibold">
+          <div className="grid grid-cols-2 gap-4 max-w-xs mx-auto">
+            <div className="rounded-xl border border-amber-200 bg-amber-50 p-5">
+              <p className="text-xs uppercase tracking-wider text-amber-700 font-semibold">
                 {t("lesson.yourScore")}
               </p>
-              <p className="mt-2 text-4xl font-extrabold text-cyan-700">
+              <p className="mt-2 text-4xl font-extrabold text-amber-700">
                 {result.score}%
               </p>
-              <p className="mt-1 text-sm text-cyan-700/80">
+              <p className="mt-1 text-sm text-amber-700/80">
                 {result.correctCount} / {result.total}
               </p>
             </div>
@@ -237,6 +232,20 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
       className="lesson-section animate-fadeInUp"
       aria-label={t("common.knowledgeChallenge")}
     >
+      <div className="lesson-section-title">
+        <span
+          className="icon-bubble"
+          style={{
+            background: "linear-gradient(135deg,#fbbf24,#d97706)",
+            color: "#78350f",
+          }}
+          aria-hidden
+        >
+          <Gem className="w-5 h-5" />
+        </span>
+        <h2>Treasure Challenge</h2>
+      </div>
+
       {/* Progress */}
       <div className="mb-5">
         <div className="flex items-center justify-between text-sm font-medium text-[hsl(var(--muted-foreground))] mb-2">
@@ -249,7 +258,7 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
         </div>
         <div className="progress-track progress-track-lg" aria-hidden>
           <div
-            className="progress-fill"
+            className="progress-fill progress-fill-gold"
             style={{ width: `${progressPct}%` }}
           />
         </div>
@@ -338,7 +347,7 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
           <button
             type="button"
             onClick={confirm}
-            className="btn btn-primary btn-md"
+            className="btn btn-accent btn-md"
             disabled={selected === null}
           >
             {t("common.submit")}
@@ -347,7 +356,7 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
           <button
             type="button"
             onClick={next}
-            className="btn btn-primary btn-md"
+            className="btn btn-accent btn-md"
           >
             {questionIndex < total - 1
               ? t("lesson.nextQuestion")

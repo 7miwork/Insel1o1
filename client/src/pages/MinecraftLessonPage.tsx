@@ -14,6 +14,10 @@ import {
   Trophy,
   ArrowRight,
   RotateCcw,
+  Ship,
+  Map,
+  Compass,
+  Anchor,
 } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import {
@@ -28,14 +32,14 @@ import { RewardAnimation } from "@/components/RewardAnimation";
 import { calculateQuizReward, calculateLessonReward } from "@/lib/reward-system";
 
 /**
- * Phase accent colors. The hero band is the visual anchor of the lesson page.
+ * Phase accent colors — warm, expedition-friendly tones
  */
 const phaseAccents: Record<Lesson["phase"], { from: string; to: string; ring: string }> = {
-  "getting-started": { from: "#34d399", to: "#059669", ring: "#10b981" },
-  "loops":          { from: "#60a5fa", to: "#2563eb", ring: "#3b82f6" },
-  "conditionals":   { from: "#fb923c", to: "#ea580c", ring: "#f97316" },
-  "creative":       { from: "#a78bfa", to: "#7c3aed", ring: "#8b5cf6" },
-  "final-project":  { from: "#facc15", to: "#d97706", ring: "#eab308" },
+  "getting-started": { from: "#0d9488", to: "#115e59", ring: "#14b8a6" },
+  "loops":          { from: "#0f766e", to: "#065f46", ring: "#10b981" },
+  "conditionals":   { from: "#d97706", to: "#92400e", ring: "#f59e0b" },
+  "creative":       { from: "#0e7490", to: "#164e63", ring: "#06b6d4" },
+  "final-project":  { from: "#ca8a04", to: "#78350f", ring: "#eab308" },
 };
 
 const difficultyKeyMap: Record<Lesson["difficulty"], string> = {
@@ -63,6 +67,9 @@ export const MinecraftLessonPage: React.FC = () => {
   const [reward, setReward] = useState({ xp: 0, coins: 0 });
   const [completed, setCompleted] = useState(false);
 
+  const totalLessons = MINECRAFT_LESSONS.length;
+  const lessonIndex = lesson ? MINECRAFT_LESSONS.findIndex(l => l.id === lesson.id) : -1;
+
   const accent = useMemo(
     () => (lesson ? phaseAccents[lesson.phase] : phaseAccents["getting-started"]),
     [lesson]
@@ -71,10 +78,10 @@ export const MinecraftLessonPage: React.FC = () => {
   // Lesson not found
   if (!lesson) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 flex items-center justify-center px-4">
-        <div className="max-w-md text-center card-elevated p-8 rounded-2xl">
-          <div className="w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 mx-auto flex items-center justify-center mb-4">
-            <Lightbulb className="w-7 h-7" />
+      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-teal-50 flex items-center justify-center px-4">
+        <div className="max-w-md text-center rounded-2xl bg-white border-2 border-amber-200 p-8 shadow-lg">
+          <div className="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 mx-auto flex items-center justify-center mb-4">
+            <Compass className="w-7 h-7" />
           </div>
           <h1 className="text-2xl font-extrabold text-slate-900">
             {t("lesson.lessonNotFound")}
@@ -121,8 +128,21 @@ export const MinecraftLessonPage: React.FC = () => {
     background: `linear-gradient(135deg, ${accent.from} 0%, ${accent.to} 100%)`,
   };
 
+  // Build journey dots (show up to 5 surrounding lessons)
+  const journeyStart = Math.max(0, lessonIndex - 2);
+  const journeyEnd = Math.min(totalLessons - 1, lessonIndex + 2);
+  const journeyItems = [];
+  for (let i = journeyStart; i <= journeyEnd; i++) {
+    const targetId = MINECRAFT_LESSONS[i].id;
+    let dotStatus: 'past' | 'current' | 'future' = 'future';
+    if (i < lessonIndex) dotStatus = 'past';
+    else if (i === lessonIndex) dotStatus = 'current';
+    else dotStatus = 'future';
+    journeyItems.push({ id: targetId, status: dotStatus });
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50/50 via-white to-teal-50/30">
       {showRewardAnimation && (
         <RewardAnimation
           xp={reward.xp}
@@ -132,17 +152,17 @@ export const MinecraftLessonPage: React.FC = () => {
       )}
 
       {/* ========================================================
-          1. HERO BANNER
+          1. HERO BANNER — Expedition Ship Deck
           ======================================================== */}
       <header
         className="relative overflow-hidden text-white"
         style={heroStyle}
       >
         <div
-          className="absolute inset-0 opacity-30 pointer-events-none"
+          className="absolute inset-0 opacity-20 pointer-events-none"
           style={{
             background:
-              "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15) 0%, transparent 40%)",
+              "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(0,0,0,0.1) 0%, transparent 40%)",
           }}
           aria-hidden
         />
@@ -158,8 +178,10 @@ export const MinecraftLessonPage: React.FC = () => {
             {t("lesson.backToArchipelago")}
           </button>
 
-          <div className="flex flex-wrap items-center gap-2 mb-3">
+          {/* Island name + chapter */}
+          <div className="flex flex-wrap items-center gap-2 mb-2">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur px-3 py-1 text-xs font-bold uppercase tracking-wider">
+              <Ship className="w-3.5 h-3.5" />
               {t("common.lesson")} {lesson.id}
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur px-3 py-1 text-xs font-semibold">
@@ -176,20 +198,49 @@ export const MinecraftLessonPage: React.FC = () => {
             </span>
           </div>
 
+          {/* Lesson title */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight max-w-3xl">
             {lesson.title}
           </h1>
-          <p className="text-base sm:text-lg text-white/90 mt-3 max-w-3xl">
+
+          {/* Lesson progress — where we are in the journey */}
+          <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <span className="text-sm text-white/80 font-medium flex items-center gap-1.5">
+              <Map className="w-4 h-4" />
+              {t("lesson.lesson")} {lessonIndex + 1} {t("lesson.of")} {totalLessons}
+            </span>
+            <div className="journey-route">
+              {journeyItems.map((item, idx) => (
+                <React.Fragment key={item.id}>
+                  {idx > 0 && (
+                    <span
+                      className={`journey-line ${
+                        item.status === 'current' || item.status === 'past' ? 'completed' : ''
+                      }`}
+                    />
+                  )}
+                  <span
+                    className={`journey-dot ${
+                      item.status === 'past' ? 'active' : item.status === 'current' ? 'current' : ''
+                    }`}
+                  />
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+
+          {/* Description */}
+          <p className="text-base sm:text-lg text-white/90 mt-4 max-w-3xl">
             {lesson.description}
           </p>
         </div>
       </header>
 
       {/* ========================================================
-          MAIN — sections 2 through 9
+          MAIN — sections
           ======================================================== */}
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
-        {/* 2. LESSON OVERVIEW */}
+        {/* 2. OVERVIEW — Expedition Briefing */}
         <section
           className="lesson-section animate-fadeInUp"
           aria-label={t("lesson.overview")}
@@ -203,7 +254,7 @@ export const MinecraftLessonPage: React.FC = () => {
           <p className="text-slate-600 leading-relaxed">{lesson.description}</p>
         </section>
 
-        {/* 3. LEARNING OBJECTIVES */}
+        {/* 3. LEARNING OBJECTIVES — Mission Checklist */}
         {lesson.objectives?.length > 0 && (
           <section
             className="lesson-section animate-fadeInUp"
@@ -213,8 +264,8 @@ export const MinecraftLessonPage: React.FC = () => {
               <span
                 className="icon-bubble"
                 style={{
-                  background: "linear-gradient(135deg,#bbf7d0,#4ade80)",
-                  color: "#14532d",
+                  background: "linear-gradient(135deg,#d1fae5,#6ee7b7)",
+                  color: "#065f46",
                 }}
                 aria-hidden
               >
@@ -226,7 +277,7 @@ export const MinecraftLessonPage: React.FC = () => {
               {lesson.objectives.map((obj, idx) => (
                 <li key={idx} className="objective-item">
                   <CheckCircle2
-                    className="w-4 h-4 mt-0.5 shrink-0 text-cyan-600"
+                    className="w-4 h-4 mt-0.5 shrink-0 text-emerald-600"
                     aria-hidden
                   />
                   <span>{obj}</span>
@@ -236,13 +287,13 @@ export const MinecraftLessonPage: React.FC = () => {
           </section>
         )}
 
-        {/* 4. VIDEO CONTAINER */}
+        {/* 4. VIDEO — Captain's Briefing / Scout Report */}
         <VideoContainer
           enabled={Boolean(lesson.video?.enabled)}
           label={t("lesson.videoContainer")}
         />
 
-        {/* 5. LESSON CONTENT */}
+        {/* 5. LESSON CONTENT — Captain's Log */}
         <section
           className="lesson-section animate-fadeInUp"
           aria-label={t("lesson.content")}
@@ -251,8 +302,8 @@ export const MinecraftLessonPage: React.FC = () => {
             <span
               className="icon-bubble"
               style={{
-                background: "linear-gradient(135deg,#fed7aa,#fb923c)",
-                color: "#9a3412",
+                background: "linear-gradient(135deg,#fde68a,#fbbf24)",
+                color: "#92400e",
               }}
               aria-hidden
             >
@@ -260,23 +311,21 @@ export const MinecraftLessonPage: React.FC = () => {
             </span>
             <h2>{t("lesson.content")}</h2>
           </div>
-          <div className="prose prose-slate max-w-none">
-            <div className="text-slate-700 leading-relaxed whitespace-pre-wrap">
-              {lesson.content}
-            </div>
+          <div className="captains-log whitespace-pre-wrap text-slate-700 leading-relaxed">
+            {lesson.content}
           </div>
 
           {lesson.codeBlocks && lesson.codeBlocks.length > 0 && (
             <div className="mt-8">
               <h3 className="text-lg font-bold flex items-center gap-2 mb-4 text-slate-900">
-                <Code2 className="w-5 h-5 text-cyan-600" />
+                <Code2 className="w-5 h-5 text-emerald-600" />
                 {t("lesson.codeBlocks")}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {lesson.codeBlocks.map((block, idx) => (
                   <div
                     key={idx}
-                    className="card p-4 hover:border-cyan-300 transition-colors"
+                    className="card p-4 hover:border-amber-300 transition-colors"
                   >
                     <div className="flex items-start gap-3">
                       <span className="text-2xl shrink-0" aria-hidden>
@@ -316,7 +365,7 @@ export const MinecraftLessonPage: React.FC = () => {
                 <Lightbulb className="w-5 h-5 text-violet-600" />
                 {t("lesson.teacherTip")}
               </h3>
-              <div className="rounded-xl border-l-4 border-violet-400 bg-violet-50 p-4 text-slate-700">
+              <div className="rounded-xl border-l-4 border-amber-400 bg-amber-50 p-4 text-slate-700">
                 {lesson.teacherTip}
               </div>
             </div>
@@ -342,8 +391,8 @@ export const MinecraftLessonPage: React.FC = () => {
               </span>
               <h2>{t("lesson.mission")}</h2>
             </div>
-            <div className="rounded-2xl border border-cyan-200 bg-gradient-to-br from-cyan-50 to-sky-50 p-5 sm:p-6">
-              <p className="text-base sm:text-lg text-cyan-900 font-medium">
+            <div className="rounded-2xl border border-teal-200 bg-gradient-to-br from-teal-50 to-amber-50 p-5 sm:p-6">
+              <p className="text-base sm:text-lg text-teal-900 font-medium">
                 {lesson.objectives[0]}
               </p>
               {lesson.objectives.length > 1 && (
@@ -351,10 +400,10 @@ export const MinecraftLessonPage: React.FC = () => {
                   {lesson.objectives.slice(1).map((o, idx) => (
                     <li
                       key={idx}
-                      className="text-sm text-cyan-800 flex items-start gap-2"
+                      className="text-sm text-amber-800 flex items-start gap-2"
                     >
                       <ArrowRight
-                        className="w-4 h-4 mt-0.5 shrink-0 text-cyan-500"
+                        className="w-4 h-4 mt-0.5 shrink-0 text-amber-500"
                         aria-hidden
                       />
                       {o}
@@ -366,7 +415,7 @@ export const MinecraftLessonPage: React.FC = () => {
           </section>
         )}
 
-        {/* 7. QUIZ / KNOWLEDGE CHALLENGE */}
+        {/* 7. QUIZ — Treasure Challenge */}
         {lesson.quiz && lesson.quiz.length > 0 && (
           <QuizSection
             questions={lesson.quiz}
@@ -376,7 +425,7 @@ export const MinecraftLessonPage: React.FC = () => {
           />
         )}
 
-        {/* 8. REWARD SECTION (after completion) */}
+        {/* 8. REWARD — Island Cleared */}
         {completed && (
           <RewardSection
             xp={reward.xp}
@@ -393,7 +442,7 @@ export const MinecraftLessonPage: React.FC = () => {
       </main>
 
       {/* 9. FOOTER NAVIGATION */}
-      <footer className="border-t border-slate-200 bg-white">
+      <footer className="border-t border-amber-200 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-wrap items-center justify-between gap-3">
           <button
             type="button"
@@ -403,12 +452,14 @@ export const MinecraftLessonPage: React.FC = () => {
             <ChevronLeft className="w-4 h-4" />
             {t("lesson.backToMap")}
           </button>
+
           {!completed && lesson.quiz && lesson.quiz.length > 0 && (
             <span className="text-sm text-slate-500 flex items-center gap-1.5">
               <Trophy className="w-4 h-4 text-amber-500" />
               +{lesson.xpReward} {t("common.xp")} {t("lesson.xpPreview").toLowerCase()}
             </span>
           )}
+
           {completed && (
             <button
               type="button"

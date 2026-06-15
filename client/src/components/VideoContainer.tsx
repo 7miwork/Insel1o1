@@ -1,5 +1,5 @@
 import React from "react";
-import { Play, Video as VideoIcon } from "lucide-react";
+import { Play, Video as VideoIcon, Binoculars, Eye } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 
 interface VideoContainerProps {
@@ -28,10 +28,17 @@ export const VideoContainer: React.FC<VideoContainerProps> = ({
         aria-label={label || t("lesson.videoContainer")}
       >
         <div className="lesson-section-title">
-          <span className="icon-bubble" aria-hidden>
-            <VideoIcon className="w-5 h-5" />
+          <span
+            className="icon-bubble"
+            style={{
+              background: "linear-gradient(135deg,#d9f99d,#a3e635)",
+              color: "#3f6212",
+            }}
+            aria-hidden
+          >
+            <Binoculars className="w-5 h-5" />
           </span>
-          <h2>{label || t("lesson.videoContainer")}</h2>
+          <h2>{t("lesson.videoContainer")}</h2>
         </div>
         <div
           className="video-frame"
@@ -47,7 +54,7 @@ export const VideoContainer: React.FC<VideoContainerProps> = ({
           ) : null}
           <div className="relative z-10 flex flex-col items-center gap-4 text-center px-6">
             <span className="video-play-button" aria-hidden>
-              <Play className="w-7 h-7 ml-1" fill="currentColor" />
+              <Eye className="w-7 h-7" />
             </span>
             <div>
               <p className="text-lg sm:text-xl font-bold text-white">
@@ -69,18 +76,29 @@ export const VideoContainer: React.FC<VideoContainerProps> = ({
       aria-label={label || t("lesson.videoContainer")}
     >
       <div className="lesson-section-title">
-        <span className="icon-bubble" aria-hidden>
-          <VideoIcon className="w-5 h-5" />
+        <span
+          className="icon-bubble"
+          style={{
+            background: "linear-gradient(135deg,#fde68a,#fbbf24)",
+            color: "#92400e",
+          }}
+          aria-hidden
+        >
+          <Binoculars className="w-5 h-5" />
         </span>
-        <h2>{label || t("lesson.videoContainer")}</h2>
+        <h2>Captain's Briefing</h2>
       </div>
-      <div className="video-frame">
+      <div className="video-frame border-2 border-amber-400/30">
         {embed ?? (
           <span className="video-play-button" aria-hidden>
             <Play className="w-7 h-7 ml-1" fill="currentColor" />
           </span>
         )}
       </div>
+      <p className="mt-3 text-xs text-amber-700 italic flex items-center gap-1.5">
+        <Eye className="w-3.5 h-3.5" />
+        Observe carefully — this intelligence will guide your expedition.
+      </p>
     </section>
   );
 };
