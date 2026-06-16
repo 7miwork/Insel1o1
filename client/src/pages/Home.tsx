@@ -79,7 +79,7 @@ function FeatureBlock({ titleKey, descKey, reverse = false, videoUrl, videoTitle
 
 export default function Home() {
   const [, setLocation] = useLocation();
-  const { t } = useI18n();
+  const { t, language } = useI18n();
 
   return (
     <div className="min-h-screen bg-white">
