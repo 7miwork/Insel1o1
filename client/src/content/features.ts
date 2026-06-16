@@ -54,7 +54,6 @@ export const homepageFeatures: HomepageFeature[] = [
     id: "island-timelapse",
     titleKey: "home.feature_islandTimelapse",
     descriptionKey: "home.feature_islandTimelapseDesc",
-    videoKey: "preview",
     order: 5,
   },
 ];
