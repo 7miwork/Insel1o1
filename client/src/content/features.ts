@@ -29,7 +29,6 @@ export const homepageFeatures: HomepageFeature[] = [
     id: "interactive-paths",
     titleKey: "home.feature_interactivePaths",
     descriptionKey: "home.feature_interactivePathsDesc",
-    videoKey: "preview",
     order: 1,
   },
   {
@@ -54,6 +53,7 @@ export const homepageFeatures: HomepageFeature[] = [
     id: "island-timelapse",
     titleKey: "home.feature_islandTimelapse",
     descriptionKey: "home.feature_islandTimelapseDesc",
+    videoKey: "preview",
     order: 5,
   },
 ];
