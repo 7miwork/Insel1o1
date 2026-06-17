@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <defs>
+    <linearGradient id="bg-w" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6bb7c9"/>
+      <stop offset="100%" stop-color="#4aa3b5"/>
+    </linearGradient>
+    <linearGradient id="sand-f" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8d3a2"/>
+      <stop offset="100%" stop-color="#d4bd8c"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Water -->
+  <rect width="400" height="320" fill="url(#bg-w)"/>
+  <!-- Subtle wave lines -->
+  <path d="M30,260 Q80,250 130,260 Q180,270 230,260 Q280,250 330,260 Q360,266 380,260" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <path d="M50,275 Q100,265 150,275 Q200,285 250,275 Q300,265 350,275 Q370,280 390,275" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <!-- Layer 2: Island shape (organic blob) -->
+  <path d="M130,230 C110,200 115,165 140,145 C165,125 200,120 230,130 C260,140 275,160 280,185 C285,210 270,235 245,240 C220,245 185,248 160,245 C140,242 135,238 130,230Z" fill="url(#sand-f)" stroke="rgba(60,40,20,0.35)" stroke-width="2.5"/>
+  <!-- Layer 3: Light highlight top-left -->
+  <path d="M140,150 C160,132 190,126 220,132 C200,128 170,130 148,148 C142,153 138,160 136,168 C134,160 136,153 140,150Z" fill="rgba(255,255,255,0.25)"/>
+  <!-- Layer 4: Minimal details - 1 small tree -->
+  <rect x="197" y="145" width="3" height="16" fill="#7a6652"/>
+  <circle cx="198" cy="138" r="10" fill="#8fbf7a" opacity="0.6"/>
+  <!-- 1 rock -->
+  <ellipse cx="150" cy="205" rx="8" ry="4" fill="#b8a88e"/>
+  <!-- 1 wave at base -->
+  <path d="M100,237 Q140,227 180,237 Q220,247 260,237 Q300,227 330,237" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <!-- Text: Charting new land… -->
+  <rect x="125" y="252" width="150" height="34" rx="6" fill="rgba(40,30,20,0.5)"/>
+  <text x="200" y="274" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#f0e0c0" font-style="italic">Charting new land…</text>
+</svg>

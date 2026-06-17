@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6bb7c9"/>
+      <stop offset="100%" stop-color="#4aa3b5"/>
+    </linearGradient>
+    <linearGradient id="sand1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8d3a2"/>
+      <stop offset="100%" stop-color="#d4bd8c"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Water background -->
+  <rect width="400" height="320" fill="url(#bg1)"/>
+  <!-- Subtle waves -->
+  <path d="M20,255 Q60,245 100,255 Q140,265 180,255 Q220,245 260,255 Q300,265 340,255 Q370,248 390,255" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <path d="M40,270 Q90,260 140,270 Q190,280 240,270 Q290,260 340,270 Q380,278 400,270" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+  <!-- Layer 2: Island shape (organic blob, asymmetric, flattened bottom) -->
+  <path d="M110,230 C90,195 100,155 130,140 C160,125 195,120 225,128 C255,136 280,155 285,180 C290,205 280,230 260,238 C240,246 210,250 180,248 C150,246 125,240 110,230Z" fill="url(#sand1)" stroke="rgba(60,40,20,0.35)" stroke-width="2.5"/>
+  <!-- Layer 3: Light highlight top-left -->
+  <path d="M135,148 C155,130 185,124 215,130 C198,126 170,128 148,145 C142,150 138,157 136,165 C134,157 136,150 135,148Z" fill="rgba(255,255,255,0.25)"/>
+  <!-- Layer 4: Minimal details -->
+  <!-- 2 palm trees (simple circles + trunks) -->
+  <rect x="172" y="140" width="4" height="20" rx="2" fill="#7a6652"/>
+  <circle cx="174" cy="132" r="14" fill="#8fbf7a" opacity="0.55"/>
+  <rect x="228" y="148" width="3" height="16" rx="1.5" fill="#7a6652"/>
+  <circle cx="229" cy="142" r="10" fill="#8fbf7a" opacity="0.45"/>
+  <!-- 2 small rocks -->
+  <ellipse cx="140" cy="210" rx="10" ry="5" fill="#b8a88e"/>
+  <ellipse cx="262" cy="215" rx="7" ry="3.5" fill="#b8a88e" opacity="0.8"/>
+  <!-- 1 small house -->
+  <rect x="200" y="180" width="14" height="10" rx="1" fill="#d4a574"/>
+  <polygon points="197,180 214,180 205.5,172" fill="#b0583a"/>
+  <!-- Base wave -->
+  <path d="M85,235 Q120,226 155,235 Q190,244 225,235 Q260,226 295,235" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+</svg>

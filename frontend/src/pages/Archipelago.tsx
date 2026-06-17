@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import GameLayout from '@/components/gamified/GameLayout';
+import IslandVisual from '@/components/gamified/IslandVisual';
 import { usei18n } from '@/contexts/i18nContext';
 import Link from 'next/link';
 
@@ -11,6 +12,7 @@ interface Island {
   progress: number;
   locked: boolean;
   lessons: number;
+  courseSlug?: string;
 }
 
 interface Archipelago {
@@ -18,6 +20,11 @@ interface Archipelago {
   name: string;
   description: string;
   islands: Island[];
+}
+
+/** Map display names to course folder slugs */
+function toCourseSlug(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, '-');
 }
 
 export default function ArchipelagoPage() {
@@ -72,15 +79,25 @@ export default function ArchipelagoPage() {
                       : 'bg-gradient-to-br from-blue-600/30 to-purple-600/30 border-blue-400/30 hover:border-blue-400/60 hover:shadow-lg hover:shadow-blue-500/20'
                   }`}
                 >
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <h3 className="text-xl font-bold text-white flex-1">{island.name}</h3>
-                      {island.locked ? (
-                        <span className="text-2xl">🔒</span>
-                      ) : (
-                        <span className="text-2xl">🏝️</span>
-                      )}
-                    </div>
+                  {/* Island Visual SVG */}
+                  <div className="relative w-full h-32 mb-4 rounded-lg overflow-hidden bg-blue-900/20">
+                    <IslandVisual
+                      course={toCourseSlug(archipelago.name)}
+                      lesson={island.id}
+                      alt={island.name}
+                      className="w-full h-full object-cover"
+                      width={400}
+                      height={320}
+                    />
+                    {island.locked && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                        <span className="text-3xl">🔒</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="p-6 pt-0">
+                    <h3 className="text-xl font-bold text-white flex-1 mb-3">{island.name}</h3>
 
                     <div className="space-y-3">
                       <div>

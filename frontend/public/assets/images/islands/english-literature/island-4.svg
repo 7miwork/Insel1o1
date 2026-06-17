@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6bb7c9"/>
+      <stop offset="100%" stop-color="#4aa3b5"/>
+    </linearGradient>
+    <linearGradient id="sand4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8d3a2"/>
+      <stop offset="100%" stop-color="#d4bd8c"/>
+    </linearGradient>
+  </defs>
+  <!-- Water background -->
+  <rect width="400" height="320" fill="url(#bg4)"/>
+  <!-- Subtle waves -->
+  <path d="M20,255 Q60,245 100,255 Q140,265 180,255 Q220,245 260,255 Q300,265 340,255 Q370,248 390,255" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <path d="M40,270 Q90,260 140,270 Q190,280 240,270 Q290,260 340,270 Q380,278 400,270" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+  <!-- Island shape (organic blob) -->
+  <path d="M120,230 C100,198 108,160 135,145 C162,130 195,125 225,132 C255,139 278,158 282,182 C286,206 272,232 250,240 C228,248 200,250 175,248 C150,246 130,240 120,230Z" fill="url(#sand4)" stroke="rgba(60,40,20,0.35)" stroke-width="2.5"/>
+  <!-- Light highlight top-left -->
+  <path d="M140,150 C160,132 190,126 220,132 C200,128 172,130 150,147 C144,152 140,159 138,167 C136,159 138,152 140,150Z" fill="rgba(255,255,255,0.25)"/>
+  <!-- Details -->
+  <!-- Palm tree 1 -->
+  <rect x="180" y="142" width="4" height="18" rx="2" fill="#7a6652"/>
+  <circle cx="182" cy="134" r="13" fill="#8fbf7a" opacity="0.55"/>
+  <!-- Palm tree 2 -->
+  <rect x="230" y="150" width="3" height="14" rx="1.5" fill="#7a6652"/>
+  <circle cx="231" cy="144" r="9" fill="#8fbf7a" opacity="0.45"/>
+  <!-- Books / library detail -->
+  <rect x="160" y="190" width="8" height="6" rx="1" fill="#c0392b"/>
+  <rect x="169" y="190" width="6" height="6" rx="1" fill="#2980b9"/>
+  <rect x="176" y="190" width="7" height="6" rx="1" fill="#27ae60"/>
+  <!-- Small rocks -->
+  <ellipse cx="145" cy="212" rx="9" ry="4.5" fill="#b8a88e"/>
+  <ellipse cx="260" cy="218" rx="6" ry="3" fill="#b8a88e" opacity="0.8"/>
+  <!-- Base wave -->
+  <path d="M90,236 Q125,227 160,236 Q195,245 230,236 Q265,227 300,236" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+</svg>

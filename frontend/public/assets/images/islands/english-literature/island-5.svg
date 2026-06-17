@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6bb7c9"/>
+      <stop offset="100%" stop-color="#4aa3b5"/>
+    </linearGradient>
+    <linearGradient id="sand5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8d3a2"/>
+      <stop offset="100%" stop-color="#d4bd8c"/>
+    </linearGradient>
+  </defs>
+  <!-- Water background -->
+  <rect width="400" height="320" fill="url(#bg5)"/>
+  <!-- Subtle waves -->
+  <path d="M20,255 Q60,245 100,255 Q140,265 180,255 Q220,245 260,255 Q300,265 340,255 Q370,248 390,255" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <path d="M40,270 Q90,260 140,270 Q190,280 240,270 Q290,260 340,270 Q380,278 400,270" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+  <!-- Island shape (wider, more elongated - like an open book) -->
+  <path d="M100,230 C85,200 95,165 125,150 C155,135 190,130 220,135 C250,140 275,155 282,178 C289,201 278,228 260,237 C242,246 215,250 190,248 C165,246 140,242 120,236 C105,232 103,233 100,230Z" fill="url(#sand5)" stroke="rgba(60,40,20,0.35)" stroke-width="2.5"/>
+  <!-- Light highlight -->
+  <path d="M130,155 C150,137 180,131 210,136 C192,132 168,134 145,152 C139,157 136,164 134,172 C132,164 134,157 130,155Z" fill="rgba(255,255,255,0.25)"/>
+  <!-- Details -->
+  <!-- Palm tree -->
+  <rect x="175" y="145" width="4" height="18" rx="2" fill="#7a6652"/>
+  <circle cx="177" cy="137" r="14" fill="#8fbf7a" opacity="0.55"/>
+  <!-- Quill / writing theme -->
+  <rect x="210" y="160" width="2" height="28" rx="1" fill="#e8d5a0" transform="rotate(25,211,174)"/>
+  <circle cx="214" cy="158" r="5" fill="#d9a05b" opacity="0.7" transform="rotate(25,214,158)"/>
+  <!-- Scroll / parchment -->
+  <rect x="152" y="190" width="20" height="12" rx="2" fill="#f5e6c8" stroke="#c4a97d" stroke-width="0.8"/>
+  <line x1="155" y1="194" x2="169" y2="194" stroke="#c4a97d" stroke-width="0.5"/>
+  <line x1="155" y1="197" x2="169" y2="197" stroke="#c4a97d" stroke-width="0.5"/>
+  <!-- Rocks -->
+  <ellipse cx="140" cy="215" rx="8" ry="4" fill="#b8a88e"/>
+  <ellipse cx="265" cy="215" rx="6" ry="3" fill="#b8a88e" opacity="0.8"/>
+  <!-- Base wave -->
+  <path d="M75,235 Q115,226 155,235 Q195,244 235,235 Q275,226 315,235" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+</svg>

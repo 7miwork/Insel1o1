@@ -1,0 +1,26 @@
+{
+  "course": "mathematics-kingdom",
+  "displayName": "Mathematics Kingdom",
+  "description": "Master the fundamentals of mathematics",
+  "totalIslands": 3,
+  "islands": [
+    {
+      "id": 1,
+      "file": "island-1.svg",
+      "title": "Algebra Island",
+      "lessonIndex": 0
+    },
+    {
+      "id": 2,
+      "file": "island-2.svg",
+      "title": "Geometry Island",
+      "lessonIndex": 1
+    },
+    {
+      "id": 3,
+      "file": "island-3.svg",
+      "title": "Calculus Island",
+      "lessonIndex": 2
+    }
+  ]
+}
