@@ -1,41 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320">
   <defs>
-    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#5faebb"/>
-      <stop offset="100%" stop-color="#4398aa"/>
+    <linearGradient id="sand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#fcd34d"/>
     </linearGradient>
-    <linearGradient id="forest" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#6fbf73"/>
-      <stop offset="100%" stop-color="#5ca862"/>
+    <linearGradient id="grass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.4"/>
     </linearGradient>
   </defs>
-  <!-- Layer 1: Water background -->
-  <rect width="400" height="320" fill="url(#bg2)"/>
-  <!-- Subtle waves -->
-  <path d="M30,260 Q80,250 130,260 Q180,270 230,260 Q280,250 330,260 Q370,254 390,260" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
-  <path d="M10,275 Q60,265 110,275 Q160,285 210,275 Q260,265 310,275 Q360,285 390,275" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
-  <!-- Layer 2: Forest island (organic blob, wider, different silhouette) -->
-  <path d="M95,235 C80,200 85,160 115,140 C145,120 185,115 220,122 C255,129 280,148 288,175 C296,202 285,230 265,240 C245,250 210,255 175,252 C140,249 110,243 95,235Z" fill="url(#forest)" stroke="rgba(60,40,20,0.35)" stroke-width="2.5"/>
-  <!-- Layer 3: Light highlight top-left -->
-  <path d="M120,148 C145,127 175,121 210,126 C195,122 165,124 138,143 C132,148 128,156 126,165 C124,156 126,149 120,148Z" fill="rgba(255,255,255,0.2)"/>
-  <!-- Layer 4: Minimal details - dense tree cluster (forest theme) -->
-  <!-- Tree cluster 1 -->
-  <rect x="165" y="138" width="3" height="15" fill="#7a6652"/>
-  <circle cx="166" cy="130" r="12" fill="#5fad57" opacity="0.6"/>
-  <circle cx="158" cy="135" r="9" fill="#6fbf73" opacity="0.5"/>
-  <!-- Tree cluster 2 -->
-  <rect x="205" y="142" width="3" height="14" fill="#7a6652"/>
-  <circle cx="206" cy="135" r="11" fill="#5fad57" opacity="0.55"/>
-  <circle cx="215" cy="138" r="8" fill="#6fbf73" opacity="0.45"/>
-  <!-- Tree cluster 3 -->
-  <rect x="240" y="150" width="3" height="12" fill="#7a6652"/>
-  <circle cx="241" cy="144" r="10" fill="#5fad57" opacity="0.5"/>
-  <!-- Single tall tree -->
-  <rect x="132" y="142" width="3" height="20" fill="#7a6652"/>
-  <circle cx="133" cy="134" r="10" fill="#6fbf73" opacity="0.55"/>
-  <!-- Small rocks -->
-  <ellipse cx="120" cy="212" rx="9" ry="4" fill="#9aab94"/>
-  <ellipse cx="265" cy="218" rx="6" ry="3" fill="#9aab94" opacity="0.8"/>
-  <!-- Base wave -->
-  <path d="M70,238 Q110,228 150,238 Q190,248 230,238 Q270,228 310,238" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <rect width="400" height="320" fill="url(#water)"/>
+  <path d="M60,190 Q50,140 90,100 Q130,70 180,80 Q230,65 270,95 Q310,85 335,125 Q355,155 345,200 Q335,240 300,265 Q260,285 210,280 Q160,290 120,265 Q85,240 65,200 Z" fill="url(#sand)"/>
+  <path d="M90,170 Q110,130 150,140 Q190,120 230,150 Q260,180 250,210 Q230,235 190,230 Q150,240 120,215 Q95,195 90,170 Z" fill="url(#grass)"/>
+  <!-- Pyramids (geometry theme) -->
+  <path d="M150,200 L190,110 L230,200 Z" fill="#d6d3d1" opacity="0.8"/>
+  <path d="M170,200 L210,130 L250,200 Z" fill="#a8a29e" opacity="0.7"/>
+  <!-- Trees -->
+  <g transform="translate(120, 140)">
+    <rect x="-4" y="0" width="8" height="28" fill="#92400e"/>
+    <circle cx="0" cy="-6" r="14" fill="#15803d"/>
+  </g>
+  <g transform="translate(280, 150)">
+    <rect x="-3" y="0" width="6" height="24" fill="#78350f"/>
+    <circle cx="0" cy="-5" r="12" fill="#166534"/>
+  </g>
+  <!-- Geometry symbols -->
+  <circle cx="320" cy="90" r="15" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.5"/>
+  <path d="M70,130 L90,110 L110,130 L90,150 Z" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.5"/>
+  <text x="70" y="200" font-size="18" fill="#fbbf24" opacity="0.6" font-family="serif">△</text>
+  <text x="310" y="180" font-size="16" fill="#fbbf24" opacity="0.5" font-family="serif">○</text>
 </svg>

@@ -1,35 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320">
   <defs>
-    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#6bb7c9"/>
-      <stop offset="100%" stop-color="#4aa3b5"/>
+    <linearGradient id="sand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#fcd34d"/>
     </linearGradient>
-    <linearGradient id="sand1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#e8d3a2"/>
-      <stop offset="100%" stop-color="#d4bd8c"/>
+    <linearGradient id="grass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.4"/>
     </linearGradient>
   </defs>
-  <!-- Layer 1: Water background -->
-  <rect width="400" height="320" fill="url(#bg1)"/>
-  <!-- Subtle waves -->
-  <path d="M20,255 Q60,245 100,255 Q140,265 180,255 Q220,245 260,255 Q300,265 340,255 Q370,248 390,255" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
-  <path d="M40,270 Q90,260 140,270 Q190,280 240,270 Q290,260 340,270 Q380,278 400,270" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
-  <!-- Layer 2: Island shape (organic blob, asymmetric, flattened bottom) -->
-  <path d="M110,230 C90,195 100,155 130,140 C160,125 195,120 225,128 C255,136 280,155 285,180 C290,205 280,230 260,238 C240,246 210,250 180,248 C150,246 125,240 110,230Z" fill="url(#sand1)" stroke="rgba(60,40,20,0.35)" stroke-width="2.5"/>
-  <!-- Layer 3: Light highlight top-left -->
-  <path d="M135,148 C155,130 185,124 215,130 C198,126 170,128 148,145 C142,150 138,157 136,165 C134,157 136,150 135,148Z" fill="rgba(255,255,255,0.25)"/>
-  <!-- Layer 4: Minimal details -->
-  <!-- 2 palm trees (simple circles + trunks) -->
-  <rect x="172" y="140" width="4" height="20" rx="2" fill="#7a6652"/>
-  <circle cx="174" cy="132" r="14" fill="#8fbf7a" opacity="0.55"/>
-  <rect x="228" y="148" width="3" height="16" rx="1.5" fill="#7a6652"/>
-  <circle cx="229" cy="142" r="10" fill="#8fbf7a" opacity="0.45"/>
-  <!-- 2 small rocks -->
-  <ellipse cx="140" cy="210" rx="10" ry="5" fill="#b8a88e"/>
-  <ellipse cx="262" cy="215" rx="7" ry="3.5" fill="#b8a88e" opacity="0.8"/>
-  <!-- 1 small house -->
-  <rect x="200" y="180" width="14" height="10" rx="1" fill="#d4a574"/>
-  <polygon points="197,180 214,180 205.5,172" fill="#b0583a"/>
-  <!-- Base wave -->
-  <path d="M85,235 Q120,226 155,235 Q190,244 225,235 Q260,226 295,235" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <!-- Water background -->
+  <rect width="400" height="320" fill="url(#water)"/>
+  <!-- Island base (organic beach shape) -->
+  <path d="M80,180 Q60,140 100,110 Q140,80 180,90 Q220,70 260,100 Q300,90 320,130 Q340,160 330,200 Q320,240 290,260 Q250,280 200,275 Q150,285 110,260 Q80,240 80,200 Z" fill="url(#sand)"/>
+  <!-- Grass patches -->
+  <path d="M120,160 Q140,120 180,130 Q220,110 250,140 Q270,170 260,200 Q240,220 200,215 Q160,225 130,200 Q110,180 120,160 Z" fill="url(#grass)"/>
+  <!-- Trees -->
+  <g transform="translate(140, 130)">
+    <rect x="-3" y="0" width="6" height="25" fill="#92400e"/>
+    <circle cx="0" cy="-5" r="12" fill="#15803d"/>
+  </g>
+  <g transform="translate(210, 120)">
+    <rect x="-4" y="0" width="8" height="30" fill="#78350f"/>
+    <circle cx="0" cy="-8" r="15" fill="#166534"/>
+  </g>
+  <g transform="translate(250, 145)">
+    <rect x="-3" y="0" width="6" height="22" fill="#92400e"/>
+    <circle cx="0" cy="-5" r="11" fill="#15803d"/>
+  </g>
+  <!-- Mountains -->
+  <path d="M90,200 L130,120 L170,200 Z" fill="#78716c" opacity="0.6"/>
+  <path d="M130,200 L180,110 L230,200 Z" fill="#57534e" opacity="0.5"/>
+  <!-- Small building (school/hut) -->
+  <g transform="translate(175, 165)">
+    <rect x="0" y="10" width="30" height="20" fill="#fef3c7"/>
+    <path d="M-5,10 L15,-5 L45,10 Z" fill="#b45309"/>
+    <rect x="10" y="18" width="10" height="12" fill="#78350f"/>
+  </g>
+  <!-- Algebra symbols floating -->
+  <text x="300" y="100" font-size="20" fill="#fbbf24" opacity="0.6" font-family="serif">∑</text>
+  <text x="70" y="150" font-size="16" fill="#fbbf24" opacity="0.5" font-family="serif">∫</text>
+  <text x="310" y="180" font-size="14" fill="#fbbf24" opacity="0.4" font-family="serif">π</text>
 </svg>

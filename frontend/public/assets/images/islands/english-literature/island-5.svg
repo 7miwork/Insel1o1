@@ -1,37 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320">
   <defs>
-    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#6bb7c9"/>
-      <stop offset="100%" stop-color="#4aa3b5"/>
+    <linearGradient id="sand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#fcd34d"/>
     </linearGradient>
-    <linearGradient id="sand5" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#e8d3a2"/>
-      <stop offset="100%" stop-color="#d4bd8c"/>
+    <linearGradient id="grass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.4"/>
     </linearGradient>
   </defs>
-  <!-- Water background -->
-  <rect width="400" height="320" fill="url(#bg5)"/>
-  <!-- Subtle waves -->
-  <path d="M20,255 Q60,245 100,255 Q140,265 180,255 Q220,245 260,255 Q300,265 340,255 Q370,248 390,255" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
-  <path d="M40,270 Q90,260 140,270 Q190,280 240,270 Q290,260 340,270 Q380,278 400,270" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
-  <!-- Island shape (wider, more elongated - like an open book) -->
-  <path d="M100,230 C85,200 95,165 125,150 C155,135 190,130 220,135 C250,140 275,155 282,178 C289,201 278,228 260,237 C242,246 215,250 190,248 C165,246 140,242 120,236 C105,232 103,233 100,230Z" fill="url(#sand5)" stroke="rgba(60,40,20,0.35)" stroke-width="2.5"/>
-  <!-- Light highlight -->
-  <path d="M130,155 C150,137 180,131 210,136 C192,132 168,134 145,152 C139,157 136,164 134,172 C132,164 134,157 130,155Z" fill="rgba(255,255,255,0.25)"/>
-  <!-- Details -->
-  <!-- Palm tree -->
-  <rect x="175" y="145" width="4" height="18" rx="2" fill="#7a6652"/>
-  <circle cx="177" cy="137" r="14" fill="#8fbf7a" opacity="0.55"/>
-  <!-- Quill / writing theme -->
-  <rect x="210" y="160" width="2" height="28" rx="1" fill="#e8d5a0" transform="rotate(25,211,174)"/>
-  <circle cx="214" cy="158" r="5" fill="#d9a05b" opacity="0.7" transform="rotate(25,214,158)"/>
-  <!-- Scroll / parchment -->
-  <rect x="152" y="190" width="20" height="12" rx="2" fill="#f5e6c8" stroke="#c4a97d" stroke-width="0.8"/>
-  <line x1="155" y1="194" x2="169" y2="194" stroke="#c4a97d" stroke-width="0.5"/>
-  <line x1="155" y1="197" x2="169" y2="197" stroke="#c4a97d" stroke-width="0.5"/>
-  <!-- Rocks -->
-  <ellipse cx="140" cy="215" rx="8" ry="4" fill="#b8a88e"/>
-  <ellipse cx="265" cy="215" rx="6" ry="3" fill="#b8a88e" opacity="0.8"/>
-  <!-- Base wave -->
-  <path d="M75,235 Q115,226 155,235 Q195,244 235,235 Q275,226 315,235" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <rect width="400" height="320" fill="url(#water)"/>
+  <path d="M65,195 Q50,145 95,108 Q140,75 190,88 Q240,70 280,100 Q315,92 338,128 Q358,162 348,205 Q338,245 302,268 Q262,288 212,282 Q162,292 122,268 Q88,245 70,205 Z" fill="url(#sand)"/>
+  <path d="M88,172 Q112,132 152,142 Q192,125 228,155 Q258,185 248,215 Q228,240 188,236 Q148,246 118,220 Q98,200 88,172 Z" fill="url(#grass)"/>
+  <!-- Library / Novel theme: bookshelf building -->
+  <g transform="translate(155, 148)">
+    <rect x="0" y="10" width="60" height="45" rx="3" fill="#92400e" opacity="0.9"/>
+    <rect x="5" y="14" width="50" height="8" fill="#78350f"/>
+    <rect x="5" y="25" width="50" height="8" fill="#78350f"/>
+    <rect x="5" y="36" width="50" height="8" fill="#78350f"/>
+    <!-- Books spines -->
+    <rect x="10" y="15" width="6" height="6" fill="#ef4444" opacity="0.8"/>
+    <rect x="20" y="15" width="5" height="6" fill="#3b82f6" opacity="0.8"/>
+    <rect x="28" y="15" width="7" height="6" fill="#22c55e" opacity="0.8"/>
+    <rect x="38" y="15" width="5" height="6" fill="#fbbf24" opacity="0.8"/>
+    <path d="M-5,10 L30,-10 L75,10 Z" fill="#b45309"/>
+  </g>
+  <!-- Quill and ink -->
+  <g transform="translate(100, 130) rotate(-15)">
+    <path d="M0,0 Q5,-18 2,-35 Q0,-42 -5,-35 Q-3,-18 0,0 Z" fill="#fef3c7"/>
+    <path d="M-5,0 L5,0 L8,12 L-8,12 Z" fill="#1e293b"/>
+  </g>
+  <circle cx="120" cy="135" r="4" fill="#1e293b" opacity="0.7"/>
+  <!-- Trees -->
+  <g transform="translate(125, 115)">
+    <rect x="-3" y="0" width="6" height="23" fill="#92400e"/>
+    <circle cx="0" cy="-5" r="11" fill="#15803d"/>
+  </g>
+  <g transform="translate(300, 135)">
+    <rect x="-4" y="0" width="8" height="25" fill="#78350f"/>
+    <circle cx="0" cy="-6" r="12" fill="#166534"/>
+  </g>
+  <!-- Novel symbols -->
+  <text x="60" y="115" font-size="20" fill="#fbbf24" opacity="0.6" font-family="serif">📖</text>
+  <text x="330" y="105" font-size="16" fill="#fbbf24" opacity="0.5" font-family="serif">✎</text>
 </svg>

@@ -1,37 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320">
   <defs>
-    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#6bb7c9"/>
-      <stop offset="100%" stop-color="#4aa3b5"/>
+    <linearGradient id="sand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#fcd34d"/>
     </linearGradient>
-    <linearGradient id="sand4" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#e8d3a2"/>
-      <stop offset="100%" stop-color="#d4bd8c"/>
+    <linearGradient id="grass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.4"/>
     </linearGradient>
   </defs>
-  <!-- Water background -->
-  <rect width="400" height="320" fill="url(#bg4)"/>
-  <!-- Subtle waves -->
-  <path d="M20,255 Q60,245 100,255 Q140,265 180,255 Q220,245 260,255 Q300,265 340,255 Q370,248 390,255" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
-  <path d="M40,270 Q90,260 140,270 Q190,280 240,270 Q290,260 340,270 Q380,278 400,270" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
-  <!-- Island shape (organic blob) -->
-  <path d="M120,230 C100,198 108,160 135,145 C162,130 195,125 225,132 C255,139 278,158 282,182 C286,206 272,232 250,240 C228,248 200,250 175,248 C150,246 130,240 120,230Z" fill="url(#sand4)" stroke="rgba(60,40,20,0.35)" stroke-width="2.5"/>
-  <!-- Light highlight top-left -->
-  <path d="M140,150 C160,132 190,126 220,132 C200,128 172,130 150,147 C144,152 140,159 138,167 C136,159 138,152 140,150Z" fill="rgba(255,255,255,0.25)"/>
-  <!-- Details -->
-  <!-- Palm tree 1 -->
-  <rect x="180" y="142" width="4" height="18" rx="2" fill="#7a6652"/>
-  <circle cx="182" cy="134" r="13" fill="#8fbf7a" opacity="0.55"/>
-  <!-- Palm tree 2 -->
-  <rect x="230" y="150" width="3" height="14" rx="1.5" fill="#7a6652"/>
-  <circle cx="231" cy="144" r="9" fill="#8fbf7a" opacity="0.45"/>
-  <!-- Books / library detail -->
-  <rect x="160" y="190" width="8" height="6" rx="1" fill="#c0392b"/>
-  <rect x="169" y="190" width="6" height="6" rx="1" fill="#2980b9"/>
-  <rect x="176" y="190" width="7" height="6" rx="1" fill="#27ae60"/>
-  <!-- Small rocks -->
-  <ellipse cx="145" cy="212" rx="9" ry="4.5" fill="#b8a88e"/>
-  <ellipse cx="260" cy="218" rx="6" ry="3" fill="#b8a88e" opacity="0.8"/>
-  <!-- Base wave -->
-  <path d="M90,236 Q125,227 160,236 Q195,245 230,236 Q265,227 300,236" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <rect width="400" height="320" fill="url(#water)"/>
+  <path d="M70,185 Q55,135 100,100 Q145,70 195,82 Q245,65 285,95 Q320,85 340,125 Q358,155 348,200 Q338,240 305,262 Q265,282 215,276 Q165,286 125,262 Q92,238 75,198 Z" fill="url(#sand)"/>
+  <path d="M95,165 Q120,125 160,135 Q200,118 235,148 Q262,178 252,208 Q232,232 192,228 Q152,238 122,212 Q100,192 95,165 Z" fill="url(#grass)"/>
+  <!-- Poetry quill / book theme -->
+  <g transform="translate(170, 140)">
+    <rect x="0" y="5" width="50" height="35" rx="3" fill="#fef3c7" opacity="0.9"/>
+    <path d="M5,5 L25,-8 L55,5 Z" fill="#b45309"/>
+    <line x1="15" y1="12" x2="40" y2="12" stroke="#92400e" stroke-width="2"/>
+    <line x1="15" y1="20" x2="35" y2="20" stroke="#92400e" stroke-width="2"/>
+    <line x1="15" y1="28" x2="30" y2="28" stroke="#92400e" stroke-width="2"/>
+  </g>
+  <!-- Quill -->
+  <g transform="translate(250, 130) rotate(30)">
+    <path d="M0,0 Q5,-20 2,-40 Q0,-50 -5,-40 Q-3,-20 0,0 Z" fill="#fef3c7"/>
+    <path d="M-5,0 L5,0 L8,15 L-8,15 Z" fill="#78350f"/>
+  </g>
+  <!-- Trees -->
+  <g transform="translate(115, 115)">
+    <rect x="-3" y="0" width="6" height="24" fill="#92400e"/>
+    <circle cx="0" cy="-5" r="12" fill="#15803d"/>
+  </g>
+  <g transform="translate(305, 140)">
+    <rect x="-4" y="0" width="8" height="26" fill="#78350f"/>
+    <circle cx="0" cy="-6" r="13" fill="#166534"/>
+  </g>
+  <!-- Poetry symbols -->
+  <text x="60" y="120" font-size="20" fill="#fbbf24" opacity="0.6" font-family="serif">❝</text>
+  <text x="320" y="110" font-size="16" fill="#fbbf24" opacity="0.5" font-family="serif">❞</text>
+  <text x="80" y="200" font-size="14" fill="#fbbf34" opacity="0.5" font-family="serif">~</text>
 </svg>
