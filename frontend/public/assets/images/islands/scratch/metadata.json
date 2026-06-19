@@ -1,0 +1,20 @@
+{
+  "course": "scratch",
+  "displayName": "Scratch Islands",
+  "description": "Build creative projects with visual block programming",
+  "totalIslands": 1,
+  "colorPalette": {
+    "water": "#6bb7c9",
+    "sand": "#e8d3a2",
+    "accent": "#f59e0b",
+    "highlight": "#fbbf24"
+  },
+  "islands": [
+    {
+      "id": 1,
+      "file": "island-1.svg",
+      "title": "Creativity Cove",
+      "lessonIndex": 0
+    }
+  ]
+}

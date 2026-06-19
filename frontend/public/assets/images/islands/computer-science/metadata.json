@@ -1,0 +1,20 @@
+{
+  "course": "computer-science",
+  "displayName": "Computer Science",
+  "description": "Explore the fundamentals of computing and algorithms",
+  "totalIslands": 1,
+  "colorPalette": {
+    "water": "#5faebb",
+    "sand": "#6fbf73",
+    "accent": "#3b82f6",
+    "highlight": "#fbbf24"
+  },
+  "islands": [
+    {
+      "id": 1,
+      "file": "island-1.svg",
+      "title": "Processor Isle",
+      "lessonIndex": 0
+    }
+  ]
+}

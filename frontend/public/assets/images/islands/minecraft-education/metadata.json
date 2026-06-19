@@ -1,0 +1,104 @@
+{
+  "course": "minecraft-education",
+  "displayName": "Minecraft Education",
+  "description": "Learn with block-based adventures in Minecraft Education world",
+  "totalIslands": 2,
+  "colorPalette": {
+    "water": "#5faebb",
+    "sand": "#d4bd8c",
+    "accent": "#3c8c40",
+    "highlight": "#fbbf24"
+  },
+  "islands": [
+    {
+      "id": 1,
+      "file": "island-1.svg",
+      "title": "Crafting Island",
+      "lessonIndex": 0
+    },
+    {
+      "id": 2,
+      "file": "island-2.svg",
+      "title": "Builder's Tower",
+      "lessonIndex": 1
+    }
+  ]
+}
+</content>
+
+<write_to_file>
+<path>Insel1o1/frontend/public/assets/images/islands/python/metadata.json</path>
+<content>{
+  "course": "python",
+  "displayName": "Python Island",
+  "description": "Master the Python programming language through project-based learning",
+  "totalIslands": 2,
+  "colorPalette": {
+    "water": "#6bb7c9",
+    "sand": "#e8d3a2",
+    "accent": "#306844",
+    "highlight": "#6dd5ed"
+  },
+  "islands": [
+    {
+      "id": 1,
+      "file": "island-1.svg",
+      "title": "Terminal Bay",
+      "lessonIndex": 0
+    },
+    {
+      "id": 2,
+      "file": "island-2.svg",
+      "title": "Data Atoll",
+      "lessonIndex": 1
+    }
+  ]
+}
+</content>
+
+<write_to_file>
+<path>Insel1o1/frontend/public/assets/images/islands/scratch/metadata.json</path>
+<content>{
+  "course": "scratch",
+  "displayName": "Scratch Islands",
+  "description": "Build creative projects with visual block programming",
+  "totalIslands": 1,
+  "colorPalette": {
+    "water": "#6bb7c9",
+    "sand": "#e8d3a2",
+    "accent": "#f59e0b",
+    "highlight": "#fbbf24"
+  },
+  "islands": [
+    {
+      "id": 1,
+      "file": "island-1.svg",
+      "title": "Creativity Cove",
+      "lessonIndex": 0
+    }
+  ]
+}
+</content>
+
+<write_to_file>
+<path>Insel1o1/frontend/public/assets/images/islands/computer-science/metadata.json</path>
+<content>{
+  "course": "computer-science",
+  "displayName": "Computer Science",
+  "description": "Explore the fundamentals of computing and algorithms",
+  "totalIslands": 1,
+  "colorPalette": {
+    "water": "#5faebb",
+    "sand": "#6fbf73",
+    "accent": "#3b82f6",
+    "highlight": "#fbbf24"
+  },
+  "islands": [
+    {
+      "id": 1,
+      "file": "island-1.svg",
+      "title": "Processor Isle",
+      "lessonIndex": 0
+    }
+  ]
+}

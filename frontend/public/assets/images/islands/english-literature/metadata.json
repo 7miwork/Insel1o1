@@ -1,0 +1,26 @@
+{
+  "course": "english-literature",
+  "displayName": "English Literature",
+  "description": "Explore the world of literature",
+  "totalIslands": 2,
+  "colorPalette": {
+    "water": "#6bb7c9",
+    "sand": "#e8d3a2",
+    "accent": "#d4a574",
+    "highlight": "#fbbf24"
+  },
+  "islands": [
+    {
+      "id": 4,
+      "file": "island-4.svg",
+      "title": "Poetry Island",
+      "lessonIndex": 0
+    },
+    {
+      "id": 5,
+      "file": "island-5.svg",
+      "title": "Novel Island",
+      "lessonIndex": 1
+    }
+  ]
+}

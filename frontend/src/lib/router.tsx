@@ -10,6 +10,7 @@ import RegisterPage from '@/pages/Register';
 import DashboardPage from '@/pages/Dashboard';
 import CoursesPage from '@/pages/Courses';
 import ArchipelagoPage from '@/pages/Archipelago';
+import WorldMapPage from '@/pages/WorldMap';
 import LandingPage from '@/pages/LandingPage';
 import ParentDashboardPage from '@/pages/ParentDashboard';
 import AboutPage from '@/pages/About';
@@ -80,6 +81,14 @@ export default function AppRouter() {
           element={
             <ProtectedRoute>
               <ArchipelagoPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/world"
+          element={
+            <ProtectedRoute>
+              <WorldMapPage />
             </ProtectedRoute>
           }
         />
