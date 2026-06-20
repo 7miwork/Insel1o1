@@ -119,44 +119,40 @@ export type Island = {
 
 const toStr = (id: number) => String(id);
 
-// Build the detailed lessons for "minecraft-block-coding" from
-// the existing MINECRAFT_LESSONS + the map positions from the
-// archipelago config (which were defined inline before).
-
 /** Archipelago cluster layout — Level 1
  *  Lesson 11 is the center destination (largest).
  *  Lessons 1-10 surround it in a natural archipelago shape.
- *  Coordinates are in SVG viewBox units (0-100), centered around lesson 11 at (50, 50). */
-const MINECRAFT_POSITIONS: Array<{ id: number; x: number; y: number; isMainIsland?: boolean; isFinalIsland?: boolean; emoji: string; titleKey: string; subtitleKey?: string }> = [
-  { id: 2,  x: 50, y: 12, emoji: "🧠", titleKey: "archipelago.lesson2", subtitleKey: "archipelago.lesson2sub" },
-  { id: 1,  x: 28, y: 28, emoji: "🧭", titleKey: "archipelago.lesson1", subtitleKey: "archipelago.lesson1sub" },
-  { id: 3,  x: 72, y: 28, emoji: "🔢", titleKey: "archipelago.lesson3", subtitleKey: "archipelago.lesson3sub" },
-  { id: 10, x: 18, y: 50, emoji: "🏙️", titleKey: "archipelago.lesson10", subtitleKey: "archipelago.lesson10sub" },
-  { id: 4,  x: 82, y: 50, emoji: "🧩", titleKey: "archipelago.lesson4", subtitleKey: "archipelago.lesson4sub" },
-  { id: 9,  x: 28, y: 72, emoji: "🎮", titleKey: "archipelago.lesson9", subtitleKey: "archipelago.lesson9sub" },
-  { id: 5,  x: 72, y: 72, emoji: "🌉", titleKey: "archipelago.lesson5", subtitleKey: "archipelago.lesson5sub" },
-  { id: 8,  x: 40, y: 88, emoji: "⚙️", titleKey: "archipelago.lesson8", subtitleKey: "archipelago.lesson8sub" },
-  { id: 6,  x: 60, y: 88, emoji: "🎨", titleKey: "archipelago.lesson6", subtitleKey: "archipelago.lesson6sub" },
-  { id: 7,  x: 50, y: 100, emoji: "🔍", titleKey: "archipelago.lesson7", subtitleKey: "archipelago.lesson7sub" },
-  { id: 11, x: 50, y: 50, emoji: "🏰", titleKey: "archipelago.lesson11", subtitleKey: "archipelago.lesson11sub", isMainIsland: true, isFinalIsland: true },
+ *  Desktop coordinates are in SVG viewBox units (0-100), centered around lesson 11 at (50, 50). */
+const MINECRAFT_POSITIONS: Array<{ id: number; x: number; y: number; tabletX: number; tabletY: number; isMainIsland?: boolean; isFinalIsland?: boolean; emoji: string; titleKey: string; subtitleKey?: string }> = [
+  { id: 2,  x: 50,  y: 12,  tabletX: 50, tabletY: 8,   emoji: "🧠", titleKey: "archipelago.lesson2", subtitleKey: "archipelago.lesson2sub" },
+  { id: 1,  x: 28,  y: 28,  tabletX: 35, tabletY: 22,  emoji: "🧭", titleKey: "archipelago.lesson1", subtitleKey: "archipelago.lesson1sub" },
+  { id: 3,  x: 72,  y: 28,  tabletX: 65, tabletY: 22,  emoji: "🔢", titleKey: "archipelago.lesson3", subtitleKey: "archipelago.lesson3sub" },
+  { id: 10, x: 18,  y: 50,  tabletX: 25, tabletY: 45,  emoji: "🏙️", titleKey: "archipelago.lesson10", subtitleKey: "archipelago.lesson10sub" },
+  { id: 4,  x: 82,  y: 50,  tabletX: 75, tabletY: 45,  emoji: "🧩", titleKey: "archipelago.lesson4", subtitleKey: "archipelago.lesson4sub" },
+  { id: 9,  x: 28,  y: 72,  tabletX: 35, tabletY: 72,  emoji: "🎮", titleKey: "archipelago.lesson9", subtitleKey: "archipelago.lesson9sub" },
+  { id: 5,  x: 72,  y: 72,  tabletX: 65, tabletY: 72,  emoji: "🌉", titleKey: "archipelago.lesson5", subtitleKey: "archipelago.lesson5sub" },
+  { id: 8,  x: 40,  y: 88,  tabletX: 40, tabletY: 88,  emoji: "⚙️", titleKey: "archipelago.lesson8", subtitleKey: "archipelago.lesson8sub" },
+  { id: 6,  x: 60,  y: 88,  tabletX: 60, tabletY: 88,  emoji: "🎨", titleKey: "archipelago.lesson6", subtitleKey: "archipelago.lesson6sub" },
+  { id: 7,  x: 50,  y: 100, tabletX: 50, tabletY: 96,  emoji: "🔍", titleKey: "archipelago.lesson7", subtitleKey: "archipelago.lesson7sub" },
+  { id: 11, x: 50,  y: 50,  tabletX: 50, tabletY: 50,  emoji: "🏰", titleKey: "archipelago.lesson11", subtitleKey: "archipelago.lesson11sub", isMainIsland: true, isFinalIsland: true },
 ];
 
 /** Archipelago cluster layout — Level 2 (Bedingungen & Funktionen)
  *  Lesson 31 is the center destination (largest).
  *  Lessons 21-30 surround it in a natural archipelago shape.
- *  Coordinates are in SVG viewBox units (0-100), centered around lesson 31 at (50, 50). */
-const LEVEL2_POSITIONS: Array<{ id: number; x: number; y: number; isFinalIsland?: boolean; emoji: string; titleKey: string; subtitleKey?: string }> = [
-  { id: 22, x: 50, y: 12, emoji: "🔀",  titleKey: "archipelago.l2Lesson2", subtitleKey: "archipelago.l2Lesson2sub" },
-  { id: 21, x: 28, y: 28, emoji: "❓",  titleKey: "archipelago.l2Lesson1", subtitleKey: "archipelago.l2Lesson1sub" },
-  { id: 23, x: 72, y: 28, emoji: "📦",  titleKey: "archipelago.l2Lesson3", subtitleKey: "archipelago.l2Lesson3sub" },
-  { id: 30, x: 18, y: 50, emoji: "🏗️",  titleKey: "archipelago.l2Lesson10", subtitleKey: "archipelago.l2Lesson10sub" },
-  { id: 24, x: 82, y: 50, emoji: "🔧",  titleKey: "archipelago.l2Lesson4", subtitleKey: "archipelago.l2Lesson4sub" },
-  { id: 29, x: 28, y: 72, emoji: "🎲",  titleKey: "archipelago.l2Lesson9", subtitleKey: "archipelago.l2Lesson9sub" },
-  { id: 25, x: 72, y: 72, emoji: "⚖️",  titleKey: "archipelago.l2Lesson5", subtitleKey: "archipelago.l2Lesson5sub" },
-  { id: 28, x: 40, y: 88, emoji: "🔬",  titleKey: "archipelago.l2Lesson8", subtitleKey: "archipelago.l2Lesson8sub" },
-  { id: 26, x: 60, y: 88, emoji: "♟️",  titleKey: "archipelago.l2Lesson6", subtitleKey: "archipelago.l2Lesson6sub" },
-  { id: 27, x: 50, y: 100, emoji: "🗼", titleKey: "archipelago.l2Lesson7", subtitleKey: "archipelago.l2Lesson7sub" },
-  { id: 31, x: 50, y: 50, emoji: "🏖️", titleKey: "archipelago.l2Lesson11", subtitleKey: "archipelago.l2Lesson11sub", isMainIsland: true, isFinalIsland: true },
+ *  Desktop coordinates in SVG viewBox units (0-100), centered around lesson 31 at (50, 50). */
+const LEVEL2_POSITIONS: Array<{ id: number; x: number; y: number; tabletX: number; tabletY: number; isFinalIsland?: boolean; emoji: string; titleKey: string; subtitleKey?: string }> = [
+  { id: 22, x: 50,  y: 12,  tabletX: 50, tabletY: 8,   emoji: "🔀",  titleKey: "archipelago.l2Lesson2", subtitleKey: "archipelago.l2Lesson2sub" },
+  { id: 21, x: 28,  y: 28,  tabletX: 35, tabletY: 20,  emoji: "❓",  titleKey: "archipelago.l2Lesson1", subtitleKey: "archipelago.l2Lesson1sub" },
+  { id: 23, x: 72,  y: 28,  tabletX: 65, tabletY: 20,  emoji: "📦",  titleKey: "archipelago.l2Lesson3", subtitleKey: "archipelago.l2Lesson3sub" },
+  { id: 30, x: 18,  y: 50,  tabletX: 25, tabletY: 40,  emoji: "🏗️", titleKey: "archipelago.l2Lesson10", subtitleKey: "archipelago.l2Lesson10sub" },
+  { id: 24, x: 82,  y: 50,  tabletX: 75, tabletY: 40,  emoji: "🔧",  titleKey: "archipelago.l2Lesson4", subtitleKey: "archipelago.l2Lesson4sub" },
+  { id: 29, x: 28,  y: 72,  tabletX: 35, tabletY: 65,  emoji: "🎲",  titleKey: "archipelago.l2Lesson9", subtitleKey: "archipelago.l2Lesson9sub" },
+  { id: 25, x: 72,  y: 72,  tabletX: 65, tabletY: 65,  emoji: "⚖️",  titleKey: "archipelago.l2Lesson5", subtitleKey: "archipelago.l2Lesson5sub" },
+  { id: 28, x: 40,  y: 88,  tabletX: 40, tabletY: 85,  emoji: "🔬",  titleKey: "archipelago.l2Lesson8", subtitleKey: "archipelago.l2Lesson8sub" },
+  { id: 26, x: 60,  y: 88,  tabletX: 60, tabletY: 85,  emoji: "♟️",  titleKey: "archipelago.l2Lesson6", subtitleKey: "archipelago.l2Lesson6sub" },
+  { id: 27, x: 50,  y: 100, tabletX: 50, tabletY: 95,  emoji: "🗼", titleKey: "archipelago.l2Lesson7", subtitleKey: "archipelago.l2Lesson7sub" },
+  { id: 31, x: 50,  y: 50,  tabletX: 50, tabletY: 50,  emoji: "🏖️", titleKey: "archipelago.l2Lesson11", subtitleKey: "archipelago.l2Lesson11sub", isFinalIsland: true },
 ];
 
 /** Merge rich lesson content from MINECRAFT_LESSONS with map positions */
@@ -173,11 +169,12 @@ function buildMinecraftLessons(): Lesson[] {
       subtitleKey: pos?.subtitleKey,
       x: pos?.x ?? 50,
       y: pos?.y ?? 50,
+      tabletX: pos?.tabletX ?? pos?.x ?? 50,
+      tabletY: pos?.tabletY ?? pos?.y ?? 50,
       available: true,
       isMainIsland: pos?.isMainIsland,
       isFinalIsland: pos?.isFinalIsland,
       duration: `${ml.duration} min`,
-      // rich content from the original Lesson type
       phase: ml.phase,
       difficulty: ml.difficulty,
       objectives: ml.objectives,
@@ -207,6 +204,8 @@ function buildLevel2Lessons(): Lesson[] {
       subtitleKey: pos?.subtitleKey,
       x: pos?.x ?? 50,
       y: pos?.y ?? 50,
+      tabletX: pos?.tabletX ?? pos?.x ?? 50,
+      tabletY: pos?.tabletY ?? pos?.y ?? 50,
       available: true,
       isFinalIsland: pos?.isFinalIsland,
       duration: `${ml.duration} min`,

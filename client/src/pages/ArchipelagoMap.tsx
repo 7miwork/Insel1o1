@@ -366,6 +366,7 @@ function IslandView({ course, t, onLessonClick }: {
   onLessonClick: (id: number) => void;
 }) {
   const [showShowcase, setShowShowcase] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   if (!course) return null;
   const lessons = course.lessons ?? [];
   const showcaseVideo = course.media?.introVideoUrl;
@@ -373,13 +374,38 @@ function IslandView({ course, t, onLessonClick }: {
   const total = lessons.length;
   const pct = total > 0 ? Math.round((completedCount / total) * 100) : 0;
 
+  /* ── Responsive breakpoints ── */
+  const desktopBreakpoint = 1200;
+  const tabletBreakpoint = 700;
+
+  // Desktop: use full archipelago coordinates
+  // Tablet: use compressed tablet coordinates
+  // Mobile: use vertical journey layout (CSS handles layout)
+  const getLessonPos = (l: any) => {
+    const x = typeof window !== "undefined" && window.innerWidth >= desktopBreakpoint
+      ? (l.x ?? 50)
+      : (window.innerWidth >= tabletBreakpoint ? (l.tabletX ?? l.x ?? 50) : 50);
+    const y = typeof window !== "undefined" && window.innerWidth >= desktopBreakpoint
+      ? (l.y ?? 50)
+      : (window.innerWidth >= tabletBreakpoint ? (l.tabletY ?? l.y ?? 50) : 50);
+    return { x: Math.min(100, Math.max(0, x)), y: Math.min(100, Math.max(0, y)) };
+  };
+
+  if (typeof window !== "undefined") {
+    const handler = () => setIsMobile(window.innerWidth < tabletBreakpoint);
+    handler();
+    window.addEventListener("resize", handler);
+    return null; // SSR safety
+  }
+
   // Compute viewBox that fits all lessons with generous padding for archipelago cluster
-  const xs = lessons.map((l: any) => l.x ?? 50);
-  const ys = lessons.map((l: any) => l.y ?? 50);
-  const minX = xs.length > 0 ? Math.max(0, Math.min(...xs) - 15) : 0;
-  const maxX = xs.length > 0 ? Math.min(100, Math.max(...xs) + 15) : 100;
-  const minY = ys.length > 0 ? Math.max(0, Math.min(...ys) - 15) : 0;
-  const maxY = ys.length > 0 ? Math.min(100, Math.max(...ys) + 15) : 100;
+  const positions = lessons.map((l: any) => getLessonPos(l));
+  const xs = positions.map((p) => p.x);
+  const ys = positions.map((p) => p.y);
+  const minX = xs.length > 0 ? Math.max(0, Math.min(...xs) - 12) : 0;
+  const maxX = xs.length > 0 ? Math.min(100, Math.max(...xs) + 12) : 100;
+  const minY = ys.length > 0 ? Math.max(0, Math.min(...ys) - 12) : 0;
+  const maxY = ys.length > 0 ? Math.min(100, Math.max(...ys) + 12) : 100;
   const vw = Math.max(maxX - minX, 1);
   const vh = Math.max(maxY - minY, 1);
 
@@ -437,193 +463,222 @@ function IslandView({ course, t, onLessonClick }: {
           <CompassRose />
         </div>
 
-        {/* ── SVG Island Map ── */}
-        <svg className="w-full" viewBox={`${minX} ${minY} ${vw} ${vh}`}
-          preserveAspectRatio="xMidYMid meet" style={{ minHeight: "380px" }}>
+        {/* ── Desktop/Tablet: SVG Island Map ── */}
+        {!isMobile && (
+          <svg className="w-full" viewBox={`${minX} ${minY} ${vw} ${vh}`}
+            preserveAspectRatio="xMidYMid meet" style={{ minHeight: "380px" }}>
 
-          {/* Island shape — organic blob behind lessons */}
-          <ellipse cx={(minX + maxX) / 2} cy={(minY + maxY) / 2}
-            rx={vw * 0.42} ry={vh * 0.38}
-            fill="url(#islandGreen)" opacity="0.18" />
-          <ellipse cx={(minX + maxX) / 2 - 5} cy={(minY + maxY) / 2 + 3}
-            rx={vw * 0.38} ry={vh * 0.33}
-            fill="url(#islandGreen)" opacity="0.12" />
+            {/* Island shape — organic blob behind lessons */}
+            <ellipse cx={(minX + maxX) / 2} cy={(minY + maxY) / 2}
+              rx={vw * 0.42} ry={vh * 0.38}
+              fill="url(#islandGreen)" opacity="0.18" />
+            <ellipse cx={(minX + maxX) / 2 - 5} cy={(minY + maxY) / 2 + 3}
+              rx={vw * 0.38} ry={vh * 0.33}
+              fill="url(#islandGreen)" opacity="0.12" />
 
-          <defs>
-            <radialGradient id="islandGreen">
-              <stop offset="0%" stopColor="#7fa35d" />
-              <stop offset="60%" stopColor="#6b8e4e" />
-              <stop offset="100%" stopColor="#4a6b35" stopOpacity="0" />
-            </radialGradient>
-          </defs>
+            <defs>
+              <radialGradient id="islandGreen">
+                <stop offset="0%" stopColor="#7fa35d" />
+                <stop offset="60%" stopColor="#6b8e4e" />
+                <stop offset="100%" stopColor="#4a6b35" stopOpacity="0" />
+              </radialGradient>
+            </defs>
 
-          {/* ── Paths between lessons ── */}
-          {lessons.map((lesson: any, idx: number) => {
-            if (idx >= lessons.length - 1) return null;
-            const next = lessons[idx + 1] as any;
-            if (!next) return null;
-            const isPathVisible = lesson.completed || lesson.current;
-            const isPathLocked = !lesson.completed && !lesson.current && !next.available;
+            {/* ── Paths between lessons ── */}
+            {lessons.map((lesson: any, idx: number) => {
+              if (idx >= lessons.length - 1) return null;
+              const next = lessons[idx + 1] as any;
+              if (!next) return null;
+              const isPathVisible = lesson.completed || lesson.current;
+              const isPathLocked = !lesson.completed && !lesson.current && !next.available;
 
-            // Bezier control points for organic curves
-            const cx1 = lesson.x + (next.x - lesson.x) * 0.3 + (idx % 2 === 0 ? 3 : -3);
-            const cy1 = lesson.y - 4 - (idx * 2 % 5);
-            const cx2 = lesson.x + (next.x - lesson.x) * 0.7 + (idx % 2 === 0 ? -2 : 4);
-            const cy2 = next.y - 3 - ((idx + 1) * 2 % 4);
+              const cx1 = lesson.x + (next.x - lesson.x) * 0.3 + (idx % 2 === 0 ? 3 : -3);
+              const cy1 = lesson.y - 4 - (idx * 2 % 5);
+              const cx2 = lesson.x + (next.x - lesson.x) * 0.7 + (idx % 2 === 0 ? -2 : 4);
+              const cy2 = next.y - 3 - ((idx + 1) * 2 % 4);
 
-            return (
-              <g key={`path-${lesson.id}`}>
-                {/* Fog shadow for locked paths */}
-                {isPathLocked && (
-                  <path
-                    d={`M${lesson.x},${lesson.y} C${cx1},${cy1} ${cx2},${cy2} ${next.x},${next.y}`}
-                    fill="none" stroke="#5a4a3a" strokeWidth="2.5" opacity="0.15"
-                    strokeDasharray="4,3"
+              return (
+                <g key={`path-${lesson.id}`}>
+                  {isPathLocked && (
+                    <path d={`M${lesson.x},${lesson.y} C${cx1},${cy1} ${cx2},${cy2} ${next.x},${next.y}`}
+                      fill="none" stroke="#5a4a3a" strokeWidth="2.5" opacity="0.15" strokeDasharray="4,3" />
+                  )}
+                  <path d={`M${lesson.x},${lesson.y} C${cx1},${cy1} ${cx2},${cy2} ${next.x},${next.y}`}
+                    fill="none"
+                    stroke={isPathVisible ? "#8b5e3c" : "#7a6a5a"}
+                    strokeWidth={isPathVisible ? "1.2" : "0.8"}
+                    strokeDasharray={isPathVisible ? "none" : "3,2"}
+                    opacity={isPathVisible ? 0.6 : 0.25}
+                    strokeLinecap="round"
                   />
-                )}
-                {/* Main path */}
-                <path
-                  d={`M${lesson.x},${lesson.y} C${cx1},${cy1} ${cx2},${cy2} ${next.x},${next.y}`}
-                  fill="none"
-                  stroke={isPathVisible ? "#8b5e3c" : "#7a6a5a"}
-                  strokeWidth={isPathVisible ? "1.2" : "0.8"}
-                  strokeDasharray={isPathVisible ? "none" : "3,2"}
-                  opacity={isPathVisible ? 0.6 : 0.25}
-                  strokeLinecap="round"
-                />
-                {/* Path direction indicator for visible paths */}
-                {isPathVisible && (
-                  <circle
-                    cx={lesson.x + (next.x - lesson.x) * 0.5 + (idx % 2 === 0 ? 1.5 : -1.5)}
-                    cy={lesson.y + (next.y - lesson.y) * 0.5 - 2}
-                    r="0.6" fill="#8b5e3c" opacity="0.35"
+                  {isPathVisible && (
+                    <circle cx={lesson.x + (next.x - lesson.x) * 0.5 + (idx % 2 === 0 ? 1.5 : -1.5)}
+                      cy={lesson.y + (next.y - lesson.y) * 0.5 - 2} r="0.6" fill="#8b5e3c" opacity="0.35" />
+                  )}
+                </g>
+              );
+            })}
+
+            {/* ── Lesson Nodes ── */}
+            {lessons.map((lesson: any, idx: number) => {
+              const isCompleted = lesson.completed;
+              const isCurrent = lesson.current;
+              const isAvailable = lesson.available;
+              const isLocked = !isAvailable;
+              const isFinal = lesson.isFinalIsland;
+              const isMain = lesson.isMainIsland;
+              const pos = getLessonPos(lesson);
+              const nodeSize = isFinal ? 12 : isMain ? 10 : 5.5;
+              const fontSize = isFinal ? 5.5 : isMain ? 4.5 : 3.2;
+
+              return (
+                <g key={lesson.id}
+                  onClick={() => isAvailable && onLessonClick(lesson.id)}
+                  className={isAvailable ? "cursor-pointer group" : "cursor-not-allowed"}
+                  style={{ transition: "transform 0.2s" }}>
+
+                  {isLocked && (
+                    <>
+                      <circle cx={pos.x} cy={pos.y} r={nodeSize + 4} fill="rgba(90,74,58,0.12)" />
+                      <circle cx={pos.x - 2} cy={pos.y + 1} r={nodeSize + 2} fill="rgba(90,74,58,0.08)" />
+                    </>
+                  )}
+
+                  {isCurrent && (
+                    <>
+                      <circle cx={pos.x} cy={pos.y} r={nodeSize + 3} fill="none" stroke="#7fa35d" strokeWidth="0.6" opacity="0.25">
+                        <animate attributeName="r" values={`${nodeSize + 3};${nodeSize + 6};${nodeSize + 3}`} dur="2.5s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="0.25;0.08;0.25" dur="2.5s" repeatCount="indefinite" />
+                      </circle>
+                      <circle cx={pos.x} cy={pos.y} r={nodeSize + 1} fill="none" stroke="#7fa35d" strokeWidth="0.4" opacity="0.4">
+                        <animate attributeName="r" values={`${nodeSize + 1};${nodeSize + 3};${nodeSize + 1}`} dur="2s" repeatCount="indefinite" />
+                      </circle>
+                    </>
+                  )}
+
+                  <circle cx={pos.x} cy={pos.y} r={nodeSize}
+                    fill={isCompleted ? "#7fa35d" : isCurrent ? "#6ea7bb" : isAvailable ? "#84b8cb" : "#5a4a3a"}
+                    stroke={isCompleted ? "#6b8e4e" : isCurrent ? "#4a8a5a" : isAvailable ? "#5a8a9e" : "#4a3a2a"}
+                    strokeWidth={isCurrent ? "0.8" : "0.5"}
+                    style={{
+                      filter: isCompleted ? "drop-shadow(0 2px 4px rgba(107,142,78,0.4))" : isCurrent ? "drop-shadow(0 2px 6px rgba(110,167,187,0.5))" : "drop-shadow(0 2px 3px rgba(0,0,0,0.3))"
+                    }}
                   />
-                )}
-              </g>
-            );
-          })}
 
-          {/* ── Lesson Nodes (Landmarks) ── */}
-          {lessons.map((lesson: any, idx: number) => {
-            const isCompleted = lesson.completed;
-            const isCurrent = lesson.current;
-            const isAvailable = lesson.available;
-            const isLocked = !isAvailable;
-            const isFinal = lesson.isFinalIsland;
-            const isMain = lesson.isMainIsland;
-            // Archipelago cluster: center island much larger, surrounding islands smaller
-            const nodeSize = isFinal ? 12 : isMain ? 10 : 5.5;
-            const fontSize = isFinal ? 5.5 : isMain ? 4.5 : 3.2;
+                  {(isCompleted || isCurrent) && (
+                    <circle cx={pos.x - nodeSize * 0.2} cy={pos.y - nodeSize * 0.2} r={nodeSize * 0.35}
+                      fill="white" opacity="0.15" />
+                  )}
 
-            return (
-              <g key={lesson.id}
-                onClick={() => isAvailable && onLessonClick(lesson.id)}
-                className={isAvailable ? "cursor-pointer group" : "cursor-not-allowed"}
-                style={{ transition: "transform 0.2s" }}>
-
-                {/* Fog cloud for locked nodes */}
-                {isLocked && (
-                  <>
-                    <circle cx={lesson.x} cy={lesson.y} r={nodeSize + 4} fill="rgba(90,74,58,0.12)" />
-                    <circle cx={lesson.x - 2} cy={lesson.y + 1} r={nodeSize + 2} fill="rgba(90,74,58,0.08)" />
-                  </>
-                )}
-
-                {/* Pulsing ring for current */}
-                {isCurrent && (
-                  <>
-                    <circle cx={lesson.x} cy={lesson.y} r={nodeSize + 3} fill="none" stroke="#7fa35d" strokeWidth="0.6" opacity="0.25">
-                      <animate attributeName="r" values={`${nodeSize + 3};${nodeSize + 6};${nodeSize + 3}`} dur="2.5s" repeatCount="indefinite" />
-                      <animate attributeName="opacity" values="0.25;0.08;0.25" dur="2.5s" repeatCount="indefinite" />
-                    </circle>
-                    <circle cx={lesson.x} cy={lesson.y} r={nodeSize + 1} fill="none" stroke="#7fa35d" strokeWidth="0.4" opacity="0.4">
-                      <animate attributeName="r" values={`${nodeSize + 1};${nodeSize + 3};${nodeSize + 1}`} dur="2s" repeatCount="indefinite" />
-                    </circle>
-                  </>
-                )}
-
-                {/* Node background circle */}
-                <circle cx={lesson.x} cy={lesson.y} r={nodeSize}
-                  fill={isCompleted ? "#7fa35d" : isCurrent ? "#6ea7bb" : isAvailable ? "#84b8cb" : "#5a4a3a"}
-                  stroke={isCompleted ? "#6b8e4e" : isCurrent ? "#4a8a5a" : isAvailable ? "#5a8a9e" : "#4a3a2a"}
-                  strokeWidth={isCurrent ? "0.8" : "0.5"}
-                  style={{
-                    filter: isCompleted ? "drop-shadow(0 2px 4px rgba(107,142,78,0.4))" : isCurrent ? "drop-shadow(0 2px 6px rgba(110,167,187,0.5))" : "drop-shadow(0 2px 3px rgba(0,0,0,0.3))"
-                  }}
-                />
-
-                {/* Inner highlight for completed/current */}
-                {(isCompleted || isCurrent) && (
-                  <circle cx={lesson.x - nodeSize * 0.2} cy={lesson.y - nodeSize * 0.2} r={nodeSize * 0.35}
-                    fill="white" opacity="0.15" />
-                )}
-
-                {/* Lesson emoji as "building" */}
-                <text x={lesson.x} y={lesson.y + fontSize * 0.35} textAnchor="middle" fontSize={fontSize}
-                  className="pointer-events-none"
-                  style={{ filter: isLocked ? "grayscale(1) opacity(0.4)" : "none" }}>
-                  {lesson.emoji}
-                </text>
-
-                {/* Flag for completed */}
-                {isCompleted && (
-                  <g transform={`translate(${lesson.x + nodeSize * 0.6},${lesson.y - nodeSize * 0.9})`}>
-                    <line x1="0" y1="0" x2="0" y2="-3.5" stroke="#2c1810" strokeWidth="0.4" />
-                    <path d="M0,-3.5 L3,-2.5 L0,-1.5" fill="#e74c3c" opacity="0.8" />
-                  </g>
-                )}
-
-                {/* Lock icon overlay */}
-                {isLocked && (
-                  <text x={lesson.x} y={lesson.y + fontSize * 0.35} textAnchor="middle" fontSize="3" fill="#4a3a2a" opacity="0.5">
-                    🔒
+                  <text x={pos.x} y={pos.y + fontSize * 0.35} textAnchor="middle" fontSize={fontSize}
+                    className="pointer-events-none"
+                    style={{ filter: isLocked ? "grayscale(1) opacity(0.4)" : "none" }}>
+                    {lesson.emoji}
                   </text>
-                )}
 
-                {/* Lesson name label */}
-                <text x={lesson.x} y={lesson.y + nodeSize + 2.5} textAnchor="middle" fontSize="1.8"
-                  fill={isLocked ? "#7a6a5a" : "#2c1810"}
-                  opacity={isLocked ? 0.4 : 0.8}
-                  fontFamily="serif"
-                  className="pointer-events-none"
-                  style={{ fontStyle: "italic" }}>
-                  {(lesson.title ?? "").length > 18 ? (lesson.title ?? "").substring(0, 16) + "…" : (lesson.title ?? "")}
-                </text>
+                  {isCompleted && (
+                    <g transform={`translate(${pos.x + nodeSize * 0.6},${pos.y - nodeSize * 0.9})`}>
+                      <line x1="0" y1="0" x2="0" y2="-3.5" stroke="#2c1810" strokeWidth="0.4" />
+                      <path d="M0,-3.5 L3,-2.5 L0,-1.5" fill="#e74c3c" opacity="0.8" />
+                    </g>
+                  )}
 
-                {/* Step number */}
-                <text x={lesson.x} y={lesson.y + nodeSize + 4.5} textAnchor="middle" fontSize="1.2"
-                  fill="#6b4226" opacity="0.4" className="pointer-events-none">
-                  {idx + 1}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
+                  {isLocked && (
+                    <text x={pos.x} y={pos.y + fontSize * 0.35} textAnchor="middle" fontSize="3" fill="#4a3a2a" opacity="0.5">
+                      🔒
+                    </text>
+                  )}
 
-        {/* ── Bottom legend strip ── */}
-        <div className="flex items-center justify-center gap-6 py-2 px-4 text-xs"
-          style={{ borderTop: "1px solid rgba(160,140,106,0.4)", color: "#6b4226" }}>
-          <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#7fa35d" }} />
-            <span>Discovered</span>
+                  <text x={pos.x} y={pos.y + nodeSize + 2.5} textAnchor="middle" fontSize="1.8"
+                    fill={isLocked ? "#7a6a5a" : "#2c1810"}
+                    opacity={isLocked ? 0.4 : 0.8}
+                    fontFamily="serif"
+                    className="pointer-events-none"
+                    style={{ fontStyle: "italic" }}>
+                    {(lesson.title ?? "").length > 18 ? (lesson.title ?? "").substring(0, 16) + "…" : (lesson.title ?? "")}
+                  </text>
+
+                  <text x={pos.x} y={pos.y + nodeSize + 4.5} textAnchor="middle" fontSize="1.2"
+                    fill="#6b4226" opacity="0.4" className="pointer-events-none">
+                    {idx + 1}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+        )}
+
+        {/* ── Mobile: Vertical Journey ── */}
+        {isMobile && (
+          <div className="px-4 py-6">
+            <div className="mx-auto max-w-sm space-y-4">
+              {lessons.map((lesson: any, idx: number) => {
+                const isCompleted = lesson.completed;
+                const isCurrent = lesson.current;
+                const isAvailable = lesson.available;
+                const isLocked = !isAvailable;
+                return (
+                  <div key={lesson.id} className="relative flex items-center gap-3">
+                    {idx < lessons.length - 1 && (
+                      <div className="absolute left-6 top-12 h-8 w-0.5 border-l-2 border-dashed"
+                        style={{ borderColor: "rgba(139,94,60,0.5)" }} />
+                    )}
+                    <button
+                      onClick={() => isAvailable && onLessonClick(lesson.id)}
+                      disabled={isLocked}
+                      className={`relative flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border-2 text-2xl transition-all ${isLocked ? "cursor-not-allowed opacity-40" : "cursor-pointer active:scale-95"}`}
+                      style={{
+                        borderColor: isCompleted ? "#6b8e4e" : isCurrent ? "#4a8a5a" : isAvailable ? "#5a8a9e" : "#4a3a2a",
+                        background: isCompleted ? "linear-gradient(135deg, #7fa35d, #6b8e4e)" : isCurrent ? "linear-gradient(135deg, #6ea7bb, #4a8a9e)" : isAvailable ? "linear-gradient(135deg, #84b8cb, #5a8a9e)" : "#5a4a3a",
+                        boxShadow: isCurrent ? "0 0 0 3px rgba(110,167,187,0.3)" : "none",
+                        minHeight: "44px", minWidth: "44px",
+                      }}>
+                      <span className="relative z-10">{isLocked ? "🔒" : lesson.emoji}</span>
+                      {isCompleted && <span className="absolute -right-1 -top-1 text-xs">✅</span>}
+                      {isCurrent && <span className="absolute -right-1 -top-1 text-xs">⚡</span>}
+                    </button>
+                    <div className={`flex-1 rounded-xl border p-3 ${isLocked ? "opacity-50" : ""}`}
+                      style={{
+                        borderColor: isCompleted ? "#6b8e4e" : isCurrent ? "#4a8a5a" : isAvailable ? "#5a8a9e" : "#4a3a2a",
+                        background: "rgba(245,230,200,0.9)", minHeight: "44px",
+                      }}>
+                      <p className="text-sm font-bold" style={{ color: "#2c1810" }}>
+                        {idx + 1}. {lesson.title || lesson.titleKey}
+                      </p>
+                      {isCurrent && <p className="text-xs" style={{ color: "#4a8a5a" }}>Current Quest</p>}
+                      {isCompleted && <p className="text-xs" style={{ color: "#6b8e4e" }}>Discovered</p>}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#6ea7bb" }} />
-            <span>Current Quest</span>
+        )}
+        {!isMobile && (
+          <div className="flex items-center justify-center gap-4 py-2 px-4 text-xs flex-wrap"
+            style={{ borderTop: "1px solid rgba(160,140,106,0.4)", color: "#6b4226" }}>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#7fa35d" }} />
+              <span>Discovered</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#6ea7bb" }} />
+              <span>Current Quest</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#84b8cb" }} />
+              <span>Available</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#5a4a3a" }} />
+              <span>Locked</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span>🚩</span>
+              <span>Completed</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#84b8cb" }} />
-            <span>Available</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#5a4a3a" }} />
-            <span>Locked</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span>🚩</span>
-            <span>Completed</span>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* ── XP Summary ── */}

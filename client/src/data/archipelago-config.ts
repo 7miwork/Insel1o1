@@ -26,6 +26,10 @@ export interface ArchipelagoLesson {
   x: number;
   /** Position on the course map (0-100 for SVG viewBox) */
   y: number;
+  /** Tablet position (0-100) — compressed archipelago cluster */
+  tabletX?: number;
+  /** Tablet position (0-100) — compressed archipelago cluster */
+  tabletY?: number;
   /** Whether this lesson is currently available */
   available: boolean;
   /** Whether this island is a special main island (larger, different styling) */
@@ -91,6 +95,8 @@ function islandToCourse(island: Island): ArchipelagoCourse {
       emoji: l.emoji ?? "🏝️",
       x: l.x ?? 50,
       y: l.y ?? 50,
+      tabletX: ((l as any).tabletX ?? l.x ?? 50) as number,
+      tabletY: ((l as any).tabletY ?? l.y ?? 50) as number,
       available: l.available ?? false,
       isMainIsland: l.isMainIsland,
       isFinalIsland: l.isFinalIsland,
