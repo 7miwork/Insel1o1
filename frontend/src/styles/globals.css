@@ -2,49 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Root Variables */
+/* Root Variables - Premium Adventure Palette */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 0 0% 3.6%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 3.6%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 3.6%;
-  --primary: 0 0% 9%;
+  --background: 168 28% 97%;
+  --foreground: 168 20% 15%;
+  --card: 168 30% 99%;
+  --card-foreground: 168 20% 15%;
+  --popover: 168 30% 99%;
+  --popover-foreground: 168 20% 15%;
+  --primary: 168 50% 28%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 96.1%;
-  --secondary-foreground: 0 0% 9%;
-  --muted: 0 0% 96.1%;
-  --muted-foreground: 0 0% 45.1%;
-  --accent: 0 0% 9%;
+  --secondary: 38 40% 88%;
+  --secondary-foreground: 168 20% 15%;
+  --muted: 168 15% 94%;
+  --muted-foreground: 168 15% 45%;
+  --accent: 38 60% 58%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 100%;
-  --border: 0 0% 89.8%;
-  --input: 0 0% 89.8%;
-  --ring: 0 0% 3.6%;
+  --border: 168 20% 88%;
+  --input: 168 20% 88%;
+  --ring: 168 50% 30%;
 }
 
 .dark {
-  --background: 0 0% 3.6%;
-  --foreground: 0 0% 98.2%;
-  --card: 0 0% 3.6%;
-  --card-foreground: 0 0% 98.2%;
-  --popover: 0 0% 3.6%;
-  --popover-foreground: 0 0% 98.2%;
-  --primary: 0 0% 98.2%;
-  --primary-foreground: 0 0% 9%;
-  --secondary: 0 0% 14.9%;
-  --secondary-foreground: 0 0% 98.2%;
-  --muted: 0 0% 14.9%;
-  --muted-foreground: 0 0% 63.9%;
-  --accent: 0 0% 98.2%;
-  --accent-foreground: 0 0% 9%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 9%;
-  --border: 0 0% 14.9%;
-  --input: 0 0% 14.9%;
-  --ring: 0 0% 83.1%;
+  --background: 168 25% 12%;
+  --foreground: 168 20% 92%;
+  --card: 168 25% 15%;
+  --card-foreground: 168 20% 92%;
+  --popover: 168 25% 15%;
+  --popover-foreground: 168 20% 92%;
+  --primary: 168 40% 55%;
+  --primary-foreground: 168 25% 12%;
+  --secondary: 38 25% 25%;
+  --secondary-foreground: 168 20% 92%;
+  --muted: 168 15% 22%;
+  --muted-foreground: 168 10% 60%;
+  --accent: 38 55% 55%;
+  --accent-foreground: 168 25% 12%;
+  --destructive: 0 75% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 168 15% 25%;
+  --input: 168 15% 25%;
+  --ring: 168 40% 55%;
 }
 
 * {
@@ -283,6 +283,93 @@ html {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.9;
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(4px) rotate(1deg);
+  }
+  75% {
+    transform: translateY(-4px) rotate(-1deg);
+  }
+}
+
+@keyframes softDrift {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(12px);
+  }
+}
+
+/* ================================================
+   PREMIUM ISLAND STYLES
+   ================================================ */
+.island-card {
+  @apply relative rounded-2xl border border-teal-200/50 transition-all duration-300 overflow-hidden;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.island-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.10), 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.island-card-current {
+  @apply bg-gradient-to-br from-teal-50/95 to-white/95;
+  border-color: theme('colors.teal.300');
+  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.12), 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.island-card-completed {
+  @apply bg-gradient-to-br from-amber-50/90 to-white/90;
+  border-color: theme('colors.amber.300');
+}
+
+.island-card-locked {
+  @apply opacity-50;
+  filter: grayscale(15%);
+}
+
+/* ================================================
+   OCEAN BACKGROUNDS
+   ================================================ */
+.ocean-surface {
+  background: linear-gradient(180deg, #e0f5f3 0%, #b8e5e0 30%, #6bb7c9 60%, #4a9fa8 100%);
+}
+
+.ocean-deep {
+  background: linear-gradient(180deg, #6bb7c9 0%, #4a9fa8 40%, #398a9c 100%);
+}
+
+/* ================================================
+   SUBTLE DECORATIVE MOTION
+   ================================================ */
+.decor-float {
+  animation: sway 6s ease-in-out infinite;
+}
+
+.decor-drift {
+  animation: softDrift 10s ease-in-out infinite;
+}
+
+.decor-pulse-gentle {
+  animation: gentlePulse 4s ease-in-out infinite;
 }
 
 /* ================================================

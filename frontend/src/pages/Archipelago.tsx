@@ -25,11 +25,7 @@ function toCourseSlug(name: string): string {
   return name.toLowerCase().replace(/\s+/g, '-');
 }
 
-function getIslandStatus(
-  island: Island,
-  index: number,
-  islands: Island[]
-): 'completed' | 'current' | 'locked' | 'upcoming' {
+function getIslandStatus(island: Island, index: number, islands: Island[]): 'completed' | 'current' | 'locked' | 'upcoming' {
   if (island.progress === 100) return 'completed';
   if (index === 0 && island.progress > 0 && !island.locked) return 'current';
   if (!island.locked && island.progress > 0) {
@@ -39,127 +35,96 @@ function getIslandStatus(
   return island.locked ? 'locked' : 'upcoming';
 }
 
-/** Premium explorer flag */
 function ExplorerFlag() {
   return (
     <div className="absolute -top-3 -right-1 z-20" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}>
-      <svg width="24" height="28" viewBox="0 0 24 28">
-        <path d="M6,22 L6,6 L18,11 L6,16 Z" fill="#fbbf24" stroke="#b45309" strokeWidth="1.5" strokeLinejoin="round"/>
-        <circle cx="6" cy="22" r="2.5" fill="#b45309"/>
+      <svg width="22" height="26" viewBox="0 0 24 28" aria-hidden="true">
+        <path d="M6,22 L6,6 L18,11 L6,16 Z" fill="#fbbf24" stroke="#b45309" strokeWidth="1.5" strokeLinejoin="round" />
+        <circle cx="6" cy="22" r="2.5" fill="#b45309" />
       </svg>
     </div>
   );
 }
 
-/** Voyage path connector */
-function VoyagePath({
-  status,
-}: {
-  status: 'completed' | 'current' | 'locked';
-}) {
-  const color = status === 'completed' ? '#fbbf24' : status === 'current' ? '#5eead4' : '#cbd5e1';
+function VoyagePath({ status }: { status: 'completed' | 'current' | 'locked' }) {
+  const stroke = status === 'completed' ? '#fbbf24' : status === 'current' ? '#14b8a6' : '#cbd5e1';
+  const dotFill = status === 'locked' ? '#e2e8f0' : stroke;
 
   return (
     <div className="flex items-center justify-center py-2">
-      <svg width="60" height="20" viewBox="0 0 60 20">
+      <svg width="56" height="18" viewBox="0 0 60 20" aria-hidden="true">
         <path
           d="M2,10 Q15,0 30,10 Q45,20 58,10"
-          stroke={color}
+          stroke={stroke}
           strokeWidth="2.5"
           fill="none"
           strokeDasharray={status === 'locked' ? '5 4' : '0'}
           strokeLinecap="round"
-          opacity={status === 'locked' ? 0.5 : 0.7}
+          opacity={status === 'locked' ? 0.5 : 0.75}
         />
-        {status !== 'locked' && (
-          <circle cx="30" cy="10" r="3" fill={color} opacity="0.8"/>
-        )}
+        <circle cx="30" cy="10" r={status === 'locked' ? 2.5 : 3} fill={dotFill} opacity={status === 'locked' ? 0.6 : 0.85} />
       </svg>
     </div>
   );
 }
 
-/** Island card component */
-function IslandCard({
-  island,
-  status,
-  courseSlug,
-  t,
-}: {
-  island: Island;
-  status: 'completed' | 'current' | 'locked' | 'upcoming';
-  courseSlug: string;
-  t: (key: string) => string;
-}) {
+function IslandCard({ island, status, courseSlug, t }: { island: Island; status: 'completed' | 'current' | 'locked' | 'upcoming'; courseSlug: string; t: (key: string) => string }) {
   const isLocked = island.locked || status === 'locked';
 
   return (
     <div
-      className={`relative rounded-xl border-2 transition-all duration-300 overflow-hidden ${
+      className={`relative overflow-hidden rounded-2xl border transition-all duration-300 ${
         status === 'completed'
-          ? 'border-amber-300 bg-gradient-to-br from-amber-50/90 to-white/90 shadow-sm'
+          ? 'border-[#f0d78c] bg-gradient-to-br from-[#fffbf2] to-white shadow-[0_2px_12px_rgba(251,191,36,0.12)]'
           : status === 'current'
-          ? 'border-teal-300 bg-gradient-to-br from-teal-50/95 to-white/95 shadow-md scale-[1.04]'
+          ? 'border-[#8fd6ce] bg-gradient-to-br from-[#f2fbfa] to-white shadow-[0_4px_16px_rgba(13,148,136,0.12)]'
           : isLocked
-          ? 'border-slate-200 bg-white/50 opacity-55'
-          : 'border-slate-200 bg-white/80 hover:shadow-sm hover:-translate-y-0.5'
+          ? 'border-[#e2e8f0] bg-white/60 opacity-50'
+          : 'border-[#e2e8f0] bg-white/80 hover:-translate-y-0.5 hover:shadow-md'
       }`}
     >
-      {/* Island SVG */}
-      <div className="relative w-full h-36 overflow-hidden">
+      <div className="relative h-36 w-full overflow-hidden">
         <div
           className="absolute inset-0"
           style={{
-            background: isLocked
-              ? 'linear-gradient(to bottom, rgba(148,163,184,0.3), rgba(148,163,184,0.5))'
-              : 'none',
+            background: isLocked ? 'linear-gradient(to bottom, rgba(148,163,184,0.25), rgba(148,163,184,0.45))' : 'none',
           }}
         />
-        <IslandVisual
-          course={courseSlug}
-          lesson={island.id}
-          alt={island.name}
-          className="w-full h-full object-cover"
-          width={400}
-          height={320}
-        />
+        <IslandVisual course={courseSlug} lesson={island.id} alt={island.name} className="h-full w-full object-cover" width={400} height={320} />
 
-        {/* State overlays */}
         {isLocked && (
           <div className="absolute inset-0 flex items-center justify-center bg-white/20 backdrop-blur-[2px]">
             <div className="flex flex-col items-center gap-1">
               <span className="text-3xl">🔒</span>
-              <span className="text-xs text-slate-500 font-medium">Locked</span>
+              <span className="text-xs font-medium text-slate-500">Locked</span>
             </div>
           </div>
         )}
         {status === 'current' && (
-          <div className="absolute top-2 left-2 px-2.5 py-0.5 bg-teal-500/90 text-white text-xs font-semibold rounded-full shadow-sm backdrop-blur-sm">
+          <div className="absolute top-2 left-2 rounded-full bg-[#0d9488]/90 px-2.5 py-0.5 text-xs font-semibold text-white shadow-sm backdrop-blur-sm">
             Active
           </div>
         )}
         {status === 'completed' && (
-          <div className="absolute top-2 left-2 px-2.5 py-0.5 bg-amber-500/90 text-white text-xs font-semibold rounded-full shadow-sm backdrop-blur-sm flex items-center gap-1">
+          <div className="absolute top-2 left-2 flex items-center gap-1 rounded-full bg-[#d97706]/90 px-2.5 py-0.5 text-xs font-semibold text-white shadow-sm backdrop-blur-sm">
             <span>✔</span> Done
           </div>
         )}
       </div>
 
-      {/* Card body */}
       <div className="p-4">
-        <h3 className="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
-          {status === 'completed' && <span className="text-amber-500 text-lg">🏆</span>}
-          {status === 'current' && <span className="text-teal-600 text-sm">⚑</span>}
+        <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-[#22383a]">
+          {status === 'completed' && <span className="text-lg text-[#d97706]">🏆</span>}
+          {status === 'current' && <span className="text-sm text-[#0d9488]">⚑</span>}
           {island.name}
         </h3>
 
-        {/* Progress */}
         <div className="mb-3">
-          <div className="flex justify-between text-xs text-slate-500 mb-1">
-            <span>{status === 'completed' ? 'Completed' : 'Progress'}</span>
-            <span className="font-semibold text-slate-700">{island.progress}%</span>
+          <div className="mb-1 flex items-center justify-between text-xs text-[#5a7a78]">
+            <span className="font-medium">{status === 'completed' ? 'Completed' : 'Progress'}</span>
+            <span className="font-semibold text-[#2a5a58]">{island.progress}%</span>
           </div>
-          <div className="w-full bg-slate-200 rounded-full h-2">
+          <div className="h-2 w-full overflow-hidden rounded-full bg-[#e8f0ef]">
             <div
               className="h-2 rounded-full transition-all duration-500"
               style={{
@@ -173,27 +138,26 @@ function IslandCard({
               }}
             />
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="mt-1 text-xs text-[#8a9e9d]">
             {island.lessons} {t('gamification.mission')}s
           </p>
         </div>
 
-        {/* Action */}
         {!isLocked && (
           <button
-            className={`w-full py-2.5 rounded-lg text-sm font-semibold transition-all ${
+            className={`w-full rounded-xl py-2.5 text-sm font-semibold transition-all ${
               status === 'completed'
-                ? 'bg-amber-500 text-white hover:bg-amber-600 shadow-sm'
+                ? 'bg-[#d97706] text-white shadow-sm hover:bg-[#b45309]'
                 : status === 'current'
-                ? 'bg-teal-500 text-white hover:bg-teal-600 shadow-sm'
-                : 'bg-slate-300 text-white hover:bg-slate-400'
+                ? 'bg-[#0d9488] text-white shadow-sm hover:bg-[#115e59]'
+                : 'bg-[#cbd5e1] text-white hover:bg-[#94a3b8]'
             }`}
           >
             {status === 'completed' ? '✔ Completed' : 'Continue Learning'}
           </button>
         )}
         {isLocked && (
-          <div className="w-full py-2.5 bg-slate-100 text-slate-400 rounded-lg text-xs text-center border border-slate-200 font-medium">
+          <div className="w-full rounded-xl border border-slate-200 bg-slate-100 py-2.5 text-center text-xs font-medium text-slate-400">
             Complete previous lesson
           </div>
         )}
@@ -228,16 +192,15 @@ export default function ArchipelagoPage() {
 
   return (
     <GameLayout xp={2450} level={5} streak={12}>
-      <div className="space-y-12">
+      <div className="space-y-14">
         {/* Page header */}
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-teal-900 mb-3 tracking-tight">
-            Archipelago
-          </h1>
-          <p className="text-base md:text-lg text-teal-700/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.25em] text-[#7aaba6]">Your Learning Journey</p>
+          <h1 className="text-4xl font-bold tracking-tight text-[#1a4a48] md:text-5xl">Archipelago</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#4a7a78] md:text-lg">
             Chart your course through the islands of knowledge. Each island holds new adventures and discoveries.
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-teal-400 to-amber-400 mx-auto mt-4 rounded-full" />
+          <div className="mx-auto mt-5 h-1 w-24 rounded-full bg-gradient-to-r from-[#5eead4] via-[#8fc5bc] to-[#e8d3a2]" />
         </div>
 
         {archipelagos.map((archipelago) => {
@@ -246,29 +209,27 @@ export default function ArchipelagoPage() {
           return (
             <div key={archipelago.id}>
               {/* Region heading */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-white/80 border border-teal-200/60 flex items-center justify-center text-lg shadow-sm">
+              <div className="mb-6 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#b8ddd5]/70 bg-white/80 text-lg shadow-sm">
                   🏝️
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-teal-900">{archipelago.name}</h2>
-                  <p className="text-sm text-teal-600/70">{archipelago.description}</p>
+                  <h2 className="text-2xl font-bold text-[#1a4a48]">{archipelago.name}</h2>
+                  <p className="text-sm text-[#5a8a87]">{archipelago.description}</p>
                 </div>
               </div>
 
               {/* Desktop: horizontal island route */}
-              <div className="hidden md:block bg-white/60 backdrop-blur-sm rounded-xl border border-teal-200/50 p-8 shadow-sm">
-                <div className="flex items-start justify-center gap-2">
+              <div className="hidden overflow-hidden rounded-2xl border border-[#b8ddd5]/60 bg-[#fafdfc]/70 px-6 py-8 shadow-[0_2px_20px_rgba(13,148,136,0.05)] backdrop-blur-sm md:block md:px-8">
+                <div className="flex items-start justify-center gap-3">
                   {archipelago.islands.map((island, index) => {
                     const status = getIslandStatus(island, index, archipelago.islands);
                     const nextIsland = archipelago.islands[index + 1];
-                    const nextStatus = nextIsland
-                      ? getIslandStatus(nextIsland, index + 1, archipelago.islands)
-                      : 'locked';
+                    const nextStatus = nextIsland ? getIslandStatus(nextIsland, index + 1, archipelago.islands) : 'locked';
 
                     return (
                       <React.Fragment key={island.id}>
-                        <div className="flex-1 max-w-xs relative">
+                        <div className="relative w-full max-w-xs">
                           {status === 'current' && <ExplorerFlag />}
                           <IslandCard island={island} status={status} courseSlug={courseSlug} t={t} />
                         </div>
@@ -276,11 +237,7 @@ export default function ArchipelagoPage() {
                           <div className="flex-shrink-0 pt-16">
                             <VoyagePath
                               status={
-                                nextStatus === 'locked'
-                                  ? 'locked'
-                                  : status === 'completed'
-                                  ? 'completed'
-                                  : 'current'
+                                nextStatus === 'locked' ? 'locked' : status === 'completed' ? 'completed' : 'current'
                               }
                             />
                           </div>
@@ -292,16 +249,14 @@ export default function ArchipelagoPage() {
               </div>
 
               {/* Mobile: vertical island route */}
-              <div className="md:hidden bg-white/60 backdrop-blur-sm rounded-xl border border-teal-200/50 p-5 shadow-sm">
+              <div className="overflow-hidden rounded-2xl border border-[#b8ddd5]/60 bg-[#fafdfc]/70 px-5 py-6 shadow-[0_2px_20px_rgba(13,148,136,0.05)] backdrop-blur-sm md:hidden">
                 <div className="relative flex flex-col items-center">
-                  <div className="absolute top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-300 via-amber-200 to-slate-200 rounded-full" />
+                  <div className="absolute top-2 bottom-2 w-0.5 rounded-full bg-gradient-to-b from-[#8fc5bc] via-[#e8d3a2] to-[#c8d8d6]" />
 
                   {archipelago.islands.map((island, index) => {
                     const status = getIslandStatus(island, index, archipelago.islands);
                     const nextIsland = archipelago.islands[index + 1];
-                    const nextStatus = nextIsland
-                      ? getIslandStatus(nextIsland, index + 1, archipelago.islands)
-                      : 'locked';
+                    const nextStatus = nextIsland ? getIslandStatus(nextIsland, index + 1, archipelago.islands) : 'locked';
 
                     return (
                       <React.Fragment key={island.id}>
@@ -313,11 +268,7 @@ export default function ArchipelagoPage() {
                           <div className="relative z-10">
                             <VoyagePath
                               status={
-                                nextStatus === 'locked'
-                                  ? 'locked'
-                                  : status === 'completed'
-                                  ? 'completed'
-                                  : 'current'
+                                nextStatus === 'locked' ? 'locked' : status === 'completed' ? 'completed' : 'current'
                               }
                             />
                           </div>

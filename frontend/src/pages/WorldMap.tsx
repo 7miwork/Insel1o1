@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import GameLayout from '@/components/gamified/GameLayout';
 import { usei18n } from '@/contexts/i18nContext';
-import { useNavigate } from 'react-router-dom';
 
 interface Region {
   id: number;
@@ -13,9 +13,6 @@ interface Region {
   totalIslands: number;
   completedIslands: number;
   progress: number;
-  color: string;
-  waterColor: string;
-  accent: string;
   gridPosition: { col: number; row: number };
 }
 
@@ -28,9 +25,6 @@ const regions: Region[] = [
     totalIslands: 3,
     completedIslands: 1,
     progress: 33,
-    color: '#e8d3a2',
-    waterColor: '#6bb7c9',
-    accent: '#fbbf24',
     gridPosition: { col: 2, row: 1 },
   },
   {
@@ -41,9 +35,6 @@ const regions: Region[] = [
     totalIslands: 2,
     completedIslands: 0,
     progress: 15,
-    color: '#d4a574',
-    waterColor: '#5faebb',
-    accent: '#d4a574',
     gridPosition: { col: 4, row: 1 },
   },
   {
@@ -54,9 +45,6 @@ const regions: Region[] = [
     totalIslands: 2,
     completedIslands: 0,
     progress: 0,
-    color: '#7cc46c',
-    waterColor: '#5faebb',
-    accent: '#3c8c40',
     gridPosition: { col: 1, row: 2 },
   },
   {
@@ -67,9 +55,6 @@ const regions: Region[] = [
     totalIslands: 2,
     completedIslands: 0,
     progress: 0,
-    color: '#e8d3a2',
-    waterColor: '#6bb7c9',
-    accent: '#6dd5ed',
     gridPosition: { col: 3, row: 2 },
   },
   {
@@ -80,9 +65,6 @@ const regions: Region[] = [
     totalIslands: 1,
     completedIslands: 0,
     progress: 0,
-    color: '#e8d3a2',
-    waterColor: '#6bb7c9',
-    accent: '#f59e0b',
     gridPosition: { col: 5, row: 2 },
   },
   {
@@ -93,9 +75,6 @@ const regions: Region[] = [
     totalIslands: 1,
     completedIslands: 0,
     progress: 0,
-    color: '#6fbf73',
-    waterColor: '#5faebb',
-    accent: '#3b82f6',
     gridPosition: { col: 2, row: 3 },
   },
 ];
@@ -110,109 +89,95 @@ export default function WorldMapPage() {
 
   return (
     <GameLayout xp={2450} level={5} streak={12}>
-      {/* World Map Container */}
-      <div className="relative rounded-2xl bg-white/80 backdrop-blur-sm border border-teal-200/60 p-6 md:p-10 shadow-lg overflow-hidden">
+      <div className="relative overflow-hidden rounded-3xl border border-[#b8ddd5]/60 bg-[#fafdfc]/80 px-5 py-8 shadow-[0_2px_20px_rgba(13,148,136,0.05)] backdrop-blur-sm md:px-10 md:py-12">
         {/* Ocean decorative elements */}
-        <div className="absolute inset-0 pointer-events-none opacity-30">
-          <svg className="w-full h-full">
+        <div className="pointer-events-none absolute inset-0 opacity-20">
+          <svg className="h-full w-full" aria-hidden="true">
             <defs>
               <pattern id="wave-pattern" x="0" y="0" width="120" height="24" patternUnits="userSpaceOnUse">
-                <path d="M0,12 Q30,0 60,12 Q90,24 120,12" stroke="#5eead4" strokeWidth="1" fill="none"/>
+                <path d="M0,12 Q30,0 60,12 Q90,24 120,12" stroke="#5eead4" strokeWidth="1" fill="none" />
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#wave-pattern)"/>
+            <rect width="100%" height="100%" fill="url(#wave-pattern)" />
           </svg>
         </div>
 
         {/* Decorative elements */}
-        <img src="/assets/images/islands/backgrounds/compass.svg" alt="" className="absolute top-6 right-6 w-20 h-20 opacity-25 pointer-events-none" />
-        <img src="/assets/images/islands/backgrounds/clouds.svg" alt="" className="absolute top-4 left-4 w-56 h-12 opacity-40 pointer-events-none" />
-        <img src="/assets/images/islands/backgrounds/clouds.svg" alt="" className="absolute top-10 right-24 w-40 h-8 opacity-30 pointer-events-none" />
+        <img src="/assets/images/islands/backgrounds/compass.svg" alt="" className="decor-float pointer-events-none absolute right-6 top-6 h-16 w-16 opacity-30 md:h-20 md:w-20" />
+        <img src="/assets/images/islands/backgrounds/clouds.svg" alt="" className="decor-drift pointer-events-none absolute left-6 top-4 h-10 w-44 opacity-30" />
+        <img src="/assets/images/islands/backgrounds/clouds.svg" alt="" className="pointer-events-none absolute right-24 top-10 h-8 w-40 opacity-25" />
 
         {/* Header */}
-        <div className="relative mb-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-teal-900 mb-3 tracking-tight">
+        <div className="relative mb-12 text-center">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.25em] text-[#7aaba6]">
+            Your Learning Journey
+          </p>
+          <h1 className="text-4xl font-bold tracking-tight text-[#1a4a48] md:text-5xl">
             World of Islands
           </h1>
-          <p className="text-base md:text-lg text-teal-700/80 max-w-2xl mx-auto leading-relaxed">
-            A vast archipelago of knowledge awaits. Choose your region and begin your adventure across the islands of learning.
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#4a7a78] md:text-lg">
+            A vast archipelago of knowledge awaits. Choose your region and begin your adventure across the islands
+            of learning.
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-teal-400 to-amber-400 mx-auto mt-4 rounded-full" />
+          <div className="mx-auto mt-5 h-1 w-24 rounded-full bg-gradient-to-r from-[#5eead4] via-[#8fc5bc] to-[#e8d3a2]" />
         </div>
 
         {/* Desktop Grid */}
-        <div className="hidden md:block relative">
-          <div className="grid grid-cols-5 gap-5 auto-rows-[180px]">
+        <div className="relative hidden md:block">
+          <div className="grid grid-cols-5 auto-rows-[175px] gap-5">
             {regions.map((region) => {
               const isActive = region.progress > 0 && region.progress < 100;
               const isCompleted = region.progress === 100;
               const isLocked = region.progress === 0 && region.id > 2;
 
               return (
-                <button
-                  key={region.id}
-                  onClick={() => handleRegionClick(region.slug)}
-                  className="relative group focus:outline-none"
-                  style={{
+                <button key={region.id} onClick={() => handleRegionClick(region.slug)} className="group relative focus:outline-none" style={{
                     gridColumn: `${region.gridPosition.col} / span 2`,
                     gridRow: `${region.gridPosition.row}`,
-                  }}
-                >
+                  }}>
                   <div
-                    className={`relative w-full h-full rounded-xl border-2 transition-all duration-300 overflow-hidden ${
+                    className={`relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border transition-all duration-300 ${
                       isCompleted
-                        ? 'border-amber-300 bg-gradient-to-br from-amber-50/90 to-white/90 shadow-sm'
+                        ? 'border-[#f0d78c] bg-gradient-to-br from-[#fffbf2] to-white shadow-[0_2px_12px_rgba(251,191,36,0.12)]'
                         : isActive
-                        ? 'border-teal-300 bg-gradient-to-br from-teal-50/90 to-white/90 shadow-sm'
-                        : 'border-slate-200 bg-white/50'
-                    } ${isLocked ? 'opacity-55' : 'hover:shadow-md hover:-translate-y-0.5'}`}
+                        ? 'border-[#8fd6ce] bg-gradient-to-br from-[#f2fbfa] to-white shadow-[0_2px_12px_rgba(13,148,136,0.10)]'
+                        : 'border-[#e2e8f0] bg-white/70'
+                    } ${isLocked ? 'opacity-50' : 'hover:-translate-y-0.5 hover:shadow-lg'}`}
                   >
-                    {/* SVG island preview */}
-                    <div className="absolute inset-0 opacity-20">
-                      <img
-                        src={`/assets/images/islands/${region.slug}/island-1.svg`}
-                        alt=""
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
+                    <div className="pointer-events-none absolute inset-0 opacity-15">
+                      <img src={`/assets/images/islands/${region.slug}/island-1.svg`} alt="" className="h-full w-full object-cover" onError={(e) => {
                           (e.target as HTMLImageElement).src = '/assets/images/islands/fallback/island-placeholder.svg';
-                        }}
-                      />
+                        }} />
                     </div>
 
-                    {/* Content */}
-                    <div className="relative z-10 p-4 h-full flex flex-col justify-between">
-                      <div className="flex items-start justify-between gap-2">
+                    <div className="relative z-10 flex h-full flex-col justify-between p-5">
+                      <div className="flex items-start justify-between gap-3">
                         <div>
-                          <h3 className="text-base font-bold text-slate-800 leading-tight">{region.name}</h3>
-                          <p className="text-xs text-slate-500 mt-0.5 leading-snug line-clamp-1">{region.description}</p>
+                          <h3 className="text-base font-semibold leading-snug text-[#22383a]">{region.name}</h3>
+                          <p className="mt-1 line-clamp-1 text-xs leading-relaxed text-[#647a79]">{region.description}</p>
                         </div>
-                        <span className="flex-shrink-0 text-base">
+                        <span className="flex-shrink-0 text-lg">
                           {isCompleted ? '🏆' : isLocked ? '🔒' : isActive ? '⚓' : ''}
                         </span>
                       </div>
 
                       {!isLocked && (
                         <div>
-                          <div className="flex justify-between text-xs text-slate-600 mb-1">
-                            <span>{isCompleted ? 'Completed' : `${region.completedIslands}/${region.totalIslands} islands`}</span>
-                            <span className="font-semibold">{region.progress}%</span>
+                          <div className="mb-1.5 flex items-center justify-between text-xs text-[#5a7a78]">
+                            <span className="font-medium">
+                              {isCompleted ? 'Completed' : `${region.completedIslands}/${region.totalIslands} islands`}
+                            </span>
+                            <span className="font-semibold text-[#2a5a58]">{region.progress}%</span>
                           </div>
-                          <div className="w-full bg-slate-200 rounded-full h-1.5">
-                            <div
-                              className="h-1.5 rounded-full transition-all duration-500"
-                              style={{
+                          <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#e8f0ef]">
+                            <div className="h-1.5 rounded-full transition-all duration-500" style={{
                                 width: `${region.progress}%`,
-                                background: isCompleted
-                                  ? 'linear-gradient(90deg, #fbbf24, #f59e0b)'
-                                  : 'linear-gradient(90deg, #5eead4, #14b8a6)',
-                              }}
-                            />
+                                background: isCompleted ? 'linear-gradient(90deg, #fbbf24, #f59e0b)' : 'linear-gradient(90deg, #5eead4, #14b8a6)',
+                              }} />
                           </div>
                         </div>
                       )}
-                      {isLocked && (
-                        <p className="text-xs text-slate-400 italic">Complete previous regions</p>
-                      )}
+                      {isLocked && <p className="text-xs italic text-[#8a9e9d]">Complete previous regions</p>}
                     </div>
                   </div>
                 </button>
@@ -222,7 +187,7 @@ export default function WorldMapPage() {
         </div>
 
         {/* Tablet: 2-column compact */}
-        <div className="hidden sm:block md:hidden relative">
+        <div className="relative hidden sm:block md:hidden">
           <div className="grid grid-cols-2 gap-4">
             {regions.map((region, index) => {
               const isActive = region.progress > 0 && region.progress < 100;
@@ -230,27 +195,22 @@ export default function WorldMapPage() {
               const isLocked = region.progress === 0 && index > 1;
 
               return (
-                <button
-                  key={region.id}
-                  onClick={() => handleRegionClick(region.slug)}
-                  className={`relative rounded-xl border-2 p-4 text-left transition-all ${
-                    isCompleted
-                      ? 'border-amber-300 bg-gradient-to-br from-amber-50/90 to-white/90'
-                      : isActive
-                      ? 'border-teal-300 bg-gradient-to-br from-teal-50/90 to-white/90'
-                      : 'border-slate-200 bg-white/50'
-                  } ${isLocked ? 'opacity-55' : 'hover:shadow-md'}`}
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-sm font-bold text-slate-800">{region.name}</h3>
-                    <span>{isCompleted ? '🏆' : isLocked ? '🔒' : isActive ? '⚓' : ''}</span>
+                <button key={region.id} onClick={() => handleRegionClick(region.slug)} className={`relative rounded-2xl border p-4 text-left transition-all duration-300 ${
+                    isCompleted ? 'border-[#f0d78c] bg-gradient-to-br from-[#fffbf2] to-white shadow-sm' : isActive ? 'border-[#8fd6ce] bg-gradient-to-br from-[#f2fbfa] to-white shadow-sm' : 'border-[#e2e8f0] bg-white/70'
+                  } ${isLocked ? 'opacity-50' : 'hover:-translate-y-0.5 hover:shadow-md'}`}>
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-sm font-semibold text-[#22383a]">{region.name}</h3>
+                    <span className="text-base">
+                      {isCompleted ? '🏆' : isLocked ? '🔒' : isActive ? '⚓' : ''}
+                    </span>
                   </div>
+
                   {!isLocked && (
-                    <div className="w-full bg-slate-200 rounded-full h-1.5">
-                      <div className="h-1.5 rounded-full transition-all" style={{
-                        width: `${region.progress}%`,
-                        background: isCompleted ? 'linear-gradient(90deg, #fbbf24, #f59e0b)' : 'linear-gradient(90deg, #5eead4, #14b8a6)',
-                      }} />
+                    <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[#e8f0ef]">
+                      <div className="h-1.5 rounded-full transition-all duration-500" style={{
+                          width: `${region.progress}%`,
+                          background: isCompleted ? 'linear-gradient(90deg, #fbbf24, #f59e0b)' : 'linear-gradient(90deg, #5eead4, #14b8a6)',
+                        }} />
                     </div>
                   )}
                 </button>
@@ -260,8 +220,8 @@ export default function WorldMapPage() {
         </div>
 
         {/* Mobile: Vertical journey */}
-        <div className="sm:hidden relative flex flex-col gap-5">
-          <div className="absolute left-[19px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-300 via-amber-200 to-slate-300 rounded-full" />
+        <div className="relative flex flex-col gap-6 sm:hidden">
+          <div className="absolute left-[18px] top-2 bottom-2 w-0.5 rounded-full bg-gradient-to-b from-[#8fc5bc] via-[#e8d3a2] to-[#c8d8d6]" />
 
           {regions.map((region, index) => {
             const isActive = region.progress > 0 && region.progress < 100;
@@ -269,38 +229,34 @@ export default function WorldMapPage() {
             const isLocked = region.progress === 0 && index > 1;
 
             return (
-              <button
-                key={region.id}
-                onClick={() => handleRegionClick(region.slug)}
-                className="relative flex items-start gap-4 text-left group"
-              >
-                {/* Travel marker */}
+              <button key={region.id} onClick={() => handleRegionClick(region.slug)} className="relative flex items-start gap-4 text-left group">
                 <div
-                  className="relative z-10 w-[38px] h-[38px] rounded-full border-2 flex items-center justify-center flex-shrink-0"
+                  className="relative z-10 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border-2"
                   style={{
                     borderColor: isCompleted ? '#fbbf24' : isActive ? '#14b8a6' : '#cbd5e1',
-                    backgroundColor: isCompleted ? '#fef3c7' : isActive ? '#ccfbf1' : '#f1f5f9',
+                    backgroundColor: isCompleted ? '#fef9ee' : isActive ? '#f0fdfc' : '#f8fafc',
                   }}
                 >
                   <span className="text-sm">{isLocked ? '🔒' : isCompleted ? '🏆' : '⚓'}</span>
                 </div>
 
-                {/* Card */}
                 <div className="flex-1 min-w-0">
-                  <div className={`rounded-lg border p-3 ${
-                    isCompleted
-                      ? 'border-amber-200 bg-amber-50/60'
-                      : isActive
-                      ? 'border-teal-200 bg-teal-50/60'
-                      : 'border-slate-200 bg-white/60'
-                  } ${isLocked ? 'opacity-55' : ''}`}>
-                    <h3 className="text-sm font-bold text-slate-800 truncate">{region.name}</h3>
+                  <div
+                    className={`rounded-2xl border p-3.5 transition-all duration-300 ${
+                      isCompleted
+                        ? 'border-[#f0d78c] bg-gradient-to-br from-[#fffbf2] to-white'
+                        : isActive
+                        ? 'border-[#8fd6ce] bg-gradient-to-br from-[#f2fbfa] to-white'
+                        : 'border-[#e2e8f0] bg-white/70'
+                    } ${isLocked ? 'opacity-50' : ''}`}
+                  >
+                    <h3 className="text-sm font-semibold text-[#22383a] truncate">{region.name}</h3>
                     {!isLocked && (
-                      <div className="mt-2 w-full bg-slate-200 rounded-full h-1">
-                        <div className="h-1 rounded-full" style={{
-                          width: `${region.progress}%`,
-                          background: isCompleted ? 'linear-gradient(90deg, #fbbf24, #f59e0b)' : 'linear-gradient(90deg, #5eead4, #14b8a6)',
-                        }} />
+                      <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-[#e8f0ef]">
+                        <div className="h-1 rounded-full transition-all duration-500" style={{
+                            width: `${region.progress}%`,
+                            background: isCompleted ? 'linear-gradient(90deg, #fbbf24, #f59e0b)' : 'linear-gradient(90deg, #5eead4, #14b8a6)',
+                          }} />
                       </div>
                     )}
                   </div>
@@ -312,9 +268,9 @@ export default function WorldMapPage() {
 
         {/* Bottom decorative elements */}
         <div className="relative mt-8 flex items-center justify-center gap-4">
-          <img src="/assets/images/islands/backgrounds/rocks.svg" alt="" className="h-8 opacity-40" />
-          <div className="text-xs text-teal-500/60 italic">Chart your own course</div>
-          <img src="/assets/images/islands/backgrounds/boat.svg" alt="" className="h-8 opacity-40" />
+          <img src="/assets/images/islands/backgrounds/rocks.svg" alt="" className="decor-float h-7 opacity-40" />
+          <p className="text-xs italic text-[#7aaba6]/80">Chart your own course</p>
+          <img src="/assets/images/islands/backgrounds/boat.svg" alt="" className="decor-float h-7 opacity-40" style={{ animationDelay: '1.5s' }} />
         </div>
       </div>
     </GameLayout>
