@@ -400,14 +400,15 @@ function IslandView({ course, t, onLessonClick }: {
     return { x: Math.min(100, Math.max(0, x)), y: Math.min(100, Math.max(0, y)) };
   };
 
-  // Compute viewBox that fits all lessons with generous padding for archipelago cluster
+  // Compute viewBox that fits all lessons with generous padding to prevent clipping
   const positions = lessons.map((l: any) => getLessonPos(l));
   const xs = positions.map((p) => p.x);
   const ys = positions.map((p) => p.y);
-  const minX = xs.length > 0 ? Math.max(0, Math.min(...xs) - 12) : 0;
-  const maxX = xs.length > 0 ? Math.min(100, Math.max(...xs) + 12) : 100;
-  const minY = ys.length > 0 ? Math.max(0, Math.min(...ys) - 12) : 0;
-  const maxY = ys.length > 0 ? Math.min(100, Math.max(...ys) + 12) : 100;
+  const pad = 18; // generous padding so no island touches the edge
+  const minX = xs.length > 0 ? Math.max(0, Math.min(...xs) - pad) : 0;
+  const maxX = xs.length > 0 ? Math.min(100, Math.max(...xs) + pad) : 100;
+  const minY = ys.length > 0 ? Math.max(0, Math.min(...ys) - pad) : 0;
+  const maxY = ys.length > 0 ? Math.min(100, Math.max(...ys) + pad) : 100;
   const vw = Math.max(maxX - minX, 1);
   const vh = Math.max(maxY - minY, 1);
 
