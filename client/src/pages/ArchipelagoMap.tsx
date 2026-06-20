@@ -441,13 +441,12 @@ function IslandView({ course, t, onLessonClick }: {
       </div>
 
       {/* ── Island Map (the main parchment overlay) ── */}
-      <div className="relative rounded-2xl overflow-hidden"
+      <div className="relative rounded-2xl overflow-visible"
         style={{
           background: "linear-gradient(145deg, #f5e6c8 0%, #e8d4aa 30%, #f1e3bf 60%, #e6d3aa 100%)",
           border: "3px solid #a08c6a",
           boxShadow: "0 40px 120px rgba(0,0,0,0.6), 0 10px 30px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.15), 3px 3px 0 1px rgba(58,36,22,0.25)",
-          transform: "scale(1.01)",
-          minHeight: "400px"
+          minHeight: "500px"
         }}>
         {/* Parchment noise */}
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
