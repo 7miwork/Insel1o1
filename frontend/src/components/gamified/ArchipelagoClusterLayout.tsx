@@ -41,10 +41,10 @@ interface IslandNodeProps {
   status: LessonStatus;
   courseSlug: string;
   t: (key: string) => string;
-  size?: 'large' | 'normal';
+  size: 'large' | 'normal';
 }
 
-function IslandNode({ lesson, status, courseSlug, t, size = 'normal' }: IslandNodeProps) {
+function IslandNode({ lesson, status, courseSlug, t, size }: IslandNodeProps) {
   const isLocked = lesson.locked || status === 'locked';
   const isCurrent = status === 'current';
   const isCompleted = status === 'completed';
@@ -112,46 +112,44 @@ function IslandNode({ lesson, status, courseSlug, t, size = 'normal' }: IslandNo
   );
 }
 
-interface ArchipelagoLayoutProps {
+interface ArchipelagoClusterLayoutProps {
   lessons: Lesson[];
   courseSlug: string;
   t: (key: string) => string;
 }
 
-const ARCHIPELAGO_COORDS: { [key: number]: { x: number; y: number } } = {
-  1: { x: -220, y: -60 },
-  2: { x: 0, y: -240 },
-  3: { x: 220, y: -60 },
-  4: { x: 260, y: 120 },
-  5: { x: 200, y: 240 },
-  6: { x: 160, y: 340 },
+const COORDS: { [key: number]: { x: number; y: number } } = {
+  2: { x: 0, y: -300 },
+  1: { x: -220, y: -180 },
+  3: { x: 220, y: -180 },
+  10: { x: -320, y: 0 },
+  4: { x: 320, y: 0 },
+  9: { x: -220, y: 180 },
+  5: { x: 220, y: 180 },
+  8: { x: -100, y: 300 },
+  6: { x: 100, y: 300 },
   7: { x: 0, y: 380 },
-  8: { x: -160, y: 340 },
-  9: { x: -200, y: 240 },
-  10: { x: -260, y: 120 },
   11: { x: 0, y: 0 },
 };
 
-export default function ArchipelagoLayout({ lessons, courseSlug, t }: ArchipelagoLayoutProps) {
+export default function ArchipelagoClusterLayout({ lessons, courseSlug, t }: ArchipelagoClusterLayoutProps) {
   return (
-    <div className="relative mx-auto h-[520px] w-full max-w-2xl sm:h-[560px]">
-      {/* Center anchor for absolute placement */}
+    <div className="relative mx-auto h-[760px] w-full max-w-3xl sm:h-[800px]">
+      {/* Center anchor at 50% 50% */}
       <div className="absolute left-1/2 top-1/2 h-0 w-0" />
 
       {lessons.map((lesson) => {
         const index = lessons.findIndex((l) => l.id === lesson.id);
         const status = getLessonStatus(lesson, index, lessons);
         const isCenter = lesson.id === 11;
-        const coord = ARCHIPELAGO_COORDS[lesson.id] || { x: 0, y: 0 };
+        const coord = COORDS[lesson.id] || { x: 0, y: 0 };
 
         return (
           <div
             key={lesson.id}
             className="absolute"
             style={{
-              left: `calc(50% + ${coord.x}px)`,
-              top: `calc(50% + ${coord.y}px)`,
-              transform: 'translate(-50%, -50%)',
+              transform: `translate(calc(50% + ${coord.x}px), calc(50% + ${coord.y}px))`,
               zIndex: isCenter ? 10 : 1,
             }}
           >
