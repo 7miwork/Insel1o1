@@ -80,109 +80,39 @@ export default function ArchipelagoPage() {
 
               {/* Archipelago cluster layout */}
               <div className="overflow-hidden rounded-3xl border border-[#b8ddd5]/60 bg-gradient-to-br from-[#e8f4f2] via-[#fafdfc] to-[#f5faf9] px-4 py-8 shadow-[0_2px_20px_rgba(13,148,136,0.05)] backdrop-blur-sm sm:px-6 md:py-10">
-                {/* Desktop / Tablet: cluster */}
+                {/* Desktop / Tablet: archipelago cluster */}
                 <div className="hidden md:block">
                   <ArchipelagoLayout lessons={archipelago.islands} courseSlug={courseSlug} t={t} />
                 </div>
 
-                {/* Mobile: vertical progression */}
+                {/* Mobile: simple vertical progression */}
                 <div className="md:hidden">
-                  <div className="relative mx-auto flex max-w-xs flex-col items-center">
-                    <div className="absolute top-3 bottom-3 left-[18px] w-0.5 rounded-full bg-gradient-to-b from-[#8fc5bc] via-[#e8d3a2] to-[#c8d8d6]" />
-
+                  <div className="relative mx-auto flex max-w-xs flex-col items-center gap-4">
                     {archipelago.islands.map((island, index) => {
                       const isLocked = island.locked;
                       const isCurrent = !isLocked && island.progress > 0 && island.progress < 100;
                       const isCompleted = island.progress === 100;
 
                       return (
-                        <div key={island.id} className="relative w-full">
-                          {index > 0 && (
-                            <div className="relative z-10 flex justify-center py-1">
-                              <svg width="32" height="10" viewBox="0 0 32 10" aria-hidden="true">
-                                <path
-                                  d="M2,5 Q8,0 16,5 Q24,10 30,5"
-                                  stroke="#cbd5e1"
-                                  strokeWidth="2"
-                                  fill="none"
-                                  strokeDasharray="3 3"
-                                  strokeLinecap="round"
-                                  opacity="0.7"
-                                />
-                              </svg>
-                            </div>
-                          )}
-
-                          <div className="relative flex justify-center">
-                            <button
-                              disabled={isLocked}
-                              className={`relative flex flex-col items-center justify-end transition-all duration-300 ${
-                                isCompleted
-                                  ? 'w-28 h-28 sm:w-32 sm:h-32'
-                                  : isCurrent
-                                  ? 'w-32 h-32 sm:w-36 sm:h-36'
-                                  : 'w-28 h-28 sm:w-32 sm:h-32'
-                              } rounded-full border-2`}
-                              style={{
-                                borderColor: isCompleted ? '#f0d78c' : isCurrent ? '#8fd6ce' : isLocked ? '#e2e8f0' : '#b8ddd5',
-                                background: isCompleted
-                                  ? 'linear-gradient(to bottom right, #fffbf2, #fef3c7)'
-                                  : isCurrent
-                                  ? 'linear-gradient(to bottom right, #f2fbfa, #e8f9f7)'
-                                  : isLocked
-                                  ? 'rgba(255,255,255,0.5)'
-                                  : 'rgba(255,255,255,0.8)',
-                                boxShadow: isCurrent
-                                  ? '0 4px 20px rgba(13,148,136,0.18)'
-                                  : isCompleted
-                                  ? '0 2px 12px rgba(251,191,36,0.15)'
-                                  : '0 1px 3px rgba(0,0,0,0.05)',
-                                opacity: isLocked ? 0.5 : 1,
-                              }}
-                            >
-                              {isCurrent && (
-                                <div className="absolute -top-3 -right-1 z-20" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}>
-                                  <svg width="22" height="26" viewBox="0 0 24 28" aria-hidden="true">
-                                    <path d="M6,22 L6,6 L18,11 L6,16 Z" fill="#fbbf24" stroke="#b45309" strokeWidth="1.5" strokeLinejoin="round" />
-                                    <circle cx="6" cy="22" r="2.5" fill="#b45309" />
-                                  </svg>
-                                </div>
-                              )}
-
-                              <div className="relative w-full h-20 overflow-hidden rounded-full sm:h-24">
-                                <div
-                                  className="absolute inset-0"
-                                  style={{
-                                    background: isLocked ? 'linear-gradient(to bottom, rgba(148,163,184,0.3), rgba(148,163,184,0.5))' : 'none',
-                                  }}
-                                />
-                                <img
-                                  src={`/assets/images/islands/${courseSlug}/island-${island.id}.svg`}
-                                  alt={island.name}
-                                  className="h-full w-full object-cover"
-                                  onError={(e) => {
-                                    (e.target as HTMLImageElement).src = '/assets/images/islands/fallback/island-placeholder.svg';
-                                  }}
-                                />
-
-                                {isLocked && (
-                                  <div className="absolute inset-0 flex items-center justify-center bg-white/20 backdrop-blur-[2px]">
-                                    <span className="text-2xl">🔒</span>
-                                  </div>
-                                )}
-                                {!isLocked && !isCurrent && !isCompleted && (
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-xl font-bold text-white drop-shadow-md">{island.id}</span>
-                                  </div>
-                                )}
+                        <div key={island.id} className="flex w-full items-center gap-3">
+                          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border-2"
+                            style={{
+                              borderColor: isCompleted ? '#f0d78c' : isCurrent ? '#8fd6ce' : isLocked ? '#e2e8f0' : '#b8ddd5',
+                              backgroundColor: isCompleted ? '#fef9ee' : isCurrent ? '#f0fdfc' : isLocked ? '#f1f5f9' : '#fff',
+                              opacity: isLocked ? 0.5 : 1,
+                            }}>
+                            <span className="text-sm">{isLocked ? '🔒' : isCompleted ? '🏆' : '⚓'}</span>
+                          </div>
+                          <div className={`flex-1 rounded-2xl border p-3 ${isCompleted ? 'border-[#f0d78c] bg-[#fffbf2]' : isCurrent ? 'border-[#8fd6ce] bg-[#f2fbfa]' : 'border-[#e2e8f0] bg-white/70'}`}>
+                            <p className="truncate text-sm font-semibold text-[#22383a]">{island.name}</p>
+                            {!isLocked && (
+                              <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-[#e8f0ef]">
+                                <div className="h-1 rounded-full" style={{
+                                  width: `${island.progress}%`,
+                                  background: isCompleted ? 'linear-gradient(90deg, #fbbf24, #f59e0b)' : 'linear-gradient(90deg, #5eead4, #14b8a6)',
+                                }} />
                               </div>
-
-                              <div className="mt-1 w-28 px-2 text-center sm:w-32">
-                                <p className="truncate text-xs font-semibold text-[#22383a] sm:text-sm">{island.name}</p>
-                                {isCurrent && <p className="text-[10px] font-medium text-[#0d9488]">Active</p>}
-                                {isCompleted && <p className="text-[10px] font-medium text-[#d97706]">✔ Done</p>}
-                              </div>
-                            </button>
+                            )}
                           </div>
                         </div>
                       );

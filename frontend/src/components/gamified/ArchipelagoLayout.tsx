@@ -118,45 +118,39 @@ interface ArchipelagoLayoutProps {
   t: (key: string) => string;
 }
 
+const ARCHIPELAGO_COORDS: { [key: number]: { x: number; y: number } } = {
+  1: { x: -220, y: -60 },
+  2: { x: 0, y: -240 },
+  3: { x: 220, y: -60 },
+  4: { x: 260, y: 120 },
+  5: { x: 200, y: 240 },
+  6: { x: 160, y: 340 },
+  7: { x: 0, y: 380 },
+  8: { x: -160, y: 340 },
+  9: { x: -200, y: 240 },
+  10: { x: -260, y: 120 },
+  11: { x: 0, y: 0 },
+};
+
 export default function ArchipelagoLayout({ lessons, courseSlug, t }: ArchipelagoLayoutProps) {
-  const centerLesson = lessons.length > 0 ? lessons[Math.floor(lessons.length / 2)] : null;
-  const centerIndex = centerLesson ? lessons.findIndex((l) => l.id === centerLesson.id) : 0;
-
-  const organicPositions: { x: number; y: number }[] = [
-    { x: 50, y: 50 },
-  ];
-
-  const pattern = [
-    { x: 50, y: 18 },
-    { x: 22, y: 26 },
-    { x: 78, y: 26 },
-    { x: 10, y: 46 },
-    { x: 90, y: 46 },
-    { x: 16, y: 70 },
-    { x: 84, y: 70 },
-    { x: 30, y: 82 },
-    { x: 70, y: 82 },
-    { x: 50, y: 78 },
-  ];
-
-  for (let i = 1; i < lessons.length; i++) {
-    organicPositions.push(pattern[i - 1] || { x: 50, y: 50 });
-  }
-
   return (
-    <div className="relative mx-auto h-[560px] max-w-3xl sm:h-[600px]">
-      {lessons.map((lesson, index) => {
+    <div className="relative mx-auto h-[520px] w-full max-w-2xl sm:h-[560px]">
+      {/* Center anchor for absolute placement */}
+      <div className="absolute left-1/2 top-1/2 h-0 w-0" />
+
+      {lessons.map((lesson) => {
+        const index = lessons.findIndex((l) => l.id === lesson.id);
         const status = getLessonStatus(lesson, index, lessons);
-        const pos = organicPositions[index] || { x: 50, y: 50 };
-        const isCenter = index === centerIndex;
+        const isCenter = lesson.id === 11;
+        const coord = ARCHIPELAGO_COORDS[lesson.id] || { x: 0, y: 0 };
 
         return (
           <div
             key={lesson.id}
             className="absolute"
             style={{
-              left: `${pos.x}%`,
-              top: `${pos.y}%`,
+              left: `calc(50% + ${coord.x}px)`,
+              top: `calc(50% + ${coord.y}px)`,
               transform: 'translate(-50%, -50%)',
               zIndex: isCenter ? 10 : 1,
             }}
