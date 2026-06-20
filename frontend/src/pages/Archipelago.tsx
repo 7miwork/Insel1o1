@@ -35,6 +35,36 @@ function getIslandStatus(island: Island, index: number, islands: Island[]): 'com
   return island.locked ? 'locked' : 'upcoming';
 }
 
+function getCenterIsland(islands: Island[]): Island | null {
+  const unlocked = islands.filter((i) => !i.locked);
+  if (unlocked.length === 0) return islands[0];
+  const current = unlocked.find((i) => i.progress > 0 && i.progress < 100);
+  if (current) return current;
+  const highestProgress = unlocked.reduce((a, b) => (a.progress > b.progress ? a : b), unlocked[0]);
+  if (highestProgress.progress > 0) return highestProgress;
+  return islands[0];
+}
+
+function getArchipelagoPositions(count: number): { x: number; y: number }[] {
+  const positions: { x: number; y: number }[] = [];
+  const center = { x: 50, y: 50 };
+  positions.push(center);
+
+  if (count <= 1) return positions;
+
+  const radius = count <= 4 ? 32 : count <= 6 ? 36 : 40;
+  const startAngle = -Math.PI / 2;
+
+  for (let i = 0; i < count - 1; i++) {
+    const angle = startAngle + (i * 2 * Math.PI) / (count - 1);
+    const x = 50 + radius * Math.cos(angle);
+    const y = 50 + radius * Math.sin(angle);
+    positions.push({ x, y });
+  }
+
+  return positions;
+}
+
 function ExplorerFlag() {
   return (
     <div className="absolute -top-3 -right-1 z-20" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}>
@@ -46,123 +76,88 @@ function ExplorerFlag() {
   );
 }
 
-function VoyagePath({ status }: { status: 'completed' | 'current' | 'locked' }) {
-  const stroke = status === 'completed' ? '#fbbf24' : status === 'current' ? '#14b8a6' : '#cbd5e1';
-  const dotFill = status === 'locked' ? '#e2e8f0' : stroke;
-
+function VoyagePathDashed() {
   return (
-    <div className="flex items-center justify-center py-2">
-      <svg width="56" height="18" viewBox="0 0 60 20" aria-hidden="true">
-        <path
-          d="M2,10 Q15,0 30,10 Q45,20 58,10"
-          stroke={stroke}
-          strokeWidth="2.5"
-          fill="none"
-          strokeDasharray={status === 'locked' ? '5 4' : '0'}
-          strokeLinecap="round"
-          opacity={status === 'locked' ? 0.5 : 0.75}
-        />
-        <circle cx="30" cy="10" r={status === 'locked' ? 2.5 : 3} fill={dotFill} opacity={status === 'locked' ? 0.6 : 0.85} />
+    <div className="flex items-center justify-center py-1">
+      <svg width="40" height="12" viewBox="0 0 40 12" aria-hidden="true">
+        <path d="M2,6 Q10,0 20,6 Q30,12 38,6" stroke="#cbd5e1" strokeWidth="2" fill="none" strokeDasharray="4 3" strokeLinecap="round" opacity="0.7" />
       </svg>
     </div>
   );
 }
 
-function IslandCard({ island, status, courseSlug, t }: { island: Island; status: 'completed' | 'current' | 'locked' | 'upcoming'; courseSlug: string; t: (key: string) => string }) {
+interface IslandNodeProps {
+  island: Island;
+  status: 'completed' | 'current' | 'locked' | 'upcoming';
+  courseSlug: string;
+  t: (key: string) => string;
+  size?: 'large' | 'normal';
+  showLabel?: boolean;
+}
+
+function IslandNode({ island, status, courseSlug, t, size = 'normal', showLabel = true }: IslandNodeProps) {
   const isLocked = island.locked || status === 'locked';
+  const isCurrent = status === 'current';
+  const isCompleted = status === 'completed';
+
+  const baseSize = size === 'large' ? 'w-36 h-36 sm:w-40 sm:h-40' : 'w-28 h-28 sm:w-32 sm:h-32';
+  const innerSize = size === 'large' ? 'h-24 sm:h-28' : 'h-20 sm:h-24';
+  const iconSize = size === 'large' ? 'text-3xl' : 'text-2xl';
 
   return (
-    <div
-      className={`relative overflow-hidden rounded-2xl border transition-all duration-300 ${
-        status === 'completed'
-          ? 'border-[#f0d78c] bg-gradient-to-br from-[#fffbf2] to-white shadow-[0_2px_12px_rgba(251,191,36,0.12)]'
-          : status === 'current'
-          ? 'border-[#8fd6ce] bg-gradient-to-br from-[#f2fbfa] to-white shadow-[0_4px_16px_rgba(13,148,136,0.12)]'
+    <button
+      disabled={isLocked}
+      className={`relative flex flex-col items-center justify-end ${baseSize} rounded-full border-2 transition-all duration-300 ${
+        isCompleted
+          ? 'border-[#f0d78c] bg-gradient-to-br from-[#fffbf2] to-[#fef3c7] shadow-[0_2px_12px_rgba(251,191,36,0.15)]'
+          : isCurrent
+          ? 'border-[#8fd6ce] bg-gradient-to-br from-[#f2fbfa] to-[#e8f9f7] shadow-[0_4px_20px_rgba(13,148,136,0.18)]'
           : isLocked
-          ? 'border-[#e2e8f0] bg-white/60 opacity-50'
-          : 'border-[#e2e8f0] bg-white/80 hover:-translate-y-0.5 hover:shadow-md'
-      }`}
+          ? 'border-[#e2e8f0] bg-white/50 opacity-50'
+          : 'border-[#b8ddd5] bg-white/80 hover:-translate-y-0.5 hover:shadow-md'
+      } ${isCurrent ? 'decor-pulse-gentle' : ''} ${isLocked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
     >
-      <div className="relative h-36 w-full overflow-hidden">
+      {isCurrent && <ExplorerFlag />}
+
+      <div className={`relative w-full ${innerSize} overflow-hidden rounded-full`}>
         <div
           className="absolute inset-0"
           style={{
-            background: isLocked ? 'linear-gradient(to bottom, rgba(148,163,184,0.25), rgba(148,163,184,0.45))' : 'none',
+            background: isLocked ? 'linear-gradient(to bottom, rgba(148,163,184,0.3), rgba(148,163,184,0.5))' : 'none',
           }}
         />
-        <IslandVisual course={courseSlug} lesson={island.id} alt={island.name} className="h-full w-full object-cover" width={400} height={320} />
+        <IslandVisual course={courseSlug} lesson={island.id} alt={island.name} className="h-full w-full object-cover" width={320} height={320} />
 
+        {/* Status badges */}
         {isLocked && (
           <div className="absolute inset-0 flex items-center justify-center bg-white/20 backdrop-blur-[2px]">
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-3xl">🔒</span>
-              <span className="text-xs font-medium text-slate-500">Locked</span>
-            </div>
+            <span className="text-2xl">🔒</span>
           </div>
         )}
-        {status === 'current' && (
-          <div className="absolute top-2 left-2 rounded-full bg-[#0d9488]/90 px-2.5 py-0.5 text-xs font-semibold text-white shadow-sm backdrop-blur-sm">
-            Active
-          </div>
-        )}
-        {status === 'completed' && (
-          <div className="absolute top-2 left-2 flex items-center gap-1 rounded-full bg-[#d97706]/90 px-2.5 py-0.5 text-xs font-semibold text-white shadow-sm backdrop-blur-sm">
-            <span>✔</span> Done
+        {!isLocked && !isCurrent && !isCompleted && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className={`font-bold text-white drop-shadow-md ${size === 'large' ? 'text-2xl' : 'text-xl'}`}>
+              {island.id}
+            </span>
           </div>
         )}
       </div>
 
-      <div className="p-4">
-        <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-[#22383a]">
-          {status === 'completed' && <span className="text-lg text-[#d97706]">🏆</span>}
-          {status === 'current' && <span className="text-sm text-[#0d9488]">⚑</span>}
-          {island.name}
-        </h3>
-
-        <div className="mb-3">
-          <div className="mb-1 flex items-center justify-between text-xs text-[#5a7a78]">
-            <span className="font-medium">{status === 'completed' ? 'Completed' : 'Progress'}</span>
-            <span className="font-semibold text-[#2a5a58]">{island.progress}%</span>
-          </div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-[#e8f0ef]">
-            <div
-              className="h-2 rounded-full transition-all duration-500"
-              style={{
-                width: `${island.progress}%`,
-                background:
-                  status === 'completed'
-                    ? 'linear-gradient(90deg, #fbbf24, #f59e0b)'
-                    : status === 'current'
-                    ? 'linear-gradient(90deg, #5eead4, #14b8a6)'
-                    : 'linear-gradient(90deg, #94a3b8, #64748b)',
-              }}
-            />
-          </div>
-          <p className="mt-1 text-xs text-[#8a9e9d]">
-            {island.lessons} {t('gamification.mission')}s
+      {/* Label */}
+      {showLabel && (
+        <div className="mt-1 px-2 text-center">
+          <p className={`font-semibold text-[#22383a] truncate ${size === 'large' ? 'text-sm sm:text-base' : 'text-xs sm:text-sm'}`}>
+            {island.name}
           </p>
+          {isCurrent && (
+            <p className="text-[10px] font-medium text-[#0d9488]">Active</p>
+          )}
+          {isCompleted && (
+            <p className="text-[10px] font-medium text-[#d97706]">✔ Done</p>
+          )}
         </div>
-
-        {!isLocked && (
-          <button
-            className={`w-full rounded-xl py-2.5 text-sm font-semibold transition-all ${
-              status === 'completed'
-                ? 'bg-[#d97706] text-white shadow-sm hover:bg-[#b45309]'
-                : status === 'current'
-                ? 'bg-[#0d9488] text-white shadow-sm hover:bg-[#115e59]'
-                : 'bg-[#cbd5e1] text-white hover:bg-[#94a3b8]'
-            }`}
-          >
-            {status === 'completed' ? '✔ Completed' : 'Continue Learning'}
-          </button>
-        )}
-        {isLocked && (
-          <div className="w-full rounded-xl border border-slate-200 bg-slate-100 py-2.5 text-center text-xs font-medium text-slate-400">
-            Complete previous lesson
-          </div>
-        )}
-      </div>
-    </div>
+      )}
+    </button>
   );
 }
 
@@ -205,6 +200,9 @@ export default function ArchipelagoPage() {
 
         {archipelagos.map((archipelago) => {
           const courseSlug = toCourseSlug(archipelago.name);
+          const centerIsland = getCenterIsland(archipelago.islands);
+          const centerIndex = centerIsland ? archipelago.islands.findIndex((i) => i.id === centerIsland.id) : 0;
+          const positions = getArchipelagoPositions(archipelago.islands.length);
 
           return (
             <div key={archipelago.id}>
@@ -219,39 +217,43 @@ export default function ArchipelagoPage() {
                 </div>
               </div>
 
-              {/* Desktop: horizontal island route */}
-              <div className="hidden overflow-hidden rounded-2xl border border-[#b8ddd5]/60 bg-[#fafdfc]/70 px-6 py-8 shadow-[0_2px_20px_rgba(13,148,136,0.05)] backdrop-blur-sm md:block md:px-8">
-                <div className="flex items-start justify-center gap-3">
+              {/* Desktop & Tablet: Archipelago cluster */}
+              <div className="relative hidden overflow-hidden rounded-3xl border border-[#b8ddd5]/60 bg-gradient-to-br from-[#e8f4f2] via-[#fafdfc] to-[#f5faf9] px-6 py-10 shadow-[0_2px_20px_rgba(13,148,136,0.05)] backdrop-blur-sm md:block">
+                <div className="relative mx-auto h-[520px] max-w-3xl">
                   {archipelago.islands.map((island, index) => {
                     const status = getIslandStatus(island, index, archipelago.islands);
-                    const nextIsland = archipelago.islands[index + 1];
-                    const nextStatus = nextIsland ? getIslandStatus(nextIsland, index + 1, archipelago.islands) : 'locked';
+                    const pos = positions[index];
+                    const isCenter = index === centerIndex;
 
                     return (
-                      <React.Fragment key={island.id}>
-                        <div className="relative w-full max-w-xs">
-                          {status === 'current' && <ExplorerFlag />}
-                          <IslandCard island={island} status={status} courseSlug={courseSlug} t={t} />
-                        </div>
-                        {nextIsland && (
-                          <div className="flex-shrink-0 pt-16">
-                            <VoyagePath
-                              status={
-                                nextStatus === 'locked' ? 'locked' : status === 'completed' ? 'completed' : 'current'
-                              }
-                            />
-                          </div>
-                        )}
-                      </React.Fragment>
+                      <div
+                        key={island.id}
+                        className="absolute"
+                        style={{
+                          left: `${pos.x}%`,
+                          top: `${pos.y}%`,
+                          transform: 'translate(-50%, -50%)',
+                          zIndex: isCenter ? 10 : 1,
+                        }}
+                      >
+                        <IslandNode
+                          island={island}
+                          status={status}
+                          courseSlug={courseSlug}
+                          t={t}
+                          size={isCenter ? 'large' : 'normal'}
+                          showLabel={true}
+                        />
+                      </div>
                     );
                   })}
                 </div>
               </div>
 
-              {/* Mobile: vertical island route */}
-              <div className="overflow-hidden rounded-2xl border border-[#b8ddd5]/60 bg-[#fafdfc]/70 px-5 py-6 shadow-[0_2px_20px_rgba(13,148,136,0.05)] backdrop-blur-sm md:hidden">
+              {/* Mobile: Vertical stack */}
+              <div className="overflow-hidden rounded-3xl border border-[#b8ddd5]/60 bg-[#fafdfc]/70 px-5 py-6 shadow-[0_2px_20px_rgba(13,148,136,0.05)] backdrop-blur-sm md:hidden">
                 <div className="relative flex flex-col items-center">
-                  <div className="absolute top-2 bottom-2 w-0.5 rounded-full bg-gradient-to-b from-[#8fc5bc] via-[#e8d3a2] to-[#c8d8d6]" />
+                  <div className="absolute top-6 bottom-6 left-4 w-0.5 rounded-full bg-gradient-to-b from-[#8fc5bc] via-[#e8d3a2] to-[#c8d8d6]" />
 
                   {archipelago.islands.map((island, index) => {
                     const status = getIslandStatus(island, index, archipelago.islands);
@@ -259,21 +261,23 @@ export default function ArchipelagoPage() {
                     const nextStatus = nextIsland ? getIslandStatus(nextIsland, index + 1, archipelago.islands) : 'locked';
 
                     return (
-                      <React.Fragment key={island.id}>
-                        <div className="relative w-full max-w-sm">
-                          {status === 'current' && <ExplorerFlag />}
-                          <IslandCard island={island} status={status} courseSlug={courseSlug} t={t} />
-                        </div>
-                        {nextIsland && (
-                          <div className="relative z-10">
-                            <VoyagePath
-                              status={
-                                nextStatus === 'locked' ? 'locked' : status === 'completed' ? 'completed' : 'current'
-                              }
-                            />
+                      <div key={island.id} className="relative w-full">
+                        {index > 0 && (
+                          <div className="relative z-10 flex justify-center">
+                            <VoyagePathDashed />
                           </div>
                         )}
-                      </React.Fragment>
+                        <div className="relative flex justify-center">
+                          <IslandNode
+                            island={island}
+                            status={status}
+                            courseSlug={courseSlug}
+                            t={t}
+                            size="normal"
+                            showLabel={true}
+                          />
+                        </div>
+                      </div>
                     );
                   })}
                 </div>
