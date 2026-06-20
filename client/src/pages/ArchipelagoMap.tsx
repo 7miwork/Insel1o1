@@ -373,13 +373,13 @@ function IslandView({ course, t, onLessonClick }: {
   const total = lessons.length;
   const pct = total > 0 ? Math.round((completedCount / total) * 100) : 0;
 
-  // Compute viewBox that fits all lessons with padding
+  // Compute viewBox that fits all lessons with generous padding for archipelago cluster
   const xs = lessons.map((l: any) => l.x ?? 50);
   const ys = lessons.map((l: any) => l.y ?? 50);
-  const minX = xs.length > 0 ? Math.max(0, Math.min(...xs) - 10) : 0;
-  const maxX = xs.length > 0 ? Math.min(100, Math.max(...xs) + 10) : 100;
-  const minY = ys.length > 0 ? Math.max(0, Math.min(...ys) - 12) : 0;
-  const maxY = ys.length > 0 ? Math.min(100, Math.max(...ys) + 12) : 100;
+  const minX = xs.length > 0 ? Math.max(0, Math.min(...xs) - 15) : 0;
+  const maxX = xs.length > 0 ? Math.min(100, Math.max(...xs) + 15) : 100;
+  const minY = ys.length > 0 ? Math.max(0, Math.min(...ys) - 15) : 0;
+  const maxY = ys.length > 0 ? Math.min(100, Math.max(...ys) + 15) : 100;
   const vw = Math.max(maxX - minX, 1);
   const vh = Math.max(maxY - minY, 1);
 
@@ -511,8 +511,9 @@ function IslandView({ course, t, onLessonClick }: {
             const isLocked = !isAvailable;
             const isFinal = lesson.isFinalIsland;
             const isMain = lesson.isMainIsland;
-            const nodeSize = isFinal ? 9 : isMain ? 7.5 : 6;
-            const fontSize = isFinal ? 5 : isMain ? 4.5 : 3.5;
+            // Archipelago cluster: center island much larger, surrounding islands smaller
+            const nodeSize = isFinal ? 12 : isMain ? 10 : 5.5;
+            const fontSize = isFinal ? 5.5 : isMain ? 4.5 : 3.2;
 
             return (
               <g key={lesson.id}
