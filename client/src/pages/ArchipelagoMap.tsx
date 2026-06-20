@@ -226,11 +226,11 @@ function IslandView({ course, t, onLessonClick }: {
   const positions = lessons.map((l: any) => getLessonPos(l));
   const xs = positions.map((p) => p.x);
   const ys = positions.map((p) => p.y);
-  const pad = 20;
+  const pad = 25;
   const minX = xs.length > 0 ? Math.max(0, Math.min(...xs) - pad) : 0;
-  const maxX = xs.length > 0 ? Math.min(100, Math.max(...xs) + pad) : 100;
+  const maxX = xs.length > 0 ? Math.max(...xs) + pad : 100;
   const minY = ys.length > 0 ? Math.max(0, Math.min(...ys) - pad) : 0;
-  const maxY = ys.length > 0 ? Math.min(100, Math.max(...ys) + pad) : 100;
+  const maxY = ys.length > 0 ? Math.max(...ys) + pad : 100;
   const vw = Math.max(maxX - minX, 1);
   const vh = Math.max(maxY - minY, 1);
 
