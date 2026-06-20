@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useRef } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import { useLocation } from "wouter";
 import { ChevronLeft, Compass, Ship, Map as MapIcon, Lock, CheckCircle2, PlayCircle, Wind, Trophy, Target, Star, Anchor, Eye, X } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
@@ -378,25 +378,27 @@ function IslandView({ course, t, onLessonClick }: {
   const desktopBreakpoint = 1200;
   const tabletBreakpoint = 700;
 
+  /* ── Proper window resize listener via useEffect ── */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const check = () => setIsMobile(window.innerWidth < tabletBreakpoint);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   // Desktop: use full archipelago coordinates
   // Tablet: use compressed tablet coordinates
-  // Mobile: use vertical journey layout (CSS handles layout)
   const getLessonPos = (l: any) => {
-    const x = typeof window !== "undefined" && window.innerWidth >= desktopBreakpoint
+    const w = typeof window !== "undefined" ? window.innerWidth : 1200;
+    const x = w >= desktopBreakpoint
       ? (l.x ?? 50)
-      : (window.innerWidth >= tabletBreakpoint ? (l.tabletX ?? l.x ?? 50) : 50);
-    const y = typeof window !== "undefined" && window.innerWidth >= desktopBreakpoint
+      : (w >= tabletBreakpoint ? (l.tabletX ?? l.x ?? 50) : 50);
+    const y = w >= desktopBreakpoint
       ? (l.y ?? 50)
-      : (window.innerWidth >= tabletBreakpoint ? (l.tabletY ?? l.y ?? 50) : 50);
+      : (w >= tabletBreakpoint ? (l.tabletY ?? l.y ?? 50) : 50);
     return { x: Math.min(100, Math.max(0, x)), y: Math.min(100, Math.max(0, y)) };
   };
-
-  if (typeof window !== "undefined") {
-    const handler = () => setIsMobile(window.innerWidth < tabletBreakpoint);
-    handler();
-    window.addEventListener("resize", handler);
-    return null; // SSR safety
-  }
 
   // Compute viewBox that fits all lessons with generous padding for archipelago cluster
   const positions = lessons.map((l: any) => getLessonPos(l));
