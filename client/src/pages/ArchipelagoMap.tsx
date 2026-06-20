@@ -280,11 +280,11 @@ function IslandView({ course, t, onLessonClick }: {
         }} />
 
         {!isMobile && (
-          <div style={{ minWidth: "1000px", minHeight: "900px", padding: "60px 40px 100px 40px" }}>
+          <div style={{ minWidth: "1000px", minHeight: "1400px", padding: "60px 40px 300px 40px" }}>
             {/* Fixed-size SVG canvas that never clips */}
             <svg viewBox={`${minX} ${minY} ${vw} ${vh}`}
               preserveAspectRatio="xMidYMid meet"
-              style={{ width: "100%", height: "100%", display: "block", minHeight: "600px" }}>
+              style={{ width: "100%", height: "100%", display: "block", minHeight: "1000px" }}>
 
               <defs>
                 <radialGradient id="islandGreen">
