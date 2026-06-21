@@ -96,7 +96,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
-              onClick={() => setLocation("/student")}
+              onClick={() => setLocation("/world")}
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium px-5 py-2.5 text-sm transition-colors"
             >
               <GraduationCap className="w-4 h-4" />
@@ -176,7 +176,7 @@ export default function Home() {
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">{t("home.readyToTransform")}</h2>
           <p className="text-sm text-slate-500 mb-8">{t("home.joinThousands")}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button onClick={() => setLocation("/student")} className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium px-5 py-2.5 text-sm transition-colors">
+            <button onClick={() => setLocation("/world")} className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium px-5 py-2.5 text-sm transition-colors">
               <GraduationCap className="w-4 h-4" />
               {t("common.startLearning")}
             </button>
