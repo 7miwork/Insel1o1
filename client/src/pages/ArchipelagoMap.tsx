@@ -235,11 +235,12 @@ function IslandView({ course, t, onLessonClick }: {
   const vh = Math.max(maxY - minY, 1);
 
   // Calculate world bounding box for canvas sizing
-  // Use a generous scale factor: SVG viewBox 0-125 becomes ~1600px canvas height
-  const CANVAS_SCALE = 12; // pixels per SVG unit
-  const canvasWidth = Math.max(vw * CANVAS_SCALE, 1000);
-  const canvasHeight = Math.max(vh * CANVAS_SCALE + 300, 1400); // +300 for bottom padding
-
+  // World bounds: minY=0, maxY=125, so vh=125
+  // Scale factor converts viewBox units to pixels
+  const CANVAS_SCALE = 14; // pixels per SVG unit (higher = more resolution)
+  const worldWidth = Math.max(vw * CANVAS_SCALE, 1100); // min 1100px wide
+  const worldHeight = Math.max(vh * CANVAS_SCALE + 400, 1800); // +400 bottom margin
+  const BOTTOM_PAD = 400;
   return (
     <div className="w-full space-y-4 animate-[islandEnter_0.6s_ease-out]">
       <div className="text-center space-y-1">
@@ -284,11 +285,11 @@ function IslandView({ course, t, onLessonClick }: {
         }} />
 
         {!isMobile && (
-          <div style={{ width: `${canvasWidth}px`, minHeight: `${canvasHeight}px`, padding: "60px 40px 300px 40px" }}>
-            {/* SVG canvas sized to world bounds */}
+          <div style={{ width: `${worldWidth}px`, height: `${worldHeight + 140}px`, padding: "60px 40px 80px 40px", boxSizing: "border-box" }}>
+            {/* SVG canvas sized exactly to world bounds */}
             <svg viewBox={`${minX} ${minY} ${vw} ${vh}`}
               preserveAspectRatio="xMidYMid meet"
-              style={{ width: "100%", height: "auto", display: "block" }}>
+              style={{ width: "100%", height: "100%", display: "block" }}>
 
               <defs>
                 <radialGradient id="islandGreen">
