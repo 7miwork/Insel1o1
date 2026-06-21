@@ -234,6 +234,12 @@ function IslandView({ course, t, onLessonClick }: {
   const vw = Math.max(maxX - minX, 1);
   const vh = Math.max(maxY - minY, 1);
 
+  // Calculate world bounding box for canvas sizing
+  // Use a generous scale factor: SVG viewBox 0-125 becomes ~1600px canvas height
+  const CANVAS_SCALE = 12; // pixels per SVG unit
+  const canvasWidth = Math.max(vw * CANVAS_SCALE, 1000);
+  const canvasHeight = Math.max(vh * CANVAS_SCALE + 300, 1400); // +300 for bottom padding
+
   return (
     <div className="w-full space-y-4 animate-[islandEnter_0.6s_ease-out]">
       <div className="text-center space-y-1">
@@ -266,8 +272,6 @@ function IslandView({ course, t, onLessonClick }: {
           background: "linear-gradient(145deg, #f5e6c8 0%, #e8d4aa 30%, #f1e3bf 60%, #e6d3aa 100%)",
           border: "3px solid #a08c6a",
           boxShadow: "0 40px 120px rgba(0,0,0,0.6), 0 10px 30px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.15), 3px 3px 0 1px rgba(58,36,22,0.25)",
-          minHeight: "700px",
-          maxHeight: "90vh",
           borderRadius: "1rem",
         }}>
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -280,11 +284,11 @@ function IslandView({ course, t, onLessonClick }: {
         }} />
 
         {!isMobile && (
-          <div style={{ minWidth: "1000px", minHeight: "1400px", padding: "60px 40px 300px 40px" }}>
-            {/* Fixed-size SVG canvas that never clips */}
+          <div style={{ width: `${canvasWidth}px`, minHeight: `${canvasHeight}px`, padding: "60px 40px 300px 40px" }}>
+            {/* SVG canvas sized to world bounds */}
             <svg viewBox={`${minX} ${minY} ${vw} ${vh}`}
               preserveAspectRatio="xMidYMid meet"
-              style={{ width: "100%", height: "100%", display: "block", minHeight: "1000px" }}>
+              style={{ width: "100%", height: "auto", display: "block" }}>
 
               <defs>
                 <radialGradient id="islandGreen">
