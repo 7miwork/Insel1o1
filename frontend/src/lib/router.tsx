@@ -51,17 +51,17 @@ export default function AppRouter() {
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
         <Route
-          path="/login"
+          path="login"
           element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <LoginPage />}
         />
         <Route
-          path="/register"
+          path="register"
           element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <RegisterPage />}
         />
 
         {/* Protected Routes */}
         <Route
-          path="/dashboard"
+          path="dashboard"
           element={
             <ProtectedRoute>
               <DashboardPage />
@@ -69,7 +69,7 @@ export default function AppRouter() {
           }
         />
         <Route
-          path="/courses"
+          path="courses"
           element={
             <ProtectedRoute>
               <CoursesPage />
@@ -77,7 +77,7 @@ export default function AppRouter() {
           }
         />
         <Route
-          path="/archipelago"
+          path="archipelago"
           element={
             <ProtectedRoute>
               <ArchipelagoPage />
@@ -85,7 +85,7 @@ export default function AppRouter() {
           }
         />
         <Route
-          path="/world"
+          path="world"
           element={
             <ProtectedRoute>
               <WorldMapPage />
@@ -93,9 +93,9 @@ export default function AppRouter() {
           }
         />
         {/* Public About Page */}
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="about" element={<AboutPage />} />
         <Route
-          path="/dashboard/parent"
+          path="dashboard/parent"
           element={
             <ProtectedRoute>
               <ParentDashboardPage />
