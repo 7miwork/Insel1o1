@@ -43,7 +43,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./frontend/dist
-          name: github-pages-artifact
 
   deploy:
     environment:
@@ -53,11 +52,6 @@ jobs:
     needs: build
 
     steps:
-      - name: Download artifact
-        uses: actions/download-pages-artifact@v3
-        with:
-          artifact-name: github-pages-artifact
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
