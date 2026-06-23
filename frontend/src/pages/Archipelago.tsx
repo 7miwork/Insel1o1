@@ -1,7 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import GameLayout from '@/components/gamified/GameLayout';
 import ArchipelagoClusterLayout from '@/components/gamified/ArchipelagoClusterLayout';
+import LockedIslandModal from '@/components/gamified/LockedIslandModal';
+import type { LockedResource } from '@/components/gamified/LockedIslandModal';
 import { usei18n } from '@/contexts/i18nContext';
 import { codingSubject, getCourseBySlug, getSubjectBySlug } from '@/data/hierarchy';
 import type { Course, Subject } from '@/data/hierarchy';
@@ -42,6 +44,8 @@ function CourseArchipelagoView({
   subject: Subject;
   onSelectCourse: (slug: string) => void;
 }) {
+  const [lockedTarget, setLockedTarget] = useState<LockedResource | null>(null);
+
   // Calculate overall progress
   const totalCourses = subject.courses.length;
   const completedCourses = subject.courses.filter((c) => c.progress === 100).length;
@@ -51,6 +55,8 @@ function CourseArchipelagoView({
 
   return (
     <GameLayout xp={2450} level={5} streak={12}>
+      {/* Locked course modal */}
+      <LockedIslandModal resource={lockedTarget} onClose={() => setLockedTarget(null)} />
       <div className="space-y-10">
         {/* Page header */}
         <div className="text-center">
@@ -94,6 +100,13 @@ function CourseArchipelagoView({
               key={course.id}
               course={course}
               onClick={() => onSelectCourse(course.slug)}
+              onLockedClick={() =>
+                setLockedTarget({
+                  type: 'course',
+                  title: course.title,
+                  description: course.description,
+                })
+              }
             />
           ))}
         </div>
@@ -106,15 +119,23 @@ function CourseArchipelagoView({
  * A card representing a single course in the archipelago.
  * Shows title, lesson count, progress bar, and current lesson.
  */
-function CourseCard({ course, onClick }: { course: Course; onClick: () => void }) {
+function CourseCard({ course, onClick, onLockedClick }: { course: Course; onClick: () => void; onLockedClick?: () => void }) {
   const isCompleted = course.progress === 100;
   const isLocked = course.progress === 0 && course.id !== 'makecode-block-coding';
   const isActive = !isCompleted && !isLocked;
 
+  const handleClick = () => {
+    if (isLocked && onLockedClick) {
+      onLockedClick();
+      return;
+    }
+    onClick();
+  };
+
   return (
     <button
-      onClick={onClick}
-      disabled={isLocked}
+      type="button"
+      onClick={handleClick}
       className={`group relative overflow-hidden rounded-2xl border-2 p-5 text-left transition-all duration-300 ${
         isCompleted
           ? 'border-[#f0d78c] bg-gradient-to-br from-[#fffbf2] to-white shadow-[0_2px_12px_rgba(251,191,36,0.12)]'

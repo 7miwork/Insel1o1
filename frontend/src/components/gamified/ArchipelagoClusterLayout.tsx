@@ -1,7 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import IslandVisual from './IslandVisual';
+import LockedIslandModal from './LockedIslandModal';
+import type { LockedResource } from './LockedIslandModal';
 import { usei18n } from '@/contexts/i18nContext';
 
 export interface Lesson {
@@ -42,9 +44,11 @@ interface IslandNodeProps {
   courseSlug: string;
   t: (key: string) => string;
   size: 'large' | 'normal';
+  /** Called when a locked island is clicked */
+  onLockedClick?: () => void;
 }
 
-function IslandNode({ lesson, status, courseSlug, t, size }: IslandNodeProps) {
+function IslandNode({ lesson, status, courseSlug, t, size, onLockedClick }: IslandNodeProps) {
   const isLocked = lesson.locked || status === 'locked';
   const isCurrent = status === 'current';
   const isCompleted = status === 'completed';
@@ -52,10 +56,17 @@ function IslandNode({ lesson, status, courseSlug, t, size }: IslandNodeProps) {
   const diameter = size === 'large' ? 'w-36 h-36 sm:w-40 sm:h-40' : 'w-28 h-28 sm:w-32 sm:h-32';
   const visualH = size === 'large' ? 'h-24 sm:h-28' : 'h-20 sm:h-24';
 
+  const handleClick = () => {
+    if (isLocked && onLockedClick) {
+      onLockedClick();
+    }
+  };
+
   return (
     <button
-      disabled={isLocked}
-      className={`relative flex flex-col items-center justify-end ${diameter} rounded-full border-2 transition-all duration-300`}
+      type="button"
+      onClick={handleClick}
+      className={`relative flex flex-col items-center justify-end ${diameter} rounded-full border-2 transition-all duration-300 cursor-pointer`}
       style={{
         borderColor: isCompleted ? '#f0d78c' : isCurrent ? '#8fd6ce' : isLocked ? '#e2e8f0' : '#b8ddd5',
         background: isCompleted
@@ -133,8 +144,13 @@ const COORDS: { [key: number]: { x: number; y: number } } = {
 };
 
 export default function ArchipelagoClusterLayout({ lessons, courseSlug, t }: ArchipelagoClusterLayoutProps) {
+  const [lockedTarget, setLockedTarget] = useState<LockedResource | null>(null);
+
   return (
     <div className="relative mx-auto h-[760px] w-full max-w-3xl sm:h-[800px]">
+      {/* Locked island modal */}
+      <LockedIslandModal resource={lockedTarget} onClose={() => setLockedTarget(null)} />
+
       {/* Center anchor at 50% 50% */}
       <div className="absolute left-1/2 top-1/2 h-0 w-0" />
 
@@ -159,6 +175,12 @@ export default function ArchipelagoClusterLayout({ lessons, courseSlug, t }: Arc
               courseSlug={courseSlug}
               t={t}
               size={isCenter ? 'large' : 'normal'}
+              onLockedClick={() =>
+                setLockedTarget({
+                  type: 'lesson',
+                  title: lesson.name,
+                })
+              }
             />
           </div>
         );
