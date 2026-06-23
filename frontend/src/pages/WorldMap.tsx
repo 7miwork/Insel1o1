@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import GameLayout from '@/components/gamified/GameLayout';
 import { usei18n } from '@/contexts/i18nContext';
 import { codingSubject, futureSubjects } from '@/data/hierarchy';
+import FogOfDiscovery from '@/components/gamified/FogOfDiscovery';
 import type { FutureSubject } from '@/data/hierarchy';
 
 /**
@@ -154,49 +155,51 @@ export default function WorldMapPage() {
             </div>
 
             {/* Fog container — mimics distant archipelago in mist */}
-            <div className="relative overflow-hidden rounded-2xl border border-[#c5d8d5]/60 bg-gradient-to-b from-[#e2efed]/80 via-[#dae8e5]/70 to-[#ccdfdb]/80 backdrop-blur-[2px]">
-              {/* Fog overlay */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/20" />
+            <FogOfDiscovery state="unknown" tooltip="Uncharted waters" className="rounded-2xl">
+              <div className="relative overflow-hidden rounded-2xl border border-[#c5d8d5]/60 bg-gradient-to-b from-[#e2efed]/80 via-[#dae8e5]/70 to-[#ccdfdb]/80 backdrop-blur-[2px]">
+                {/* Fog overlay */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/20" />
 
-              {/* Fog wave pattern */}
-              <div className="pointer-events-none absolute inset-0 opacity-[0.12]">
-                <svg className="h-full w-full" aria-hidden="true">
-                  <defs>
-                    <pattern id="fog-waves" x="0" y="0" width="100" height="20" patternUnits="userSpaceOnUse">
-                      <path d="M0,10 Q25,2 50,10 Q75,18 100,10" stroke="#94a3b8" strokeWidth="1.2" fill="none" opacity="0.6"/>
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#fog-waves)" />
-                </svg>
-              </div>
+                {/* Fog wave pattern */}
+                <div className="pointer-events-none absolute inset-0 opacity-[0.12]">
+                  <svg className="h-full w-full" aria-hidden="true">
+                    <defs>
+                      <pattern id="fog-waves" x="0" y="0" width="100" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M0,10 Q25,2 50,10 Q75,18 100,10" stroke="#94a3b8" strokeWidth="1.2" fill="none" opacity="0.6"/>
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#fog-waves)" />
+                  </svg>
+                </div>
 
-              {/* Mist particles */}
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute left-[10%] top-[15%] h-24 w-48 rounded-full bg-white/40 blur-3xl" />
-                <div className="absolute right-[20%] bottom-[10%] h-32 w-40 rounded-full bg-white/30 blur-3xl" />
-                <div className="absolute left-[40%] top-[40%] h-20 w-36 rounded-full bg-white/35 blur-3xl" />
-              </div>
+                {/* Mist particles */}
+                <div className="pointer-events-none absolute inset-0">
+                  <div className="absolute left-[10%] top-[15%] h-24 w-48 rounded-full bg-white/40 blur-3xl" />
+                  <div className="absolute right-[20%] bottom-[10%] h-32 w-40 rounded-full bg-white/30 blur-3xl" />
+                  <div className="absolute left-[40%] top-[40%] h-20 w-36 rounded-full bg-white/35 blur-3xl" />
+                </div>
 
-              <div className="relative z-10 grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 md:p-5">
-                {futureSubjects.map((subject) => (
-                  <div
-                    key={subject.id}
-                    className="relative flex items-center gap-3 rounded-xl border border-[#c5d8d5]/50 bg-white/50 px-4 py-3.5 opacity-60 select-none backdrop-blur-sm"
-                  >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#c5d8d5]/40 bg-white/60 text-lg opacity-60">
-                      {subject.icon}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-sm font-semibold text-[#5a7a78]">{subject.title}</h3>
-                      <p className="text-xs text-[#7a9a98] truncate">{subject.description}</p>
+                <div className="relative z-10 grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 md:p-5">
+                  {futureSubjects.map((subject) => (
+                    <div
+                      key={subject.id}
+                      className="relative flex items-center gap-3 rounded-xl border border-[#c5d8d5]/50 bg-white/50 px-4 py-3.5 select-none backdrop-blur-sm"
+                    >
+                      <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#c5d8d5]/40 bg-white/60 text-lg opacity-60">
+                        {subject.icon}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-sm font-semibold text-[#5a7a78]">{subject.title}</h3>
+                        <p className="text-xs text-[#7a9a98] truncate">{subject.description}</p>
+                      </div>
+                      <span className="flex-shrink-0 rounded-full border border-[#c5d8d5]/40 bg-white/60 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-[#7a9a98]">
+                        Coming Soon
+                      </span>
                     </div>
-                    <span className="flex-shrink-0 rounded-full border border-[#c5d8d5]/40 bg-white/60 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-[#7a9a98]">
-                      Coming Soon
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            </FogOfDiscovery>
           </div>
         </div>
 

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '@/components/professional/DashboardLayout';
 import { usei18n } from '@/contexts/i18nContext';
 import { codingSubject, futureSubjects } from '@/data/hierarchy';
+import FogOfDiscovery from '@/components/gamified/FogOfDiscovery';
 import type { FutureSubject } from '@/data/hierarchy';
 
 /**
