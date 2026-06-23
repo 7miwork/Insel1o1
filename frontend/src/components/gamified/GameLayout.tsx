@@ -3,7 +3,7 @@
 import React, { ReactNode } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { usei18n } from '@/contexts/i18nContext';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 interface GameLayoutProps {
   children: ReactNode;
