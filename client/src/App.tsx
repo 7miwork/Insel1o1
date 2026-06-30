@@ -39,7 +39,9 @@ function AppRouter() {
       <Route path={"/dashboard"} component={DashboardRouter} />
       <Route path={"/courses"} component={Courses} />
       <Route path={"/world"} component={WorldMap} />
-      <Route path={"/archipelago"} component={ArchipelagoMap} />
+      <Route path={"/world/:subjectId"} component={WorldMap} />
+      <Route path={"/world/:subjectId/:archipelagoId"} component={WorldMap} />
+      <Route path={"/world/:subjectId/:archipelagoId/:islandId"} component={WorldMap} />
       <Route path={"/lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/minecraft-lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/school-dashboard"} component={SchoolDashboard} />
