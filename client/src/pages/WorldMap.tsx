@@ -163,7 +163,13 @@ export default function WorldMap() {
   }, [parseHash]);
 
   const currentSubject = useMemo(() => SUBJECTS.find(s => s.id === viewState.subjectId), [viewState.subjectId]);
-  const currentArchipelago = useMemo(() => currentSubject ? programmingArchipelago : null, [currentSubject]);
+  const currentArchipelago = useMemo(() => {
+    if (!viewState.archipelagoId || !currentSubject) return null;
+    const arch = programmingArchipelago;
+    // Check if this archipelagoId matches any course
+    const course = arch.courses.find(c => c.id === viewState.archipelagoId);
+    return course ? arch : null;
+  }, [viewState.archipelagoId, currentSubject]);
 
   // World view
   const goToSubject = useCallback((subject: SubjectRegion, e: React.MouseEvent) => {
@@ -177,7 +183,6 @@ export default function WorldMap() {
     setAnimDirection("forward");
     setIsAnimating(true);
     
-    // Build new hash
     const newHash = `#/world/${subject.id}`;
     if (window.location.hash !== newHash) {
       window.location.hash = newHash;
@@ -186,7 +191,7 @@ export default function WorldMap() {
     setTimeout(() => setIsAnimating(false), 700);
   }, []);
 
-  const goToArchipelago = useCallback((arch: any, e: React.MouseEvent) => {
+  const goToArchipelago = useCallback((course: ArchipelagoCourse, e: React.MouseEvent) => {
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const origin = {
       x: rect.left + rect.width / 2,
@@ -196,7 +201,7 @@ export default function WorldMap() {
     setAnimDirection("forward");
     setIsAnimating(true);
     
-    const newHash = `#/world/${viewState.subjectId}/${arch.id}`;
+    const newHash = `#/world/${viewState.subjectId}/${course.id}`;
     if (window.location.hash !== newHash) {
       window.location.hash = newHash;
     }
@@ -233,9 +238,9 @@ export default function WorldMap() {
     if (parts.length <= 2) {
       window.location.hash = "#/world";
     } else if (parts.length === 3) {
-      window.location.hash = "#/world";
-    } else if (parts.length === 4) {
       window.location.hash = `#/world/${parts[1]}`;
+    } else if (parts.length === 4) {
+      window.location.hash = `#/world/${parts[1]}/${parts[2]}`;
     } else {
       window.location.hash = `#/world/${parts[1]}/${parts[2]}`;
     }
@@ -244,29 +249,6 @@ export default function WorldMap() {
   }, []);
 
   const canGoBack = viewState.level !== "world";
-
-  // Calculate animation transform
-  const getMapTransform = useCallback(() => {
-    if (!isAnimating || !animOrigin) {
-      if (viewState.level === "world") return { scale: 1, x: 0, y: 0 };
-      if (viewState.level === "subject" && currentSubject) {
-        const mapRect = document.getElementById("world-map-container")?.getBoundingClientRect();
-        if (!mapRect) return { scale: 1.5, x: 0, y: 0 };
-        const originX = currentSubject.x;
-        const originY = currentSubject.y;
-        const scale = 2.5;
-        return { scale, x: 0, y: 0 };
-      }
-      return { scale: 1, x: 0, y: 0 };
-    }
-    
-    if (animDirection === "forward") {
-      return { scale: 2.8, x: 0, y: 0 };
-    }
-    return { scale: 1, x: 0, y: 0 };
-  }, [isAnimating, animOrigin, animDirection, viewState.level, currentSubject]);
-
-  const mapTransform = getMapTransform();
 
   return (
     <div className="min-h-screen relative"
@@ -361,8 +343,6 @@ export default function WorldMap() {
                       <button
                         onClick={(e) => goToSubject(subject, e)}
                         disabled={!subject.available}
-                        onMouseEnter={() => {}}
-                        onMouseLeave={() => {}}
                         className={`relative flex flex-col items-center ${subject.available ? "cursor-pointer group" : "cursor-default"}`}>
                         {/* Fog for locked regions */}
                         {!subject.available && (
@@ -428,8 +408,8 @@ export default function WorldMap() {
             </motion.div>
           )}
 
-          {/* SUBJECT / ARCHIPELAGO VIEW */}
-          {(viewState.level === "subject" || viewState.level === "archipelago") && currentSubject && (
+          {/* SUBJECT VIEW - show list of archipelagos */}
+          {viewState.level === "subject" && currentSubject && (
             <motion.div
               key="subject"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -464,23 +444,21 @@ export default function WorldMap() {
                   <CompassRose />
                 </div>
                 
-                {/* Show courses if only subject level, or allow clicking course to go deeper */}
-                {currentArchipelago && currentArchipelago.courses.map((course, idx) => (
+                {programmingArchipelago.courses.map((course, idx) => (
                   <motion.button
                     key={course.id}
                     onClick={(e) => goToArchipelago(course, e)}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer focus:outline-none group"
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer focus:outline-none"
                     style={{ left: `${25 + idx * 50}%`, top: `${50}%` }}
                     whileHover={{ scale: 1.15 }}
                     whileTap={{ scale: 0.95 }}>
-                    <div className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center transition-all`}
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center"
                       style={{
                         background: "radial-gradient(circle, #9a8a7a 0%, #7a6a5a 50%, #5a4a3a 100%)",
                         border: "2px solid #a08c6a",
                         boxShadow: "0 8px 24px rgba(90,56,33,0.3)",
                       }}>
                       <span className="text-2xl sm:text-3xl">{course.emoji}</span>
-                      {/* Small decorative trees */}
                       <div className="absolute -bottom-1 left-2 w-1.5 h-2 rounded-full" style={{ background: "#7fa35d" }} />
                       <div className="absolute -bottom-1 right-3 w-1 h-1.5 rounded-full" style={{ background: "#6b8e4e" }} />
                     </div>
@@ -495,17 +473,99 @@ export default function WorldMap() {
                   </motion.button>
                 ))}
               </div>
-
-              {/* Legend */}
-              <div className="flex items-center justify-center gap-6 text-xs flex-wrap"
-                style={{ color: "rgba(184,164,138,0.7)" }}>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-3 h-3 rounded-full" style={{ background: "#9a8a7a", border: "1px solid #a08c6a" }} />
-                  <span>Available Archipelago</span>
-                </div>
-              </div>
             </motion.div>
           )}
+
+          {/* ARCHIPELAGO VIEW - show individual lesson islands */}
+          {viewState.level === "archipelago" && currentArchipelago && (() => {
+            const course = currentArchipelago.courses[0];
+            if (!course) return null;
+            
+            return (
+              <motion.div
+                key="archipelago"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.1 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="space-y-4">
+              {/* Archipelago header */}
+              <div className="text-center space-y-2">
+                <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full text-xs"
+                  style={{ background: "rgba(44,24,16,0.8)", border: "1px solid rgba(107,66,38,0.4)", color: "#b8a48a" }}>
+                  <span className="text-lg">{course.emoji}</span>
+                  <span>Archipelago Overview</span>
+                </div>
+                <h2 className="text-2xl font-bold tracking-tight" style={{ color: "#f1e3bf" }}>
+                  {t(course.titleKey)}
+                </h2>
+                <p className="text-sm max-w-lg mx-auto" style={{ color: "#b8a48a" }}>
+                  {course.lessons.length} lessons to discover
+                </p>
+              </div>
+
+              {/* Lesson Islands */}
+              <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] rounded-lg overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, #d8c49a 0%, #e6d3aa 20%, #f1e3bf 50%, #e6d3aa 80%, #d8c49a 100%)",
+                  border: "3px solid #a08c6a",
+                  boxShadow: "0 12px 40px rgba(0,0,0,0.7), 0 4px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.15)",
+                }}>
+                <SeaWaves />
+                <div className="absolute top-3 right-3 pointer-events-none">
+                  <CompassRose />
+                </div>
+                
+                {/* Lesson island buttons */}
+                {course.lessons.map((lesson, idx) => (
+                  <motion.button
+                    key={lesson.id}
+                    onClick={(e) => goToIsland(lesson.id, e)}
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer focus:outline-none"
+                    style={{ 
+                      left: `${20 + (idx % 4) * 20}%`,
+                      top: `${20 + Math.floor(idx / 4) * 25}%`
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}>
+                    <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center"
+                      style={{
+                        background: lesson.available !== false 
+                          ? "radial-gradient(circle, #84b8cb 0%, #6ea7bb 50%, #5a8a9e 100%)"
+                          : "radial-gradient(circle, #9a8a7a 0%, #7a6a5a 50%, #5a4a3a 100%)",
+                        border: "2px solid #a08c6a",
+                        boxShadow: "0 4px 16px rgba(90,56,33,0.3)",
+                        opacity: lesson.available !== false ? 1 : 0.5,
+                      }}>
+                      <span className="text-xl sm:text-2xl">{lesson.emoji || "🏝️"}</span>
+                      {!lesson.available && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Lock className="w-4 h-4" style={{ color: "#7c5e3a" }} />
+                        </div>
+                      )}
+                    </div>
+                    <div className="mt-1 text-center max-w-[100px]">
+                      <p className="text-[10px] sm:text-xs font-medium truncate" style={{ color: "#2c1810" }}>
+                        {lesson.titleKey ? t(lesson.titleKey) : lesson.title}
+                      </p>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+
+              {/* Back button */}
+              <div className="flex justify-center">
+                <button 
+                  onClick={() => window.location.hash = `#/world/${viewState.subjectId}`}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors"
+                  style={{ background: "rgba(44,24,16,0.8)", color: "#b8a48a" }}>
+                  <ChevronLeft className="w-4 h-4" />
+                  Back to {currentSubject.name}
+                </button>
+              </div>
+            </motion.div>
+              );
+          })()}
 
           {/* ISLAND DETAIL VIEW */}
           {viewState.level === "island" && currentSubject && currentArchipelago && (() => {
