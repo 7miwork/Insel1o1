@@ -95,7 +95,7 @@ export default function LessonPage() {
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950 dark:to-blue-950 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Lesson not found</h1>
-          <Button onClick={() => setLocation("/archipelago")}>Back to Archipelago</Button>
+           <Button onClick={() => setLocation("/world")}>Back to World Map</Button>
         </div>
       </div>
     );
@@ -124,7 +124,7 @@ export default function LessonPage() {
   };
 
   const handleBack = () => {
-    setLocation("/archipelago");
+    setLocation("/world");
   };
 
   return (
@@ -430,7 +430,7 @@ export default function LessonPage() {
 
             {/* Navigation Button */}
             <Button
-              onClick={() => setLocation("/archipelago")}
+              onClick={() => setLocation("/world")}
               className="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white py-6 text-lg font-bold shadow-lg transform hover:scale-105 transition-all"
             >
               <Wind className="w-5 h-5 mr-2" />

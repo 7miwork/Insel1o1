@@ -91,7 +91,7 @@ export const MinecraftLessonPage: React.FC = () => {
           </p>
           <button
             type="button"
-            onClick={() => setLocation('/archipelago')}
+            onClick={() => setLocation('/world')}
             className="btn btn-primary btn-md mt-5"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -168,12 +168,12 @@ export const MinecraftLessonPage: React.FC = () => {
         />
 
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-          <button
-            type="button"
-            onClick={() => setLocation('/archipelago')}
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 hover:text-white mb-6 transition-colors"
-            aria-label={t("lesson.backToArchipelago")}
-          >
+        <button
+          type="button"
+          onClick={() => setLocation('/world')}
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 hover:text-white mb-6 transition-colors"
+          aria-label={t("lesson.backToArchipelago")}
+        >
             <ChevronLeft className="w-4 h-4" />
             {t("lesson.backToArchipelago")}
           </button>
@@ -433,7 +433,7 @@ export const MinecraftLessonPage: React.FC = () => {
             title={t("lesson.lessonComplete")}
             description={t("lesson.lessonCompleteDesc")}
             unlocks={lesson.unlocks}
-            onBackToMap={() => setLocation("/archipelago")}
+              onBackToMap={() => setLocation("/world")}
             onContinue={() =>
               lesson.unlocks?.[0] && setLocation(`/lesson/${lesson.unlocks[0]}`)
             }
@@ -446,7 +446,7 @@ export const MinecraftLessonPage: React.FC = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-wrap items-center justify-between gap-3">
           <button
             type="button"
-            onClick={() => setLocation("/archipelago")}
+            onClick={() => setLocation("/world")}
             className="btn btn-outline btn-md"
           >
             <ChevronLeft className="w-4 h-4" />

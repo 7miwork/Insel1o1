@@ -147,7 +147,7 @@ export default function StudentDashboard() {
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
         {/* Primary CTA — Continue Adventure */}
         <button
-          onClick={() => setLocation("/archipelago")}
+          onClick={() => setLocation("/world")}
           className="w-full mb-6 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 text-lg shadow-md transition-colors"
         >
           <Wind className="h-6 w-6" />
@@ -276,7 +276,7 @@ export default function StudentDashboard() {
 
         {/* Quick Links */}
         <div className="mt-6 flex gap-3 justify-center flex-wrap">
-          <button onClick={() => setLocation("/archipelago")} className="flex items-center gap-1.5 text-sm text-slate-600 hover:text-teal-600 transition-colors">
+          <button onClick={() => setLocation("/world")} className="flex items-center gap-1.5 text-sm text-slate-600 hover:text-teal-600 transition-colors">
             <MapIcon className="h-4 w-4" /> Archipelago
           </button>
           <button onClick={() => setLocation("/progress")} className="flex items-center gap-1.5 text-sm text-slate-600 hover:text-emerald-600 transition-colors">
