@@ -4,8 +4,8 @@ import path from "node:path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  // 🔥 IMPORTANT for GitHub Pages
-  base: "/Insel1o1/",
+  // 🔥 IMPORTANT for GitHub Pages with custom domain
+  base: "/",
 
   plugins: [
     react(),
