@@ -32,26 +32,13 @@ jobs:
         env:
           VITE_BASE: "/"
 
-      - name: Create .htaccess for SPA fallback
-        shell: bash
-        run: |
-          cat > dist/.htaccess << 'EOF'
-          <IfModule mod_rewrite.c>
-            RewriteEngine On
-            RewriteBase /
-            RewriteCond %{REQUEST_FILENAME} -f [OR]
-            RewriteCond %{REQUEST_FILENAME} -d
-            RewriteRule ^ - [L]
-            RewriteRule ^ /index.html [L]
-          </IfModule>
-          EOF
-          echo ".htaccess created in dist/"
-
       - name: Verify build output
         run: |
           ls -la dist/
-          echo "---"
+          echo "--- index.html ---"
           head -5 dist/index.html
+          echo "--- .htaccess ---"
+          cat dist/.htaccess
 
       - name: Deploy to Hostinger via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
