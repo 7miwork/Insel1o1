@@ -34,11 +34,13 @@ jobs:
 
       - name: Verify build output
         run: |
+          echo "=== Build output ==="
           ls -la dist/
-          echo "--- index.html ---"
+          echo "--- index.html first lines ---"
           head -5 dist/index.html
-          echo "--- .htaccess ---"
-          cat dist/.htaccess
+          echo "--- index.html last lines ---"
+          tail -5 dist/index.html
+          echo "=== Verification complete ==="
 
       - name: Deploy to Hostinger via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
@@ -55,4 +57,5 @@ jobs:
             **/.git*/**
             **/node_modules/**
           delete-existing: true
+          dangerous-clean-slate: true
           timeout: 180
