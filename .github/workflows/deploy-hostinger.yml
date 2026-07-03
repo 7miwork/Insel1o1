@@ -1,4 +1,4 @@
-name: Deploy to Hostinger
+name: Deploy to Hostinger (FTP)
 
 on:
   push:
@@ -27,13 +27,33 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build for Hostinger (root domain)
+      - name: Build for Hostinger (root domain, base: /)
         run: pnpm run build:hostinger
+        env:
+          VITE_BASE: "/"
 
-      - name: Copy .htaccess to build output
-        run: cp public/.htaccess dist/.htaccess
+      - name: Create .htaccess for SPA fallback
+        shell: bash
+        run: |
+          cat > dist/.htaccess << 'EOF'
+          <IfModule mod_rewrite.c>
+            RewriteEngine On
+            RewriteBase /
+            RewriteCond %{REQUEST_FILENAME} -f [OR]
+            RewriteCond %{REQUEST_FILENAME} -d
+            RewriteRule ^ - [L]
+            RewriteRule ^ /index.html [L]
+          </IfModule>
+          EOF
+          echo ".htaccess created in dist/"
 
-      - name: Deploy to Hostinger via FTP
+      - name: Verify build output
+        run: |
+          ls -la dist/
+          echo "---"
+          head -5 dist/index.html
+
+      - name: Deploy to Hostinger via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.HOSTINGER_FTP_SERVER }}
@@ -42,11 +62,10 @@ jobs:
           port: 21
           protocol: ftps
           local-dir: dist/
-          server-dir: public_html/
+          server-dir: /public_html/
           exclude: |
-            .git*
-            .gitignore
-            node_modules/**
-            README.md
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
           delete-existing: true
-          timeout: 120
+          timeout: 180

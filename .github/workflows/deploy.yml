@@ -35,8 +35,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build project
+      - name: Build project (GitHub Pages, base: /Insel1o1/)
         run: pnpm run build:web
+        env:
+          VITE_BASE: "/Insel1o1/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
