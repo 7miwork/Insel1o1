@@ -4,7 +4,7 @@ import path from "node:path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: process.env.VITE_BASE || "/Insel1o1/",
+  base: process.env.VITE_BASE || "/",
 
   plugins: [
     react(),
