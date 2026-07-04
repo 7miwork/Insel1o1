@@ -308,11 +308,11 @@ function IslandView({ course, t, onLessonClick }: {
       {/* ── SCROLLABLE CANVAS: large parchment area, no clipping ── */}
       <div className="relative w-full overflow-auto"
         style={{
-          background: "radial-gradient(circle at 18% 12%, #f8e6ce 0%, #e4c49f 28%, #c59a6c 54%, #94623c 100%)",
+          background: "linear-gradient(180deg, #f3e6cc 0%, #dec5a0 12%, transparent 26%), radial-gradient(circle at 50% 46%, #dff4f7 0%, #b9d7e0 26%, #7ea7b5 52%, #436e82 100%)",
           border: "4px solid rgba(95,61,36,0.96)",
           boxShadow: "inset 0 0 100px rgba(0,0,0,0.18), 0 35px 100px rgba(0,0,0,0.38)",
           borderRadius: "1rem",
-          backgroundImage: "radial-gradient(circle at 18% 14%, rgba(255,255,255,0.16) 0%, transparent 14%), radial-gradient(circle at 82% 72%, rgba(255,255,255,0.09) 0%, transparent 20%), repeating-linear-gradient(90deg, transparent, transparent 9px, rgba(0,0,0,0.03) 9px, rgba(0,0,0,0.03) 11px)",
+          backgroundImage: "radial-gradient(circle at 18% 14%, rgba(255,255,255,0.16) 0%, transparent 14%), radial-gradient(circle at 82% 72%, rgba(255,255,255,0.09) 0%, transparent 20%), repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px), repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px)",
         }}>
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='250' height='250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E\")", backgroundSize: "220px 220px" }} />
