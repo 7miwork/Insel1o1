@@ -37,11 +37,11 @@
 </content>
 
 <write_to_file>
-<path>Insel1o1/frontend/public/assets/images/islands/python/metadata.json</path>
+<path>I-Land1o1/frontend/public/assets/images/islands/python/metadata.json</path>
 <content>{"course":"python","displayName":"Python Island","description":"Master the Python programming language","totalIslands":2,"colorPalette":{"water":"#6bb7c9","sand":"#e8d3a2","accent":"#306844","highlight":"#6dd5ed"},"islands":[{"id":1,"file":"island-1.svg","title":"Terminal Bay","lessonIndex":0},{"id":2,"file":"island-2.svg","title":"Data Atoll","lessonIndex":1}]}</content>
 
 <write_to_file>
-<path>Insel1o1/frontend/public/assets/images/islands/computer-science/island-1.svg</path>
+<path>I-Land1o1/frontend/public/assets/images/islands/computer-science/island-1.svg</path>
 <content><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
   <defs>
     <linearGradient id="bg-cs" x1="0" y1="0" x2="0" y2="1">
@@ -80,5 +80,5 @@
 </content>
 
 <write_to_file>
-<path>Insel1o1/frontend/public/assets/images/islands/scratch/metadata.json</path>
+<path>I-Land1o1/frontend/public/assets/images/islands/scratch/metadata.json</path>
 <content>{"course":"scratch","displayName":"Scratch Islands","description":"Build creative projects with visual block programming","totalIslands":1,"colorPalette":{"water":"#6bb7c9","sand":"#e8d3a2","accent":"#f59e0b","highlight":"#fbbf24"},"islands":[{"id":1,"file":"island-1.svg","title":"Creativity Cove","lessonIndex":0}]}
