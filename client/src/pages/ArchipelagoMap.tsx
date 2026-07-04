@@ -320,6 +320,32 @@ function IslandView({ course, t, onLessonClick }: {
           style={{ background: "rgba(247,235,210,0.90)", boxShadow: "inset 0 0 28px rgba(110,78,50,0.16)" }} />
         <div className="absolute inset-5 rounded-[1.25rem] pointer-events-none"
           style={{ background: "linear-gradient(180deg, rgba(255,250,238,0.94) 0%, rgba(243,226,191,0.94) 38%, rgba(229,206,164,0.90) 100%)" }} />
+        {/* Decorative parchment inset SVG */}
+        <svg className="absolute inset-10 pointer-events-none" viewBox="0 0 100 60" preserveAspectRatio="none" style={{ mixBlendMode: 'multiply', opacity: 0.96 }}>
+          <defs>
+            <linearGradient id="parchGrad2" x1="0%" x2="0%" y1="0%" y2="100%">
+              <stop offset="0%" stopColor="#fffaf0" stopOpacity="0.98" />
+              <stop offset="100%" stopColor="#efe0bf" stopOpacity="0.95" />
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="100" height="60" rx="3" fill="url(#parchGrad2)" stroke="#b89f7e" strokeWidth="0.7" />
+          <g opacity="0.16" stroke="#876543" strokeWidth="0.22">
+            <path d="M6,8 C20,6 30,10 46,8 C62,6 74,10 94,8" fill="none" />
+            <path d="M6,20 C22,18 34,22 50,20 C66,18 78,22 94,20" fill="none" />
+            <path d="M6,34 C22,32 34,36 50,34 C66,32 78,36 94,34" fill="none" />
+          </g>
+          <g stroke="#6b4d30" strokeWidth="0.16" opacity="0.14">
+            <path d="M12,6 L88,54" strokeDasharray="4,6" fill="none" />
+            <path d="M12,54 L88,6" strokeDasharray="4,6" fill="none" />
+          </g>
+          <g transform="translate(80,46) scale(0.8)" opacity="0.9">
+            <circle cx="8" cy="8" r="8" fill="none" stroke="#5a3f2a" strokeWidth="0.7" />
+            <g transform="translate(8,8)">
+              <line x1="0" y1="-6" x2="1.6" y2="0" stroke="#2c1810" strokeWidth="0.9" />
+              <line x1="0" y1="6" x2="-1" y2="0" stroke="#2c1810" strokeWidth="0.6" />
+            </g>
+          </g>
+        </svg>
         <div className="absolute inset-0 pointer-events-none" style={{
           background: "radial-gradient(circle at 45% 48%, rgba(230,220,190,0.24) 0%, rgba(210,180,140,0.16) 28%, transparent 68%)"
         }} />

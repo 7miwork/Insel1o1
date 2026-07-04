@@ -320,6 +320,33 @@ export default function WorldMap() {
                   style={{ background: "linear-gradient(180deg, rgba(255,250,238,0.94) 0%, rgba(244,228,199,0.94) 34%, rgba(232,206,168,0.92) 100%)" }} />
                 <div className="absolute inset-8 rounded-[1.25rem] opacity-[0.08] pointer-events-none"
                   style={{ backgroundImage: "linear-gradient(90deg, rgba(0,0,0,0.03) 0%, transparent 1px, transparent 100%), linear-gradient(rgba(0,0,0,0.03) 0%, transparent 1px, transparent 100%)", backgroundSize: "50px 50px" }} />
+                {/* Decorative parchment inset SVG: torn edge + rhumb lines + small compass */}
+                <svg className="absolute inset-10 pointer-events-none" viewBox="0 0 100 60" preserveAspectRatio="none" style={{ mixBlendMode: 'multiply', opacity: 0.95 }}>
+                  <defs>
+                    <linearGradient id="parchGrad" x1="0%" x2="0%" y1="0%" y2="100%">
+                      <stop offset="0%" stopColor="#fffaf0" stopOpacity="0.98" />
+                      <stop offset="100%" stopColor="#efe0bf" stopOpacity="0.95" />
+                    </linearGradient>
+                    <filter id="grain"><feTurbulence baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0.2"/></filter>
+                  </defs>
+                  <rect x="0" y="0" width="100" height="60" rx="3" fill="url(#parchGrad)" stroke="#b89f7e" strokeWidth="0.8" />
+                  <g opacity="0.18" stroke="#876543" strokeWidth="0.25">
+                    <path d="M6,8 C20,6 30,10 46,8 C62,6 74,10 94,8" fill="none" />
+                    <path d="M6,20 C22,18 34,22 50,20 C66,18 78,22 94,20" fill="none" />
+                    <path d="M6,34 C22,32 34,36 50,34 C66,32 78,36 94,34" fill="none" />
+                  </g>
+                  <g stroke="#6b4d30" strokeWidth="0.18" opacity="0.16">
+                    <path d="M12,6 L88,54" strokeDasharray="4,6" fill="none" />
+                    <path d="M12,54 L88,6" strokeDasharray="4,6" fill="none" />
+                  </g>
+                  <g transform="translate(82,46) scale(0.8)" opacity="0.9">
+                    <circle cx="8" cy="8" r="8" fill="none" stroke="#5a3f2a" strokeWidth="0.7" />
+                    <g transform="translate(8,8)">
+                      <line x1="0" y1="-6" x2="1.6" y2="0" stroke="#2c1810" strokeWidth="0.9" />
+                      <line x1="0" y1="6" x2="-1" y2="0" stroke="#2c1810" strokeWidth="0.6" />
+                    </g>
+                  </g>
+                </svg>
                 <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
                   style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E\")", backgroundSize: "200px 200px" }} />
                 <div className="absolute inset-0 pointer-events-none"
