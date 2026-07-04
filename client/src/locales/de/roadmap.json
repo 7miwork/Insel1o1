@@ -1,7 +1,7 @@
-{
+﻿{
   "roadmap": {
     "title": "Produkt-Roadmap",
-    "subtitle": "Folgen Sie der laufenden Entwicklung von Insel1o1 in Echtzeit.",
+    "subtitle": "Folgen Sie der laufenden Entwicklung von I-Land1o1 in Echtzeit.",
     "overallProgress": "Gesamtfortschritt",
     "completed": "abgeschlossen",
     "inProgress": "in Bearbeitung",
@@ -11,6 +11,6 @@
     "statusPlanned": "Geplant",
     "updatedNote": "Wird kontinuierlich mit jedem bedeutenden Commit aktualisiert.",
     "back": "Zurück",
-    "appName": "Insel 1o1"
+    "appName": "I-Land1o1"
   }
 }

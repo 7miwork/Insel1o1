@@ -1,10 +1,10 @@
-# Contributing to Insel 1o1
+﻿# Contributing to I-Land1o1
 
-Thank you for your interest in contributing to Insel 1o1.
+Thank you for your interest in contributing to I-Land1o1.
 
 ## Project Vision
 
-Insel 1o1 is a multilingual educational platform that combines modern learning with gamification and exploration.
+I-Land1o1 is a multilingual educational platform that combines modern learning with gamification and exploration.
 
 ## Areas for Contribution
 

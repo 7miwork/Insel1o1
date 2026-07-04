@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { useLocation } from "wouter";
 import {
   Home,
@@ -64,7 +64,7 @@ const USERS = [
   { id: "u3", name: "Michael Parent", email: "michael@parent.com", role: "parent", status: "active", lastLogin: "2 hours ago", school: "—" },
   { id: "u4", name: "Dr. Sarah Johnson", email: "sarah@riverside.edu", role: "teacher", status: "active", lastLogin: "3 hours ago", school: "Sunrise School" },
   { id: "u5", name: "Lukas Schafer", email: "lukas@student.com", role: "student", status: "inactive", lastLogin: "3 weeks ago", school: "Sunrise School" },
-  { id: "u6", name: "Admin User", email: "admin@insel1o1.com", role: "admin", status: "active", lastLogin: "5 min ago", school: "—" },
+  { id: "u6", name: "Admin User", email: "admin@I-Land1o1.com", role: "admin", status: "active", lastLogin: "5 min ago", school: "—" },
   { id: "u7", name: "Mia Wagner", email: "mia@student.com", role: "student", status: "active", lastLogin: "30 min ago", school: "Nordsee Gymnasium" },
   { id: "u8", name: "Hans Mueller", email: "hans@parent.com", role: "parent", status: "active", lastLogin: "1 day ago", school: "—" },
 ];

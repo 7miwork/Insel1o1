@@ -1,4 +1,4 @@
-# Deploy auf Hostinger Static Hosting (public_html)
+﻿# Deploy auf Hostinger Static Hosting (public_html)
 
 ## Wichtiger Hinweis zum Backend
 
@@ -11,7 +11,7 @@ Die gute Nachricht: Der Express-Server macht in diesem Projekt fast nichts auße
 ## Build für Hostinger erstellen
 
 ```bash
-cd Insel1o1
+cd I-Land1o1
 pnpm run build:hostinger
 ```
 

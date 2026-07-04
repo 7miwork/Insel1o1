@@ -1,6 +1,6 @@
-# Insel 1o1 Frontend Application
+﻿# I-Land1o1 Frontend Application
 
-This is the frontend application for the Insel 1o1 EdTech Platform, built with React, TypeScript, TailwindCSS, and Vite.
+This is the frontend application for the I-Land1o1 EdTech Platform, built with React, TypeScript, TailwindCSS, and Vite.
 
 ## Project Structure
 
@@ -166,3 +166,4 @@ MIT
 **Last Updated**: March 2026
 
 **Status**: Development Phase 1 - Core Scaffold Complete
+

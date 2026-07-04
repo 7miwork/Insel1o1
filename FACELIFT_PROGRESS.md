@@ -1,4 +1,4 @@
-# Insel 1o1 UI/UX Facelift - Fortschritt
+﻿# I-Land1o1 UI/UX Facelift - Fortschritt
 
 ## Phase 1: Analyse & Audit
 - [x] Bestehende Struktur analysiert
@@ -61,3 +61,4 @@
 - [ ] Errors beheben
 - [ ] Git commit
 - [ ] Git push
+

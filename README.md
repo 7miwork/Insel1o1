@@ -1,16 +1,16 @@
-# 🏝️ Insel 1o1
+﻿# 🏝️ I-Land1o1
 
 A gamified learning platform that transforms education into an adventure through islands, archipelagos, quests, achievements, and interactive learning experiences.
 
 ## 🌍 Live Demo
 
-🌐 https://7miwork.github.io/Insel1o1/
+🌐 https://7miwork.github.io/I-Land1o1/
 
 ---
 
 # 📖 Project Vision
 
-Insel 1o1 aims to combine modern education with engaging game mechanics.
+I-Land1o1 aims to combine modern education with engaging game mechanics.
 
 Students learn through a world of islands and adventures, while parents, teachers, and educational institutions receive a professional dashboard for monitoring progress and managing courses.
 
@@ -60,7 +60,7 @@ Features include:
 
 ## 💻 Programming Archipelago
 
-The first learning region available within Insel 1o1.
+The first learning region available within I-Land1o1.
 
 ### Minecraft Education Block Coding
 
@@ -240,8 +240,8 @@ shared/
 ## Clone Repository
 
 ```bash
-git clone https://github.com/7miwork/Insel1o1.git
-cd Insel1o1
+git clone https://github.com/7miwork/I-Land1o1.git
+cd I-Land1o1
 ```
 
 ## Install Dependencies
@@ -302,7 +302,7 @@ License information will be added in a future release.
 
 ---
 
-# 🌟 Insel 1o1
+# 🌟 I-Land1o1
 
 **Learn. Explore. Progress.**
 

@@ -1,10 +1,10 @@
-import { defineConfig } from 'vite';
+﻿import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Insel1o1/',
+  base: '/I-Land1o1/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

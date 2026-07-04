@@ -1,4 +1,4 @@
-{
+﻿{
   "docs": {
     "badge": "Early Stage",
     "title": "Documentation is evolving",
@@ -8,7 +8,7 @@
     "section1Desc": "First steps for students, parents and teachers.",
     "section2Title": "Platform Overview",
     "section2Status": "In progress",
-    "section2Desc": "How the Insel1o1 platform fits together.",
+    "section2Desc": "How the I-Land1o1 platform fits together.",
     "section3Title": "Student System",
     "section3Status": "Planned",
     "section3Desc": "Learning paths, lessons, and progress.",
@@ -17,6 +17,6 @@
     "section4Desc": "Class management, analytics, and reports.",
     "footerNote": "Docs will continuously expand as the platform grows.",
     "back": "Back",
-    "appName": "Insel 1o1"
+    "appName": "I-Land1o1"
   }
 }

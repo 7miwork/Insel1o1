@@ -1,16 +1,16 @@
-{
+﻿{
   "home": {
     "heroTitle": "Learning Reimagined Through Gamification",
-    "heroDescription": "Join millions of students on their learning journey with Insel 1o1, the next-generation EdTech platform that makes education engaging, interactive, and rewarding.",
+    "heroDescription": "Join millions of students on their learning journey with I-Land1o1, the next-generation EdTech platform that makes education engaging, interactive, and rewarding.",
     "getStarted": "Get Started Free",
     "watchDemo": "Watch Demo",
     "activeStudents": "Active Students",
     "courses": "Courses",
     "satisfaction": "Satisfaction Rate",
-    "powerfulFeatures": "Why Students, Parents & Teachers Love Insel 1o1",
+    "powerfulFeatures": "Why Students, Parents & Teachers Love I-Land1o1",
     "featureDescription": "A learning platform designed around real educational outcomes — not technology.",
     "readyToTransform": "Ready to Transform Your Learning?",
-    "joinThousands": "Join thousands of students already learning with Insel 1o1",
+    "joinThousands": "Join thousands of students already learning with I-Land1o1",
     "enterEmail": "Enter your email",
     "startLearning": "Start Learning Now",
     "mathKingdom": "Mathematics Kingdom",
@@ -19,7 +19,7 @@
     "level": "Level",
     "streak": "Streak",
     "tagline": "Next-Generation EdTech Platform",
-    "whyChooseTitle": "Why Choose Insel 1o1?",
+    "whyChooseTitle": "Why Choose I-Land1o1?",
     "benefits": {
       "personalizedLearning": "Personalized learning paths for every student",
       "realTimeTracking": "Real-time progress tracking and analytics",
@@ -61,7 +61,7 @@
     "feature_privacySecurity": "Privacy and Security",
     "feature_privacySecurityDesc": "Safe learning environments, secure accounts and privacy-conscious design help protect students and families.",
     "securityTitle": "Security & Trust",
-    "securitySubtitle": "Insel1o1 is designed with the safety of your child and the requirements of schools in mind.",
+    "securitySubtitle": "I-Land1o1 is designed with the safety of your child and the requirements of schools in mind.",
     "heroStudentTitle": "For Students",
     "heroStudentSubtitle": "Learning as an adventure",
     "heroTeacherTitle": "For Schools & Teachers",
@@ -69,3 +69,4 @@
     "ctaSignIn": "Sign In"
   }
 }
+

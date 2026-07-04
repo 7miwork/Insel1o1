@@ -1,7 +1,7 @@
-{
+﻿{
   "name": "insel-1o1-frontend",
   "version": "1.0.0",
-  "description": "Insel 1o1 EdTech Platform - Frontend Application",
+  "description": "I-Land1o1 EdTech Platform - Frontend Application",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -35,3 +35,4 @@
     "node": ">=18.0.0"
   }
 }
+

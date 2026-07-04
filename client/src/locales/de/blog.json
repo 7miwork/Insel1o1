@@ -1,8 +1,8 @@
-{
+﻿{
   "blog": {
     "badge": "Demnächst",
     "title": "Beiträge kommen bald",
-    "subtitle": "Wir bereiten Artikel, Lernressourcen und Updates vor, um Schülern, Eltern und Lehrern das Beste aus Insel 1o1 zu ermöglichen.",
+    "subtitle": "Wir bereiten Artikel, Lernressourcen und Updates vor, um Schülern, Eltern und Lehrern das Beste aus I-Land1o1 zu ermöglichen.",
     "whatToExpect": "Was Sie erwartet",
     "item1": "Lerntipps und bewährte Methoden",
     "item2": "Produktupdates und Versionshinweise",
@@ -13,6 +13,6 @@
     "ctaButton": "Benachrichtigen",
     "ctaNote": "Der Benachrichtigungsdienst ist demnächst verfügbar.",
     "back": "Zurück",
-    "appName": "Insel 1o1"
+    "appName": "I-Land1o1"
   }
 }

@@ -1,4 +1,4 @@
-{
+﻿{
   "docs": {
     "badge": "Frühes Stadium",
     "title": "Dokumentation entwickelt sich weiter",
@@ -8,7 +8,7 @@
     "section1Desc": "Erste Schritte für Schüler, Eltern und Lehrer.",
     "section2Title": "Plattformübersicht",
     "section2Status": "In Bearbeitung",
-    "section2Desc": "Wie die Insel1o1-Plattform zusammenspielt.",
+    "section2Desc": "Wie die I-Land1o1-Plattform zusammenspielt.",
     "section3Title": "Schüler-System",
     "section3Status": "Geplant",
     "section3Desc": "Lernwege, Lektionen und Fortschritt.",
@@ -17,6 +17,6 @@
     "section4Desc": "Klassenverwaltung, Analysen und Berichte.",
     "footerNote": "Die Dokumentation wächst kontinuierlich mit der Plattform.",
     "back": "Zurück",
-    "appName": "Insel 1o1"
+    "appName": "I-Land1o1"
   }
 }

@@ -1,7 +1,7 @@
-{
+﻿{
   "home": {
     "heroTitle": "通過遊戲化重新定義學習",
-    "heroDescription": "與數百萬學生一起加入 Insel 1o1 的學習之旅，這款次世代教育科技平台讓學習變得有趣、互動且富有成就感。",
+    "heroDescription": "與數百萬學生一起加入 I-Land1o1 的學習之旅，這款次世代教育科技平台讓學習變得有趣、互動且富有成就感。",
     "getStarted": "免費開始",
     "watchDemo": "觀看示範",
     "exploreArchipelagos": "探索群島",
@@ -9,10 +9,10 @@
     "activeStudents": "活躍學生",
     "courses": "課程數",
     "satisfaction": "滿意度",
-    "powerfulFeatures": "為什麼學生、家長與教師都喜愛 Insel 1o1",
+    "powerfulFeatures": "為什麼學生、家長與教師都喜愛 I-Land1o1",
     "featureDescription": "一個圍繞真實教育成果設計的學習平台——而不是技術。",
     "readyToTransform": "準備好改變你的學習體驗了嗎？",
-    "joinThousands": "加入數千名已經在使用 Insel 1o1 學習的學生行列",
+    "joinThousands": "加入數千名已經在使用 I-Land1o1 學習的學生行列",
     "enterEmail": "輸入您的電子郵件",
     "startLearning": "立即開始學習",
     "mathKingdom": "數學王國",
@@ -21,7 +21,7 @@
     "level": "等級",
     "streak": "連續天數",
     "tagline": "次世代教育科技平台",
-    "whyChooseTitle": "為什麼選擇 Insel 1o1？",
+    "whyChooseTitle": "為什麼選擇 I-Land1o1？",
     "benefits": {
       "personalizedLearning": "為每位學生提供個人化學習路徑",
       "realTimeTracking": "即時進度追蹤與分析",
@@ -63,7 +63,7 @@
     "feature_privacySecurity": "隱私與安全",
     "feature_privacySecurityDesc": "安全的學習環境、受保護的帳戶及注重隱私的設計，有助於保護學生與家庭。",
     "securityTitle": "Security & Trust",
-    "securitySubtitle": "Insel1o1 是為了孩子的安全和學校的需求而設計的。",
+    "securitySubtitle": "I-Land1o1 是為了孩子的安全和學校的需求而設計的。",
     "heroStudentTitle": "For Students",
     "heroStudentSubtitle": "Learning as an adventure",
     "heroTeacherTitle": "For Schools & Teachers",
@@ -71,3 +71,4 @@
     "ctaSignIn": "Sign In"
   }
 }
+

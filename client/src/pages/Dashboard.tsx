@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
 import { BookOpen, Users, TrendingUp, Award, LogOut, Settings, Home, Zap, Target, Calendar } from "lucide-react";
@@ -74,7 +74,7 @@ export default function Dashboard() {
               <BookOpen className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Insel 1o1</h1>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">I-Land1o1</h1>
               <p className="text-xs text-gray-600 dark:text-gray-400 capitalize">{user.role} Dashboard</p>
             </div>
           </div>
@@ -249,3 +249,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

@@ -1,8 +1,8 @@
-🏝️ Insel 1o1 Roadmap
+﻿🏝️ I-Land1o1 Roadmap
 
 Vision
 
-Insel 1o1 soll eine mehrsprachige, gamifizierte Bildungsplattform werden, die Lernen wie eine Entdeckungsreise durch verschiedene Inselwelten gestaltet.
+I-Land1o1 soll eine mehrsprachige, gamifizierte Bildungsplattform werden, die Lernen wie eine Entdeckungsreise durch verschiedene Inselwelten gestaltet.
 
 Schüler erleben Lernen als Abenteuer.
 
@@ -335,4 +335,4 @@ Schüler sollen das Gefühl haben, nicht einfach Kurse zu absolvieren, sondern e
 ⸻
 
 Last Updated: 2026
-Project: Insel 1o1
+Project: I-Land1o1

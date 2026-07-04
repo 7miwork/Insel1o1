@@ -1,5 +1,5 @@
-/**
- * Data hierarchy for the Insel 1o1 world map.
+﻿/**
+ * Data hierarchy for the I-Land1o1 world map.
  *
  * Level 3 → Level 2 → Level 1
  * Subject → Course → Lesson Islands

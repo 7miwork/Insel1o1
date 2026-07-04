@@ -1,7 +1,7 @@
-/**
+﻿/**
  * CREW DATA CONFIGURATION
  * =======================
- * Centralized configuration file for the Insel1o1 crew members.
+ * Centralized configuration file for the I-Land1o1 crew members.
  *
  * To add, remove, or modify crew members, edit the CREW_MEMBERS array below.
  * No UI component changes are needed.

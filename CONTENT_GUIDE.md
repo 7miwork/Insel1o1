@@ -1,4 +1,4 @@
-# Content Guide — Insel 1o1
+﻿# Content Guide — I-Land1o1
 
 This guide shows how to add and manage content **without touching React code**.
 

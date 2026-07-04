@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BookOpen, Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
@@ -58,7 +58,7 @@ export default function Login() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-2xl mb-4 shadow-lg">
             <BookOpen className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Insel 1o1</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">I-Land1o1</h1>
           <p className="text-gray-600 dark:text-gray-400">{t("login.welcomeBack")}</p>
         </div>
 
@@ -191,3 +191,4 @@ export default function Login() {
     </div>
   );
 }
+

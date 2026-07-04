@@ -1,7 +1,7 @@
-{
+﻿{
   "roadmap": {
     "title": "產品路線圖",
-    "subtitle": "實時跟蹤 Insel1o1 的持續發展。",
+    "subtitle": "實時跟蹤 I-Land1o1 的持續發展。",
     "overallProgress": "整體進度",
     "completed": "已完成",
     "inProgress": "進行中",
@@ -11,6 +11,6 @@
     "statusPlanned": "已計劃",
     "updatedNote": "每次重要提交都會持續更新。",
     "back": "返回",
-    "appName": "Insel 1o1"
+    "appName": "I-Land1o1"
   }
 }

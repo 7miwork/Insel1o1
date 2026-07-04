@@ -1,8 +1,8 @@
-# 🏝️ Insel 1o1 Roadmap
+﻿# 🏝️ I-Land1o1 Roadmap
 
 ## Vision
 
-Insel 1o1 aims to become a multilingual, gamified learning platform where education feels like an adventure.
+I-Land1o1 aims to become a multilingual, gamified learning platform where education feels like an adventure.
 
 Students explore islands, complete quests, unlock achievements, and progress through learning archipelagos, while parents, teachers, and educational institutions gain access to professional management and analytics tools.
 
@@ -42,7 +42,7 @@ Students explore islands, complete quests, unlock achievements, and progress thr
 
 ## Objective
 
-Create the first complete learning journey within Insel 1o1.
+Create the first complete learning journey within I-Land1o1.
 
 ### Learning Archipelago
 
@@ -360,7 +360,7 @@ Education should be engaging, accessible, multilingual, and rewarding for learne
 
 ---
 
-**Insel 1o1**
+**I-Land1o1**
 
 *Learn. Explore. Progress.*
 

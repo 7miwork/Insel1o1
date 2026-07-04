@@ -1,4 +1,4 @@
-{
+﻿{
   "community": {
     "badge": "Aufbauphase",
     "title": "Die Gemeinschaft formt sich",
@@ -13,11 +13,11 @@
     "item3Status": "Geplant",
     "item3Desc": "Ein dedizierter Bereich für Pädagogen zum Austausch bewährter Methoden.",
     "ctaTitle": "Der frühen Zugangsliste beitreten",
-    "ctaDesc": "Seien Sie die Erste, die der Insel1o1-Gemeinschaft beitritt, wenn sie eröffnet wird.",
+    "ctaDesc": "Seien Sie die Erste, die der I-Land1o1-Gemeinschaft beitritt, wenn sie eröffnet wird.",
     "ctaPlaceholder": "you@example.com",
     "ctaButton": "Früher Zugang",
     "ctaNote": "Die Community-Plattform ist demnächst verfügbar.",
     "back": "Zurück",
-    "appName": "Insel 1o1"
+    "appName": "I-Land1o1"
   }
 }

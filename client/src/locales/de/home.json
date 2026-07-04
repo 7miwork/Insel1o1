@@ -1,7 +1,7 @@
-{
+﻿{
   "home": {
     "heroTitle": "Lernen, neu erfunden durch Gamification",
-    "heroDescription": "Begleite Millionen von Schülerinnen und Schülern auf ihrer Lernreise mit Insel 1o1 – der nächsten Generation von EdTech, die Bildung spannend, interaktiv und belohnend macht.",
+    "heroDescription": "Begleite Millionen von Schülerinnen und Schülern auf ihrer Lernreise mit I-Land1o1 – der nächsten Generation von EdTech, die Bildung spannend, interaktiv und belohnend macht.",
     "getStarted": "Kostenlos starten",
     "watchDemo": "Demo ansehen",
     "exploreArchipelagos": "Archipele erkunden",
@@ -9,10 +9,10 @@
     "activeStudents": "Aktive Lernende",
     "courses": "Kurse",
     "satisfaction": "Zufriedenheit",
-    "powerfulFeatures": "Warum Schüler, Eltern und Lehrkräfte Insel 1o1 lieben",
+    "powerfulFeatures": "Warum Schüler, Eltern und Lehrkräfte I-Land1o1 lieben",
     "featureDescription": "Eine Lernplattform, die um echte Bildungsergebnisse herum entwickelt wurde – nicht um Technologie.",
     "readyToTransform": "Bereit, dein Lernen zu verändern?",
-    "joinThousands": "Schliesse dich Tausenden von Lernenden an, die bereits mit Insel 1o1 lernen",
+    "joinThousands": "Schliesse dich Tausenden von Lernenden an, die bereits mit I-Land1o1 lernen",
     "enterEmail": "E-Mail-Adresse eingeben",
     "startLearning": "Jetzt mit dem Lernen starten",
     "mathKingdom": "Mathematik-Königreich",
@@ -21,7 +21,7 @@
     "level": "Level",
     "streak": "Serie",
     "tagline": "EdTech-Plattform der nächsten Generation",
-    "whyChooseTitle": "Warum Insel 1o1 wählen?",
+    "whyChooseTitle": "Warum I-Land1o1 wählen?",
     "benefits": {
       "personalizedLearning": "Personalisierte Lernpfade für jede:n Lernende:n",
       "realTimeTracking": "Echtzeit-Fortschrittsverfolgung und Analysen",
@@ -63,7 +63,7 @@
     "feature_privacySecurity": "Datenschutz und Sicherheit",
     "feature_privacySecurityDesc": "Sichere Lernumgebungen, geschützte Konten und datenschutzbewusstes Design helfen, Schüler und Familien zu schützen.",
     "securityTitle": "Sicherheit & Vertrauen",
-    "securitySubtitle": "Insel1o1 ist für die Sicherheit deines Kindes und die Anforderungen von Schulen entwickelt.",
+    "securitySubtitle": "I-Land1o1 ist für die Sicherheit deines Kindes und die Anforderungen von Schulen entwickelt.",
     "heroStudentTitle": "Für Schüler",
     "heroStudentSubtitle": "Lernen als Abenteuer",
     "heroTeacherTitle": "Für Schulen & Lehrer",
@@ -71,3 +71,4 @@
     "ctaSignIn": "Anmelden"
   }
 }
+

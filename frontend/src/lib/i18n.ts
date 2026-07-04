@@ -1,4 +1,4 @@
-/**
+﻿/**
  * i18n Configuration and Translation Loader
  * 
  * This file loads and manages translations for the application.
@@ -20,8 +20,8 @@ interface Translations {
 export const translations: Translations = {
   en: {
     common: {
-      welcome: 'Welcome to Insel 1o1',
-      appName: 'Insel 1o1 EdTech Platform',
+      welcome: 'Welcome to I-Land1o1',
+      appName: 'I-Land1o1 EdTech Platform',
       language: 'Language',
       logout: 'Logout',
       login: 'Login',
@@ -46,8 +46,8 @@ export const translations: Translations = {
       crewSectionTitle: 'Meet the Crew',
     },
     auth: {
-      loginTitle: 'Login to Insel 1o1',
-      registerTitle: 'Create Your Insel 1o1 Account',
+      loginTitle: 'Login to I-Land1o1',
+      registerTitle: 'Create Your I-Land1o1 Account',
       forgotPassword: 'Forgot Password?',
       noAccount: "Don't have an account?",
       haveAccount: 'Already have an account?',
@@ -188,7 +188,7 @@ export const translations: Translations = {
       hero: {
         title1: 'Set Sail for',
         title2: 'a New Adventure',
-        subtitle: 'Welcome to Insel 1o1 – where learning becomes an epic voyage across uncharted islands, thrilling challenges, and hidden treasures.',
+        subtitle: 'Welcome to I-Land1o1 – where learning becomes an epic voyage across uncharted islands, thrilling challenges, and hidden treasures.',
         cta: 'Begin Your Journey',
         login: 'Returning Explorer',
       },
@@ -242,7 +242,7 @@ export const translations: Translations = {
         finalDesc: 'Only the bravest reach the final island',
       },
       features: {
-        title: 'Why Students Love Insel 1o1',
+        title: 'Why Students Love I-Land1o1',
         subtitle: "Learning here doesn't feel like learning. It feels like living an adventure.",
         feature1Title: 'Learn Through Play',
         feature1Desc: 'No boring textbooks. Every concept is wrapped in a quest, a puzzle, or a story that makes understanding natural and fun.',
@@ -269,7 +269,7 @@ export const translations: Translations = {
         login: 'I\'m a Returning Explorer',
       },
       footer: {
-        copyright: '© 2024 Insel 1o1. All rights reserved.',
+        copyright: '© 2024 I-Land1o1. All rights reserved.',
         about: 'About',
         contact: 'Contact',
         privacy: 'Privacy',
@@ -292,7 +292,7 @@ export const translations: Translations = {
         }
       },
       about: {
-        intro: 'Meet the daring crew steering the Insel1o1 archipelago, where every lesson is an expedition across uncharted islands.',
+        intro: 'Meet the daring crew steering the I-Land1o1 archipelago, where every lesson is an expedition across uncharted islands.',
         missionTitle: 'Our Mission',
         missionContent: 'To turn education into a grand adventure, guiding students, parents, and teachers to discover new islands of knowledge together.',
         visionTitle: 'Our Vision',
@@ -301,8 +301,8 @@ export const translations: Translations = {
   },
   de: {
     common: {
-      welcome: 'Willkommen bei Insel 1o1',
-      appName: 'Insel 1o1 EdTech-Plattform',
+      welcome: 'Willkommen bei I-Land1o1',
+      appName: 'I-Land1o1 EdTech-Plattform',
       language: 'Sprache',
       logout: 'Abmelden',
       login: 'Anmelden',
@@ -327,8 +327,8 @@ export const translations: Translations = {
       crewSectionTitle: 'Das Team',
     },
     auth: {
-      loginTitle: 'Bei Insel 1o1 anmelden',
-      registerTitle: 'Erstellen Sie Ihr Insel 1o1-Konto',
+      loginTitle: 'Bei I-Land1o1 anmelden',
+      registerTitle: 'Erstellen Sie Ihr I-Land1o1-Konto',
       forgotPassword: 'Passwort vergessen?',
       noAccount: 'Haben Sie noch kein Konto?',
       haveAccount: 'Haben Sie bereits ein Konto?',
@@ -469,7 +469,7 @@ export const translations: Translations = {
       hero: {
         title1: 'Stiche in See',
         title2: 'für ein neues Abenteuer',
-        subtitle: 'Willkommen bei Insel 1o1 – wo Lernen zu einer epischen Reise über unentdeckte Inseln, spannende Herausforderungen und verborgene Schätze wird.',
+        subtitle: 'Willkommen bei I-Land1o1 – wo Lernen zu einer epischen Reise über unentdeckte Inseln, spannende Herausforderungen und verborgene Schätze wird.',
         cta: 'Beginne deine Reise',
         login: 'Wiederkehrender Entdecker',
       },
@@ -523,7 +523,7 @@ export const translations: Translations = {
         finalDesc: 'Nur die Mutigsten erreichen die letzte Insel',
       },
       features: {
-        title: 'Warum Schüler Insel 1o1 lieben',
+        title: 'Warum Schüler I-Land1o1 lieben',
         subtitle: 'Lernen fühlt sich hier nicht wie Lernen an. Es fühlt sich an wie ein Abenteuer zu leben.',
         feature1Title: 'Lernen durch Spielen',
         feature1Desc: 'Keine langweiligen Lehrbücher. Jedes Konzept ist in eine Quest, ein Rätsel oder eine Geschichte verpackt, die das Verständnis natürlich und unterhaltsam macht.',
@@ -541,7 +541,7 @@ export const translations: Translations = {
         login: 'Ich bin ein wiederkehrender Entdecker',
       },
       footer: {
-        copyright: '© 2024 Insel 1o1. Alle Rechte vorbehalten.',
+        copyright: '© 2024 I-Land1o1. Alle Rechte vorbehalten.',
         about: 'Über uns',
         contact: 'Kontakt',
         privacy: 'Datenschutz',
@@ -551,7 +551,7 @@ export const translations: Translations = {
     crew: {
       captain: {
         title: 'Kapitän der Lernwelten',
-        description: 'Vision, Richtung und Gesamtkonzept von Insel1o1. Formt das Lernuniversum und verbindet Bildung mit abenteuerbasierter Erkundung.',
+        description: 'Vision, Richtung und Gesamtkonzept von I-Land1o1. Formt das Lernuniversum und verbindet Bildung mit abenteuerbasierter Erkundung.',
       },
       navigator: {
         title: 'Lernnavigator',
@@ -563,7 +563,7 @@ export const translations: Translations = {
       },
     },
     about: {
-      intro: 'Wir sind die Crew hinter Insel1o1 – wir bauen eine Lernwelt, in der Bildung wie ein Abenteuer über Inseln hinweg wirkt.',
+      intro: 'Wir sind die Crew hinter I-Land1o1 – wir bauen eine Lernwelt, in der Bildung wie ein Abenteuer über Inseln hinweg wirkt.',
       missionTitle: 'Unsere Mission',
       missionContent: 'Lernen in ein Erkundungserlebnis verwandeln, bei dem Schüler, Eltern und Lehrer Wissen entdecken wie neue Inseln.',
       visionTitle: 'Unsere Vision',
@@ -572,8 +572,8 @@ export const translations: Translations = {
   },
   'zh-TW': {
     common: {
-      welcome: '歡迎來到 Insel 1o1',
-      appName: 'Insel 1o1 教育科技平台',
+      welcome: '歡迎來到 I-Land1o1',
+      appName: 'I-Land1o1 教育科技平台',
       language: '語言',
       logout: '登出',
       login: '登入',
@@ -597,8 +597,8 @@ export const translations: Translations = {
       info: '資訊',
     },
     auth: {
-      loginTitle: '登入 Insel 1o1',
-      registerTitle: '建立您的 Insel 1o1 帳戶',
+      loginTitle: '登入 I-Land1o1',
+      registerTitle: '建立您的 I-Land1o1 帳戶',
       forgotPassword: '忘記密碼?',
       noAccount: '還沒有帳戶?',
       haveAccount: '已有帳戶?',
@@ -739,7 +739,7 @@ export const translations: Translations = {
       hero: {
         title1: '揚帆啟航',
         title2: '前往新的冒險',
-        subtitle: '歡迎來到 Insel 1o1 – 在這裡，學習變成一場穿越未知島嶼、刺激挑戰和隱藏寶藏的史詩旅程。',
+        subtitle: '歡迎來到 I-Land1o1 – 在這裡，學習變成一場穿越未知島嶼、刺激挑戰和隱藏寶藏的史詩旅程。',
         cta: '開始你的旅程',
         login: '回歸的探險者',
       },
@@ -793,7 +793,7 @@ export const translations: Translations = {
         finalDesc: '只有最勇敢的人才能到達最後的島嶼',
       },
       features: {
-        title: '為什麼學生喜愛 Insel 1o1',
+        title: '為什麼學生喜愛 I-Land1o1',
         subtitle: '在這裡學習不像學習。感覺就像經歷一場冒險。',
         feature1Title: '在遊戲中學習',
         feature1Desc: '沒有無聊的教科書。每個概念都包裹在任務、謎題或故事中，讓理解變得自然有趣。',
@@ -811,7 +811,7 @@ export const translations: Translations = {
         login: '我是回歸的探險者',
       },
       footer: {
-        copyright: '© 2024 Insel 1o1. 版權所有。',
+        copyright: '© 2024 I-Land1o1. 版權所有。',
         about: '關於我們',
         contact: '聯絡我們',
         privacy: '隱私政策',
@@ -821,7 +821,7 @@ export const translations: Translations = {
     crew: {
       captain: {
         title: '學習世界的船長',
-        description: '願景、方向與 Insel1o1 的整體概念。塑造學習宇宙，將教育與冒險探索相結合。',
+        description: '願景、方向與 I-Land1o1 的整體概念。塑造學習宇宙，將教育與冒險探索相結合。',
       },
       navigator: {
         title: '學習導航員',
@@ -833,7 +833,7 @@ export const translations: Translations = {
       },
     },
     about: {
-      intro: '我們是 Insel1o1 背後的船員——打造一個學習世界，讓教育像跨越島嶼的冒險般。',
+      intro: '我們是 I-Land1o1 背後的船員——打造一個學習世界，讓教育像跨越島嶼的冒險般。',
       missionTitle: '我們的使命',
       missionContent: '將學習轉化為探索體驗，讓學生、家長與教師像發現新島嶼般進步。',
       visionTitle: '我們的願景',

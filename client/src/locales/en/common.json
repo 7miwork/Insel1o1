@@ -1,6 +1,6 @@
-{
+﻿{
   "common": {
-    "appName": "Insel 1o1",
+    "appName": "I-Land1o1",
     "language": "Language",
     "logout": "Logout",
     "settings": "Settings",
@@ -207,3 +207,4 @@
     "yearlyGoal": "Yearly goal", "adventure": { "welcomeBack": "Welcome back, Explorer!", "continueAdventure": "Continue Adventure", "playerCard": "Player Card", "codingExplorer": "Coding Explorer", "blockBuilder": "Block Builder", "minecraftAdventurer": "Minecraft Adventurer", "archipelagoNavigator": "Archipelago Navigator", "yourJourney": "Your Journey", "visitedIslands": "Visited Islands", "currentIsland": "Current Island", "comingIslands": "Coming Soon", "dailyQuests": "Daily Quests", "weeklyQuests": "Weekly Quests", "adventureGoals": "Adventure Goals", "learn30Minutes": "Learn for 30 minutes", "completeAQuiz": "Complete a quiz", "earn50XP": "Earn 50 XP", "exploreNewIsland": "Explore a new island", "readAStory": "Read a story", "xpProgress": "XP Progress", "currentXP": "Current XP", "nextLevel": "Next Level", "xpNeeded": "XP Needed", "daysInARow": "days in a row", "lastRewards": "Last Rewards", "newIslandsUnlocked": "New islands unlocked", "archipelagoGoals": "Archipelago Goals", "difficulty": "Difficulty", "adventureStatus": "Adventure Status", "startNewAdventure": "Start New Adventure", "continueQuest": "Continue Quest" }
   }
 }
+

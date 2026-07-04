@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { usei18n } from '@/contexts/i18nContext';
 import { useNavigate } from 'react-router-dom';
 import { features } from '@/data/features';
@@ -293,7 +293,7 @@ export default function LandingPage() {
                 <circle cx="20" cy="20" r="19" fill="#1a4a48" stroke="#e8d3a2" strokeWidth="1.5" />
                 <path d="M20 6 C20 6 14 18 14 22 C14 26 16.5 30 20 30 C23.5 30 26 26 26 22 C26 18 20 6 20 6Z" fill="#e8d3a2" />
               </svg>
-              <span className="font-semibold text-[#1a4a48]">Insel 1o1</span>
+              <span className="font-semibold text-[#1a4a48]">I-Land1o1</span>
             </div>
             <div className="flex items-center gap-4">
               <button onClick={() => navigate('/login')} className="transition-colors hover:text-[#2a5a58]">

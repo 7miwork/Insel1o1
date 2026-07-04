@@ -1,14 +1,14 @@
-# 🏝️ Insel 1o1
+﻿# 🏝️ I-Land1o1
 
 Eine gamifizierte Lernplattform für Schülerinnen und Schüler mit einer modernen Inselwelt als Lernumgebung.
 
 ## 🌍 Live Demo
 
-🌐 https://7miwork.github.io/Insel1o1/
+🌐 https://7miwork.github.io/I-Land1o1/
 
 ## 📖 Projektvision
 
-Insel 1o1 ist eine digitale Lernwelt, die klassische Bildung mit Gamification verbindet.
+I-Land1o1 ist eine digitale Lernwelt, die klassische Bildung mit Gamification verbindet.
 
 Während Schüler in einer spielerischen Inselwelt lernen und Fortschritte sammeln, erhalten Eltern, Lehrkräfte und Schulen eine professionelle Verwaltungs- und Analyseoberfläche.
 
@@ -220,9 +220,9 @@ shared/
 Installation:
 
 ```bash
-git clone https://github.com/7miwork/Insel1o1.git
+git clone https://github.com/7miwork/I-Land1o1.git
 
-cd Insel1o1
+cd I-Land1o1
 
 pnpm install
 ```
@@ -269,4 +269,4 @@ Eine vollständig mehrsprachige Bildungsplattform zu schaffen, die Lernen so mot
 
 ---
 
-**Insel 1o1 – Lernen als Abenteuer.**
+**I-Land1o1 – Lernen als Abenteuer.**

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { ReactNode } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -32,7 +32,7 @@ export default function GameLayout({ children, xp = 0, level = 1, streak = 0 }: 
             >
               <span className="inline-flex items-center gap-2">
                 <span className="text-2xl">🗺️</span>
-                <span className="font-semibold">Insel 1o1</span>
+                <span className="font-semibold">I-Land1o1</span>
               </span>
             </Link>
             {/* Navigation links */}
@@ -109,3 +109,4 @@ export default function GameLayout({ children, xp = 0, level = 1, streak = 0 }: 
     </div>
   );
 }
+

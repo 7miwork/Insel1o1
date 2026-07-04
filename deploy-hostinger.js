@@ -1,4 +1,4 @@
-import { Client } from "basic-ftp";
+﻿import { Client } from "basic-ftp";
 import pkg from "prompts";
 const { prompt } = pkg;
 import * as fs from "fs";
@@ -47,7 +47,7 @@ async function getFtpConfig() {
       type: "text",
       name: "host",
       message: "FTP-Host (Hostinger FTP Hostname):",
-      initial: "ftp.insel1o1.ch",
+      initial: "ftp.I-Land1o1.ch",
       validate: (value) => (!value ? "Host ist erforderlich" : true),
     },
     {

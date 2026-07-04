@@ -1,4 +1,4 @@
-{
+﻿{
   "community": {
     "badge": "構建階段",
     "title": "社區正在形成中",
@@ -13,11 +13,11 @@
     "item3Status": "已計劃",
     "item3Desc": "為教育工作者交流最佳實踐提供的專屬區域。",
     "ctaTitle": "加入早期訪問列表",
-    "ctaDesc": "成為第一個在 Insel1o1 社區開放時加入的人。",
+    "ctaDesc": "成為第一個在 I-Land1o1 社區開放時加入的人。",
     "ctaPlaceholder": "you@example.com",
     "ctaButton": "早期訪問",
     "ctaNote": "社區平台即將推出。",
     "back": "返回",
-    "appName": "Insel 1o1"
+    "appName": "I-Land1o1"
   }
 }

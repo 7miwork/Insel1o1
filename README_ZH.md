@@ -1,16 +1,16 @@
-# 🏝️ Insel 1o1
+﻿# 🏝️ I-Land1o1
 
 一個將教育與遊戲化體驗結合的學習平台，透過群島、任務、成就與探索機制，讓學習成為一場真正的冒險。
 
 ## 🌍 線上體驗
 
-🌐 https://7miwork.github.io/Insel1o1/
+🌐 https://7miwork.github.io/I-Land1o1/
 
 ---
 
 # 📖 專案願景
 
-Insel 1o1 的目標是將現代教育與遊戲設計理念結合。
+I-Land1o1 的目標是將現代教育與遊戲設計理念結合。
 
 學生透過探索群島、完成任務與解鎖內容來學習，而家長、教師與教育機構則擁有專業的管理與分析工具。
 
@@ -64,7 +64,7 @@ Insel 1o1 的目標是將現代教育與遊戲設計理念結合。
 
 ## 💻 程式設計群島（Programming Archipelago）
 
-Insel 1o1 的第一個學習區域。
+I-Land1o1 的第一個學習區域。
 
 ### Minecraft Education 方塊程式設計
 
@@ -244,8 +244,8 @@ shared/
 ## 複製專案
 
 ```bash
-git clone https://github.com/7miwork/Insel1o1.git
-cd Insel1o1
+git clone https://github.com/7miwork/I-Land1o1.git
+cd I-Land1o1
 ```
 
 ## 安裝依賴
@@ -308,7 +308,7 @@ pnpm run check
 
 ---
 
-# 🌟 Insel 1o1
+# 🌟 I-Land1o1
 
 **學習．探索．成長**
 

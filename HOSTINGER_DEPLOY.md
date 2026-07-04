@@ -1,4 +1,4 @@
-# Hostinger FTP Deploy – Anleitung
+﻿# Hostinger FTP Deploy – Anleitung
 
 ## Einrichtung (nur einmal)
 
@@ -6,9 +6,9 @@
 
 1. Einloggen auf [https://hpanel.hostinger.com](https://hpanel.hostinger.com)
 2. Menü: **Files** → **FTP Accounts**
-3. Dort siehst du eine Liste der FTP-Konten. Klicke auf das Konto, das für deine Domain (`insel1o1.ch`) zuständig ist.
+3. Dort siehst du eine Liste der FTP-Konten. Klicke auf das Konto, das für deine Domain (`I-Land1o1.ch`) zuständig ist.
 4. Wichtig für das Deploy-Script:
-   - **FTP Hostname** – meist `ftp.insel1o1.ch` oder `ftp.1234567.hostinger.com`
+   - **FTP Hostname** – meist `ftp.I-Land1o1.ch` oder `ftp.1234567.hostinger.com`
    - **Benutzername** – z.B. `u670872482.i-land1o1.com`
    - **Passwort** – das beim Anlegen des FTP-Kontos vergebene Passwort
    - **Port** – standardmäßig `21`
@@ -16,7 +16,7 @@
 ### 2. Erstmaliges Deploy
 
 ```bash
-cd Insel1o1
+cd I-Land1o1
 pnpm run deploy:hostinger
 ```
 
@@ -33,7 +33,7 @@ Das Script fragt dich jetzt interaktiv nach den FTP-Zugangsdaten. Du kannst sie 
 ## Erneutes Deploy
 
 ```bash
-cd Insel1o1
+cd I-Land1o1
 pnpm run deploy:hostinger
 ```
 
@@ -52,12 +52,12 @@ Wenn du `.env.ftp` gespeichert hast, läuft das Script ohne weitere Eingaben dur
 ## Fehlerbehebung
 
 ### `getaddrinfo ENOTFOUND ...`
-Prüfe den FTP-Hostnamen. Er darf **kein** `ftp://`-Präfix haben. Richtige Form: `ftp.insel1o1.ch` oder die IP-Adresse.
+Prüfe den FTP-Hostnamen. Er darf **kein** `ftp://`-Präfix haben. Richtige Form: `ftp.I-Land1o1.ch` oder die IP-Adresse.
 
 ### Weiße Seite nach Upload
 1. Öffne die Browser-Konsole (F12) → Tab "Netzwerk" → Neu laden
 2. Suche nach 404-Fehlern bei JS-/CSS-Dateien
-3. Prüfe, ob die Pfade mit `/assets/...` beginnen (nicht `/Insel1o1/assets/...`)
+3. Prüfe, ob die Pfade mit `/assets/...` beginnen (nicht `/I-Land1o1/assets/...`)
 4. Erneut deployen mit `pnpm run deploy:hostinger`
 
 ### `.env.ftp` neu erstellen

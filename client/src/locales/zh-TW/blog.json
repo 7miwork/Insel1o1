@@ -1,8 +1,8 @@
-{
+﻿{
   "blog": {
     "badge": "即將推出",
     "title": "見解即將推出",
-    "subtitle": "我們正在準備文章、學習資源和更新，以幫助學生、家長和教師充分利用 Insel 1o1。",
+    "subtitle": "我們正在準備文章、學習資源和更新，以幫助學生、家長和教師充分利用 I-Land1o1。",
     "whatToExpect": "您可以期待什麼",
     "item1": "學習技巧和最佳實踐",
     "item2": "產品更新和版本說明",
@@ -13,6 +13,6 @@
     "ctaButton": "通知我",
     "ctaNote": "通知服務即將推出。",
     "back": "返回",
-    "appName": "Insel 1o1"
+    "appName": "I-Land1o1"
   }
 }

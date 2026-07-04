@@ -1,6 +1,6 @@
-# Course Standards
+﻿# Course Standards
 
-Every lesson in Insel 1o1 should follow a consistent structure.
+Every lesson in I-Land1o1 should follow a consistent structure.
 
 ## Required Sections
 

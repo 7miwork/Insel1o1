@@ -1,9 +1,9 @@
-import React from 'react';
+﻿import React from 'react';
 import { usei18n } from '@/contexts/i18nContext';
 import { crew, CrewMember } from '@/data/crew';
 
 /**
- * About page – crew introduction for the Insel1o1 platform.
+ * About page – crew introduction for the I-Land1o1 platform.
  * All visible strings are fetched via the translation system using keys.
  * The page follows the existing design system: card‑based layout, responsive grid,
  * and pirate / island theming using emojis.
@@ -51,3 +51,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

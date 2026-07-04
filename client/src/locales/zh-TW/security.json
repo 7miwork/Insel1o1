@@ -1,7 +1,7 @@
-{
+﻿{
   "security": {
     "title": "Security & Trust",
-    "subtitle": "Insel1o1 是為了孩子的安全和學校的需求而設計的。",
+    "subtitle": "I-Land1o1 是為了孩子的安全和學校的需求而設計的。",
     "dataProtection": "Data Protection",
     "dataProtectionDesc": "加密數據傳輸和安全存儲所有個人信息。",
     "studentPrivacy": "Student Privacy",
@@ -19,6 +19,6 @@
     "spitalSchwyzValue": "041 818 41 11",
     "emergencyNote": "Note:",
     "emergencyNoteValue": "Emergency practice is closed",
-    "trustStatement": "Insel1o1 是以對隱私、安全和教育責任的深思熟慮而設計的。"
+    "trustStatement": "I-Land1o1 是以對隱私、安全和教育責任的深思熟慮而設計的。"
   }
 }

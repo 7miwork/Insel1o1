@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BookOpen, Users, Star, ArrowRight } from "lucide-react";
 import { useLocation } from "wouter";
@@ -72,7 +72,7 @@ export default function Courses() {
             <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-600 rounded-lg flex items-center justify-center">
               <BookOpen className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Insel 1o1 Courses</span>
+            <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">I-Land1o1 Courses</span>
           </div>
           <Button
             onClick={() => setLocation("/dashboard")}
@@ -156,3 +156,4 @@ export default function Courses() {
     </div>
   );
 }
+

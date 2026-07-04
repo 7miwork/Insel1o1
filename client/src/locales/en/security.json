@@ -1,7 +1,7 @@
-{
+﻿{
   "security": {
     "title": "Security & Trust",
-    "subtitle": "Insel1o1 is designed with the safety of your child and the requirements of schools in mind.",
+    "subtitle": "I-Land1o1 is designed with the safety of your child and the requirements of schools in mind.",
     "dataProtection": "Data Protection",
     "dataProtectionDesc": "Encrypted data transmission and secure storage of all personal information.",
     "studentPrivacy": "Student Privacy",
@@ -19,6 +19,6 @@
     "spitalSchwyzValue": "041 818 41 11",
     "emergencyNote": "Note:",
     "emergencyNoteValue": "Emergency practice is closed",
-    "trustStatement": "Insel1o1 is designed with thoughtfulness for privacy, safety, and educational responsibility."
+    "trustStatement": "I-Land1o1 is designed with thoughtfulness for privacy, safety, and educational responsibility."
   }
 }

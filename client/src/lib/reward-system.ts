@@ -1,4 +1,4 @@
-// Reward System for Insel 1o1
+﻿// Reward System for I-Land1o1
 // Handles XP, coins, and achievement calculations
 
 export interface RewardData {
@@ -210,3 +210,4 @@ export type AchievementKey = keyof typeof ACHIEVEMENTS;
 export const getAchievementData = (achievementKey: AchievementKey) => {
   return ACHIEVEMENTS[achievementKey];
 };
+

@@ -1,7 +1,7 @@
-{
+﻿{
   "security": {
     "title": "Sicherheit & Vertrauen",
-    "subtitle": "Insel1o1 ist für die Sicherheit deines Kindes und die Anforderungen von Schulen entwickelt.",
+    "subtitle": "I-Land1o1 ist für die Sicherheit deines Kindes und die Anforderungen von Schulen entwickelt.",
     "dataProtection": "Datenschutz",
     "dataProtectionDesc": "Verschlüsselte Datenübertragung und sichere Speicherung aller persönlichen Informationen.",
     "studentPrivacy": "Schülerdatenschutz",
@@ -19,6 +19,6 @@
     "spitalSchwyzValue": "041 818 41 11",
     "emergencyNote": "Hinweis:",
     "emergencyNoteValue": "Notfallpraxis ist geschlossen",
-    "trustStatement": "Insel1o1 ist mit Nachdenklichkeit für Datenschutz, Sicherheit und Bildungsverantwortung entwickelt."
+    "trustStatement": "I-Land1o1 ist mit Nachdenklichkeit für Datenschutz, Sicherheit und Bildungsverantwortung entwickelt."
   }
 }

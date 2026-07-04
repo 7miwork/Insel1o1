@@ -1,4 +1,4 @@
-{
+﻿{
   "course": "minecraft-education",
   "displayName": "Minecraft Education",
   "description": "Learn with block-based adventures in Minecraft Education world",
@@ -27,7 +27,7 @@
 </content>
 
 <write_to_file>
-<path>Insel1o1/frontend/public/assets/images/islands/python/metadata.json</path>
+<path>I-Land1o1/frontend/public/assets/images/islands/python/metadata.json</path>
 <content>{
   "course": "python",
   "displayName": "Python Island",
@@ -57,7 +57,7 @@
 </content>
 
 <write_to_file>
-<path>Insel1o1/frontend/public/assets/images/islands/scratch/metadata.json</path>
+<path>I-Land1o1/frontend/public/assets/images/islands/scratch/metadata.json</path>
 <content>{
   "course": "scratch",
   "displayName": "Scratch Islands",
@@ -81,7 +81,7 @@
 </content>
 
 <write_to_file>
-<path>Insel1o1/frontend/public/assets/images/islands/computer-science/metadata.json</path>
+<path>I-Land1o1/frontend/public/assets/images/islands/computer-science/metadata.json</path>
 <content>{
   "course": "computer-science",
   "displayName": "Computer Science",
