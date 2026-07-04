@@ -320,31 +320,45 @@ export default function WorldMap() {
                   style={{ background: "linear-gradient(180deg, rgba(255,250,238,0.94) 0%, rgba(244,228,199,0.94) 34%, rgba(232,206,168,0.92) 100%)" }} />
                 <div className="absolute inset-8 rounded-[1.25rem] opacity-[0.08] pointer-events-none"
                   style={{ backgroundImage: "linear-gradient(90deg, rgba(0,0,0,0.03) 0%, transparent 1px, transparent 100%), linear-gradient(rgba(0,0,0,0.03) 0%, transparent 1px, transparent 100%)", backgroundSize: "50px 50px" }} />
-                {/* Decorative parchment inset SVG: torn edge + rhumb lines + small compass */}
-                <svg className="absolute inset-10 pointer-events-none" viewBox="0 0 100 60" preserveAspectRatio="none" style={{ mixBlendMode: 'multiply', opacity: 0.95 }}>
+                {/* Decorative parchment inset SVG: torn edge + rhumb lines + larger compass */}
+                <svg className="absolute inset-10 pointer-events-none" viewBox="0 0 100 60" preserveAspectRatio="none" style={{ mixBlendMode: 'multiply', opacity: 0.98 }}>
                   <defs>
                     <linearGradient id="parchGrad" x1="0%" x2="0%" y1="0%" y2="100%">
-                      <stop offset="0%" stopColor="#fffaf0" stopOpacity="0.98" />
-                      <stop offset="100%" stopColor="#efe0bf" stopOpacity="0.95" />
+                      <stop offset="0%" stopColor="#fffaf0" stopOpacity="0.99" />
+                      <stop offset="100%" stopColor="#efe0bf" stopOpacity="0.96" />
                     </linearGradient>
-                    <filter id="grain"><feTurbulence baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0.2"/></filter>
                   </defs>
-                  <rect x="0" y="0" width="100" height="60" rx="3" fill="url(#parchGrad)" stroke="#b89f7e" strokeWidth="0.8" />
-                  <g opacity="0.18" stroke="#876543" strokeWidth="0.25">
-                    <path d="M6,8 C20,6 30,10 46,8 C62,6 74,10 94,8" fill="none" />
-                    <path d="M6,20 C22,18 34,22 50,20 C66,18 78,22 94,20" fill="none" />
-                    <path d="M6,34 C22,32 34,36 50,34 C66,32 78,36 94,34" fill="none" />
+                  <rect x="0" y="0" width="100" height="60" rx="3" fill="url(#parchGrad)" stroke="#b89f7e" strokeWidth="0.9" />
+
+                  {/* torn / scalloped edge */}
+                  <path d="M1,4 C6,2 10,8 16,6 C22,4 28,10 34,6 C40,2 46,8 52,6 C58,4 64,10 70,6 C76,2 82,8 88,6 C94,4 98,8 99,6" fill="none" stroke="#a07b50" strokeWidth="0.9" opacity="0.95" />
+                  <path d="M1,56 C6,58 10,52 16,54 C22,56 28,50 34,54 C40,58 46,52 52,54 C58,56 64,50 70,54 C76,58 82,52 88,54 C94,56 98,52 99,54" fill="none" stroke="#a07b50" strokeWidth="0.9" opacity="0.95" />
+                  <path d="M1,4 L1,56" fill="none" stroke="#a07b50" strokeWidth="0.9" opacity="0.95" />
+                  <path d="M99,4 L99,56" fill="none" stroke="#a07b50" strokeWidth="0.9" opacity="0.95" />
+
+                  {/* subtle rhumb / contour lines */}
+                  <g opacity="0.18" stroke="#876543" strokeWidth="0.22" fill="none">
+                    <path d="M6,8 C20,6 30,10 46,8 C62,6 74,10 94,8" />
+                    <path d="M6,20 C22,18 34,22 50,20 C66,18 78,22 94,20" />
+                    <path d="M6,34 C22,32 34,36 50,34 C66,32 78,36 94,34" />
                   </g>
-                  <g stroke="#6b4d30" strokeWidth="0.18" opacity="0.16">
-                    <path d="M12,6 L88,54" strokeDasharray="4,6" fill="none" />
-                    <path d="M12,54 L88,6" strokeDasharray="4,6" fill="none" />
+
+                  {/* rhumb-like dashed cross-lines */}
+                  <g stroke="#6b4d30" strokeWidth="0.16" opacity="0.14">
+                    <path d="M10,6 L90,54" strokeDasharray="5,6" />
+                    <path d="M10,54 L90,6" strokeDasharray="5,6" />
                   </g>
-                  <g transform="translate(82,46) scale(0.8)" opacity="0.9">
-                    <circle cx="8" cy="8" r="8" fill="none" stroke="#5a3f2a" strokeWidth="0.7" />
-                    <g transform="translate(8,8)">
-                      <line x1="0" y1="-6" x2="1.6" y2="0" stroke="#2c1810" strokeWidth="0.9" />
-                      <line x1="0" y1="6" x2="-1" y2="0" stroke="#2c1810" strokeWidth="0.6" />
+
+                  {/* larger decorative compass, anchored bottom-right inside inset */}
+                  <g transform="translate(74,40) scale(1.6)" opacity="0.96">
+                    <circle cx="6" cy="6" r="6" fill="none" stroke="#5a3f2a" strokeWidth="0.8" />
+                    <g transform="translate(6,6)">
+                      {[0,45,90,135,180,225,270,315].map((a) => (
+                        <line key={a} x1={0} y1={0} x2={Math.sin((a*Math.PI)/180)*5} y2={-Math.cos((a*Math.PI)/180)*5} stroke="#2c1810" strokeWidth={a%90===0?0.9:0.5} opacity={0.9} />
+                      ))}
+                      <polygon points="0,-5 1.4,0 0.0,-1.8 -1.4,0" fill="#2c1810" opacity="0.95" />
                     </g>
+                    <text x="6" y="-2" textAnchor="middle" fontSize="3" fill="#2c1810" style={{ fontFamily: 'IM Fell English SC, serif' }}>N</text>
                   </g>
                 </svg>
                 <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
