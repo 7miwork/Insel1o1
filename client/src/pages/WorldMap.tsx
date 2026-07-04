@@ -117,15 +117,19 @@ function CompassRose() {
 function SeaWaves() {
   return (
     <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path d="M5,90 Q15,88 25,90 Q35,92 45,90 Q55,88 65,90 Q75,92 85,90 Q95,88 100,90" fill="none" stroke="#6b4226" strokeWidth="0.12" opacity="0.18" />
-      <path d="M0,94 Q10,92 20,94 Q30,96 40,94 Q50,92 60,94 Q70,96 80,94 Q90,92 100,94" fill="none" stroke="#6b4226" strokeWidth="0.1" opacity="0.14" />
-      <g transform="translate(8,75) scale(0.3)" opacity="0.3">
+      <path d="M5,88 Q15,84 25,88 Q35,92 45,88 Q55,84 65,88 Q75,92 85,88 Q95,84 100,88" fill="none" stroke="#6b4226" strokeWidth="0.14" opacity="0.24" />
+      <path d="M0,94 Q10,91 20,94 Q30,97 40,94 Q50,91 60,94 Q70,97 80,94 Q90,91 100,94" fill="none" stroke="#6b4226" strokeWidth="0.1" opacity="0.18" />
+      <path d="M10,72 Q15,70 20,72 Q25,74 30,72 Q35,70 40,72" fill="none" stroke="#6b4226" strokeWidth="0.08" opacity="0.15" />
+      <g transform="translate(10,74) scale(0.28)" opacity="0.28">
         <path d="M0,0 Q4,-3 8,0" fill="#6b4226" />
-        <line x1="4" y1="0" x2="4" y2="-5" stroke="#6b4226" strokeWidth="0.3" />
+        <line x1="4" y1="0" x2="4" y2="-5" stroke="#6b4226" strokeWidth="0.28" />
       </g>
-      <g transform="translate(85,80) scale(0.25) rotate(-10)" opacity="0.25">
+      <g transform="translate(80,78) scale(0.24) rotate(-8)" opacity="0.22">
         <path d="M0,0 Q3,-2 6,0" fill="#6b4226" />
-        <line x1="3" y1="0" x2="3" y2="-4" stroke="#6b4226" strokeWidth="0.3" />
+        <line x1="3" y1="0" x2="3" y2="-4" stroke="#6b4226" strokeWidth="0.28" />
+      </g>
+      <g transform="translate(40,20) scale(0.5) rotate(12)" opacity="0.12">
+        <path d="M0,0 Q4,-4 8,0 Q4,-2 0,0" fill="none" stroke="#6b4226" strokeWidth="0.18" />
       </g>
     </svg>
   );
@@ -302,11 +306,12 @@ export default function WorldMap() {
               transition={{ duration: 0.3 }}
               className="relative rounded-2xl overflow-auto"
               style={{
-                background: "linear-gradient(145deg, #f5e6c8 0%, #e8d4aa 30%, #f1e3bf 50%, #e6d3aa 80%, #d8c49a 100%)",
-                border: "3px solid #a08c6a",
-                boxShadow: "0 40px 120px rgba(0,0,0,0.6), 0 10px 30px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.15)",
+                background: "radial-gradient(circle at 42% 18%, #f7e6cd 0%, #e5cca0 28%, #d4b082 52%, #b69368 100%)",
+                border: "4px solid rgba(98,74,52,0.95)",
+                boxShadow: "inset 0 0 100px rgba(0,0,0,0.18), 0 40px 120px rgba(0,0,0,0.55)",
                 minHeight: "500px",
                 maxHeight: "80vh",
+                backgroundImage: "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12) 0%, transparent 18%), linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 20%)",
               }}>
               <div id="world-map-container" className="relative w-full h-full" style={{ minHeight: "480px" }}>
                 <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -316,6 +321,12 @@ export default function WorldMap() {
                 <div className="absolute inset-0 pointer-events-none"
                   style={{ boxShadow: "inset 0 0 60px rgba(90,56,33,0.25), inset 0 0 120px rgba(44,24,16,0.15)" }} />
                 <SeaWaves />
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{ backgroundImage: "radial-gradient(circle at 28% 20%, rgba(255,255,255,0.09) 0%, transparent 15%), radial-gradient(circle at 72% 80%, rgba(255,255,255,0.06) 0%, transparent 18%)" }} />
+                <div className="absolute top-5 left-5 rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-[#5d3e24]"
+                  style={{ background: "rgba(251,239,219,0.85)", border: "1px solid rgba(128,98,74,0.5)" }}>
+                  NAVIGATOR'S CHART
+                </div>
                 <CompassRose />
 
                 <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.03]">
@@ -371,19 +382,24 @@ export default function WorldMap() {
                           <span className="text-4xl sm:text-5xl relative z-10">{subject.emoji}</span>
                           {subject.available && (
                             <>
-                              <div className="absolute bottom-4 left-3 w-2 h-3 rounded-full" style={{ background: "#7fa35d" }} />
-                              <div className="absolute bottom-3 right-4 w-1.5 h-2.5 rounded-full" style={{ background: "#6b8e4e" }} />
-                              <div className="absolute bottom-5 left-6 w-1.5 h-2 rounded-full" style={{ background: "#8fc75d" }} />
+                              <div className="absolute bottom-6 left-4 w-3 h-4 rounded-full" style={{ background: "#7b6239" }} />
+                              <div className="absolute bottom-5 right-4 w-2.5 h-3 rounded-full" style={{ background: "#7b6239" }} />
+                              <div className="absolute bottom-4 left-6 w-1.5 h-2 rounded-full" style={{ background: "#c2a274" }} />
                             </>
                           )}
                         </div>
                         <div className="mt-2 text-center max-w-[140px]">
-                          <p className={`font-bold text-sm sm:text-base truncate ${subject.available ? "text-[#2c1810]" : "text-[#7c5e3a]"}`}>
+                          <p className={`font-bold text-sm sm:text-base truncate ${subject.available ? "text-[#3b271b]" : "text-[#7c5e3a]"}`}>
                             {subject.name}
                           </p>
                           <p className="text-[10px] sm:text-xs italic" style={{ color: subject.available ? "#6b4226" : "#7c5e3a" }}>
                             {subject.subtitle}
                           </p>
+                          {!subject.available && (
+                            <p className="text-[10px] mt-1" style={{ color: "#8a7256" }}>
+                              Locked until future voyages
+                            </p>
+                          )}
                           {subject.available && (
                             <div className="flex items-center justify-center gap-1 mt-1">
                               <span className="text-[10px] font-medium" style={{ color: subject.color }}>
@@ -435,35 +451,40 @@ export default function WorldMap() {
               {/* Courses / Archipelagos */}
               <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] rounded-lg overflow-hidden"
                 style={{
-                  background: "linear-gradient(135deg, #d8c49a 0%, #e6d3aa 20%, #f1e3bf 50%, #e6d3aa 80%, #d8c49a 100%)",
-                  border: "3px solid #a08c6a",
-                  boxShadow: "0 12px 40px rgba(0,0,0,0.7), 0 4px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.15)",
+                  background: "radial-gradient(circle at 40% 20%, #f7e6c1 0%, #e0c794 30%, #c6a76f 60%, #af8c55 100%)",
+                  border: "4px solid rgba(96,68,42,0.95)",
+                  boxShadow: "0 14px 40px rgba(0,0,0,0.55), inset 0 0 120px rgba(255,255,255,0.08)",
+                  backgroundImage: "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.12) 0%, transparent 15%), radial-gradient(circle at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 18%)",
                 }}>
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{ backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 15%), repeating-linear-gradient(0deg, transparent, transparent 12px, rgba(0,0,0,0.02) 12px, rgba(0,0,0,0.02) 13px)" }} />
                 <SeaWaves />
                 <div className="absolute top-3 right-3 pointer-events-none">
                   <CompassRose />
                 </div>
-                
-                {programmingArchipelago.courses.map((course, idx) => (
+                <div className="absolute top-4 left-4 rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-[#4c3522]"
+                  style={{ background: "rgba(255,250,234,0.88)", border: "1px solid rgba(117,87,61,0.5)" }}>
+                  ARCHIPELAGO CHART
+                </div>
+                {programmingArchipelago.courses.map((course) => (
                   <motion.button
                     key={course.id}
                     onClick={(e) => goToArchipelago(course, e)}
                     className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer focus:outline-none"
-                    style={{ left: `${25 + idx * 50}%`, top: `${50}%` }}
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.95 }}>
-                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center"
+                    style={{ left: `${course.x}%`, top: `${course.y}%` }}
+                    whileHover={{ scale: 1.12 }}
+                    whileTap={{ scale: 0.96 }}>
+                    <div className="relative w-20 h-20 sm:w-20 sm:h-20 rounded-full flex items-center justify-center"
                       style={{
-                        background: "radial-gradient(circle, #9a8a7a 0%, #7a6a5a 50%, #5a4a3a 100%)",
-                        border: "2px solid #a08c6a",
-                        boxShadow: "0 8px 24px rgba(90,56,33,0.3)",
+                        background: "radial-gradient(circle, #e8d2b0 0%, #c29a66 55%, #8f7046 100%)",
+                        border: "2px solid rgba(123,78,42,0.9)",
+                        boxShadow: "0 8px 18px rgba(72,42,16,0.35)",
                       }}>
                       <span className="text-2xl sm:text-3xl">{course.emoji}</span>
-                      <div className="absolute -bottom-1 left-2 w-1.5 h-2 rounded-full" style={{ background: "#7fa35d" }} />
-                      <div className="absolute -bottom-1 right-3 w-1 h-1.5 rounded-full" style={{ background: "#6b8e4e" }} />
+                      <div className="absolute inset-x-0 bottom-0 h-1 rounded-b-full bg-gradient-to-r from-[#8b5a2d] via-[#b07c45] to-[#8b5a2d] opacity-70" />
                     </div>
                     <div className="mt-2 text-center max-w-[140px]">
-                      <p className="font-bold text-sm truncate" style={{ color: "#2c1810" }}>
+                      <p className="font-bold text-sm truncate" style={{ color: "#3b2717" }}>
                         {t(course.titleKey)}
                       </p>
                       <p className="text-[10px] italic" style={{ color: "#6b4226" }}>
@@ -512,30 +533,46 @@ export default function WorldMap() {
                   boxShadow: "0 12px 40px rgba(0,0,0,0.7), 0 4px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.15)",
                 }}>
                 <SeaWaves />
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{ backgroundImage: "radial-gradient(circle at 20% 15%, rgba(255,255,255,0.08) 0%, transparent 14%), radial-gradient(circle at 75% 80%, rgba(255,255,255,0.07) 0%, transparent 16%)" }} />
                 <div className="absolute top-3 right-3 pointer-events-none">
                   <CompassRose />
                 </div>
-                
+                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  {course.lessons.slice(0, -1).map((lesson, idx) => {
+                    const nextLesson = course.lessons[idx + 1];
+                    if (!nextLesson) return null;
+                    return (
+                      <path key={`${lesson.id}-${nextLesson.id}`}
+                        d={`M${lesson.x},${lesson.y} Q${(lesson.x + nextLesson.x) / 2 + 5},${(lesson.y + nextLesson.y) / 2 - 8} ${nextLesson.x},${nextLesson.y}`}
+                        fill="none"
+                        stroke="#7b542f"
+                        strokeWidth="0.35"
+                        strokeDasharray="2,2"
+                        opacity="0.35" />
+                    );
+                  })}
+                </svg>
                 {/* Lesson island buttons */}
-                {course.lessons.map((lesson, idx) => (
+                {course.lessons.map((lesson) => (
                   <motion.button
                     key={lesson.id}
                     onClick={(e) => goToIsland(lesson.id, e)}
                     className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer focus:outline-none"
-                    style={{ 
-                      left: `${20 + (idx % 4) * 20}%`,
-                      top: `${20 + Math.floor(idx / 4) * 25}%`
+                    style={{
+                      left: `${lesson.x}%`,
+                      top: `${lesson.y}%`
                     }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}>
-                    <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center"
+                    <div className="relative w-14 h-14 sm:w-18 sm:h-18 rounded-full flex items-center justify-center"
                       style={{
-                        background: lesson.available !== false 
-                          ? "radial-gradient(circle, #84b8cb 0%, #6ea7bb 50%, #5a8a9e 100%)"
-                          : "radial-gradient(circle, #9a8a7a 0%, #7a6a5a 50%, #5a4a3a 100%)",
-                        border: "2px solid #a08c6a",
-                        boxShadow: "0 4px 16px rgba(90,56,33,0.3)",
-                        opacity: lesson.available !== false ? 1 : 0.5,
+                        background: lesson.available !== false
+                          ? "radial-gradient(circle, #f4ecd7 0%, #d4b68a 45%, #96714a 100%)"
+                          : "radial-gradient(circle, #7e6c5a 0%, #5f5144 55%, #3e3228 100%)",
+                        border: "2px solid rgba(116,80,43,0.9)",
+                        boxShadow: "0 6px 18px rgba(56,34,17,0.25)",
+                        opacity: lesson.available !== false ? 1 : 0.55,
                       }}>
                       <span className="text-xl sm:text-2xl">{lesson.emoji || "🏝️"}</span>
                       {!lesson.available && (
@@ -545,7 +582,7 @@ export default function WorldMap() {
                       )}
                     </div>
                     <div className="mt-1 text-center max-w-[100px]">
-                      <p className="text-[10px] sm:text-xs font-medium truncate" style={{ color: "#2c1810" }}>
+                      <p className="text-[10px] sm:text-xs font-medium truncate" style={{ color: "#3a2b1f" }}>
                         {lesson.titleKey ? t(lesson.titleKey) : lesson.title}
                       </p>
                     </div>
@@ -591,14 +628,14 @@ export default function WorldMap() {
                   <div className="relative inline-block">
                     <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full flex items-center justify-center mx-auto"
                       style={{
-                        background: "radial-gradient(circle at 40% 35%, #e8d4aa 0%, #d8c49a 40%, #c8b48a 100%)",
-                        border: "3px solid #a08c6a",
-                        boxShadow: "0 12px 40px rgba(90,56,33,0.3), inset 0 -6px 20px rgba(90,56,33,0.15)",
+                        background: "radial-gradient(circle at 40% 35%, #f4e2c7 0%, #d6b892 45%, #a57d57 100%)",
+                        border: "3px solid rgba(123,81,45,0.9)",
+                        boxShadow: "0 12px 40px rgba(90,56,33,0.35), inset 0 -6px 20px rgba(90,56,33,0.18)",
                       }}>
                       <span className="text-5xl sm:text-6xl">{lesson.emoji || "🏝️"}</span>
-                      <div className="absolute top-3 left-5 w-12 h-6 rounded-full bg-white/20 blur-md" />
-                      <div className="absolute bottom-4 left-4 w-2.5 h-3.5 rounded-full" style={{ background: "#7fa35d" }} />
-                      <div className="absolute bottom-3 right-5 w-2 h-3 rounded-full" style={{ background: "#6b8e4e" }} />
+                      <div className="absolute top-2 left-4 w-14 h-6 rounded-full bg-white/20 blur-sm" />
+                      <div className="absolute bottom-5 left-5 w-3 h-4 rounded-full" style={{ background: "#7b5b2e" }} />
+                      <div className="absolute bottom-4 right-6 w-2.5 h-3.5 rounded-full" style={{ background: "#8d6d44" }} />
                     </div>
                   </div>
 
@@ -627,9 +664,10 @@ export default function WorldMap() {
                     disabled={lesson.available === false}
                     className={`inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-lg transition-all ${lesson.available !== false ? "hover:scale-105" : "opacity-50 cursor-not-allowed"}`}
                     style={{
-                      background: lesson.available !== false ? "linear-gradient(135deg, #0D9488, #0F766E)" : "#7c5e3a",
-                      color: "#f1e3bf",
-                      boxShadow: lesson.available !== false ? "0 8px 24px rgba(13,148,136,0.4)" : "none",
+                      background: lesson.available !== false ? "linear-gradient(135deg, #8b5e2d, #c09b6a)" : "#7c5e3a",
+                      color: lesson.available !== false ? "#2b1607" : "#e4d3b5",
+                      boxShadow: lesson.available !== false ? "0 10px 24px rgba(148,108,59,0.35)" : "none",
+                      border: lesson.available !== false ? "1px solid rgba(80,51,27,0.35)" : "1px solid rgba(124,94,58,0.5)",
                     }}>
                     <PlayCircle className="w-6 h-6" />
                     {lesson.available !== false ? "Start Lesson" : "🔒 Locked"}
