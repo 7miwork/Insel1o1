@@ -52,4 +52,4 @@ Nach dem Upload:
 
 ## Alternativen, falls du Express-Funktionen brauchst
 
-Falls die App später echte Backend-Features (API, Auth, Datenbank) benötigt, bietet Hostinger auch **Dynamic Hosting** mit Node.js-Unterstützung an. Dann müsste der `server/index.ts` deployt und konfiguriert werden.
+Falls die App später echte Backend-Features (API, Auth, Datenbank) benötigt, bietet Hostinger auch **Dynamic Hosting** mit Node.js-Unterstützung an. Dann müsste der `server/index.ts` deployt und konfiguriert werden. 
