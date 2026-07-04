@@ -42,16 +42,16 @@ jobs:
           tail -5 dist/index.html
           echo "=== Verification complete ==="
 
-      - name: Deploy to Hostinger via FTPS
+      - name: Deploy to Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.HOSTINGER_FTP_HOST }}
           username: ${{ secrets.HOSTINGER_FTP_USER }}
           password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
           port: 21
-          protocol: ftps
+          protocol: ftp
           local-dir: dist/
-          server-dir: /public_html/
+          server-dir: public_html/
           exclude: |
             **/.git*
             **/.git*/**
