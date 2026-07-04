@@ -135,7 +135,7 @@ async function upload(client, config) {
   const remoteRoot = "/public_html";
 
   await client.ensureDir(remoteRoot);
-  await client.changeWorkingDirectory(remoteRoot);
+  await client.cd(remoteRoot);
 
   const { clear } = await prompt({
     type: "confirm",
