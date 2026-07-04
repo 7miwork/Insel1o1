@@ -315,15 +315,20 @@ export default function WorldMap() {
                 backgroundImage: "radial-gradient(circle at 18% 14%, rgba(255,255,255,0.16) 0%, transparent 14%), radial-gradient(circle at 84% 78%, rgba(255,255,255,0.08) 0%, transparent 18%), repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px), repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px)",
               }}>
               <div id="world-map-container" className="relative w-full h-full" style={{ minHeight: "480px" }}>
+                <div className="absolute inset-4 rounded-[1.5rem] border border-[#8b6d4f] bg-[rgba(255,250,238,0.94)] shadow-[inset_0_0_40px_rgba(90,56,33,0.18)] pointer-events-none" />
+                <div className="absolute inset-6 rounded-[1.25rem] pointer-events-none"
+                  style={{ background: "linear-gradient(180deg, rgba(255,250,238,0.94) 0%, rgba(244,228,199,0.94) 34%, rgba(232,206,168,0.92) 100%)" }} />
+                <div className="absolute inset-8 rounded-[1.25rem] opacity-[0.08] pointer-events-none"
+                  style={{ backgroundImage: "linear-gradient(90deg, rgba(0,0,0,0.03) 0%, transparent 1px, transparent 100%), linear-gradient(rgba(0,0,0,0.03) 0%, transparent 1px, transparent 100%)", backgroundSize: "50px 50px" }} />
                 <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-                  style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E\")", backgroundSize: "200px 200px" }} />
+                  style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E\")", backgroundSize: "200px 200px" }} />
                 <div className="absolute inset-0 pointer-events-none"
-                  style={{ background: "radial-gradient(ellipse at 50% 55%, rgba(132,184,203,0.20) 0%, rgba(110,167,187,0.12) 40%, transparent 70%)" }} />
+                  style={{ background: "radial-gradient(ellipse at 50% 55%, rgba(230,230,218,0.18) 0%, rgba(214,193,158,0.12) 40%, transparent 70%)" }} />
                 <div className="absolute inset-0 pointer-events-none"
-                  style={{ boxShadow: "inset 0 0 60px rgba(90,56,33,0.25), inset 0 0 120px rgba(44,24,16,0.15)" }} />
+                  style={{ boxShadow: "inset 0 0 80px rgba(90,56,33,0.18), inset 0 0 140px rgba(44,24,16,0.10)" }} />
                 <SeaWaves />
                 <div className="absolute inset-0 pointer-events-none"
-                  style={{ backgroundImage: "radial-gradient(circle at 28% 20%, rgba(255,255,255,0.09) 0%, transparent 15%), radial-gradient(circle at 72% 80%, rgba(255,255,255,0.06) 0%, transparent 18%)" }} />
+                  style={{ backgroundImage: "radial-gradient(circle at 28% 20%, rgba(255,255,255,0.12) 0%, transparent 15%), radial-gradient(circle at 72% 80%, rgba(255,255,255,0.08) 0%, transparent 18%)" }} />
                 <div className="absolute top-5 left-5 rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-[#5d3e24]"
                   style={{ background: "rgba(247,233,209,0.88)", border: "1px solid rgba(128,98,74,0.45)" }}>
                   NAVIGATOR'S CHART

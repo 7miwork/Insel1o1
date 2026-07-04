@@ -316,8 +316,12 @@ function IslandView({ course, t, onLessonClick }: {
         }}>
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='250' height='250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E\")", backgroundSize: "220px 220px" }} />
+        <div className="absolute inset-0 rounded-[1.5rem] border border-[#8b6d4f] pointer-events-none"
+          style={{ background: "rgba(247,235,210,0.90)", boxShadow: "inset 0 0 28px rgba(110,78,50,0.16)" }} />
+        <div className="absolute inset-5 rounded-[1.25rem] pointer-events-none"
+          style={{ background: "linear-gradient(180deg, rgba(255,250,238,0.94) 0%, rgba(243,226,191,0.94) 38%, rgba(229,206,164,0.90) 100%)" }} />
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: "radial-gradient(circle at 45% 48%, rgba(120,82,50,0.18) 0%, rgba(110,72,46,0.10) 28%, transparent 68%)"
+          background: "radial-gradient(circle at 45% 48%, rgba(230,220,190,0.24) 0%, rgba(210,180,140,0.16) 28%, transparent 68%)"
         }} />
         <div className="absolute inset-0 pointer-events-none" style={{
           boxShadow: "inset 0 0 70px rgba(90,56,33,0.24), inset 0 0 130px rgba(44,24,16,0.14)"
