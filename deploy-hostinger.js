@@ -34,7 +34,7 @@ async function getFtpConfig() {
     const { error } = dotenv.config({ path: FTP_CONFIG_PATH });
     if (!error && process.env.FTP_HOST && process.env.FTP_USER && process.env.FTP_PASSWORD) {
       return {
-        host: process.env.FTP_HOST.replace(/^https?:\/\//i, "").replace(/\/$/, ""),
+        host: process.env.FTP_HOST.trim().replace(/^(https?|ftp):\/\//i, "").replace(/\/$/, ""),
         user: process.env.FTP_USER,
         password: process.env.FTP_PASSWORD,
         port: parseInt(process.env.FTP_PORT || "21", 10),
@@ -47,7 +47,7 @@ async function getFtpConfig() {
       type: "text",
       name: "host",
       message: "FTP-Host (Hostinger FTP Hostname):",
-      initial: "ftp.I-Land1o1.ch",
+      initial: "ftp.deine-domain.ch",
       validate: (value) => (!value ? "Host ist erforderlich" : true),
     },
     {
@@ -69,7 +69,7 @@ async function getFtpConfig() {
     },
   ]);
 
-  values.host = values.host.replace(/^https?:\/\//i, "").replace(/\/$/, "");
+  values.host = values.host.trim().replace(/^(https?|ftp):\/\//i, "").replace(/\/$/, "");
   await askIfSave(values);
   return values;
 }
@@ -136,7 +136,18 @@ async function upload(client, config) {
 
   await client.ensureDir(remoteRoot);
   await client.changeWorkingDirectory(remoteRoot);
-  await client.clearWorkingDir();
+
+  const { clear } = await prompt({
+    type: "confirm",
+    name: "clear",
+    message: `Alle bestehenden Dateien in ${remoteRoot} auf dem Server löschen, bevor der neue Build hochgeladen wird?`,
+    initial: true,
+  });
+  if (clear) {
+    await client.clearWorkingDir();
+  } else {
+    console.log("Überspringe Löschvorgang – Dateien werden nur überschrieben/ergänzt.");
+  }
 
   client.trackProgress((info) => {
     console.log(`Lade hoch: ${info.name}`);
