@@ -41,8 +41,8 @@ const SUBJECTS: SubjectRegion[] = [
     route: "/world/coding",
     totalCourses: 2,
     completedCourses: 0,
-    x: 50,
-    y: 55,
+    x: 56,
+    y: 62,
   },
   {
     id: "mathematics",
@@ -55,8 +55,8 @@ const SUBJECTS: SubjectRegion[] = [
     route: "#",
     totalCourses: 0,
     completedCourses: 0,
-    x: 18,
-    y: 25,
+    x: 14,
+    y: 22,
   },
   {
     id: "science",
@@ -69,8 +69,8 @@ const SUBJECTS: SubjectRegion[] = [
     route: "#",
     totalCourses: 0,
     completedCourses: 0,
-    x: 82,
-    y: 30,
+    x: 84,
+    y: 28,
   },
   {
     id: "language",
@@ -83,8 +83,8 @@ const SUBJECTS: SubjectRegion[] = [
     route: "#",
     totalCourses: 0,
     completedCourses: 0,
-    x: 25,
-    y: 80,
+    x: 32,
+    y: 76,
   },
 ];
 
@@ -117,19 +117,20 @@ function CompassRose() {
 function SeaWaves() {
   return (
     <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path d="M5,88 Q15,84 25,88 Q35,92 45,88 Q55,84 65,88 Q75,92 85,88 Q95,84 100,88" fill="none" stroke="#6b4226" strokeWidth="0.14" opacity="0.24" />
-      <path d="M0,94 Q10,91 20,94 Q30,97 40,94 Q50,91 60,94 Q70,97 80,94 Q90,91 100,94" fill="none" stroke="#6b4226" strokeWidth="0.1" opacity="0.18" />
-      <path d="M10,72 Q15,70 20,72 Q25,74 30,72 Q35,70 40,72" fill="none" stroke="#6b4226" strokeWidth="0.08" opacity="0.15" />
-      <g transform="translate(10,74) scale(0.28)" opacity="0.28">
-        <path d="M0,0 Q4,-3 8,0" fill="#6b4226" />
-        <line x1="4" y1="0" x2="4" y2="-5" stroke="#6b4226" strokeWidth="0.28" />
+      <path d="M5,88 Q15,84 25,88 Q35,92 45,88 Q55,84 65,88 Q75,92 85,88 Q95,84 100,88" fill="none" stroke="#7a5635" strokeWidth="0.18" opacity="0.26" />
+      <path d="M0,94 Q10,91 20,94 Q30,97 40,94 Q50,91 60,94 Q70,97 80,94 Q90,91 100,94" fill="none" stroke="#7a5635" strokeWidth="0.14" opacity="0.18" />
+      <path d="M8,72 Q18,68 28,72 Q38,76 48,72 Q58,68 68,72 Q78,76 88,72" fill="none" stroke="#7a5635" strokeWidth="0.1" opacity="0.16" />
+      <path d="M15,78 C20,72 30,74 35,70" fill="none" stroke="#7a5635" strokeWidth="0.08" opacity="0.18" />
+      <g transform="translate(12,74) scale(0.28)" opacity="0.32">
+        <path d="M0,0 Q4,-3 8,0" fill="#7a5635" />
+        <line x1="4" y1="0" x2="4" y2="-5" stroke="#7a5635" strokeWidth="0.28" />
       </g>
-      <g transform="translate(80,78) scale(0.24) rotate(-8)" opacity="0.22">
-        <path d="M0,0 Q3,-2 6,0" fill="#6b4226" />
-        <line x1="3" y1="0" x2="3" y2="-4" stroke="#6b4226" strokeWidth="0.28" />
+      <g transform="translate(80,78) scale(0.24) rotate(-8)" opacity="0.24">
+        <path d="M0,0 Q3,-2 6,0" fill="#7a5635" />
+        <line x1="3" y1="0" x2="3" y2="-4" stroke="#7a5635" strokeWidth="0.28" />
       </g>
-      <g transform="translate(40,20) scale(0.5) rotate(12)" opacity="0.12">
-        <path d="M0,0 Q4,-4 8,0 Q4,-2 0,0" fill="none" stroke="#6b4226" strokeWidth="0.18" />
+      <g transform="translate(38,20) scale(0.5) rotate(12)" opacity="0.14">
+        <path d="M0,0 Q4,-4 8,0 Q4,-2 0,0" fill="none" stroke="#7a5635" strokeWidth="0.18" />
       </g>
     </svg>
   );
@@ -306,12 +307,12 @@ export default function WorldMap() {
               transition={{ duration: 0.3 }}
               className="relative rounded-2xl overflow-auto"
               style={{
-                background: "radial-gradient(circle at 42% 18%, #f7e6cd 0%, #e5cca0 28%, #d4b082 52%, #b69368 100%)",
-                border: "4px solid rgba(98,74,52,0.95)",
-                boxShadow: "inset 0 0 100px rgba(0,0,0,0.18), 0 40px 120px rgba(0,0,0,0.55)",
+                background: "radial-gradient(circle at 32% 16%, #f8e6cf 0%, #e1c897 26%, #c9a467 55%, #8c6740 100%)",
+                border: "4px solid rgba(95,66,41,0.95)",
+                boxShadow: "inset 0 0 112px rgba(0,0,0,0.18), 0 40px 120px rgba(0,0,0,0.48)",
                 minHeight: "500px",
                 maxHeight: "80vh",
-                backgroundImage: "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12) 0%, transparent 18%), linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 20%)",
+                backgroundImage: "radial-gradient(circle at 18% 14%, rgba(255,255,255,0.16) 0%, transparent 14%), radial-gradient(circle at 84% 78%, rgba(255,255,255,0.08) 0%, transparent 18%), repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(0,0,0,0.03) 8px, rgba(0,0,0,0.03) 9px)",
               }}>
               <div id="world-map-container" className="relative w-full h-full" style={{ minHeight: "480px" }}>
                 <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -324,18 +325,22 @@ export default function WorldMap() {
                 <div className="absolute inset-0 pointer-events-none"
                   style={{ backgroundImage: "radial-gradient(circle at 28% 20%, rgba(255,255,255,0.09) 0%, transparent 15%), radial-gradient(circle at 72% 80%, rgba(255,255,255,0.06) 0%, transparent 18%)" }} />
                 <div className="absolute top-5 left-5 rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-[#5d3e24]"
-                  style={{ background: "rgba(251,239,219,0.85)", border: "1px solid rgba(128,98,74,0.5)" }}>
+                  style={{ background: "rgba(247,233,209,0.88)", border: "1px solid rgba(128,98,74,0.45)" }}>
                   NAVIGATOR'S CHART
                 </div>
-                <CompassRose />
+                <div className="absolute bottom-6 right-6 pointer-events-none opacity-[0.92]">
+                  <CompassRose />
+                </div>
 
-                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.03]">
+                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.05]">
                   <defs>
-                    <pattern id="worldGrid" width="50" height="50" patternUnits="userSpaceOnUse">
-                      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#2c1810" strokeWidth="0.8" />
+                    <pattern id="worldGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                      <path d="M40 0 L0 0 0 40" fill="none" stroke="#4a321e" strokeWidth="0.5" opacity="0.55" />
                     </pattern>
                   </defs>
                   <rect width="100%" height="100%" fill="url(#worldGrid)" />
+                  <path d="M10,20 L90,20 M10,40 L90,40 M10,60 L90,60 M10,80 L90,80" fill="none" stroke="#4a321e" strokeWidth="0.3" opacity="0.18" />
+                  <path d="M20,10 L20,90 M40,10 L40,90 M60,10 L60,90 M80,10 L80,90" fill="none" stroke="#4a321e" strokeWidth="0.3" opacity="0.18" />
                 </svg>
 
                 {/* Subject Regions */}
