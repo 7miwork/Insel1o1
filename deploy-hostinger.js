@@ -128,6 +128,7 @@ async function verifyUpload(client, localRoot, remoteRoot) {
   } else {
     console.log(`✅ Alle ${localFiles.length} Dateien vollständig hochgeladen.`);
   }
+  return missing;
 }
 
 async function upload(client, config) {
@@ -156,7 +157,29 @@ async function upload(client, config) {
   await client.uploadFromDir(localRoot);
   client.trackProgress();
 
-  await verifyUpload(client, localRoot, remoteRoot);
+  const missing = await verifyUpload(client, localRoot, remoteRoot);
+
+  if (missing.length > 0) {
+    console.log("\n🔁 Versuche fehlende Dateien einzeln erneut hochzuladen ...");
+    for (const relPath of missing) {
+      const localPath = path.join(localRoot, relPath);
+      const remotePath = path.posix.join(remoteRoot, relPath);
+      const remoteDir = path.posix.dirname(remotePath);
+      try {
+        if (remoteDir !== remoteRoot) {
+          await client.ensureDir(remoteDir);
+          await client.cd(remoteRoot);
+        }
+        await client.uploadFrom(localPath, remotePath);
+        console.log(`  ✅ Erneut hochgeladen: ${relPath}`);
+      } catch (retryErr) {
+        console.error(`  ❌ Fehlgeschlagen bei "${relPath}": ${retryErr.message || retryErr}`);
+        if (retryErr.code) console.error(`     FTP-Fehlercode: ${retryErr.code}`);
+      }
+    }
+    console.log("\nErneute Prüfung nach dem Retry:");
+    await verifyUpload(client, localRoot, remoteRoot);
+  }
 }
 
 async function main() {
@@ -164,7 +187,7 @@ async function main() {
   await runBuild();
 
   const client = new Client();
-  client.ftp.verbose = false;
+  client.ftp.verbose = process.env.DEPLOY_DEBUG === "1";
 
   try {
     await client.access({
