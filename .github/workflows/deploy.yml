@@ -59,5 +59,4 @@ jobs:
             **/.env*
             **/.vscode/**
           delete-existing: true
-          dangerous-clean-slate: true
           timeout: 180
