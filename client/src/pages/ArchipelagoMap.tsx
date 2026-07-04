@@ -10,34 +10,62 @@ import {
 /* ── Decorative Compass Rose SVG ── */
 function CompassRose({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 100 100" className={className} style={{ width: "120px", height: "120px" }}>
-      <g opacity="0.7">
-        <circle cx="50" cy="50" r="48" fill="none" stroke="#2c1810" strokeWidth="0.8" />
-        <circle cx="50" cy="50" r="45" fill="none" stroke="#2c1810" strokeWidth="0.4" strokeDasharray="3,2" />
-        <circle cx="50" cy="50" r="42" fill="none" stroke="#2c1810" strokeWidth="0.3" />
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => {
-          const isMajor = angle % 90 === 0;
-          const innerR = isMajor ? 8 : 16;
-          const outerR = isMajor ? 40 : 32;
+    <svg viewBox="0 0 120 120" className={className} style={{ width: "120px", height: "120px" }}>
+      <g opacity="0.85">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#2c1810" strokeWidth="1" />
+        <circle cx="60" cy="60" r="44" fill="none" stroke="#2c1810" strokeWidth="0.55" strokeDasharray="5,3" />
+        <circle cx="60" cy="60" r="36" fill="none" stroke="#2c1810" strokeWidth="0.4" />
+        {[...Array(16).keys()].map((i) => {
+          const angle = i * 22.5;
           const rad = (angle * Math.PI) / 180;
-          const x1 = 50 + Math.sin(rad) * innerR;
-          const y1 = 50 - Math.cos(rad) * innerR;
-          const x2 = 50 + Math.sin(rad) * outerR;
-          const y2 = 50 - Math.cos(rad) * outerR;
+          const inner = i % 2 === 0 ? 12 : 18;
+          const outer = i % 2 === 0 ? 44 : 52;
           return (
-            <line key={angle} x1={x1} y1={y1} x2={x2} y2={y2}
-              stroke={isMajor ? "#1a0e06" : "#3b2416"} strokeWidth={isMajor ? "2" : "1"} opacity={isMajor ? "0.9" : "0.6"} />
+            <line key={angle}
+              x1={60 + Math.sin(rad) * inner}
+              y1={60 - Math.cos(rad) * inner}
+              x2={60 + Math.sin(rad) * outer}
+              y2={60 - Math.cos(rad) * outer}
+              stroke="#2c1810"
+              strokeWidth={i % 4 === 0 ? 1.6 : 0.9}
+              opacity={i % 4 === 0 ? 0.9 : 0.55} />
           );
         })}
-        <text x="50" y="8" textAnchor="middle" fontSize="5" fontWeight="bold" fill="#1a0e06">N</text>
-        <text x="92" y="52" textAnchor="middle" fontSize="4" fill="#2c1810">E</text>
-        <text x="50" y="95" textAnchor="middle" fontSize="4" fill="#2c1810">S</text>
-        <text x="8" y="52" textAnchor="middle" fontSize="4" fill="#2c1810">W</text>
-        <circle cx="50" cy="50" r="3" fill="#2c1810" opacity="0.8" />
-        <circle cx="50" cy="50" r="1.5" fill="#0d0705" />
+        {['N', 'E', 'S', 'W'].map((letter, idx) => {
+          const angle = idx * 90;
+          const rad = (angle * Math.PI) / 180;
+          const x = 60 + Math.sin(rad) * 58;
+          const y = 60 - Math.cos(rad) * 58 + (letter === 'S' ? 1 : 0);
+          return (
+            <text key={letter} x={x} y={y} textAnchor="middle" fontSize="6" fontWeight="700" fill="#2c1810" style={{ fontFamily: 'IM Fell English SC, serif' }}>
+              {letter}
+            </text>
+          );
+        })}
+        <polygon points="60,24 63,34 60,30 57,34" fill="#2c1810" opacity="0.95" />
+        <circle cx="60" cy="60" r="3" fill="#2c1810" opacity="0.9" />
+        <circle cx="60" cy="60" r="1.2" fill="#0d0705" />
       </g>
     </svg>
   );
+}
+
+function wrapLabelText(text: string, maxChars: number): string[] {
+  const words = text.split(' ');
+  const lines: string[] = [];
+  let current = '';
+  for (const word of words) {
+    const next = current ? `${current} ${word}` : word;
+    if (next.length <= maxChars || !current) {
+      current = next;
+    } else {
+      lines.push(current);
+      current = word;
+      if (lines.length === 2) break;
+    }
+  }
+  if (current && lines.length < 2) lines.push(current);
+  return lines;
 }
 
 /** Safely convert a YouTube URL to an embed-compatible URL */
@@ -275,13 +303,13 @@ function IslandView({ course, t, onLessonClick }: {
           boxShadow: "0 40px 120px rgba(0,0,0,0.6), 0 10px 30px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.15), 3px 3px 0 1px rgba(58,36,22,0.25)",
           borderRadius: "1rem",
         }}>
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E\")", backgroundSize: "200px 200px" }} />
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
+          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='250' height='250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E\")", backgroundSize: "220px 220px" }} />
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: "radial-gradient(ellipse at 50% 45%, rgba(132,184,203,0.12) 0%, rgba(110,167,187,0.08) 50%, transparent 80%)"
+          background: "radial-gradient(circle at 50% 55%, rgba(48,96,104,0.14) 0%, rgba(36,74,80,0.08) 30%, transparent 70%)"
         }} />
         <div className="absolute inset-0 pointer-events-none" style={{
-          boxShadow: "inset 0 0 50px rgba(90,56,33,0.25), inset 0 0 100px rgba(44,24,16,0.15)"
+          boxShadow: "inset 0 0 40px rgba(90,56,33,0.22), inset 0 0 110px rgba(44,24,16,0.12)"
         }} />
 
         {!isMobile && (
@@ -297,11 +325,18 @@ function IslandView({ course, t, onLessonClick }: {
                   <stop offset="60%" stopColor="#6b8e4e" />
                   <stop offset="100%" stopColor="#4a6b35" stopOpacity="0" />
                 </radialGradient>
+                <filter id="paperGrain">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.17" numOctaves="2" result="noise" />
+                  <feColorMatrix type="saturate" values="0.2" />
+                  <feBlend in="SourceGraphic" in2="noise" mode="multiply" />
+                </filter>
               </defs>
 
-              <ellipse cx={(minX + maxX) / 2} cy={(minY + maxY) / 2}
-                rx={vw * 0.42} ry={vh * 0.38}
-                fill="url(#islandGreen)" opacity="0.18" />
+              <rect x={minX} y={minY} width={vw} height={vh}
+                fill="rgba(248,236,211,0.28)"
+                filter="url(#paperGrain)" />
+              <path d={`M${minX + vw*0.1},${minY + vh*0.1} C${minX + vw*0.2},${minY + vh*0.05} ${minX + vw*0.4},${minY + vh*0.08} ${minX + vw*0.52},${minY + vh*0.15} C${minX + vw*0.67},${minY + vh*0.25} ${minX + vw*0.72},${minY + vh*0.42} ${minX + vw*0.85},${minY + vh*0.48} C${minX + vw*0.94},${minY + vh*0.54} ${minX + vw*0.98},${minY + vh*0.65} ${minX + vw*0.9},${minY + vh*0.78}`}
+                fill="none" stroke="rgba(82,57,34,0.16)" strokeWidth="0.4" opacity="0.55" />
 
               {lessons.map((lesson: any, idx: number) => {
                 if (idx >= lessons.length - 1) return null;
@@ -333,63 +368,72 @@ function IslandView({ course, t, onLessonClick }: {
                 const isFinal = lesson.isFinalIsland;
                 const isMain = lesson.isMainIsland;
                 const pos = getLessonPos(lesson);
-                const nodeSize = isFinal ? 12 : isMain ? 10 : 5.5;
-                const fontSize = isFinal ? 5.5 : isMain ? 4.5 : 3.2;
+                const nodeSize = isFinal ? 14 : isMain ? 12 : 8;
+                const labelWidth = isFinal ? 22 : isMain ? 18 : 16;
+                const labelFontSize = isFinal ? 3.5 : isMain ? 3.2 : 2.8;
+
+                const islandPath = `M${pos.x - nodeSize * 1.2},${pos.y + nodeSize * 0.2} C${pos.x - nodeSize * 1.4},${pos.y - nodeSize * 1.1} ${pos.x - nodeSize * 0.3},${pos.y - nodeSize * 1.8} ${pos.x + nodeSize * 0.6},${pos.y - nodeSize * 1.4} C${pos.x + nodeSize * 1.6},${pos.y - nodeSize * 1.2} ${pos.x + nodeSize * 1.5},${pos.y + nodeSize * 0.7} ${pos.x + nodeSize * 0.8},${pos.y + nodeSize * 1.4} C${pos.x + nodeSize * 0.2},${pos.y + nodeSize * 1.75} ${pos.x - nodeSize * 0.9},${pos.y + nodeSize * 1.45} ${pos.x - nodeSize * 1.3},${pos.y + nodeSize * 0.6} Z`;
+                const shorePath = `M${pos.x - nodeSize * 1.15},${pos.y + nodeSize * 0.4} C${pos.x - nodeSize * 1.25},${pos.y - nodeSize * 0.2} ${pos.x - nodeSize * 0.15},${pos.y - nodeSize * 0.9} ${pos.x + nodeSize * 0.55},${pos.y - nodeSize * 0.55} C${pos.x + nodeSize * 1.25},${pos.y - nodeSize * 0.38} ${pos.x + nodeSize * 1.2},${pos.y + nodeSize * 0.45} ${pos.x + nodeSize * 0.75},${pos.y + nodeSize * 0.95}`;
 
                 return (
                   <g key={lesson.id}
                     onClick={() => isAvailable && onLessonClick(lesson.id)}
                     className={isAvailable ? "cursor-pointer group" : "cursor-not-allowed"}>
 
+                    <path d={islandPath}
+                      fill={isCompleted ? "#e6d8b4" : isCurrent ? "#f4e8c7" : isAvailable ? "#f7ecd7" : "#ccc0a4"}
+                      stroke="#7a5f3d"
+                      strokeWidth="0.8"
+                      opacity="0.98"
+                      style={{ filter: "drop-shadow(0 2px 6px rgba(36,24,12,0.18))" }} />
+                    <path d={shorePath}
+                      fill="none"
+                      stroke="#e4cfa8"
+                      strokeWidth="1.5"
+                      opacity="0.85"
+                      strokeLinecap="round" />
+
+                    <path d={`M${pos.x - nodeSize * 0.7},${pos.y - nodeSize * 0.2} C${pos.x - nodeSize * 0.3},${pos.y - nodeSize * 0.8} ${pos.x + nodeSize * 0.2},${pos.y - nodeSize * 0.9} ${pos.x + nodeSize * 0.8},${pos.y - nodeSize * 0.35}`}
+                      fill="none"
+                      stroke="#6b8e4e"
+                      strokeWidth="0.6"
+                      opacity="0.75"
+                      strokeLinecap="round" />
+                    <circle cx={pos.x + nodeSize * 0.45} cy={pos.y - nodeSize * 0.37} r="1.2" fill="#4f7a35" opacity="0.9" />
+                    <path d={`M${pos.x + nodeSize * 0.53},${pos.y - nodeSize * 0.18} l-0.8,-1.5 l0.4,0.2 l-0.4,-0.2`} fill="#4f7a35" opacity="0.85" />
+
                     {isLocked && (
-                      <circle cx={pos.x} cy={pos.y} r={nodeSize + 4} fill="rgba(90,74,58,0.12)" />
-                    )}
-
-                    {isCurrent && (
-                      <circle cx={pos.x} cy={pos.y} r={nodeSize + 3} fill="none" stroke="#7fa35d" strokeWidth="0.6" opacity="0.25">
-                        <animate attributeName="r" values={`${nodeSize + 3};${nodeSize + 6};${nodeSize + 3}`} dur="2.5s" repeatCount="indefinite" />
-                        <animate attributeName="opacity" values="0.25;0.08;0.25" dur="2.5s" repeatCount="indefinite" />
-                      </circle>
-                    )}
-
-                    <circle cx={pos.x} cy={pos.y} r={nodeSize}
-                      fill={isCompleted ? "#7fa35d" : isCurrent ? "#6ea7bb" : isAvailable ? "#84b8cb" : "#5a4a3a"}
-                      stroke={isCompleted ? "#6b8e4e" : isCurrent ? "#4a8a5a" : isAvailable ? "#5a8a9e" : "#4a3a2a"}
-                      strokeWidth={isCurrent ? "0.8" : "0.5"}
-                      style={{
-                        filter: isCompleted ? "drop-shadow(0 2px 4px rgba(107,142,78,0.4))" : isCurrent ? "drop-shadow(0 2px 6px rgba(110,167,187,0.5))" : "drop-shadow(0 2px 3px rgba(0,0,0,0.3))"
-                      }} />
-
-                    <text x={pos.x} y={pos.y + fontSize * 0.35} textAnchor="middle" fontSize={fontSize}
-                      className="pointer-events-none"
-                      style={{ filter: isLocked ? "grayscale(1) opacity(0.4)" : "none" }}>
-                      {lesson.emoji}
-                    </text>
-
-                    {isCompleted && (
-                      <g transform={`translate(${pos.x + nodeSize * 0.6},${pos.y - nodeSize * 0.9})`}>
-                        <line x1="0" y1="0" x2="0" y2="-3.5" stroke="#2c1810" strokeWidth="0.4" />
-                        <path d="M0,-3.5 L3,-2.5 L0,-1.5" fill="#e74c3c" opacity="0.8" />
+                      <g transform={`translate(${pos.x + nodeSize * 0.6},${pos.y - nodeSize * 0.3})`}>
+                        <circle cx="0" cy="0" r="3.8" fill="rgba(116,80,40,0.18)" />
+                        <path d="M-1,1 Q0,-1 1,1" fill="none" stroke="#7a5a2f" strokeWidth="0.9" />
+                        <path d="M-1.2,0.5 L-0.8,0.5" stroke="#7a5a2f" strokeWidth="0.9" />
+                        <path d="M-2,0.2 L2,0.2" stroke="#7a5a2f" strokeWidth="0.7" />
                       </g>
                     )}
 
-                    {isLocked && (
-                      <text x={pos.x} y={pos.y + fontSize * 0.35} textAnchor="middle" fontSize="3" fill="#4a3a2a" opacity="0.5">🔒</text>
+                    {isCurrent && (
+                      <g transform={`translate(${pos.x},${pos.y - nodeSize * 0.35})`}>
+                        <path d="M0,-1.6 l0.7,1.4 h-1.4 z" fill="#7f4c1c" stroke="#4b2f18" strokeWidth="0.5" />
+                        <line x1="0" y1="-1.6" x2="0" y2="-3.4" stroke="#4b2f18" strokeWidth="0.4" />
+                      </g>
                     )}
 
-                    <text x={pos.x} y={pos.y + nodeSize + 2.5} textAnchor="middle" fontSize="1.8"
-                      fill={isLocked ? "#7a6a5a" : "#2c1810"}
-                      opacity={isLocked ? 0.4 : 0.8}
-                      fontFamily="serif"
+                    <text x={pos.x} y={pos.y + nodeSize * 1.7} textAnchor="middle" fontSize={labelFontSize}
+                      fontFamily="Inter, system-ui, sans-serif"
                       className="pointer-events-none"
-                      style={{ fontStyle: "italic" }}>
-                      {(lesson.title ?? "").length > 18 ? (lesson.title ?? "").substring(0, 16) + "…" : (lesson.title ?? "")}
+                      style={{ fill: isLocked ? "#7a6a5a" : "#3d2b1a", fontWeight: 600 }}>
+                      {wrapLabelText(lesson.titleKey ? t(lesson.titleKey) : lesson.title, isFinal ? 22 : isMain ? 18 : 16).map((line, lineIndex) => (
+                        <tspan key={lineIndex} x={pos.x} dy={lineIndex === 0 ? 0 : labelFontSize * 1.2}>{line}</tspan>
+                      ))}
                     </text>
 
-                    <text x={pos.x} y={pos.y + nodeSize + 4.5} textAnchor="middle" fontSize="1.2"
-                      fill="#6b4226" opacity="0.4" className="pointer-events-none">
-                      {idx + 1}
-                    </text>
+                    {isLocked && (
+                      <text x={pos.x} y={pos.y + nodeSize * 2.4} textAnchor="middle" fontSize="2"
+                        fontFamily="IM Fell English SC, serif"
+                        fill="#7a5a2f" opacity="0.8">
+                        Coming Soon
+                      </text>
+                    )}
                   </g>
                 );
               })}
