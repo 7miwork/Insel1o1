@@ -305,13 +305,11 @@ export default function WorldMap() {
               initial={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              className="relative rounded-2xl overflow-auto"
+              className="relative rounded-2xl"
               style={{
                 background: "linear-gradient(180deg, #f7e1c0 0%, #e2c7a5 12%, transparent 24%), radial-gradient(circle at 52% 42%, #e2f3f9 0%, #a8d4e1 28%, #6b9db0 54%, #3b6d81 100%)",
                 border: "4px solid rgba(95,66,41,0.95)",
                 boxShadow: "inset 0 0 112px rgba(0,0,0,0.18), 0 40px 120px rgba(0,0,0,0.48)",
-                minHeight: "500px",
-                maxHeight: "80vh",
                 backgroundImage: "radial-gradient(circle at 18% 14%, rgba(255,255,255,0.16) 0%, transparent 14%), radial-gradient(circle at 84% 78%, rgba(255,255,255,0.08) 0%, transparent 18%), repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px), repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px)",
               }}>
               <div id="world-map-container" className="relative w-full h-full" style={{ minHeight: "480px" }}>
