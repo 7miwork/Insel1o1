@@ -45,6 +45,8 @@ import {
 } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { authService } from "@/lib/auth-service";
+import { useTeacherDashboardData } from "@/hooks/useTeacherDashboardData";
+import type { ClassData, StudentData, ActivityItem } from "@/hooks/useTeacherDashboardData";
 import {
   DashboardLayout,
   type DashboardNavItem,
@@ -157,6 +159,7 @@ const STUDENTS: Student[] = [
   { id: "8", name: "Max Zimmermann", initials: "MZ", className: "10B", avgGrade: 55, completion: 38, lastActive: "4 days ago", status: "at-risk", avatarGradient: "from-rose-400 to-rose-500", issues: ["Multiple overdue assignments", "Very low engagement", "Needs parent contact"] },
 ];
 
+// Demo-Daten, keine Assignments-Tabelle vorhanden
 const ASSIGNMENTS: Assignment[] = [
   { id: "a1", title: "Math Worksheet: Quadratic Equations", subject: "Mathematics", className: "9A", status: "active", dueDate: "Tomorrow", completionRate: 64, totalStudents: 28, completedStudents: 18 },
   { id: "a2", title: "Science Lab Report: Chemical Reactions", subject: "Science", className: "10A", status: "active", dueDate: "Wednesday", completionRate: 45, totalStudents: 22, completedStudents: 10 },
@@ -176,6 +179,7 @@ const ACTIVITIES: ActivityItem[] = [
   { id: "act7", type: "submission", student: "Anna Becker", title: "Submitted Lab Report", detail: "Chemical Reactions Experiment", time: "4 hours ago", icon: "📄" },
 ];
 
+// Demo-Daten, keine Subjects-Aufschlüsselung vorhanden
 const SUBJECTS: SubjectData[] = [
   { name: "Mathematics", icon: <Target className="w-4 h-4" />, avgProgress: 74, avgGrade: "B+", trend: 3, studentsAbove80: 45, studentsBelow60: 8, totalStudents: 78, color: "from-cyan-500 to-cyan-400", bgColor: "bg-cyan-50", borderColor: "border-cyan-200" },
   { name: "Language", icon: <BookOpen className="w-4 h-4" />, avgProgress: 70, avgGrade: "B", trend: 1, studentsAbove80: 38, studentsBelow60: 12, totalStudents: 78, color: "from-emerald-500 to-emerald-400", bgColor: "bg-emerald-50", borderColor: "border-emerald-200" },
@@ -184,6 +188,7 @@ const SUBJECTS: SubjectData[] = [
   { name: "Social Skills", icon: <Heart className="w-4 h-4" />, avgProgress: 82, avgGrade: "A-", trend: 2, studentsAbove80: 55, studentsBelow60: 3, totalStudents: 78, color: "from-rose-400 to-rose-300", bgColor: "bg-rose-50", borderColor: "border-rose-200" },
 ];
 
+// Demo-Daten, kein Difficulty-Tracking vorhanden
 const HARDEST_LESSONS: LessonAnalytics[] = [
   { name: "Quadratic Equations", completionRate: 52, avgScore: 64, difficulty: "hard" },
   { name: "Chemical Bonding", completionRate: 58, avgScore: 68, difficulty: "hard" },
@@ -198,6 +203,7 @@ const EASIEST_LESSONS: LessonAnalytics[] = [
   { name: "Color Theory", completionRate: 88, avgScore: 85, difficulty: "easy" },
 ];
 
+// Demo-Daten, kein Nachrichten-System vorhanden
 const MESSAGES: Message[] = [
   { id: "m1", from: "Parent: Fischer", subject: "Question about Noah's progress", preview: "Hi, I noticed Noah hasn't been active recently. Can we schedule a meeting?", time: "2 hours ago", read: false, type: "parent" },
   { id: "m2", from: "Sophie Keller", subject: "Help with assignment", preview: "I'm having trouble understanding the grammar worksheet...", time: "5 hours ago", read: false, type: "student" },
@@ -205,6 +211,7 @@ const MESSAGES: Message[] = [
   { id: "m4", from: "Parent: Zimmermann", subject: "Max's learning schedule", preview: "Max has been ill this week. Can we get an extension?", time: "Yesterday", read: true, type: "parent" },
 ];
 
+// Demo-Daten, kein Zeitreihen-Tracking vorhanden
 const WEEKLY_TREND = [
   { day: "Mon", minutes: 420, engagement: 88 },
   { day: "Tue", minutes: 380, engagement: 82 },
@@ -222,7 +229,7 @@ const WEEKLY_TREND = [
 export default function TeacherDashboard() {
   const { t } = useI18n();
   const [, setLocation] = useLocation();
-  const [selectedClass, setSelectedClass] = useState<ClassRoom>(CLASSES[0]);
+  const [selectedClass, setSelectedClass] = useState<ClassData | null>(null);
   const [assignmentFilter, setAssignmentFilter] = useState<"all" | "active" | "draft" | "closed">("all");
   const [studentFilter, setStudentFilter] = useState<"all" | "at-risk" | "needs-attention" | "on-track">("all");
 
@@ -241,10 +248,24 @@ export default function TeacherDashboard() {
     if (item.to && item.to !== "#") setLocation(item.to);
   };
 
-  const totalStudents = CLASSES.reduce((s, c) => s + c.studentCount, 0);
-  const totalOpenAssignments = CLASSES.reduce((s, c) => s + c.openAssignments, 0);
-  const totalNeedingHelp = STUDENTS.filter(s => s.status !== "on-track").length;
-  const avgProgress = Math.round(CLASSES.reduce((s, c) => s + c.avgCompletion, 0) / CLASSES.length);
+  const {
+    loading,
+    error,
+    classes: realClasses,
+    students: realStudents,
+    activities: realActivities,
+  } = useTeacherDashboardData();
+
+  const activeClass = selectedClass || (realClasses.length > 0 ? realClasses[0] : null);
+
+  const totalStudents = activeClass ? activeClass.studentCount : (realClasses.reduce((s, c) => s + c.studentCount, 0) || 0);
+  const totalOpenAssignments = 0; // Demo
+  const totalNeedingHelp = realStudents.filter(s => s.status !== "on-track").length;
+  const avgProgress = activeClass ? activeClass.avgCompletion : (realClasses.length > 0 ? Math.round(realClasses.reduce((s, c) => s + c.avgCompletion, 0) / realClasses.length) : 0);
+
+  const displayClasses = realClasses.length > 0 ? realClasses : (activeClass ? [activeClass] : []);
+  const displayStudents = realStudents.length > 0 ? realStudents : STUDENTS; // fallback to demo if no real data
+  const displayActivities = realActivities.length > 0 ? realActivities : ACTIVITIES; // fallback to demo if no real data
 
   return (
     <DashboardLayout
@@ -254,12 +275,27 @@ export default function TeacherDashboard() {
       activeKey="/dashboard"
       onNavigate={handleNav}
     >
+      {loading && (
+        <div className="flex flex-col items-center justify-center py-20">
+          <div className="w-10 h-10 border-4 border-slate-300 border-t-transparent rounded-full animate-spin mb-4" />
+          <p className="text-sm text-slate-500">Loading teacher dashboard...</p>
+        </div>
+      )}
+
+      {!loading && error && (
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <p className="text-sm text-red-600 mb-2">{error}</p>
+          <button onClick={() => window.location.reload()} className="text-sm text-indigo-600 underline">Try again</button>
+        </div>
+      )}
+
+      {!loading && !error && (
       <div className="space-y-6">
         {/* ── SECTION 1: Dashboard Overview ── */}
         <WelcomeSection teacherName={teacherName} />
 
         <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <StatCard label="Total Classes" value={CLASSES.length} icon={<ClipboardList className="w-5 h-5" />} accent="from-cyan-500 to-teal-600" />
+          <StatCard label="Total Classes" value={displayClasses.length || CLASSES.length} icon={<ClipboardList className="w-5 h-5" />} accent="from-cyan-500 to-teal-600" />
           <StatCard label="Total Students" value={totalStudents} icon={<Users className="w-5 h-5" />} accent="from-emerald-500 to-teal-500" />
           <StatCard label="Open Assignments" value={totalOpenAssignments} icon={<FileText className="w-5 h-5" />} accent="from-amber-400 to-orange-500" />
           <StatCard label="Need Support" value={totalNeedingHelp} icon={<AlertTriangle className="w-5 h-5" />} accent="from-rose-400 to-rose-500" trend={{ value: `${totalNeedingHelp} students`, positive: false }} />
@@ -268,41 +304,48 @@ export default function TeacherDashboard() {
         {/* ── SECTION 2: Class Overview ── */}
         <section>
           <SectionHeading icon={<ClipboardList className="w-4 h-4" />} title="Class Overview" description="Select a class to view details" />
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {CLASSES.map((cls) => {
-              const isActive = selectedClass.id === cls.id;
-              return (
-                <button key={cls.id} type="button" onClick={() => setSelectedClass(cls)} className={`card card-interactive p-4 text-left transition-all ${isActive ? "ring-2 ring-cyan-400 shadow-md" : ""}`}>
-                  <div className="flex items-center gap-3">
-                    <span className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${cls.color} text-white`}>
-                      <Users className="h-5 w-5" />
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-extrabold text-slate-900">{cls.name}</p>
-                      <p className="text-[10px] text-slate-500">{cls.subject}</p>
+          {displayClasses.length === 0 ? (
+            <div className="rounded-xl border border-slate-200 bg-white p-8 text-center">
+              <ClipboardList className="mx-auto h-8 w-8 text-slate-300 mb-2" />
+              <p className="text-sm text-slate-500">Noch keine Klassen vorhanden. Erstelle deine erste Klasse!</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {displayClasses.map((cls) => {
+                const isActive = activeClass?.id === cls.id;
+                return (
+                  <button key={cls.id} type="button" onClick={() => setSelectedClass(cls)} className={`card card-interactive p-4 text-left transition-all ${isActive ? "ring-2 ring-cyan-400 shadow-md" : ""}`}>
+                    <div className="flex items-center gap-3">
+                      <span className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${cls.color} text-white`}>
+                        <Users className="h-5 w-5" />
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-extrabold text-slate-900">{cls.name}</p>
+                        <p className="text-[10px] text-slate-500">{cls.subject}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-3 space-y-1.5">
-                    <div className="flex items-center justify-between text-[10px] font-bold text-slate-500">
-                      <span>{cls.studentCount} students</span>
-                      <span>{cls.avgCompletion}% avg</span>
+                    <div className="mt-3 space-y-1.5">
+                      <div className="flex items-center justify-between text-[10px] font-bold text-slate-500">
+                        <span>{cls.studentCount} students</span>
+                        <span>{cls.avgCompletion}% avg</span>
+                      </div>
+                      <div className="progress-track">
+                        <div className="progress-fill" style={{ width: `${cls.avgCompletion}%` }} />
+                      </div>
+                      <div className="flex items-center justify-between text-[10px]">
+                        <span className="text-slate-400">Grade: {cls.avgGrade}</span>
+                        {cls.studentsNeedingHelp > 0 && (
+                          <span className="flex items-center gap-0.5 text-amber-600 font-medium">
+                            <AlertTriangle className="h-2.5 w-2.5" /> {cls.studentsNeedingHelp} at risk
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <div className="progress-track">
-                      <div className="progress-fill" style={{ width: `${cls.avgCompletion}%` }} />
-                    </div>
-                    <div className="flex items-center justify-between text-[10px]">
-                      <span className="text-slate-400">Grade: {cls.avgGrade}</span>
-                      {cls.studentsNeedingHelp > 0 && (
-                        <span className="flex items-center gap-0.5 text-amber-600 font-medium">
-                          <AlertTriangle className="h-2.5 w-2.5" /> {cls.studentsNeedingHelp} at risk
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </section>
 
         {/* ── SECTION 3: Students Requiring Attention ── */}
@@ -323,7 +366,7 @@ export default function TeacherDashboard() {
           />
           <div className="card-elevated overflow-hidden">
             <div className="divide-y divide-slate-100">
-              {STUDENTS.filter(s => studentFilter === "all" || s.status === studentFilter).map((student) => (
+              {displayStudents.filter(s => studentFilter === "all" || s.status === studentFilter).map((student) => (
                 <div key={student.id} className="flex items-center gap-4 px-5 py-4 transition-colors hover:bg-slate-50/50">
                   <span className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${student.avatarGradient} text-xs font-extrabold text-white`}>
                     {student.initials}
@@ -337,7 +380,7 @@ export default function TeacherDashboard() {
                         {student.status === "at-risk" ? "At Risk" : student.status === "needs-attention" ? "Attention" : "On Track"}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500">Class {student.className} · Avg: {student.avgGrade}% · Last active: {student.lastActive}</p>
+                    <p className="text-xs text-slate-500">Class {student.className} · Completion: {student.completion}% · Last active: {student.lastActive}</p>
                     {student.issues.length > 0 && (
                       <div className="mt-1.5 flex flex-wrap gap-1">
                         {student.issues.map((issue, idx) => (
@@ -613,7 +656,8 @@ export default function TeacherDashboard() {
             </div>
           </div>
         </section>
-      </div>
+        </div>
+      )}
     </DashboardLayout>
   );
 }
