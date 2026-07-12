@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { BookOpen, Mail, Lock, User, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { authService } from "@/lib/auth-service";
+import { supabase } from "@/lib/supabase";
 import { useI18n } from "@/contexts/I18nContext";
 
 export default function Register() {
@@ -47,18 +47,28 @@ export default function Register() {
 
     setLoading(true);
 
-    const response = await authService.register(
-      formData.email,
-      formData.password,
-      formData.firstName,
-      formData.lastName,
-      formData.role
-    );
+    const { data, error: signUpError } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+      options: {
+        data: {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          role: formData.role,
+        },
+      },
+    });
 
-    if (response.success) {
+    if (signUpError) {
+      setError(signUpError.message);
+      setLoading(false);
+      return;
+    }
+
+    if (data.user) {
       setLocation("/dashboard");
     } else {
-      setError(response.error || t("register.errorRegistrationFailed"));
+      setError(t("register.errorRegistrationFailed"));
       setLoading(false);
     }
   };

@@ -113,13 +113,16 @@ export default function Login() {
     setLoading(true);
     setError("");
 
-    const response = await authService.login(email, password);
-    if (response.success) {
-      setLocation("/dashboard");
-    } else {
-      setError(response.error || "Login failed");
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
       setLoading(false);
     }
+    // On success, the onAuthStateChange listener will store the user and redirect to /dashboard
   };
 
   const quickLogin = async (role: string) => {
