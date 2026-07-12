@@ -113,16 +113,23 @@ export default function Login() {
     setLoading(true);
     setError("");
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    console.log("[Login] Attempting Supabase signInWithPassword for:", email);
 
-    if (error) {
-      setError(error.message);
+    const { data, error: supabaseError } =
+      await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+    if (supabaseError) {
+      console.error("[Login] Supabase signIn error:", supabaseError);
+      setError(supabaseError.message);
       setLoading(false);
+      return;
     }
-    // On success, the onAuthStateChange listener will store the user and redirect to /dashboard
+
+    console.log("[Login] Supabase signIn success:", data.user?.id);
+    // onAuthStateChange listener will store the user and redirect to /dashboard
   };
 
   const quickLogin = async (role: string) => {
