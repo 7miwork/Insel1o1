@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation } from "wouter";
 import {
   Compass,
@@ -16,63 +16,31 @@ import {
   Wind,
   Trophy,
   ScrollText,
+  BookOpen,
 } from "lucide-react";
 import { useI18n } from "@/contexts/I18nContext";
 import { authService, type User } from "@/lib/auth-service";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-
-interface Voyage {
-  archipelago: string;
-  currentIsland: string;
-  nextIsland: string;
-  progress: number;
-}
-
-interface Activity {
-  type: "lesson" | "island" | "xp" | "treasure";
-  title: string;
-  value?: number;
-  timestamp: string;
-}
-
-interface Achievement {
-  id: number;
-  name: string;
-  icon: string;
-  status: "locked" | "discovered" | "collected";
-  rarity: "common" | "uncommon" | "rare" | "legendary";
-}
+import { useStudentDashboardData } from "@/hooks/useStudentDashboardData";
+import type { Voyage, Activity, Achievement } from "@/hooks/useStudentDashboardData";
 
 export default function StudentDashboard() {
   const { t } = useI18n();
   const [, setLocation] = useLocation();
   const user = authService.getCurrentUser() as User | null;
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [level] = useState(5);
-  const [xp] = useState(1250);
-  const [maxXp] = useState(2000);
-  const [rank] = useState("Navigator");
-
-  const voyage: Voyage = {
-    archipelago: "Mystical Waters",
-    currentIsland: "Island 5",
-    nextIsland: "Island 6",
-    progress: 65,
-  };
-
-  const activities: Activity[] = [
-    { type: "lesson", title: "You completed Lesson 3: Advanced Functions", timestamp: "2 hours ago" },
-    { type: "island", title: "You discovered a new island", value: 500, timestamp: "5 hours ago" },
-    { type: "xp", title: "You earned 100 XP", timestamp: "1 day ago" },
-    { type: "treasure", title: "You unlocked Treasure: Gold Dragon Coin", timestamp: "2 days ago" },
-  ];
-
-  const achievements: Achievement[] = [
-    { id: 1, name: "First Steps", icon: "🗺️", status: "collected", rarity: "common" },
-    { id: 2, name: "Sea Master", icon: "⚓", status: "collected", rarity: "uncommon" },
-    { id: 3, name: "Legendary Sailor", icon: "🏴‍☠️", status: "discovered", rarity: "rare" },
-    { id: 4, name: "Treasure Hunter", icon: "💎", status: "locked", rarity: "legendary" },
-  ];
+  const {
+    loading,
+    error,
+    hasNoCourses,
+    level,
+    xp,
+    maxXp,
+    rank,
+    voyage,
+    activities,
+    achievements,
+  } = useStudentDashboardData();
 
   const handleLogout = async () => {
     await authService.logout();
@@ -98,53 +66,53 @@ export default function StudentDashboard() {
     return "💰";
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50/60 via-blue-50/60 to-white">
-      {/* Mobile overlay */}
-      {sidebarOpen && (
-        <div className="fixed inset-0 z-30 bg-slate-900/30 lg:hidden" onClick={() => setSidebarOpen(false)} aria-hidden="true" />
-      )}
-
-      {/* Header: Captain's Log */}
-      <header className="sticky top-0 z-20 bg-white/90 backdrop-blur-sm border-b border-amber-200/60">
-        <div className="mx-auto max-w-6xl px-4 py-2.5 sm:px-6">
-          <div className="flex items-center justify-between gap-3">
-            <button onClick={() => setLocation("/")} className="flex items-center gap-2 shrink-0">
-              <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-                <Anchor className="h-4 w-4 text-white" />
-              </div>
-              <span className="hidden sm:inline font-semibold text-sm text-amber-900">{t("common.appName")}</span>
-            </button>
-
-            <div className="flex items-center gap-3 text-center">
-              <div className="hidden sm:flex items-center gap-2">
-                <div className="h-7 w-7 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-white text-xs font-bold">
-                  {userName.charAt(0).toUpperCase()}
-                </div>
-                <div className="text-left leading-tight">
-                  <p className="text-xs font-semibold text-slate-900">{userName}</p>
-                  <p className="text-[10px] text-slate-500">{t("studentDashboard.captainsDeck")}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <LanguageSwitcher />
-              <button onClick={() => setLocation("/settings")} className="p-1.5 rounded-md hover:bg-amber-100 transition-colors" aria-label="Settings">
-                <Settings className="h-4 w-4 text-amber-700" />
-              </button>
-              <button onClick={handleLogout} className="p-1.5 rounded-md hover:bg-red-50 transition-colors" aria-label="Logout">
-                <LogOut className="h-4 w-4 text-red-500" />
-              </button>
-              <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-1.5 rounded-md hover:bg-amber-100 lg:hidden">
-                {sidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-              </button>
-            </div>
-          </div>
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <div className="flex flex-col items-center justify-center py-20">
+          <div className="w-10 h-10 border-4 border-amber-400 border-t-transparent rounded-full animate-spin mb-4" />
+          <p className="text-sm text-slate-500">Loading your adventure...</p>
         </div>
-      </header>
+      );
+    }
 
-      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+    if (error) {
+      return (
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <div className="text-4xl mb-4">⚠️</div>
+          <p className="text-sm text-red-600 mb-2">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="text-sm text-indigo-600 hover:text-indigo-700 underline"
+          >
+            Try again
+          </button>
+        </div>
+      );
+    }
+
+    if (hasNoCourses) {
+      return (
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <div className="text-5xl mb-4">🏝️</div>
+          <h2 className="text-xl font-bold text-slate-900 mb-2">Starte dein erstes Abenteuer</h2>
+          <p className="text-sm text-slate-500 mb-6 max-w-md">
+            Es wurden noch keine Kurse für dich freigeschaltet. 
+            Entdecke verfügbare Kurse und beginne deine Reise!
+          </p>
+          <button
+            onClick={() => setLocation("/courses")}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-teal-600 transition-colors"
+          >
+            <BookOpen className="h-4 w-4" />
+            Zu den Kursen
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <>
         {/* Primary CTA — Continue Adventure */}
         <button
           onClick={() => setLocation("/world")}
@@ -289,6 +257,58 @@ export default function StudentDashboard() {
             <Settings className="h-4 w-4" /> Settings
           </button>
         </div>
+      </>
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-amber-50/60 via-blue-50/60 to-white">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-30 bg-slate-900/30 lg:hidden" onClick={() => setSidebarOpen(false)} aria-hidden="true" />
+      )}
+
+      {/* Header: Captain's Log */}
+      <header className="sticky top-0 z-20 bg-white/90 backdrop-blur-sm border-b border-amber-200/60">
+        <div className="mx-auto max-w-6xl px-4 py-2.5 sm:px-6">
+          <div className="flex items-center justify-between gap-3">
+            <button onClick={() => setLocation("/")} className="flex items-center gap-2 shrink-0">
+              <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
+                <Anchor className="h-4 w-4 text-white" />
+              </div>
+              <span className="hidden sm:inline font-semibold text-sm text-amber-900">{t("common.appName")}</span>
+            </button>
+
+            <div className="flex items-center gap-3 text-center">
+              <div className="hidden sm:flex items-center gap-2">
+                <div className="h-7 w-7 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-white text-xs font-bold">
+                  {userName.charAt(0).toUpperCase()}
+                </div>
+                <div className="text-left leading-tight">
+                  <p className="text-xs font-semibold text-slate-900">{userName}</p>
+                  <p className="text-[10px] text-slate-500">{t("studentDashboard.captainsDeck")}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher />
+              <button onClick={() => setLocation("/settings")} className="p-1.5 rounded-md hover:bg-amber-100 transition-colors" aria-label="Settings">
+                <Settings className="h-4 w-4 text-amber-700" />
+              </button>
+              <button onClick={handleLogout} className="p-1.5 rounded-md hover:bg-red-50 transition-colors" aria-label="Logout">
+                <LogOut className="h-4 w-4 text-red-500" />
+              </button>
+              <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-1.5 rounded-md hover:bg-amber-100 lg:hidden">
+                {sidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+        {renderContent()}
       </div>
     </div>
   );
