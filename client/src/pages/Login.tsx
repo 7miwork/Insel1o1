@@ -18,55 +18,51 @@ export default function Login() {
   const [error, setError] = useState("");
   const { t } = useI18n();
 
-  // OAuth callback handling: detect when user returns from OAuth provider
+  // OAuth callback handling (PKCE flow):
+  // After Google login, Supabase redirects back to /?code=...
+  // supabase-js with detectSessionInUrl:true automatically exchanges ?code for a session,
+  // then fires SIGNED_IN event. We handle both the event and mount-time session check here.
   useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === "SIGNED_IN" && session) {
-        // Store session in localStorage for compatibility with existing auth logic
-        const user = session.user;
-        localStorage.setItem(
-          "auth_user",
-          JSON.stringify({
-            id: user.id,
-            email: user.email,
-            firstName: user.user_metadata?.full_name?.split(" ")[0] || user.user_metadata?.name || "",
-            lastName:
-              user.user_metadata?.full_name?.split(" ").slice(1).join(" ") || "",
-            role: "student",
-            avatar:
-              user.user_metadata?.avatar_url ||
-              user.user_metadata?.picture ||
-              `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`,
-          }),
-        );
-        localStorage.setItem("auth_token", `oauth_${user.id}_${Date.now()}`);
-        setLocation("/dashboard");
+    const storeUserAndRedirect = (user: any) => {
+      localStorage.setItem(
+        "auth_user",
+        JSON.stringify({
+          id: user.id,
+          email: user.email,
+          firstName:
+            user.user_metadata?.full_name?.split(" ")[0] ||
+            user.user_metadata?.name ||
+            "",
+          lastName:
+            user.user_metadata?.full_name?.split(" ").slice(1).join(" ") || "",
+          role: "student",
+          avatar:
+            user.user_metadata?.avatar_url ||
+            user.user_metadata?.picture ||
+            `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`,
+        }),
+      );
+      localStorage.setItem("auth_token", `oauth_${user.id}_${Date.now()}`);
+      // Clean up any leftover ?code=... from PKCE flow in the URL bar
+      if (window.location.search || window.location.hash) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+      setLocation("/dashboard");
+    };
+
+    // 1) Check for an existing session on mount (covers page refresh while logged in)
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        storeUserAndRedirect(session.user);
       }
     });
 
-    // Also check on mount if there's already a session (e.g. from a page refresh after OAuth redirect)
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        const user = session.user;
-        localStorage.setItem(
-          "auth_user",
-          JSON.stringify({
-            id: user.id,
-            email: user.email,
-            firstName: user.user_metadata?.full_name?.split(" ")[0] || user.user_metadata?.name || "",
-            lastName:
-              user.user_metadata?.full_name?.split(" ").slice(1).join(" ") || "",
-            role: "student",
-            avatar:
-              user.user_metadata?.avatar_url ||
-              user.user_metadata?.picture ||
-              `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`,
-          }),
-        );
-        localStorage.setItem("auth_token", `oauth_${user.id}_${Date.now()}`);
-        setLocation("/dashboard");
+    // 2) Subscribe to auth state changes (covers the moment supabase-js exchanges ?code for session)
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN" && session) {
+        storeUserAndRedirect(session.user);
       }
     });
 

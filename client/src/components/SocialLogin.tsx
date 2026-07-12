@@ -40,10 +40,11 @@ export default function SocialLogin({ onError, disabled }: SocialLoginProps) {
       setLoading(provider);
       onError("");
 
-      // Build the correct redirect URL for hash-based routing
-      // The app uses hash routing, so the URL is like http://localhost:3000/#/login
-      // After OAuth, Supabase will redirect back with tokens in the URL fragment
-      const redirectUrl = `${window.location.origin}/#/login`;
+      // PKCE flow: Supabase redirects back with ?code=... as query parameter (not hash fragment).
+      // We redirect to the origin (without #/login) so the code remains a clean query parameter
+      // that supabase-js (detectSessionInUrl: true) can exchange automatically.
+      // After exchange, supabase-js fires SIGNED_IN → we redirect to /#/dashboard.
+      const redirectUrl = window.location.origin;
 
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
