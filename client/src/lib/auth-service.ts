@@ -1,3 +1,5 @@
+import { supabase } from "@/lib/supabase";
+
 // Demo accounts for testing
 export const DEMO_ACCOUNTS: Record<string, any> = {
   student: {
@@ -136,6 +138,17 @@ export const authService = {
   },
 
   logout: async (): Promise<void> => {
+    // First sign out from Supabase to invalidate the server-side session
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.warn("Supabase signOut warning:", error.message);
+      }
+    } catch (err) {
+      console.warn("Supabase signOut error:", err);
+    }
+
+    // Then clear local state
     if (typeof window !== "undefined") {
       localStorage.removeItem("auth_user");
       localStorage.removeItem("auth_token");

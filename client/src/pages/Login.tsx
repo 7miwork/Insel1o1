@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BookOpen, Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import { authService, DEMO_ACCOUNTS } from "@/lib/auth-service";
 import { supabase } from "@/lib/supabase";
@@ -17,40 +17,77 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { t } = useI18n();
+  const redirectingRef = useRef(false);
+
+  // Fetch the user's profile from the profiles table (with retry for race conditions)
+  const fetchProfile = async (userId: string, retries = 1): Promise<Record<string, any> | null> => {
+    for (let attempt = 0; attempt <= retries; attempt++) {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("role, first_name, last_name, avatar_url")
+        .eq("id", userId)
+        .single();
+
+      if (data && !error) {
+        return data;
+      }
+
+      // If profile not found yet (trigger race condition), wait and retry
+      if (attempt < retries) {
+        await new Promise((r) => setTimeout(r, 500));
+      }
+    }
+    return null;
+  };
 
   // OAuth callback handling (PKCE flow):
   // After Google login, Supabase redirects back to /?code=...
   // supabase-js with detectSessionInUrl:true automatically exchanges ?code for a session,
-  // then fires SIGNED_IN event. We handle both the event and mount-time session check here.
+  // then fires SIGNED_IN event.
   useEffect(() => {
-    const storeUserAndRedirect = (user: any) => {
-      localStorage.setItem(
-        "auth_user",
-        JSON.stringify({
-          id: user.id,
-          email: user.email,
-          firstName:
-            user.user_metadata?.full_name?.split(" ")[0] ||
-            user.user_metadata?.name ||
-            "",
-          lastName:
-            user.user_metadata?.full_name?.split(" ").slice(1).join(" ") || "",
-          role: "student",
-          avatar:
-            user.user_metadata?.avatar_url ||
-            user.user_metadata?.picture ||
-            `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`,
-        }),
-      );
+    const storeUserAndRedirect = async (user: any) => {
+      // Prevent double redirects (e.g. onAuthStateChange + getSession both firing)
+      if (redirectingRef.current) return;
+      redirectingRef.current = true;
+
+      // Fetch real role + profile data from the profiles table
+      const profile = await fetchProfile(user.id, 1);
+
+      const userData = {
+        id: user.id,
+        email: user.email,
+        firstName:
+          profile?.first_name ||
+          user.user_metadata?.full_name?.split(" ")[0] ||
+          user.user_metadata?.name ||
+          "",
+        lastName:
+          profile?.last_name ||
+          user.user_metadata?.full_name?.split(" ").slice(1).join(" ") ||
+          "",
+        role: (profile?.role as "student" | "teacher" | "parent" | "admin") || "student",
+        avatar:
+          profile?.avatar_url ||
+          user.user_metadata?.avatar_url ||
+          user.user_metadata?.picture ||
+          `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`,
+      };
+
+      localStorage.setItem("auth_user", JSON.stringify(userData));
       localStorage.setItem("auth_token", `oauth_${user.id}_${Date.now()}`);
+
       // Clean up any leftover ?code=... from PKCE flow in the URL bar
       if (window.location.search || window.location.hash) {
         window.history.replaceState({}, document.title, window.location.pathname);
       }
-      setLocation("/dashboard");
+
+      // Use setTimeout to let the router initialize before navigating
+      setTimeout(() => {
+        setLocation("/dashboard");
+      }, 0);
     };
 
-    // 1) Check for an existing session on mount (covers page refresh while logged in)
+    // 1) Check for an existing session on mount (covers OAuth redirect back with ?code)
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
         storeUserAndRedirect(session.user);
