@@ -12,7 +12,8 @@
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "deploy:hostinger": "node deploy-hostinger.js",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "create-admin": "tsx scripts/create-admin.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

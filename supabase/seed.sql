@@ -41,42 +41,42 @@ ON CONFLICT (id) DO NOTHING;
 -- Mystical Waters (6 Lektionen)
 INSERT INTO public.lessons (id, course_id, title, content, order_index, duration_min) VALUES
   (
-    'l0000000-0000-0000-0000-000000000001',
+    'd0000000-0000-0000-0000-000000000001',
     'c0000000-0000-0000-0000-000000000001',
     'Island 1: Anlegestelle - Erste Schritte',
     'Willkommen auf der ersten Insel! Lerne die grundlegenden Konzepte und mache dich bereit für das Abenteuer.',
     1, 15
   ),
   (
-    'l0000000-0000-0000-0000-000000000002',
+    'd0000000-0000-0000-0000-000000000002',
     'c0000000-0000-0000-0000-000000000001',
     'Island 2: Der Leuchtturm - Variablen & Typen',
     'Entdecke den Leuchtturm der Variablen. Hier lernst du, wie Daten gespeichert und verwaltet werden.',
     2, 20
   ),
   (
-    'l0000000-0000-0000-0000-000000000003',
+    'd0000000-0000-0000-0000-000000000003',
     'c0000000-0000-0000-0000-000000000001',
     'Island 3: Die Bucht der Bedingungen',
     'In dieser Bucht entscheiden Bedingungen über deinen Weg. Lerne if-else und switch-Anweisungen.',
     3, 25
   ),
   (
-    'l0000000-0000-0000-0000-000000000004',
+    'd0000000-0000-0000-0000-000000000004',
     'c0000000-0000-0000-0000-000000000001',
     'Island 4: Das Labyrinth der Schleifen',
     'Verirre dich im Labyrinth der Schleifen! Hier meisterst du for- und while-Schleifen.',
     4, 30
   ),
   (
-    'l0000000-0000-0000-0000-000000000005',
+    'd0000000-0000-0000-0000-000000000005',
     'c0000000-0000-0000-0000-000000000001',
     'Island 5: Der Tempel der Funktionen',
     'Der alte Tempel birgt die Geheimnisse der Funktionen. Lerne, Code wiederzuverwenden und zu strukturieren.',
     5, 25
   ),
   (
-    'l0000000-0000-0000-0000-000000000006',
+    'd0000000-0000-0000-0000-000000000006',
     'c0000000-0000-0000-0000-000000000001',
     'Island 6: Die Schatzkammer - Projektabschluss',
     'Herzlichen Glückwunsch! In der finalen Schatzkammer setzt du alles Gelernte in einem großen Projekt um.',
@@ -87,28 +87,28 @@ ON CONFLICT (id) DO NOTHING;
 -- Sturm der Algorithmen (4 Lektionen)
 INSERT INTO public.lessons (id, course_id, title, content, order_index, duration_min) VALUES
   (
-    'l0000000-0000-0000-0000-000000000007',
+    'd0000000-0000-0000-0000-000000000007',
     'c0000000-0000-0000-0000-000000000002',
     'Klippe der Sortierung',
     'Erkunde verschiedene Sortieralgorithmen und finde heraus, welcher der schnellste ist.',
     1, 30
   ),
   (
-    'l0000000-0000-0000-0000-000000000008',
+    'd0000000-0000-0000-0000-000000000008',
     'c0000000-0000-0000-0000-000000000002',
     'Die Rekursions-Riff',
     'Ein gefährliches Riff, das nur mit rekursiven Denken zu umschiffen ist.',
     2, 35
   ),
   (
-    'l0000000-0000-0000-0000-000000000009',
+    'd0000000-0000-0000-0000-000000000009',
     'c0000000-0000-0000-0000-000000000002',
     'Graph-Dschungel',
     'Navigiere durch den dichten Dschungel der Graphen und lerne BFS und DFS.',
     3, 40
   ),
   (
-    'l0000000-0000-0000-0000-000000000010',
+    'd0000000-0000-0000-0000-000000000010',
     'c0000000-0000-0000-0000-000000000002',
     'Optimierungs-Oase',
     'Optimiere deine Algorithmen für maximale Performance.',
@@ -119,21 +119,21 @@ ON CONFLICT (id) DO NOTHING;
 -- Schatzinsel Datenbanken (3 Lektionen)
 INSERT INTO public.lessons (id, course_id, title, content, order_index, duration_min) VALUES
   (
-    'l0000000-0000-0000-0000-000000000011',
+    'd0000000-0000-0000-0000-000000000011',
     'c0000000-0000-0000-0000-000000000003',
     'Die Schatzkarte - ER-Modelle',
     'Lerne, wie du Datenstrukturen mit Entity-Relationship-Modellen entwirfst.',
     1, 25
   ),
   (
-    'l0000000-0000-0000-0000-000000000012',
+    'd0000000-0000-0000-0000-000000000012',
     'c0000000-0000-0000-0000-000000000003',
     'Der Kompass - SQL Queries',
     'Mit SQL-Queries wie einem Kompass navigierst du durch deine Datenbank.',
     2, 35
   ),
   (
-    'l0000000-0000-0000-0000-000000000013',
+    'd0000000-0000-0000-0000-000000000013',
     'c0000000-0000-0000-0000-000000000003',
     'Der verborgene Hafen - Indexing & Performance',
     'Entdecke, wie Indizes und Optimierungen deine Datenbank blitzschnell machen.',
@@ -194,30 +194,3 @@ INSERT INTO public.achievements (id, title, description, icon_url, xp_reward, cr
     '{"type": "quizzes_passed", "count": 5, "rarity": "rare"}'
   )
 ON CONFLICT (id) DO NOTHING;
-
--- ============================================================
--- 4. RLS-Policies: Seed-Daten für alle sichtbar machen
--- ============================================================
--- Die Policies aus schema.sql erlauben authenticated users bereits
--- das Lesen von published courses und achievements.
--- Seed-Daten sind daher nach Login sichtbar.
-
--- ============================================================
--- 5. HINWEIS: Testdaten für student_progress und user_achievements
--- ============================================================
--- Diese werden dynamisch angelegt, sobald ein Student Lektionen
--- abschließt. Für manuelle Tests kannst du folgenden Code
--- verwenden (ersetze USER_ID durch die echte UUID des Users):
-
--- Beispiel: Markiere Island 1 & 2 als abgeschlossen
--- INSERT INTO public.student_progress (user_id, lesson_id, completed, score, completed_at)
--- VALUES
---   ('USER_ID_HERE', 'l0000000-0000-0000-0000-000000000001', true, 100, now() - interval '2 days'),
---   ('USER_ID_HERE', 'l0000000-0000-0000-0000-000000000002', true, 85, now() - interval '1 day')
--- ON CONFLICT (user_id, lesson_id) DO NOTHING;
-
--- Beispiel: Verleihe Achievements
--- INSERT INTO public.user_achievements (user_id, achievement_id)
--- VALUES
---   ('USER_ID_HERE', 'a0000000-0000-0000-0000-000000000001')
--- ON CONFLICT (user_id, achievement_id) DO NOTHING;
