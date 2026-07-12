@@ -296,7 +296,7 @@ export default function WorldMap() {
         </div>
       </header>
 
-      <main className="relative z-10 max-w-7xl mx-auto px-4 py-6">
+      <main className="relative z-10 w-full max-w-full px-4 py-6 overflow-visible">
         <AnimatePresence mode="wait">
           {/* WORLD VIEW */}
           {viewState.level === "world" && (
@@ -305,15 +305,21 @@ export default function WorldMap() {
               initial={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              className="relative rounded-2xl"
+              className="relative w-full rounded-2xl overflow-visible"
               style={{
+                minHeight: "min(72vh, 760px)",
                 background: "linear-gradient(180deg, #f7e1c0 0%, #e2c7a5 12%, transparent 24%), radial-gradient(circle at 52% 42%, #e2f3f9 0%, #a8d4e1 28%, #6b9db0 54%, #3b6d81 100%)",
                 border: "4px solid rgba(95,66,41,0.95)",
                 boxShadow: "inset 0 0 112px rgba(0,0,0,0.18), 0 40px 120px rgba(0,0,0,0.48)",
                 backgroundImage: "radial-gradient(circle at 18% 14%, rgba(255,255,255,0.16) 0%, transparent 14%), radial-gradient(circle at 84% 78%, rgba(255,255,255,0.08) 0%, transparent 18%), repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px), repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px)",
               }}>
-              <div id="world-map-container" className="relative w-full h-full" style={{ minHeight: "480px" }}>
-                <div className="absolute inset-4 rounded-[1.5rem] border border-[#8b6d4f] bg-[rgba(255,250,238,0.94)] shadow-[inset_0_0_40px_rgba(90,56,33,0.18)] pointer-events-none" />
+              <div id="world-map-container" className="relative w-full overflow-visible rounded-[1.5rem]"
+                style={{
+                  minHeight: "min(70vh, 720px)",
+                  background: "linear-gradient(180deg, rgba(255,250,238,0.94) 0%, rgba(244,228,199,0.94) 34%, rgba(232,206,168,0.92) 100%)",
+                  border: "3px solid rgba(139,109,79,0.75)",
+                  boxShadow: "inset 0 0 40px rgba(90,56,33,0.18)",
+                }}>
                 <div className="absolute inset-6 rounded-[1.25rem] pointer-events-none"
                   style={{ background: "linear-gradient(180deg, rgba(255,250,238,0.94) 0%, rgba(244,228,199,0.94) 34%, rgba(232,206,168,0.92) 100%)" }} />
                 <div className="absolute inset-8 rounded-[1.25rem] opacity-[0.08] pointer-events-none"

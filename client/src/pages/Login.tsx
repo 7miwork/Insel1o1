@@ -1,11 +1,13 @@
-﻿import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BookOpen, Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { authService, DEMO_ACCOUNTS } from "@/lib/auth-service";
+import { supabase } from "@/lib/supabase";
 import { useI18n } from "@/contexts/I18nContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import SocialLogin from "@/components/SocialLogin";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -15,6 +17,63 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { t } = useI18n();
+
+  // OAuth callback handling: detect when user returns from OAuth provider
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "SIGNED_IN" && session) {
+        // Store session in localStorage for compatibility with existing auth logic
+        const user = session.user;
+        localStorage.setItem(
+          "auth_user",
+          JSON.stringify({
+            id: user.id,
+            email: user.email,
+            firstName: user.user_metadata?.full_name?.split(" ")[0] || user.user_metadata?.name || "",
+            lastName:
+              user.user_metadata?.full_name?.split(" ").slice(1).join(" ") || "",
+            role: "student",
+            avatar:
+              user.user_metadata?.avatar_url ||
+              user.user_metadata?.picture ||
+              `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`,
+          }),
+        );
+        localStorage.setItem("auth_token", `oauth_${user.id}_${Date.now()}`);
+        setLocation("/dashboard");
+      }
+    });
+
+    // Also check on mount if there's already a session (e.g. from a page refresh after OAuth redirect)
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        const user = session.user;
+        localStorage.setItem(
+          "auth_user",
+          JSON.stringify({
+            id: user.id,
+            email: user.email,
+            firstName: user.user_metadata?.full_name?.split(" ")[0] || user.user_metadata?.name || "",
+            lastName:
+              user.user_metadata?.full_name?.split(" ").slice(1).join(" ") || "",
+            role: "student",
+            avatar:
+              user.user_metadata?.avatar_url ||
+              user.user_metadata?.picture ||
+              `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.email}`,
+          }),
+        );
+        localStorage.setItem("auth_token", `oauth_${user.id}_${Date.now()}`);
+        setLocation("/dashboard");
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,6 +207,9 @@ export default function Login() {
             </Button>
           </div>
         </form>
+
+        {/* Social Login (OAuth) */}
+        <SocialLogin onError={setError} disabled={loading} />
 
         {/* Demo Accounts */}
         <div className="mb-6">
