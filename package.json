@@ -13,7 +13,8 @@
     "check": "tsc --noEmit",
     "deploy:hostinger": "node deploy-hostinger.js",
     "format": "prettier --write .",
-    "create-admin": "tsx scripts/create-admin.ts"
+    "create-admin": "tsx scripts/create-admin.ts",
+    "create-test-accounts": "tsx scripts/create-test-accounts.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
