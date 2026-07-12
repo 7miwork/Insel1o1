@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import { authService } from "@/lib/auth-service";
 
 // --- Types matching the StudentDashboard interface ---
 
@@ -95,30 +96,71 @@ export function useStudentDashboardData(): DashboardData {
         setLoading(true);
         setError(null);
 
-        // 1) Get current user
-        const {
-          data: { user },
-          error: userError,
-        } = await supabase.auth.getUser();
-        if (userError) throw userError;
-        if (!user) {
-          setError("Not authenticated");
-          setLoading(false);
-          return;
+        // 1) Get current user - first try Supabase session, then fall back to localStorage demo user
+        let userId: string | null = null;
+        let userEmail: string | null = null;
+
+        const { data: supabaseSession, error: sessionError } =
+          await supabase.auth.getSession();
+        if (sessionError) {
+          console.error(
+            "[useStudentDashboardData] getSession error:",
+            sessionError,
+          );
         }
 
-        const userId = user.id;
+        if (supabaseSession?.session?.user) {
+          userId = supabaseSession.session.user.id;
+          userEmail = supabaseSession.session.user.email;
+          console.log(
+            "[useStudentDashboardData] Using Supabase session for user:",
+            userId,
+          );
+        } else {
+          // Fallback: use localStorage user (demo accounts)
+          const localUser = authService.getCurrentUser();
+          if (localUser && localUser.id) {
+            userId = localUser.id;
+            userEmail = localUser.email;
+            console.log(
+              "[useStudentDashboardData] Using localStorage demo user:",
+              userId,
+            );
+          } else {
+            console.error(
+              "[useStudentDashboardData] No user found - neither Supabase session nor localStorage user",
+            );
+            setError("Not authenticated");
+            setLoading(false);
+            return;
+          }
+        }
 
         // 2) Fetch courses (published)
+        console.log("[useStudentDashboardData] Fetching courses...");
         const { data: courses, error: coursesError } = await supabase
           .from("courses")
           .select("id, title, category")
           .eq("published", true)
           .order("created_at", { ascending: true });
 
-        if (coursesError) throw coursesError;
+        if (coursesError) {
+          console.error(
+            "[useStudentDashboardData] courses query error:",
+            coursesError,
+          );
+          throw coursesError;
+        }
+
+        console.log(
+          "[useStudentDashboardData] Courses found:",
+          courses?.length || 0,
+        );
 
         if (!courses || courses.length === 0) {
+          console.log(
+            "[useStudentDashboardData] No courses found - setting hasNoCourses=true",
+          );
           setHasNoCourses(true);
           setLoading(false);
           return;
@@ -126,17 +168,39 @@ export function useStudentDashboardData(): DashboardData {
 
         // 3) Pick the first course as the "active" one
         const activeCourse = courses[0];
+        console.log(
+          "[useStudentDashboardData] Active course:",
+          activeCourse.title,
+        );
 
         // 4) Fetch lessons for the active course
+        console.log(
+          "[useStudentDashboardData] Fetching lessons for course:",
+          activeCourse.id,
+        );
         const { data: lessons, error: lessonsError } = await supabase
           .from("lessons")
           .select("id, title, order_index")
           .eq("course_id", activeCourse.id)
           .order("order_index", { ascending: true });
 
-        if (lessonsError) throw lessonsError;
+        if (lessonsError) {
+          console.error(
+            "[useStudentDashboardData] lessons query error:",
+            lessonsError,
+          );
+          throw lessonsError;
+        }
+
+        console.log(
+          "[useStudentDashboardData] Lessons found:",
+          lessons?.length || 0,
+        );
 
         if (!lessons || lessons.length === 0) {
+          console.log(
+            "[useStudentDashboardData] No lessons for active course - setting hasNoCourses=true",
+          );
           setHasNoCourses(true);
           setLoading(false);
           return;
@@ -144,13 +208,30 @@ export function useStudentDashboardData(): DashboardData {
 
         // 5) Fetch student_progress for this user + this course's lessons
         const lessonIds = lessons.map((l) => l.id);
+        console.log(
+          "[useStudentDashboardData] Fetching student_progress for user:",
+          userId,
+          "lessonIds:",
+          lessonIds,
+        );
         const { data: progress, error: progressError } = await supabase
           .from("student_progress")
           .select("lesson_id, completed, score, completed_at")
           .eq("user_id", userId)
           .in("lesson_id", lessonIds);
 
-        if (progressError) throw progressError;
+        if (progressError) {
+          console.error(
+            "[useStudentDashboardData] student_progress query error:",
+            progressError,
+          );
+          throw progressError;
+        }
+
+        console.log(
+          "[useStudentDashboardData] Progress entries:",
+          progress?.length || 0,
+        );
 
         // 6) Calculate voyage progress
         const completedLessons = (progress || []).filter((p) => p.completed);
@@ -158,6 +239,12 @@ export function useStudentDashboardData(): DashboardData {
           lessons.length > 0
             ? Math.round((completedLessons.length / lessons.length) * 100)
             : 0;
+
+        console.log(
+          "[useStudentDashboardData] Voyage progress:",
+          voyageProgressPercent,
+          "%",
+        );
 
         // 7) Determine current island (last completed) and next island (first incomplete)
         const completedLessonIds = new Set(
@@ -182,23 +269,52 @@ export function useStudentDashboardData(): DashboardData {
         );
 
         // 9) Fetch user_achievements + achievements for XP and treasure list
+        console.log(
+          "[useStudentDashboardData] Fetching user_achievements for user:",
+          userId,
+        );
         const { data: userAchievements, error: uaError } = await supabase
           .from("user_achievements")
           .select("achievement_id, earned_at")
           .eq("user_id", userId);
 
-        if (uaError) throw uaError;
+        if (uaError) {
+          console.error(
+            "[useStudentDashboardData] user_achievements query error:",
+            uaError,
+          );
+          throw uaError;
+        }
+
+        console.log(
+          "[useStudentDashboardData] User achievements:",
+          userAchievements?.length || 0,
+        );
 
         const earnedAchievementIds = new Set(
           (userAchievements || []).map((ua) => ua.achievement_id),
         );
 
+        console.log(
+          "[useStudentDashboardData] Fetching all achievements...",
+        );
         const { data: allAchievements, error: achError } = await supabase
           .from("achievements")
           .select("id, title, description, icon_url, xp_reward, criteria")
           .order("created_at", { ascending: true });
 
-        if (achError) throw achError;
+        if (achError) {
+          console.error(
+            "[useStudentDashboardData] achievements query error:",
+            achError,
+          );
+          throw achError;
+        }
+
+        console.log(
+          "[useStudentDashboardData] All achievements:",
+          allAchievements?.length || 0,
+        );
 
         // XP from achievements
         const achievementXp = (allAchievements || [])
@@ -221,12 +337,11 @@ export function useStudentDashboardData(): DashboardData {
             if (isEarned) {
               status = "collected";
             } else {
-              // Check if any progress exists for this user (discovered if they've started)
               status = "discovered";
             }
 
-            // Determine rarity from criteria JSON or by index
-            if (a.criteria && typeof a.criteria === "object") {
+            // Determine rarity from criteria JSONB field
+            if (a.criteria && typeof a.criteria === "object" && a.criteria !== null) {
               const r = (a.criteria as any).rarity;
               if (["common", "uncommon", "rare", "legendary"].includes(r)) {
                 rarity = r;
@@ -301,6 +416,7 @@ export function useStudentDashboardData(): DashboardData {
           setHasNoCourses(false);
         }
       } catch (err) {
+        console.error("[useStudentDashboardData] Caught error:", err);
         if (!cancelled) {
           setError(
             err instanceof Error ? err.message : "Failed to load dashboard data",
