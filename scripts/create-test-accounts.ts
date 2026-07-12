@@ -127,9 +127,10 @@ async function createClass(name: string, teacherId: string, courseId?: string) {
 async function addStudentToClass(classId: string, studentId: string) {
   const { error } = await supabase
     .from("class_students")
-    .insert({ class_id: classId, student_id: studentId })
-    .onConflict("class_id,student_id")
-    .ignore();
+    .upsert(
+      { class_id: classId, student_id: studentId },
+      { onConflict: "class_id,student_id", ignoreDuplicates: true }
+    );
 
   if (error) {
     // Falls Tabelle nicht existiert, stillschweigend überspringen
@@ -148,9 +149,10 @@ async function addStudentToClass(classId: string, studentId: string) {
 async function linkParentChild(parentId: string, childId: string) {
   const { error } = await supabase
     .from("parent_child_links")
-    .insert({ parent_id: parentId, child_id: childId })
-    .onConflict("parent_id,child_id")
-    .ignore();
+    .upsert(
+      { parent_id: parentId, child_id: childId },
+      { onConflict: "parent_id,child_id", ignoreDuplicates: true }
+    );
 
   if (error) {
     const msg = error.message || "";
@@ -176,9 +178,7 @@ async function addProgressEntries(userId: string, lessonIds: string[]) {
 
   const { error } = await supabase
     .from("student_progress")
-    .insert(entries)
-    .onConflict("user_id,lesson_id")
-    .ignore();
+    .upsert(entries, { onConflict: "user_id,lesson_id", ignoreDuplicates: true });
 
   if (error) {
     const msg = error.message || "";
@@ -266,11 +266,11 @@ async function main() {
 
   // ── 6) Test-Progress-Einträge ──
   console.log("\n📌 Schritt 8: Test-Progress für student1-student4 anlegen");
-  // Lektionen aus seed.sql: l0000000-0000-0000-0000-000000000001 bis l0000000-0000-0000-0000-000000000006
+  // Lektionen aus seed.sql: d0000000-0000-0000-0000-000000000001 bis d0000000-0000-0000-0000-000000000006
   const lessonIds = [
-    "l0000000-0000-0000-0000-000000000001",
-    "l0000000-0000-0000-0000-000000000002",
-    "l0000000-0000-0000-0000-000000000003",
+    "d0000000-0000-0000-0000-000000000001",
+    "d0000000-0000-0000-0000-000000000002",
+    "d0000000-0000-0000-0000-000000000003",
   ];
 
   if (studentIds[0]) await addProgressEntries(studentIds[0], lessonIds);
