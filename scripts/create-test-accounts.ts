@@ -104,6 +104,19 @@ async function createUser(email: string, firstName: string, lastName: string, ro
 }
 
 async function createClass(name: string, teacherId: string, courseId?: string) {
+  // Zuerst prüfen, ob Klasse mit diesem Namen + teacher_id bereits existiert
+  const { data: existing } = await supabase
+    .from("classes")
+    .select("id")
+    .eq("name", name)
+    .eq("teacher_id", teacherId)
+    .single();
+
+  if (existing) {
+    console.log(`  ⏭️  Klasse "${name}" existiert bereits (ID: ${existing.id})`);
+    return existing.id;
+  }
+
   const { data, error } = await supabase
     .from("classes")
     .insert({ name, teacher_id: teacherId, course_id: courseId || null })
@@ -111,7 +124,6 @@ async function createClass(name: string, teacherId: string, courseId?: string) {
     .single();
 
   if (error) {
-    // Falls Tabelle nicht existiert
     if (error.message.includes("does not exist") || error.code === "42P01") {
       console.log(`  ⏭️  classes-Tabelle nicht vorhanden, überspringe Klasse "${name}"`);
       return null;
