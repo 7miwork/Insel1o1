@@ -53,6 +53,7 @@ export function useTeacherDashboardData(): TeacherDashboardData {
   const [classes, setClasses] = useState<ClassData[]>([]);
   const [students, setStudents] = useState<StudentData[]>([]);
   const [activities, setActivities] = useState<ActivityItem[]>([]);
+  const [totalDistinctStudents, setTotalDistinctStudents] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -137,9 +138,15 @@ export function useTeacherDashboardData(): TeacherDashboardData {
 
         const resolvedClasses = await Promise.all(classDataPromises);
 
+        // Deduplicate classes by id
+        const uniqueClasses = Array.from(
+          new Map(resolvedClasses.map((c: any) => [c.id, c])).values()
+        );
+
         // 3) Load students for these classes with completion %
-        const classIds = classList.map((c: any) => c.id);
+        const classIds = uniqueClasses.map((c: any) => c.id);
         let studentRows: any[] = [];
+        let totalDistinctStudents = 0;
         if (classIds.length > 0) {
           const { data: classStudents, error: csError } = await supabase
             .from("class_students")
@@ -150,6 +157,7 @@ export function useTeacherDashboardData(): TeacherDashboardData {
             const uniqueStudentIds = Array.from(
               new Set((classStudents || []).map((cs: any) => cs.student_id))
             );
+            totalDistinctStudents = uniqueStudentIds.length;
 
             const { data: profiles, error: profilesError } = await supabase
               .from("profiles")
@@ -249,9 +257,10 @@ export function useTeacherDashboardData(): TeacherDashboardData {
         const recentActivities = activityEntries.slice(0, 10).map((e) => e.activity);
 
         if (!cancelled) {
-          setClasses(resolvedClasses);
+          setClasses(uniqueClasses);
           setStudents(studentRows);
           setActivities(recentActivities);
+          setTotalDistinctStudents(totalDistinctStudents);
         }
       } catch (err) {
         console.error("[useTeacherDashboardData] Caught error:", err);
@@ -276,5 +285,6 @@ export function useTeacherDashboardData(): TeacherDashboardData {
     classes,
     students,
     activities,
+    totalDistinctStudents,
   };
 }
